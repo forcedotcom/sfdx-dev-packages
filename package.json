@@ -1,0 +1,32 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "clean": "yarn sfdx-clean",
+    "clean-all": "yarn sfdx-clean all",
+    "postclean": "lerna run clean",
+    "postclean-all": "lerna run clean-all",
+    "postinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-post.js",
+    "preinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-pre.js"
+  },
+  "devDependencies": {
+    "cz-lerna-changelog": "^2",
+    "husky": "^1",
+    "lerna": "^3",
+    "lerna-semantic-release": "^9"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-lerna-changelog"
+    }
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "husky": {
+    "hooks": {
+      "commit-msg": "yarn sfdx-commit-msg"
+    }
+  }
+}
