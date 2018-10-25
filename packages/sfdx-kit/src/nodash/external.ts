@@ -1,0 +1,269 @@
+/*
+ * Copyright (c) 2018, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
+// NOTE TO MAINTAINERS:
+//
+// This module exports replacements for several lodash functions with a much smaller footprint than relying
+// on a full lodash build, or a partial build plus full lodash typings would provide. The downside is that
+// in order to expand on this set, we must do the following:
+//
+// * Update scripts/build-lodash.sh with the new target function name.
+// * Rebuild and commit the resulting vendor/lodash.js file using `yarn lodash`.
+// * Manually copy, prune, and edit (if necessary) the new fn's typings from the lodash typing.
+// * Add tests that verify the expected type signatures... at a minimum, add tests for the relevant fn examples
+//   published in the lodash documentation for that fn.
+
+import { AnyFunction, Dictionary, Many, Optional, PropertyKey } from '@salesforce/ts-types';
+// @ts-ignore ignore the demand for typings for the locally built lodash
+import * as _ from './lodash';
+import { ListIteratee, ObjectIteratee, Omit, ValueIteratee, ValueIterateeCustom } from './support';
+
+/**
+ * Assigns own enumerable properties of source object(s) to the destination object for all destination
+ * properties that resolve to undefined. Once a property is set, additional values of the same property are
+ * ignored.
+ *
+ * Note: This method mutates `obj`.
+ *
+ * @param obj The destination object.
+ * @param sources The source objects.
+ */
+export function defaults<T, S>(obj: T, source: S): S & T;
+/**
+ * @see defaults
+ */
+export function defaults<T, S1, S2>(obj: T, source1: S1, source2: S2): S2 & S1 & T;
+/**
+ * @see defaults
+ */
+export function defaults<T, S1, S2, S3>(obj: T, source1: S1, source2: S2, source3: S3): S3 & S2 & S1 & T;
+/**
+ * @see defaults
+ */
+export function defaults<T, S1, S2, S3, S4>(obj: T, source1: S1, source2: S2, source3: S3, source4: S4): S4 & S3 & S2 & S1 & T;
+/**
+ * @see defaults
+ */
+export function defaults<T>(obj: T): T;
+// underlying function
+export function defaults(obj: any, ...otherArgs: any[]): any { // tslint:disable-line:no-any
+    return _.defaults(obj, ...otherArgs);
+}
+
+/**
+ * This method is like `find` except that it returns the key of the first element predicate returns truthy for
+ * instead of the element itself.
+ *
+ * @param obj The object to search.
+ * @param predicate The function invoked per iteration.
+ */
+export function findKey<T>(obj: T | null | undefined, predicate?: ObjectIteratee<T>): Optional<string> {
+    return _.findKey(obj, predicate);
+}
+
+/**
+ * Gets the property value at path of object. If the resolved value is undefined the defaultValue is used
+ * in its place.
+ *
+ * When possible, prefer using the `get*` utilities provided by
+ * [@salesforce/ts-types](https://www.npmjs.com/package/@salesforce/ts-types);
+ *
+ * @param obj The object to query.
+ * @param path The path of the property to get.
+ * @param def The value returned if the resolved value is undefined.
+ */
+export function get<T extends object>(obj: T | null | undefined, path: string): any; // tslint:disable-line:no-any
+/**
+ * @see get
+ */
+export function get<T extends object, D>(obj: T | null | undefined, path: string, def: D): any | D; // tslint:disable-line:no-any
+// underlying function
+export function get(obj: any, path: string, def?: any): any { // tslint:disable-line:no-any
+    return _.get(obj, path, def);
+}
+
+/**
+ * Creates an object composed of keys generated from the results of running each element of collection through
+ * iteratee. The corresponding value of each key is the last element responsible for generating the key. The
+ * iteratee function is invoked with one argument: (value).
+ *
+ * @param collection The collection to iterate over.
+ * @param iteratee The function invoked per iteration.
+ */
+export function keyBy<T>(collection: ArrayLike<T> | null | undefined, iteratee?: ValueIterateeCustom<T, PropertyKey>): Dictionary<T>;
+/**
+ * @see keyBy
+ */
+export function keyBy<T extends object>(collection: T | null | undefined, iteratee?: ValueIterateeCustom<T[keyof T], PropertyKey>): Dictionary<T[keyof T]>;
+// underlying function
+export function keyBy(collection: any, iteratee?: any): any { // tslint:disable-line:no-any
+    return _.keyBy(collection, iteratee);
+}
+
+/**
+ * This method creates an object with the same values as object and keys generated
+ * by running each own enumerable property of object through iteratee.
+ *
+ * @param obj The object to iterate over.
+ * @param iteratee The function invoked per iteration.
+ */
+export function mapKeys<T>(object: ArrayLike<T> | null | undefined, iteratee?: ListIteratee<T>): Dictionary<T>;
+/**
+ * @see mapKeys
+ */
+export function mapKeys<T extends object>(object: T | null | undefined, iteratee?: ObjectIteratee<T>): Dictionary<T[keyof T]>;
+// underlying function
+export function mapKeys(obj: any, iteratee?: any): any { // tslint:disable-line:no-any
+    return _.mapKeys(obj, iteratee);
+}
+
+/**
+ * This method is like `_.min` except that it accepts `iteratee` which is
+ * invoked for each element in `array` to generate the criterion by which
+ * the value is ranked. The iteratee is invoked with one argument: (value).
+ *
+ * @param array The array to iterate over.
+ * @param iteratee The iteratee invoked per element.
+ */
+export function minBy<T>(collection: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): Optional<T> {
+    return _.minBy(collection, iteratee);
+}
+
+/**
+ * This method is like `_.max` except that it accepts `iteratee` which is
+ * invoked for each element in `array` to generate the criterion by which
+ * the value is ranked. The iteratee is invoked with one argument: (value).
+ *
+ * @param array The array to iterate over.
+ * @param iteratee The iteratee invoked per element.
+ */
+export function maxBy<T>(collection: ArrayLike<T> | null | undefined, iteratee?: ValueIteratee<T>): Optional<T> {
+    return _.maxBy(collection, iteratee);
+}
+
+/**
+ * Recursively merges own and inherited enumerable properties of source
+ * objects into the destination object, skipping source properties that resolve
+ * to `undefined`. Array and plain object properties are merged recursively.
+ * Other objects and value types are overridden by assignment. Source objects
+ * are applied from left to right. Subsequent sources overwrite property
+ * assignments of previous sources.
+ *
+ * **Note:** This method mutates `object`.
+ *
+ * @param object The destination object.
+ * @param sources The source objects.
+ */
+export function merge<T, S>(object: T, source: S): T & S;
+/**
+ * @see merge
+ */
+export function merge<T, S1, S2>(object: T, source1: S1, source2: S2): T & S1 & S2;
+/**
+ * @see merge
+ */
+export function merge<T, S1, S2, S3>(object: T, source1: S1, source2: S2, source3: S3): T & S1 & S2 & S3;
+/**
+ * @see merge
+ */
+export function merge<T, S1, S2, S3, S4>(object: T, source1: S1, source2: S2, source3: S3, source4: S4): T & S1 & S2 & S3 & S4;
+// underlying function
+export function merge(obj: any, ...otherArgs: any[]): any { // tslint:disable-line:no-any
+    return _.merge(obj, ...otherArgs);
+}
+
+/**
+ * The opposite of `_.pick`; this method creates an object composed of the
+ * own and inherited enumerable properties of `object` that are not omitted.
+ *
+ * @param obj The source object.
+ * @param paths The property names to omit, specified individually or in arrays..
+ */
+export function omit<T extends Dictionary<any>>(obj: T | null | undefined, ...paths: Array<Many<PropertyKey>>): T; // tslint:disable-line:no-any
+/**
+ * @see omit
+ */
+export function omit<T extends object, K extends keyof T>(obj: T | null | undefined, ...paths: Array<Many<K>>): Omit<T, K>;
+/**
+ * @see omit
+ */
+export function omit<T extends object>(obj: T | null | undefined, ...paths: Array<Many<PropertyKey>>): Partial<T>;
+// underlying function
+export function omit(obj: any, ...paths: any[]): any { // tslint:disable-line:no-any
+    return _.omit(obj, ...paths);
+}
+
+/**
+ * Creates a function that is restricted to invoking `func` once. Repeat calls to the function return the value
+ * of the first call. The `func` is invoked with the this binding and arguments of the created function.
+ *
+ * @param func The function to restrict.
+ */
+export function once<T extends AnyFunction>(func: T): T { // tslint:disable-line:no-any
+    return _.once(func);
+}
+
+/**
+ * Sets the value at path of object. If a portion of path doesn’t exist it’s created. Arrays are created for
+ * missing index properties while objects are created for all other missing properties. Use _.setWith to
+ * customize path creation.
+ *
+ * @param obj The object to modify.
+ * @param path The path of the property to set.
+ * @param value The value to set.
+ */
+export function set<T extends object>(obj: T, path: string, value: any): T; // tslint:disable-line:no-any
+/**
+ * @see set
+ */
+export function set<R>(obj: object, path: string, value: any): R; // tslint:disable-line:no-any
+// underlying function
+export function set(obj: any, path: string, value: any): any { // tslint:disable-line:no-any
+    return _.set(obj, path, value);
+}
+
+/**
+ * Creates an array of elements, sorted in ascending order by the results of
+ * running each element in a collection through each iteratee. This method
+ * performs a stable sort, that is, it preserves the original sort order of
+ * equal elements. The iteratees are invoked with one argument: (value).
+ *
+ * @param collection The collection to iterate over.
+ * @param iteratees The iteratees to sort by, specified individually or in arrays.
+ */
+export function sortBy<T>(collection: ArrayLike<T> | null | undefined, ...iteratees: Array<Many<ListIteratee<T>>>): T[];
+/**
+ * @see sortBy
+ */
+export function sortBy<T extends object>(collection: T | null | undefined, ...iteratees: Array<Many<ObjectIteratee<T>>>): Array<T[keyof T]>;
+// underlying function
+export function sortBy(collection: any, ...iteratees: any[]): any { // tslint:disable-line:no-any
+    return _.sortBy(collection, ...iteratees);
+}
+
+/**
+ * Converts `value` to a number.
+ *
+ * @param value The value to process.
+ *
+ * ```
+ * _.toNumber(3);
+ * // => 3
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3');
+ * // => 3
+ * ```
+ */
+export function toNumber(value: any): number { // tslint:disable-line:no-any
+    return _.toNumber(value);
+}
