@@ -31,7 +31,7 @@ const genScriptsPre = (packageRoot = require("../utils/package-root")) => {
 
   pjson.devDependencies = orderMap(pjson.devDependencies);
 
-  writeFileSync(pjsonPath, JSON.stringify(pjson, null, 2));
+  writeFileSync(pjsonPath, JSON.stringify(pjson, null, 2) + "\n");
 };
 
 genScriptsPre();
