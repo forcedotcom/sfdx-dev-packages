@@ -7,22 +7,23 @@
  */
 
 /**
- * 
+ *
  */
 
-const { join } = require('path');
-const packageRoot = require('../utils/package-root');
+const { join } = require("path");
+const packageRoot = require("../utils/package-root");
 
-const shell = require('shelljs');
+const postScript = join(
+  packageRoot,
+  "packages",
+  "sfdx-dev-scripts",
+  "bin",
+  "sfdx-gen-scripts-post.js"
+);
 
-shell.set('-e');
-shell.set('+v');
-
-const postScript = join(packageRoot, 'packages', 'sfdx-dev-scripts', 'bin', 'sfdx-gen-scripts-post.js');
-
+// Will also run this for the packageRoot when required
 console.log(`Running ${postScript} for the lerna project`);
-shell.exec(postScript, {
-    cwd: join(packageRoot)
-});
+const genScriptsPost = require(postScript);
 
-require('../utils/run-in-lerna-packages')(postScript);
+// Run it for all packages in the lerna project
+require("../utils/run-in-lerna-packages")(genScriptsPost);

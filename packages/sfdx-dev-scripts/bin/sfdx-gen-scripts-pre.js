@@ -10,28 +10,30 @@
  * This is the preinstall hook for adding dependencies used by the generated pjson scripts, targets, and files.
  */
 
-const { writeFileSync } = require('fs');
-const { join } = require('path');
-const shell = require('shelljs');
+const { writeFileSync } = require("fs");
+const { join } = require("path");
 
-shell.set('-e');
-shell.set('+v');
+const buildList = require("../utils/list-from-config");
 
-const buildList = require('../utils/list-from-config');
-const packageRoot = require('../utils/package-root');
-const orderMap = require('../utils/order-map');
+const genScriptsPre = (packageRoot = require("../utils/package-root")) => {
+  const orderMap = require("../utils/order-map");
 
-const pjsonPath = join(packageRoot, 'package.json');
-const pjson = require(pjsonPath);
+  const pjsonPath = join(packageRoot, "package.json");
+  const pjson = require(pjsonPath);
 
-const DEFAULT_HUSKY = ["commit-msg"];
+  const DEFAULT_HUSKY = ["commit-msg"];
 
-const huskyList = buildList('husky', DEFAULT_HUSKY);
+  const huskyList = buildList("husky", DEFAULT_HUSKY);
 
-if (huskyList.length > 0) {
+  if (huskyList.length > 0) {
     pjson.devDependencies["husky"] = "^1";
-}
+  }
 
-pjson.devDependencies = orderMap(pjson.devDependencies);
+  pjson.devDependencies = orderMap(pjson.devDependencies);
 
-writeFileSync(pjsonPath, JSON.stringify(pjson, null, 2));
+  writeFileSync(pjsonPath, JSON.stringify(pjson, null, 2));
+};
+
+genScriptsPre();
+
+module.exports = genScriptsPre;
