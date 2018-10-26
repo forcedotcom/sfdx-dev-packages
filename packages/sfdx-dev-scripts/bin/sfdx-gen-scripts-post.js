@@ -90,7 +90,7 @@ const genScriptsPost = (
     }
   }
 
-  writeFileSync(pjsonPath, JSON.stringify(pjson, null, 2));
+  writeFileSync(pjsonPath, JSON.stringify(pjson, null, 2) + "\n");
   console.log(`wrote ${pjsonPath}`);
 };
 
