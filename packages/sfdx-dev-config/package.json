@@ -10,7 +10,8 @@
   "license": "BSD-3-Clause",
   "files": [
     "/tslint.json",
-    "/tsconfig.json"
+    "/tsconfig.json",
+    "/.prettierrc"
   ],
   "dependencies": {
     "tslint": "^5",

@@ -12,8 +12,9 @@ shell.set("-e");
 shell.set("+v");
 
 const packageRoot = require("../utils/package-root");
+const prettierConfig = require.resolve("@salesforce/dev-config/.prettierrc");
 
-shell.exec("pretty-quick --staged", {
+shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
   cwd: packageRoot
 });
 
