@@ -53,13 +53,6 @@
     "typescript": "^3",
     "xunit-file": "^1"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "yarn sfdx-commit-msg",
-      "pre-commit": "yarn docs && git add docs",
-      "pre-push": "yarn clean && yarn test"
-    }
-  },
   "nyc": {
     "check-coverage": true,
     "lines": 95,

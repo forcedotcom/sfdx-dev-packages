@@ -3,10 +3,8 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "clean": "yarn sfdx-clean",
-    "clean-all": "yarn sfdx-clean all",
-    "postclean": "lerna run clean",
-    "postclean-all": "lerna run clean-all",
+    "clean": "lerna run clean",
+    "clean-all": "lerna run clean-all",
     "postinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-post.js",
     "preinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-pre.js"
   },
@@ -26,7 +24,9 @@
   ],
   "husky": {
     "hooks": {
-      "commit-msg": "yarn sfdx-commit-msg"
+      "commit-msg": "yarn sfdx-husky-commit-msg",
+      "pre-commit": "yarn sfdx-husky-pre-commit",
+      "pre-push": "yarn sfdx-husky-pre-push"
     }
   }
 }
