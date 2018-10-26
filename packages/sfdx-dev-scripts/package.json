@@ -4,7 +4,10 @@
   "description": "A set of standard package.json scripts for Salesforce projects.",
   "bin": {
     "sfdx-clean": "bin/sfdx-clean.js",
-    "sfdx-compile": "bin/sfdx-compile.js"
+    "sfdx-compile": "bin/sfdx-compile.js",
+    "sfdx-husky-commit-msg": "bin/sfdx-husky-commit-msg.js",
+    "sfdx-husky-pre-commit": "bin/sfdx-husky-pre-commit.js",
+    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js"
   },
   "scripts": {
     "clean": "bin/sfdx-clean.js",
@@ -26,12 +29,5 @@
     "shelljs": "0.8.2",
     "typescript": "^3"
   },
-  "devDependencies": {
-    "husky": "^1"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "bin/sfdx-commit-msg.js"
-    }
-  }
+  "devDependencies": {}
 }

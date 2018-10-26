@@ -24,10 +24,5 @@
   "scripts": {
     "clean": "yarn sfdx-clean",
     "clean-all": "yarn sfdx-clean all"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "yarn sfdx-commit-msg"
-    }
   }
 }
