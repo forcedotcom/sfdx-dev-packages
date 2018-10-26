@@ -6,13 +6,13 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require("shelljs");
+const shell = require('shelljs');
 
-shell.set("-e");
-shell.set("+v");
+shell.set('-e');
+shell.set('+v');
 
-const packageRoot = require("../utils/package-root");
-const prettierConfig = require.resolve("@salesforce/dev-config/.prettierrc");
+const packageRoot = require('../utils/package-root');
+const prettierConfig = require.resolve('@salesforce/dev-config/.prettierrc');
 
 shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
   cwd: packageRoot
