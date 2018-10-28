@@ -64,8 +64,5 @@
     "exclude": [
       "lib/**/*.test.js"
     ]
-  },
-  "prettier": {
-    "singleQuote": true
   }
 }
