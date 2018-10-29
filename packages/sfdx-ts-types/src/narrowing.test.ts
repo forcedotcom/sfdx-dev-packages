@@ -876,7 +876,7 @@ describe('type narrowing', () => {
 
       it('should narrow an unknown type to an object with an instance property', () => {
         if (!narrowing.hasInstance(obj, 'i', Test)) {
-          throw new Error('object should have instance property m');
+          throw new Error('object should have instance property i');
         }
         // trivial runtime check but useful for compilation testing
         expect(obj.i).to.equal(obj.i);
@@ -892,7 +892,7 @@ describe('type narrowing', () => {
 
       it('should narrow an unknown type to an object with an array property', () => {
         if (!narrowing.hasArray(obj, 'a')) {
-          throw new Error('object should have array property m');
+          throw new Error('object should have array property a');
         }
         // trivial runtime check but useful for compilation testing
         expect(obj.a).to.equal(obj.a);
@@ -908,7 +908,7 @@ describe('type narrowing', () => {
 
       it('should narrow an unknown type to an object with an function property', () => {
         if (!narrowing.hasFunction(obj, 'f')) {
-          throw new Error('object should have function property m');
+          throw new Error('object should have function property f');
         }
         // trivial runtime check but useful for compilation testing
         expect(obj.f).to.equal(obj.f);
