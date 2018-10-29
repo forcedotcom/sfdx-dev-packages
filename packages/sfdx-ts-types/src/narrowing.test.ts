@@ -10,9 +10,51 @@
 import { expect } from 'chai';
 import { JsonCloneError, UnexpectedValueTypeError } from './errors';
 import * as narrowing from './narrowing';
-import { Dictionary, JsonArray, JsonMap, Nullable, Optional } from './types';
+import { Dictionary, JsonArray, Nullable, Optional } from './types';
 
 describe('type narrowing', () => {
+  class Test {
+    constructor(public name = 'test') {}
+  }
+
+  describe('valueOrDefault', () => {
+    it('should return undefined when passed an undefined value and an undefined default', () => {
+      expect(narrowing.valueOrDefault(undefined, undefined)).to.be.undefined;
+    });
+
+    it('should return null when passed a null value and an undefined default', () => {
+      expect(narrowing.valueOrDefault(null, undefined)).to.be.null;
+    });
+
+    it('should return null when passed an undefined value and a null default', () => {
+      expect(narrowing.valueOrDefault(undefined, null)).to.be.null;
+    });
+
+    it('should return null when passed a null value and a null default', () => {
+      expect(narrowing.valueOrDefault(null, null)).to.be.null;
+    });
+
+    it('should return the value when passed a defined value and an undefined default', () => {
+      expect(narrowing.valueOrDefault('a', undefined)).to.equal('a');
+    });
+
+    it('should return the value when passed a defined value and a null default', () => {
+      expect(narrowing.valueOrDefault('a', null)).to.equal('a');
+    });
+
+    it('should return the value when passed a defined value and a defined default', () => {
+      expect(narrowing.valueOrDefault('a', 'b')).to.equal('a');
+    });
+
+    it('should return the default when passed an undefined value and a defined default', () => {
+      expect(narrowing.valueOrDefault(undefined, 'b')).to.equal('b');
+    });
+
+    it('should return the default when passed a null value and a defined default', () => {
+      expect(narrowing.valueOrDefault(null, 'b')).to.equal('b');
+    });
+  });
+
   describe('is type', () => {
     describe('isString', () => {
       it('should return false when passed undefined', () => {
@@ -153,6 +195,44 @@ describe('type narrowing', () => {
       });
     });
 
+    describe('isArrayLike', () => {
+      it('should reject undefined', () => {
+        expect(narrowing.isArrayLike(undefined)).to.be.false;
+      });
+
+      it('should reject null', () => {
+        expect(narrowing.isArrayLike(null)).to.be.false;
+      });
+
+      it('should accept string', () => {
+        expect(narrowing.isArrayLike('string')).to.be.true;
+      });
+
+      it('should reject number', () => {
+        expect(narrowing.isArrayLike(1)).to.be.false;
+      });
+
+      it('should reject boolean', () => {
+        expect(narrowing.isArrayLike(true)).to.be.false;
+      });
+
+      it('should accept array', () => {
+        expect(narrowing.isArrayLike([])).to.be.true;
+      });
+
+      it('should reject object', () => {
+        expect(narrowing.isArrayLike({})).to.be.false;
+      });
+
+      it('should accept array-like', () => {
+        expect(narrowing.isArrayLike({ length: 1, 0: 'test' })).to.be.true;
+      });
+
+      it('should reject function', () => {
+        expect(narrowing.isArrayLike(() => {})).to.be.false;
+      });
+    });
+
     describe('isFunction', () => {
       it('should reject undefined', () => {
         expect(narrowing.isFunction(undefined)).to.be.false;
@@ -193,11 +273,11 @@ describe('type narrowing', () => {
 
     describe('isKeyOf', () => {
       it('should return false when passed a non-key string', () => {
-        expect(narrowing.isKeyOf('foo', { bar: true })).to.be.false;
+        expect(narrowing.isKeyOf({ bar: true }, 'foo')).to.be.false;
       });
 
       it('should return true when passed a key string', () => {
-        expect(narrowing.isKeyOf('bar', { bar: true })).to.be.true;
+        expect(narrowing.isKeyOf({ bar: true }, 'bar')).to.be.true;
       });
     });
 
@@ -513,19 +593,6 @@ describe('type narrowing', () => {
       });
     });
 
-    describe('ensureAnyJson', () => {
-      it('should raise an error when passed undefined', () => {
-        expect(() => narrowing.ensureAnyJson(undefined)).to.throw(
-          UnexpectedValueTypeError
-        );
-      });
-
-      it('should return a string when passed a string', () => {
-        const value = 'string';
-        expect(narrowing.ensureAnyJson(value)).to.equal(value);
-      });
-    });
-
     describe('ensureString', () => {
       it('should raise an error when passed undefined', () => {
         expect(() => narrowing.ensureString(undefined)).to.throw(
@@ -559,9 +626,74 @@ describe('type narrowing', () => {
         );
       });
 
-      it('should return a boolean when passed a number', () => {
+      it('should return a boolean when passed a boolean', () => {
         const value = true;
         expect(narrowing.ensureBoolean(value)).to.equal(value);
+      });
+    });
+
+    describe('ensureObject', () => {
+      it('should raise an error when passed undefined', () => {
+        expect(() => narrowing.ensureObject(undefined)).to.throw(
+          UnexpectedValueTypeError
+        );
+      });
+
+      it('should return a object when passed a object', () => {
+        const value = { a: 'b' };
+        expect(narrowing.ensureObject(value)).to.equal(value);
+      });
+    });
+
+    describe('ensureInstance', () => {
+      it('should raise an error when passed undefined', () => {
+        expect(() => narrowing.ensureInstance(undefined, Test)).to.throw(
+          UnexpectedValueTypeError
+        );
+      });
+
+      it('should return a class instance when passed a class instance', () => {
+        const value = new Test('foo');
+        expect(narrowing.ensureInstance(value, Test)).to.equal(value);
+      });
+    });
+
+    describe('ensureArray', () => {
+      it('should raise an error when passed undefined', () => {
+        expect(() => narrowing.ensureArray(undefined)).to.throw(
+          UnexpectedValueTypeError
+        );
+      });
+
+      it('should return an array when passed an array', () => {
+        const value = ['a', 'b'];
+        expect(narrowing.ensureArray(value)).to.equal(value);
+      });
+    });
+
+    describe('ensureFunction', () => {
+      it('should raise an error when passed undefined', () => {
+        expect(() => narrowing.ensureFunction(undefined)).to.throw(
+          UnexpectedValueTypeError
+        );
+      });
+
+      it('should return a function when passed a function', () => {
+        const value = () => {};
+        expect(narrowing.ensureFunction(value)).to.equal(value);
+      });
+    });
+
+    describe('ensureAnyJson', () => {
+      it('should raise an error when passed undefined', () => {
+        expect(() => narrowing.ensureAnyJson(undefined)).to.throw(
+          UnexpectedValueTypeError
+        );
+      });
+
+      it('should return a string when passed a string', () => {
+        const value = 'string';
+        expect(narrowing.ensureAnyJson(value)).to.equal(value);
       });
     });
 
@@ -592,283 +724,481 @@ describe('type narrowing', () => {
     });
   });
 
-  describe('get as type', () => {
-    const data: JsonMap = {
-      inner: {
-        s: 'string',
-        n: 1,
-        b: true,
-        m: { a: 'b', c: 'd' },
-        a: ['a', 'b']
-      }
-    };
+  describe('has', () => {
+    let obj: unknown;
 
-    describe('getAsAnyJson', () => {
-      it('should return undefined when passed an empty json map', () => {
-        expect(narrowing.getAsAnyJson(undefined, 'foo')).to.be.undefined;
+    beforeEach(() => {
+      obj = {
+        u: undefined,
+        s: '',
+        b: false,
+        n: 0,
+        m: {},
+        i: new Test(),
+        a: [],
+        f: () => {}
+      };
+    });
+
+    describe('has (unknown)', () => {
+      it('should fail to narrow an unknown type if the target key does not exist', () => {
+        if (narrowing.has(obj, 'z')) {
+          throw new Error('object should not have property z');
+        }
       });
 
-      it('should return undefined when passed an unknown path', () => {
-        expect(narrowing.getAsAnyJson(data, 'foo')).to.be.undefined;
+      it('should narrow an unknown type when the target key is found, even if undefined', () => {
+        if (!narrowing.has(obj, 'u')) {
+          throw new Error('object should have property u');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.u).to.equal(obj.u);
       });
 
-      it('should return a default when passed an unknown path and a default', () => {
-        const def = 'def';
-        expect(narrowing.getAsAnyJson(data, 'foo', def)).to.equal(def);
+      it('should narrow an unknown type when the target key is found', () => {
+        if (!narrowing.has(obj, 's')) {
+          throw new Error('object should have property s');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.s).to.equal(obj.s);
       });
 
-      it('should return a string when passed a path to a string', () => {
-        const value = 'string';
-        const path = 'inner.s';
-        expect(narrowing.getAsAnyJson(data, path)).to.equal(value);
+      it('should progressively narrow an unknown type when target keys are found', () => {
+        if (!narrowing.has(obj, 's')) {
+          throw new Error('object should have property s');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.s).to.equal(obj.s);
+        if (!narrowing.has(obj, 'b')) {
+          throw new Error('object should have property b');
+        }
+        // trivial runtime checks but useful for compilation testing
+        expect(obj.s).to.equal(obj.s);
+        expect(obj.b).to.equal(obj.b);
       });
 
-      it('should return a string when passed an array path to a string', () => {
-        const value = 'string';
-        const path = ['inner', 's'];
-        expect(narrowing.getAsAnyJson(data, path)).to.equal(value);
+      it('should narrow an unknown type when multiple target keys are found', () => {
+        if (!narrowing.has(obj, ['s', 'b'])) {
+          throw new Error('object should have properties s and b');
+        }
+        // trivial runtime checks but useful for compilation testing
+        expect(obj.s).to.equal(obj.s);
+        expect(obj.b).to.equal(obj.b);
       });
     });
 
-    describe('getAsString', () => {
-      it('should return undefined when passed an empty json map', () => {
-        expect(narrowing.getAsString(undefined, 'foo')).to.be.undefined;
+    describe('hasString', () => {
+      it('should not narrow an unknown type when checking a non-string property', () => {
+        if (narrowing.hasString(obj, 'b')) {
+          throw new Error('object should not have string property b');
+        }
       });
 
-      it('should return undefined when passed an unknown path', () => {
-        expect(narrowing.getAsString(data, 'foo')).to.be.undefined;
-      });
-
-      it('should return a default when passed an unknown path and a default', () => {
-        const def = 'def';
-        expect(narrowing.getAsString(data, 'foo', def)).to.equal(def);
-      });
-
-      it('should return a string when passed a path to a string', () => {
-        const value = 'string';
-        const path = 'inner.s';
-        expect(narrowing.getAsString(data, path)).to.equal(value);
+      it('should narrow an unknown type to an object with a string property', () => {
+        if (!narrowing.hasString(obj, 's')) {
+          throw new Error('object should have string property s');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.s).to.equal(obj.s);
       });
     });
 
-    describe('getAsNumber', () => {
-      it('should return undefined when passed an empty json map', () => {
-        expect(narrowing.getAsNumber(undefined, 'foo')).to.be.undefined;
+    describe('hasNumber', () => {
+      it('should not narrow an unknown type when checking a non-number property', () => {
+        if (narrowing.hasNumber(obj, 's')) {
+          throw new Error('object should not have number property s');
+        }
       });
 
-      it('should return undefined when passed an unknown path', () => {
-        expect(narrowing.getAsNumber(data, 'foo')).to.be.undefined;
-      });
-
-      it('should return a default when passed an unknown path and a default', () => {
-        const def = 1;
-        expect(narrowing.getAsNumber(data, 'foo', def)).to.equal(def);
-      });
-
-      it('should return a number when passed a path to a number', () => {
-        const value = 1;
-        const path = 'inner.n';
-        expect(narrowing.getAsNumber(data, path)).to.equal(value);
+      it('should narrow an unknown type to an object with a string property', () => {
+        if (!narrowing.hasNumber(obj, 'n')) {
+          throw new Error('object should have number property n');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.n).to.equal(obj.n);
       });
     });
 
-    describe('getAsBoolean', () => {
-      it('should return undefined when passed an empty json map', () => {
-        expect(narrowing.getAsBoolean(undefined, 'foo')).to.be.undefined;
+    describe('hasBoolean', () => {
+      it('should not narrow an unknown type when checking a non-string property', () => {
+        if (narrowing.hasBoolean(obj, 's')) {
+          throw new Error('object should not have boolean property s');
+        }
       });
 
-      it('should return undefined when passed an unknown path', () => {
-        expect(narrowing.getAsBoolean(data, 'foo')).to.be.undefined;
-      });
-
-      it('should return a default when passed an unknown path and a default', () => {
-        const def = true;
-        expect(narrowing.getAsBoolean(data, 'foo', def)).to.equal(def);
-      });
-
-      it('should return a boolean when passed a path to a boolean', () => {
-        const value = true;
-        const path = 'inner.b';
-        expect(narrowing.getAsBoolean(data, path)).to.equal(value);
+      it('should narrow an unknown type to an object with a string property', () => {
+        if (!narrowing.hasBoolean(obj, 'b')) {
+          throw new Error('object should have boolean property b');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.b).to.equal(obj.b);
       });
     });
 
-    describe('getAsJsonMap', () => {
-      it('should return undefined when passed an empty json map', () => {
-        expect(narrowing.getAsJsonMap(undefined, 'foo')).to.be.undefined;
+    describe('hasObject', () => {
+      it('should not narrow an unknown type when checking a non-object property', () => {
+        if (narrowing.hasObject(obj, 's')) {
+          throw new Error('object should not have object property s');
+        }
       });
 
-      it('should return undefined when passed an unknown path', () => {
-        expect(narrowing.getAsJsonMap(data, 'foo')).to.be.undefined;
-      });
-
-      it('should return a default when passed an unknown path and a default', () => {
-        const def = { a: 'b', c: 'd' };
-        expect(narrowing.getAsJsonMap(data, 'foo', def)).to.equal(def);
-      });
-
-      it('should return a JsonMap when passed a path to a JsonMap', () => {
-        const value = { a: 'b', c: 'd' };
-        const path = 'inner.m';
-        expect(narrowing.getAsJsonMap(data, path)).to.deep.equal(value);
+      it('should narrow an unknown type to an object with an object property', () => {
+        if (!narrowing.hasObject(obj, 'm')) {
+          throw new Error('object should have object property m');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.m).to.deep.equal(obj.m);
       });
     });
 
-    describe('getAsJsonArray', () => {
-      it('should return undefined when passed an empty json map', () => {
-        expect(narrowing.getAsJsonArray(undefined, 'foo')).to.be.undefined;
+    describe('hasPlainObject', () => {
+      it('should not narrow an unknown type when checking a non-object property', () => {
+        if (narrowing.hasPlainObject(obj, 's')) {
+          throw new Error('object should not have object property s');
+        }
       });
 
-      it('should return undefined when passed an unknown path', () => {
-        expect(narrowing.getAsJsonArray(data, 'foo')).to.be.undefined;
+      it('should narrow an unknown type to an object with an object property', () => {
+        if (!narrowing.hasPlainObject(obj, 'm')) {
+          throw new Error('object should have object property m');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.m).to.deep.equal(obj.m);
+      });
+    });
+
+    describe('hasInstance', () => {
+      it('should not narrow an unknown type when checking a non-instance property', () => {
+        if (narrowing.hasInstance(obj, 's', Test)) {
+          throw new Error('object should not have instance property s');
+        }
       });
 
-      it('should return a default when passed an unknown path and a default', () => {
-        const def = ['a', 'b'];
-        expect(narrowing.getAsJsonArray(data, 'foo', def)).to.equal(def);
+      it('should narrow an unknown type to an object with an instance property', () => {
+        if (!narrowing.hasInstance(obj, 'i', Test)) {
+          throw new Error('object should have instance property m');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.i).to.equal(obj.i);
+      });
+    });
+
+    describe('hasArray', () => {
+      it('should not narrow an unknown type when checking a non-array property', () => {
+        if (narrowing.hasArray(obj, 's')) {
+          throw new Error('object should not have array property s');
+        }
       });
 
-      it('should return a JsonArray when passed a path to a JsonArray', () => {
-        const value = ['a', 'b'];
-        const path = 'inner.a';
-        expect(narrowing.getAsJsonArray(data, path)).to.deep.equal(value);
+      it('should narrow an unknown type to an object with an array property', () => {
+        if (!narrowing.hasArray(obj, 'a')) {
+          throw new Error('object should have array property m');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.a).to.equal(obj.a);
+      });
+    });
+
+    describe('hasFunction', () => {
+      it('should not narrow an unknown type when checking a non-function property', () => {
+        if (narrowing.hasFunction(obj, 's')) {
+          throw new Error('object should not have function property s');
+        }
+      });
+
+      it('should narrow an unknown type to an object with an function property', () => {
+        if (!narrowing.hasFunction(obj, 'f')) {
+          throw new Error('object should have function property m');
+        }
+        // trivial runtime check but useful for compilation testing
+        expect(obj.f).to.equal(obj.f);
       });
     });
   });
 
-  describe('get ensure type', () => {
-    const data: JsonMap = {
+  describe('take', () => {
+    const jsonMap = {
       inner: {
         s: 'string',
         n: 1,
         b: true,
-        m: { a: 'b', c: 'd' },
+        m: { a: 'b', c: 'd', e: [1] },
         a: ['a', 'b']
       }
     };
 
-    describe('getEnsureAnyJson', () => {
-      it('should raise an error when passed an undefined map', () => {
-        expect(() => narrowing.getEnsureAnyJson(undefined, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+    const jsonArray = [jsonMap];
+
+    const obj = {
+      inner: Object.assign(jsonMap.inner, {
+        c: new Test(),
+        f: () => {}
+      })
+    };
+
+    describe('take (unknown)', () => {
+      it('should return undefined when passed an undefined object', () => {
+        expect(narrowing.take(undefined, 'foo')).to.be.undefined;
       });
 
-      it('should raise an error when passed an unknown path', () => {
-        expect(() => narrowing.getEnsureAnyJson(data, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+      it('should return undefined when passed a null object', () => {
+        expect(narrowing.take(null, 'foo')).to.be.undefined;
       });
 
-      it('should return a string when passed a path to a string', () => {
-        const value = 'string';
+      it('should return undefined when passed an unknown path', () => {
+        expect(narrowing.take(jsonMap, 'foo')).to.be.undefined;
+      });
+
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = 'def';
+        expect(narrowing.take(jsonMap, 'foo', def)).to.equal(def);
+      });
+
+      it('should return a value from an object when passed a valid object path', () => {
+        const value = jsonMap.inner.s;
         const path = 'inner.s';
-        expect(narrowing.getEnsureAnyJson(data, path)).to.equal(value);
+        expect(narrowing.take(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return a value from an array when passed a valid array path', () => {
+        const value = jsonArray[0].inner.a[1];
+        const path = '[0].inner.a[1]';
+        expect(narrowing.take(jsonArray, path)).to.equal(value);
+      });
+
+      it('should support string keys in brackets, with or without any style of quotes', () => {
+        const value = jsonArray[0].inner.m.e[0];
+        const path = `[0]["inner"][m]['e'][0]`;
+        expect(narrowing.take(jsonArray, path)).to.equal(value);
       });
     });
 
-    describe('getEnsureString', () => {
-      it('should raise an error when passed an undefined map', () => {
-        expect(() => narrowing.getEnsureString(undefined, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
-      });
-
-      it('should raise an error when passed an unknown path', () => {
-        expect(() => narrowing.getEnsureString(data, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+    describe('takeString', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = 'def';
+        expect(narrowing.takeString(jsonMap, 'foo', def)).to.equal(def);
       });
 
       it('should return a string when passed a path to a string', () => {
-        const value = 'string';
+        const value = jsonMap.inner.s;
         const path = 'inner.s';
-        expect(narrowing.getEnsureString(data, path)).to.equal(value);
+        expect(narrowing.takeString(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-string', () => {
+        const path = 'inner.b';
+        expect(narrowing.takeString(jsonMap, path)).to.be.undefined;
       });
     });
 
-    describe('getEnsureNumber', () => {
-      it('should raise an error when passed an undefined map', () => {
-        expect(() => narrowing.getEnsureNumber(undefined, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
-      });
-
-      it('should raise an error when passed an unknown path', () => {
-        expect(() => narrowing.getEnsureNumber(data, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+    describe('takeNumber', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = 1;
+        expect(narrowing.takeNumber(jsonMap, 'foo', def)).to.equal(def);
       });
 
       it('should return a number when passed a path to a number', () => {
-        const value = 1;
+        const value = jsonMap.inner.n;
         const path = 'inner.n';
-        expect(narrowing.getEnsureNumber(data, path)).to.equal(value);
+        expect(narrowing.takeNumber(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-number', () => {
+        const path = 'inner.s';
+        expect(narrowing.takeNumber(jsonMap, path)).to.be.undefined;
       });
     });
 
-    describe('getEnsureBoolean', () => {
-      it('should raise an error when passed an undefined map', () => {
-        expect(() => narrowing.getEnsureBoolean(undefined, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
-      });
-
-      it('should raise an error when passed an unknown path', () => {
-        expect(() => narrowing.getEnsureBoolean(data, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+    describe('takeBoolean', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = true;
+        expect(narrowing.takeBoolean(jsonMap, 'foo', def)).to.equal(def);
       });
 
       it('should return a boolean when passed a path to a boolean', () => {
-        const value = true;
+        const value = jsonMap.inner.b;
         const path = 'inner.b';
-        expect(narrowing.getEnsureBoolean(data, path)).to.equal(value);
+        expect(narrowing.takeBoolean(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-boolean', () => {
+        const path = 'inner.s';
+        expect(narrowing.takeBoolean(jsonMap, path)).to.be.undefined;
       });
     });
 
-    describe('getEnsureJsonMap', () => {
-      it('should raise an error when passed an undefined map', () => {
-        expect(() => narrowing.getEnsureJsonMap(undefined, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+    describe('takeObject', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = { a: 'b' };
+        expect(narrowing.takeObject(jsonMap, 'foo', def)).to.equal(def);
       });
 
-      it('should raise an error when passed an unknown path', () => {
-        expect(() => narrowing.getEnsureJsonMap(data, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+      it('should return an object when passed a path to an object', () => {
+        const value = jsonMap.inner.m;
+        const path = 'inner.m';
+        expect(narrowing.takeObject(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-object', () => {
+        const path = 'inner.s';
+        expect(narrowing.takeObject(jsonMap, path)).to.be.undefined;
+      });
+    });
+
+    describe('takePlainObject', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = { a: 'b' };
+        expect(narrowing.takePlainObject(jsonMap, 'foo', def)).to.equal(def);
+      });
+
+      it('should return an object when passed a path to an object', () => {
+        const value = jsonMap.inner.m;
+        const path = 'inner.m';
+        expect(narrowing.takePlainObject(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-object', () => {
+        const path = 'inner.s';
+        expect(narrowing.takePlainObject(jsonMap, path)).to.be.undefined;
+      });
+    });
+
+    describe('takeInstance', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = new Test('mine');
+        expect(narrowing.takeInstance(obj, 'foo', Test, def)).to.equal(def);
+      });
+
+      it('should return a class instance when passed a path to a class instance', () => {
+        const value = obj.inner.c;
+        const path = 'inner.c';
+        expect(narrowing.takeInstance(obj, path, Test)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-instance', () => {
+        const path = 'inner.s';
+        expect(narrowing.takeInstance(jsonMap, path, Test)).to.be.undefined;
+      });
+    });
+
+    describe('takeArray', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = ['a', 'b'];
+        expect(narrowing.takeArray(jsonMap, 'foo', def)).to.equal(def);
+      });
+
+      it('should return an array when passed a path to an array', () => {
+        const value = jsonMap.inner.a;
+        const path = 'inner.a';
+        expect(narrowing.takeArray(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-array', () => {
+        const path = 'inner.s';
+        expect(narrowing.takeArray(jsonMap, path)).to.be.undefined;
+      });
+    });
+
+    describe('takeFunction', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = () => {};
+        expect(narrowing.takeFunction(obj, 'foo', def)).to.equal(def);
+      });
+
+      it('should return a class instance when passed a path to a class instance', () => {
+        const value = obj.inner.f;
+        const path = 'inner.f';
+        expect(narrowing.takeFunction(obj, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-function', () => {
+        const path = 'inner.s';
+        expect(narrowing.takeFunction(jsonMap, path)).to.be.undefined;
+      });
+    });
+
+    describe('takeAnyJson', () => {
+      it('should return undefined when passed an unknown path', () => {
+        expect(narrowing.takeAnyJson(jsonMap, 'foo')).to.be.undefined;
+      });
+
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = 'def';
+        expect(narrowing.takeAnyJson(jsonMap, 'foo', def)).to.equal(def);
+      });
+
+      it('should return a string when passed a path to a string', () => {
+        const value = jsonMap.inner.s;
+        const path = 'inner.s';
+        expect(narrowing.takeAnyJson(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return an array element when passed a path containing an array index', () => {
+        const value = jsonMap.inner.a[1];
+        const path = '[0].inner.a[1]';
+        expect(narrowing.takeAnyJson(jsonArray, path)).to.equal(value);
+      });
+
+      it('should return a string when passed a path to a string array index', () => {
+        const value = jsonMap.inner.a[1];
+        const path = 'inner.a[1]';
+        expect(narrowing.takeAnyJson(jsonMap, path)).to.equal(value);
+      });
+
+      it('should return an array element when passed a path containing an array index', () => {
+        const value = jsonArray[0].inner.a[1];
+        const path = '[0].inner.a[1]';
+        expect(narrowing.takeAnyJson(jsonArray, path)).to.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-json value', () => {
+        const path = 'inner.f';
+        expect(narrowing.takeAnyJson(jsonMap, path)).to.be.undefined;
+      });
+    });
+
+    describe('takeJsonMap', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = { a: 'b', c: 'd' };
+        expect(narrowing.takeJsonMap(jsonMap, 'foo', def)).to.equal(def);
       });
 
       it('should return a JsonMap when passed a path to a JsonMap', () => {
-        const value = { a: 'b', c: 'd' };
+        const value = jsonMap.inner.m;
         const path = 'inner.m';
-        expect(narrowing.getEnsureJsonMap(data, path)).to.deep.equal(value);
+        expect(narrowing.takeJsonMap(jsonMap, path)).to.deep.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-JsonMap', () => {
+        const path = 'inner.f';
+        expect(narrowing.takeJsonMap(jsonMap, path)).to.be.undefined;
       });
     });
 
-    describe('getEnsureJsonArray', () => {
-      it('should raise an error when passed an undefined map', () => {
-        expect(() => narrowing.getEnsureJsonArray(undefined, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
-      });
-
-      it('should raise an error when passed an unknown path', () => {
-        expect(() => narrowing.getEnsureJsonArray(data, 'foo')).to.throw(
-          UnexpectedValueTypeError
-        );
+    describe('takeJsonArray', () => {
+      it('should return a default when passed an unknown path and a default', () => {
+        const def = ['a', 'b'];
+        expect(narrowing.takeJsonArray(jsonMap, 'foo', def)).to.equal(def);
       });
 
       it('should return a JsonArray when passed a path to a JsonArray', () => {
-        const value = ['a', 'b'];
+        const value = jsonMap.inner.a;
         const path = 'inner.a';
-        expect(narrowing.getEnsureJsonArray(data, path)).to.deep.equal(value);
+        expect(narrowing.takeJsonArray(jsonMap, path)).to.deep.equal(value);
+      });
+
+      it('should return undefined when passed a path to a non-JsonArray value', () => {
+        const path = 'inner.f';
+        expect(narrowing.takeJsonArray(jsonMap, path)).to.be.undefined;
       });
     });
   });
 
   describe('keysOf', () => {
+    it('should return an empty array if passed an undefined object', () => {
+      expect(narrowing.keysOf(undefined)).to.deep.equal([]);
+    });
+
     it("should allow convenient enumeration of a typed object's keys", () => {
       const acc: Array<[string, number]> = [];
       interface Point {
@@ -885,6 +1215,10 @@ describe('type narrowing', () => {
   });
 
   describe('entriesOf', () => {
+    it('should return an empty array if passed an undefined object', () => {
+      expect(narrowing.entriesOf(undefined)).to.deep.equal([]);
+    });
+
     it("should allow convenient enumeration of a typed object's entries", () => {
       const acc: Array<[string, number]> = [];
       interface Point {
@@ -901,6 +1235,10 @@ describe('type narrowing', () => {
   });
 
   describe('valuesOf', () => {
+    it('should return an empty array if passed an undefined object', () => {
+      expect(narrowing.valuesOf(undefined)).to.deep.equal([]);
+    });
+
     it("should allow convenient enumeration of a typed object's values", () => {
       const acc: number[] = [];
       interface Point {

@@ -24,8 +24,3 @@ export type Nullable<T> = Optional<T | null>;
  * A union type for either the parameterized type `T` or an array of `T`.
  */
 export type Many<T> = T | T[];
-
-/**
- * A union type of `string | number | symbol`, representing all possible types for object property keys.
- */
-export type PropertyKey = string | number | symbol;
