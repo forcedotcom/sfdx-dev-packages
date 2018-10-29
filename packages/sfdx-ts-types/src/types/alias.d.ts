@@ -6,6 +6,11 @@
  */
 
 /**
+ * An alias for the commonly needed `Extract<keyof T, string>`.
+ */
+export type KeyOf<T> = Extract<keyof T, string>;
+
+/**
  * An alias for a tuple of type `[string, T]' for a given generic type `T`. `T` defaults to `unknown` if not otherwise
  * defined.
  */
