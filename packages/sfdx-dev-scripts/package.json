@@ -7,13 +7,16 @@
     "sfdx-compile": "bin/sfdx-compile.js",
     "sfdx-husky-commit-msg": "bin/sfdx-husky-commit-msg.js",
     "sfdx-husky-pre-commit": "bin/sfdx-husky-pre-commit.js",
-    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js"
+    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js",
+    "sfdx-lint": "bin/sfdx-lint.js",
+    "sfdx-test": "bin/sfdx-test.js"
   },
   "scripts": {
     "clean": "bin/sfdx-clean.js",
     "clean-all": "bin/sfdx-clean.js all",
     "postinstall": "bin/sfdx-gen-scripts-post.js",
-    "preinstall": "bin/sfdx-gen-scripts-pre.js"
+    "preinstall": "bin/sfdx-gen-scripts-pre.js",
+    "test": "bin/sfdx-test.js"
   },
   "keywords": [
     "sfdx"
@@ -27,6 +30,8 @@
     "@commitlint/cli": "^7",
     "@commitlint/config-conventional": "^7",
     "@salesforce/dev-config": "^1",
+    "mocha": "^5.2.0",
+    "nyc": "^13.1.0",
     "shelljs": "0.8.2",
     "ts-node": "^7",
     "typescript": "^3"

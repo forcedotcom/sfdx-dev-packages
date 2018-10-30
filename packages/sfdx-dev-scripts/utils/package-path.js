@@ -5,12 +5,5 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-module.exports = map => {
-  const ordered = {};
-  Object.keys(map)
-    .sort()
-    .forEach(function(key) {
-      ordered[key] = map[key];
-    });
-  return ordered;
-};
+const loadRootPath = require('./load-root-path');
+module.exports = loadRootPath('package.json');

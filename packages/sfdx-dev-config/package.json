@@ -10,8 +10,10 @@
   "license": "BSD-3-Clause",
   "files": [
     "/tslint.json",
+    "/tslint-strict.json",
     "/tsconfig.json",
-    "/.prettierrc"
+    "/.prettierrc",
+    "/nyc.json"
   ],
   "dependencies": {
     "tslint": "^5",
@@ -24,6 +26,9 @@
   },
   "scripts": {
     "clean": "yarn sfdx-clean",
-    "clean-all": "yarn sfdx-clean all"
+    "clean-all": "yarn sfdx-clean all",
+    "compile": "yarn sfdx-compile",
+    "lint": "yarn sfdx-lint",
+    "test": "yarn sfdx-test"
   }
 }
