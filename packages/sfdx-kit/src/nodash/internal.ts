@@ -5,7 +5,14 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { isBoolean, isNumber, Optional } from '@salesforce/ts-types';
+import {
+  hasNumber,
+  isArrayLike,
+  isBoolean,
+  isNumber,
+  isObject,
+  Optional
+} from '@salesforce/ts-types';
 
 /**
  * Checks if value is empty. A value is considered empty unless it’s an arguments object, array, string, or
@@ -13,14 +20,14 @@ import { isBoolean, isNumber, Optional } from '@salesforce/ts-types';
  *
  * @param value The value to inspect.
  */
-export function isEmpty(value?: any): boolean { // tslint:disable-line:no-any
-    if (value == null) return true;
-    if (isNumber(value)) return false;
-    if (isBoolean(value)) return false;
-    if (value.length > 0) return false;
-    if (value.size > 0) return false;
-    if (Object.keys(value).length > 0) return false;
-    return true;
+export function isEmpty(value: unknown): boolean {
+  if (value == null) return true;
+  if (isNumber(value)) return false;
+  if (isBoolean(value)) return false;
+  if (isArrayLike(value) && value.length > 0) return false;
+  if (hasNumber(value, 'size') && value.size > 0) return false;
+  if (isObject(value) && Object.keys(value).length > 0) return false;
+  return true;
 }
 
 /**
@@ -35,7 +42,7 @@ export function lowerFirst(value: string): string;
 export function lowerFirst(value?: string): Optional<string>;
 // underlying function
 export function lowerFirst(value?: string): Optional<string> {
-    return value && value.charAt(0).toLowerCase() + value.slice(1);
+  return value && value.charAt(0).toLowerCase() + value.slice(1);
 }
 
 /**
@@ -47,7 +54,14 @@ export function snakeCase(str: string): string;
 export function snakeCase(str?: string): Optional<string>;
 // underlying function
 export function snakeCase(str?: string): Optional<string> {
-    return str && str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase().replace(/\W/g, '_').replace(/^_+|_+$/g, '');
+  return (
+    str &&
+    str
+      .replace(/([a-z])([A-Z])/g, '$1_$2')
+      .toLowerCase()
+      .replace(/\W/g, '_')
+      .replace(/^_+|_+$/g, '')
+  );
 }
 
 /**
@@ -62,5 +76,5 @@ export function upperFirst(value: string): string;
 export function upperFirst(value?: string): Optional<string>;
 // underlying function
 export function upperFirst(value?: string): Optional<string> {
-    return value && value.charAt(0).toUpperCase() + value.slice(1);
+  return value && value.charAt(0).toUpperCase() + value.slice(1);
 }

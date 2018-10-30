@@ -5,26 +5,41 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-/**
- * @module narrowing
- */
-
 import { JsonCloneError, UnexpectedValueTypeError } from './errors';
 import {
+  AnyArray,
+  AnyArrayLike,
+  AnyConstructor,
   AnyFunction,
   AnyJson,
   JsonArray,
+  JsonCollection,
   JsonMap,
   KeyOf,
   Many,
   Nullable,
-  Optional
+  Optional,
+  View
 } from './types';
+
+/**
+ * Returns the given `value` if not either `undefined` or `null`, or the given `defaultValue` otherwise if defined.
+ * Returns `null` if the value is `null` and `defaultValue` is `undefined`.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was not defined.
+ */
+export function valueOrDefault<T>(
+  value: Nullable<T>,
+  defaultValue: Nullable<T>
+): Nullable<T> {
+  return value != null || defaultValue === undefined ? value : defaultValue;
+}
 
 /**
  * Tests whether an `unknown` value is a `string`.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
 export function isString(value: unknown): value is string {
   return typeof value === 'string';
@@ -33,7 +48,7 @@ export function isString(value: unknown): value is string {
 /**
  * Tests whether an `unknown` value is a `number`.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
 export function isNumber(value: unknown): value is number {
   return typeof value === 'number';
@@ -42,7 +57,7 @@ export function isNumber(value: unknown): value is number {
 /**
  * Tests whether an `unknown` value is a `boolean`.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
 export function isBoolean(value: unknown): value is boolean {
   return typeof value === 'boolean';
@@ -51,34 +66,55 @@ export function isBoolean(value: unknown): value is boolean {
 /**
  * Tests whether an `unknown` value is an `object` subtype.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
 export function isObject(value: unknown): value is object {
-  return value !== null && typeof value === 'object';
+  return value != null && typeof value === 'object';
 }
 
 /**
- * Tests whether or not an `unknown` value is a plain JS object.
+ * Tests whether or not an `unknown` value is a plain JavaScript object.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
 export function isPlainObject(value: unknown): value is object {
   return Object.prototype.toString.call(value) === '[object Object]';
 }
 
 /**
+ * Tests whether an `unknown` value is a `function`.
+ *
+ * @param value The value to test.
+ */
+export function isInstance<C extends AnyConstructor>(
+  value: unknown,
+  ctor: C
+): value is InstanceType<C> {
+  return value instanceof ctor;
+}
+
+/**
  * Tests whether an `unknown` value is an `Array`.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
-export function isArray<T>(value: unknown): value is T[] {
+export function isArray(value: unknown): value is AnyArray {
   return Array.isArray(value);
+}
+
+/**
+ * Tests whether an `unknown` value conforms to {@link AnyArrayLike}.
+ *
+ * @param value The value to test.
+ */
+export function isArrayLike(value: unknown): value is AnyArrayLike {
+  return isString(value) || hasNumber(value, 'length');
 }
 
 /**
  * Tests whether an `unknown` value is a `function`.
  *
- * @param value Any value to test.
+ * @param value The value to test.
  */
 export function isFunction(value: unknown): value is AnyFunction {
   return typeof value === 'function';
@@ -87,12 +123,12 @@ export function isFunction(value: unknown): value is AnyFunction {
 /**
  * Tests whether or not a `key` string is a key of the given object type `T`.
  *
- * @param key The string to test as a key of the target object.
  * @param obj The target object to check the key in.
+ * @param key The string to test as a key of the target object.
  */
 export function isKeyOf<T extends object, K extends KeyOf<T>>(
-  key: string,
-  obj: T
+  obj: T,
+  key: string
 ): key is K {
   return Object.keys(obj).includes(key);
 }
@@ -103,7 +139,7 @@ export function isKeyOf<T extends object, K extends KeyOf<T>>(
  *
  * @param value The value to test.
  */
-export function isAnyJson(value: Optional<unknown>): value is AnyJson {
+export function isAnyJson(value: unknown): value is AnyJson {
   return (
     value === null ||
     isString(value) ||
@@ -117,7 +153,7 @@ export function isAnyJson(value: Optional<unknown>): value is AnyJson {
 /**
  * Tests whether an `AnyJson` value is an object.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  */
 export function isJsonMap(value: Optional<AnyJson>): value is JsonMap {
   return isPlainObject(value);
@@ -126,92 +162,200 @@ export function isJsonMap(value: Optional<AnyJson>): value is JsonMap {
 /**
  * Tests whether an `AnyJson` value is an array.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  */
 export function isJsonArray(value: Optional<AnyJson>): value is JsonArray {
   return isArray(value);
 }
 
 /**
- * Narrows an `AnyJson` value to a `string` if it is type-compatible, or returns undefined otherwise.
+ * Narrows an `unknown` value to a `string` if it is type-compatible, or returns `undefined` otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  */
-export function asString(value: Optional<AnyJson>): Optional<string>;
+export function asString(value: unknown): Optional<string>;
 /**
  * Narrows an `unknown` value to a `string` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asString(
-  value: Optional<AnyJson>,
-  defaultValue: string
-): string;
+export function asString(value: unknown, defaultValue: string): string;
 // underlying function
 export function asString(
-  value: Optional<AnyJson>,
+  value: unknown,
   defaultValue?: string
 ): Optional<string> {
   return isString(value) ? value : defaultValue;
 }
 
 /**
- * Narrows an `AnyJson` value to a `number` if it is type-compatible, or returns undefined otherwise.
+ * Narrows an `unknown` value to a `number` if it is type-compatible, or returns `undefined` otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  */
-export function asNumber(value: Optional<AnyJson>): Optional<number>;
+export function asNumber(value: unknown): Optional<number>;
 /**
  * Narrows an `unknown` value to a `number` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asNumber(
-  value: Optional<AnyJson>,
-  defaultValue: number
-): number;
+export function asNumber(value: unknown, defaultValue: number): number;
 // underlying function
 export function asNumber(
-  value: Optional<AnyJson>,
+  value: unknown,
   defaultValue?: number
 ): Optional<number> {
   return isNumber(value) ? value : defaultValue;
 }
 
 /**
- * Narrows an `AnyJson` value to a `boolean` if it is type-compatible, or returns undefined otherwise.
+ * Narrows an `unknown` value to a `boolean` if it is type-compatible, or returns `undefined` otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  */
-export function asBoolean(value: Optional<AnyJson>): Optional<boolean>;
+export function asBoolean(value: unknown): Optional<boolean>;
 /**
  * Narrows an `unknown` value to a `boolean` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asBoolean(
-  value: Optional<AnyJson>,
-  defaultValue: boolean
-): boolean;
+export function asBoolean(value: unknown, defaultValue: boolean): boolean;
 // underlying function
 export function asBoolean(
-  value: Optional<AnyJson>,
+  value: unknown,
   defaultValue?: boolean
 ): Optional<boolean> {
   return isBoolean(value) ? value : defaultValue;
 }
 
 /**
- * Narrows an `AnyJson` value to a `JsonMap` if it is type-compatible, or returns undefined otherwise.
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns `undefined` otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
+ */
+export function asObject(value: unknown): Optional<object>;
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
+ */
+export function asObject(value: unknown, defaultValue: object): object;
+// underlying function
+export function asObject(
+  value: unknown,
+  defaultValue?: object
+): Optional<object> {
+  return isObject(value) ? value : defaultValue;
+}
+
+/**
+ * Narrows an `unknown` value to a plain `object` if it is type-compatible, or returns `undefined` otherwise.
+ *
+ * @param value The value to test.
+ */
+export function asPlainObject(value: unknown): Optional<object>;
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
+ */
+export function asPlainObject(value: unknown, defaultValue: object): object;
+// underlying function
+export function asPlainObject(
+  value: unknown,
+  defaultValue?: object
+): Optional<object> {
+  return isPlainObject(value) ? value : defaultValue;
+}
+
+/**
+ * Narrows an `unknown` value to an instance of constructor type `T` if it is type-compatible, or returns `undefined`
+ * otherwise.
+ *
+ * @param value The value to test.
+ */
+export function asInstance<C extends AnyConstructor>(
+  value: unknown,
+  ctor: C
+): Optional<InstanceType<C>>;
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
+ */
+export function asInstance<C extends AnyConstructor>(
+  value: unknown,
+  ctor: C,
+  defaultValue: InstanceType<C>
+): InstanceType<C>;
+// underlying function
+export function asInstance<C extends AnyConstructor>(
+  value: unknown,
+  ctor: C,
+  defaultValue?: InstanceType<C>
+): Optional<InstanceType<C>> {
+  return isInstance(value, ctor) ? value : defaultValue;
+}
+
+/**
+ * Narrows an `unknown` value to an `Array` if it is type-compatible, or returns `undefined` otherwise.
+ *
+ * @param value The value to test.
+ */
+export function asArray(value: unknown): Optional<AnyArray>;
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
+ */
+export function asArray(value: unknown, defaultValue: AnyArray): AnyArray;
+// underlying function
+export function asArray(
+  value: unknown,
+  defaultValue?: AnyArray
+): Optional<AnyArray> {
+  return isArray(value) ? value : defaultValue;
+}
+
+/**
+ * Narrows an `unknown` value to an `AnyFunction` if it is type-compatible, or returns `undefined` otherwise.
+ *
+ * @param value The value to test.
+ */
+export function asFunction(value: unknown): Optional<AnyFunction>;
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
+ */
+export function asFunction(
+  value: unknown,
+  defaultValue: AnyFunction
+): AnyFunction;
+// underlying function
+export function asFunction(
+  value: unknown,
+  defaultValue?: AnyFunction
+): Optional<AnyFunction> {
+  return isFunction(value) ? value : defaultValue;
+}
+
+/**
+ * Narrows an `AnyJson` value to a `JsonMap` if it is type-compatible, or returns `undefined` otherwise.
+ *
+ * @param value The value to test.
  */
 export function asJsonMap(value: Optional<AnyJson>): Optional<JsonMap>;
 /**
- * Narrows an `unknown` value to a `JsonMap` if it is type-compatible, or returns the provided default otherwise.
+ * Narrows an `AnyJson` value to a `JsonMap` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
@@ -229,13 +373,13 @@ export function asJsonMap(
 }
 
 /**
- * Narrows an `AnyJson` value to a `JsonArray` if it is type-compatible, or returns undefined otherwise.
+ * Narrows an `AnyJson` value to a `JsonArray` if it is type-compatible, or returns `undefined` otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  */
 export function asJsonArray(value: Optional<AnyJson>): Optional<JsonArray>;
 /**
- * Narrows an `unknown` value to a `JsonArray` if it is type-compatible, or returns the provided default otherwise.
+ * Narrows an `AnyJson` value to a `JsonArray` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if the value was undefined or of the incorrect type.
@@ -263,7 +407,6 @@ export function asJsonArray(
  * @param value The value to test.
  */
 export function coerceAnyJson(value: unknown): Optional<AnyJson>;
-
 /**
  * Narrows an `unknown` value to an `AnyJson` if it is type-compatible, or returns the provided default otherwise.
  *
@@ -288,24 +431,24 @@ export function coerceAnyJson(
  * @param value The object to coerce.
  */
 export function coerceJsonMap<T extends object>(
-  value: Optional<T>
+  value: Nullable<T>
 ): Optional<JsonMap>;
 /**
  * Narrows an object of type `T` to a `JsonMap` using a shallow type-compatibility check. Use this when the source of
  * the object is known to be JSON-compatible and you want simple type coercion to a `JsonMap`. Use {@link toJsonMap}
  * instead when the `value` object _cannot_ be guaranteed to be JSON-compatible and you want an assurance of runtime
- * type safety.
+ * type safety. This is a shortcut for writing `asJsonMap(coerceAnyJson(value)) || defaultValue`.
  *
  * @param value The object to coerce.
- * @param defaultValue The default to return if `value` was `undefined`.
+ * @param defaultValue The default to return if `value` was not defined.
  */
 export function coerceJsonMap<T extends object>(
-  value: Optional<T>,
+  value: Nullable<T>,
   defaultValue: JsonMap
 ): JsonMap;
 // underlying function
 export function coerceJsonMap<T extends object>(
-  value: Optional<T>,
+  value: Nullable<T>,
   defaultValue?: JsonMap
 ): Optional<JsonMap> {
   return asJsonMap(coerceAnyJson(value)) || defaultValue;
@@ -319,23 +462,23 @@ export function coerceJsonMap<T extends object>(
  *
  * @param value The array to coerce.
  */
-export function coerceJsonArray<T>(value: Optional<T[]>): Optional<JsonArray>;
+export function coerceJsonArray<T>(value: Nullable<T[]>): Optional<JsonArray>;
 /**
  * Narrows an array of type `T` to a `JsonArray` using a shallow type-compatibility check. Use this when the source of
  * the array is known to be JSON-compatible and you want simple type coercion to a `JsonArray`. Use {@link toJsonArray}
  * instead when the `value` array _cannot_ be guaranteed to be JSON-compatible and you want an assurance of runtime
- * type safety.
+ * type safety. This is a shortcut for writing `asJsonArray(coerceAnyJson(value)) || defaultValue`.
  *
  * @param value The array to coerce.
- * @param defaultValue The default to return if `value` was `undefined`.
+ * @param defaultValue The default to return if `value` was not defined.
  */
 export function coerceJsonArray<T>(
-  value: Optional<T[]>,
+  value: Nullable<T[]>,
   defaultValue: JsonArray
 ): JsonArray;
 // underlying method
 export function coerceJsonArray<T>(
-  value: Optional<T[]>,
+  value: Nullable<T[]>,
   defaultValue?: JsonArray
 ): Optional<JsonArray> {
   return asJsonArray(coerceAnyJson(value)) || defaultValue;
@@ -353,7 +496,7 @@ export function coerceJsonArray<T>(
  * @param value The value to convert.
  * @throws {@link JsonCloneError} If the value values contain circular references.
  */
-export function toAnyJson<T>(value: Optional<T>): Optional<AnyJson>;
+export function toAnyJson<T>(value: Nullable<T>): Optional<AnyJson>;
 /**
  * Narrows an object of type `T` to an `AnyJson` following a deep, brute-force conversion of the object's data to
  * only consist of JSON-compatible values by performing a basic JSON clone on the object. This is preferable to
@@ -364,16 +507,16 @@ export function toAnyJson<T>(value: Optional<T>): Optional<AnyJson>;
  * and only needs type narrowing.
  *
  * @param value The value to convert.
- * @param defaultValue The default to return if `value` was `undefined`.
+ * @param defaultValue The default to return if `value` was not defined.
  * @throws {@link JsonCloneError} If the value values contain circular references.
  */
 export function toAnyJson<T>(
-  value: Optional<T>,
+  value: Nullable<T>,
   defaultValue: AnyJson
 ): AnyJson;
 // underlying function
 export function toAnyJson<T>(
-  value: Optional<T>,
+  value: Nullable<T>,
   defaultValue?: AnyJson
 ): Optional<AnyJson> {
   try {
@@ -398,7 +541,7 @@ export function toAnyJson<T>(
  * @throws {@link JsonCloneError} If the object values contain circular references.
  */
 export function toJsonMap<T extends object>(
-  value: Optional<T>
+  value: Nullable<T>
 ): Optional<JsonMap>;
 /**
  * Narrows an object of type `T` to a `JsonMap` following a deep, brute-force conversion of the object's data to
@@ -410,16 +553,16 @@ export function toJsonMap<T extends object>(
  * and only needs type narrowing.
  *
  * @param value The object to convert.
- * @param defaultValue The default to return if `value` was `undefined`.
+ * @param defaultValue The default to return if `value` was not defined.
  * @throws {@link JsonCloneError} If the object values contain circular references.
  */
 export function toJsonMap<T extends object>(
-  value: Optional<T>,
+  value: Nullable<T>,
   defaultValue: JsonMap
 ): JsonMap;
 // underlying function
 export function toJsonMap<T extends object>(
-  value: Optional<T>,
+  value: Nullable<T>,
   defaultValue?: JsonMap
 ): Optional<JsonMap> {
   return asJsonMap(toAnyJson(value)) || defaultValue;
@@ -478,78 +621,112 @@ export function ensure<T>(value: Nullable<T>, message?: string): T {
 }
 
 /**
- * Narrows an `unknown` value to an `AnyJson` if it is type-compatible, or returns undefined otherwise.
+ * Narrows an `unknown` value to an `AnyJson` if it is type-compatible, or returns `undefined` otherwise.
  *
  * See also caveats noted in {@link isAnyJson}.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was not a JSON value type.
  */
 export function ensureAnyJson(value: unknown, message?: string): AnyJson {
   if (!isAnyJson(value)) {
     throw new UnexpectedValueTypeError(
-      message || 'Value is not a JSON value type'
+      message || 'Value is not a JSON-compatible value type'
     );
   }
   return toAnyJson(value);
 }
 
 /**
- * Narrows an `AnyJson` value to a `string` if it is type-compatible, or raises an error otherwise.
+ * Narrows an `unknown` value to a `string` if it is type-compatible, or raises an error otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureString(
-  value: Optional<AnyJson>,
-  message?: string
-): string {
-  if (!isString(value)) {
-    throw new UnexpectedValueTypeError(message || 'Value is not a string');
-  }
-  return value;
+export function ensureString(value: unknown, message?: string): string {
+  return ensure(asString(value), message || 'Value is not an string');
 }
 
 /**
- * Narrows an `AnyJson` value to a `number` if it is type-compatible, or raises an error otherwise.
+ * Narrows an `unknown` value to a `number` if it is type-compatible, or raises an error otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureNumber(
-  value: Optional<AnyJson>,
-  message?: string
-): number {
-  if (!isNumber(value)) {
-    throw new UnexpectedValueTypeError(message || 'Value is not a number');
-  }
-  return value;
+export function ensureNumber(value: unknown, message?: string): number {
+  return ensure(asNumber(value), message || 'Value is not an number');
 }
 
 /**
- * Narrows an `AnyJson` value to a `boolean` if it is type-compatible, or raises an error otherwise.
+ * Narrows an `unknown` value to a `boolean` if it is type-compatible, or raises an error otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureBoolean(
-  value: Optional<AnyJson>,
+export function ensureBoolean(value: unknown, message?: string): boolean {
+  return ensure(asBoolean(value), message || 'Value is not an boolean');
+}
+
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or raises an error otherwise.
+ *
+ * @param value The value to test.
+ * @param message The error message to use if `value` is not type-compatible.
+ * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ */
+export function ensureObject(value: unknown, message?: string): object {
+  return ensure(asObject(value), message || 'Value is not an object');
+}
+
+/**
+ * Narrows an `unknown` value to instance of constructor type `T` if it is type-compatible, or raises an error
+ * otherwise.
+ *
+ * @param value The value to test.
+ * @param message The error message to use if `value` is not type-compatible.
+ * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ */
+export function ensureInstance<C extends AnyConstructor>(
+  value: unknown,
+  ctor: C,
   message?: string
-): boolean {
-  if (!isBoolean(value)) {
-    throw new UnexpectedValueTypeError(message || 'Value is not a boolean');
-  }
-  return value;
+): InstanceType<C> {
+  return ensure(
+    asInstance(value, ctor),
+    message || `Value is not an instance of ${ctor.name}`
+  );
+}
+
+/**
+ * Narrows an `unknown` value to an `Array` if it is type-compatible, or raises an error otherwise.
+ *
+ * @param value The value to test.
+ * @param message The error message to use if `value` is not type-compatible.
+ * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ */
+export function ensureArray(value: unknown, message?: string): AnyArray {
+  return ensure(asArray(value), message || 'Value is not an array');
+}
+
+/**
+ * Narrows an `unknown` value to an `AnyFunction` if it is type-compatible, or raises an error otherwise.
+ *
+ * @param value The value to test.
+ * @param message The error message to use if `value` is not type-compatible.
+ * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ */
+export function ensureFunction(value: unknown, message?: string): AnyFunction {
+  return ensure(asFunction(value), message || 'Value is not a function');
 }
 
 /**
  * Narrows an `AnyJson` value to a `JsonMap` if it is type-compatible, or raises an error otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
@@ -557,16 +734,13 @@ export function ensureJsonMap(
   value: Optional<AnyJson>,
   message?: string
 ): JsonMap {
-  if (!isJsonMap(value)) {
-    throw new UnexpectedValueTypeError(message || 'Value is not a JsonMap');
-  }
-  return value;
+  return ensure(asJsonMap(value), message || 'Value is not a JsonMap');
 }
 
 /**
  * Narrows an `AnyJson` value to a `JsonArray` if it is type-compatible, or raises an error otherwise.
  *
- * @param value An `AnyJson` value to test.
+ * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
@@ -574,312 +748,788 @@ export function ensureJsonArray(
   value: Optional<AnyJson>,
   message?: string
 ): JsonArray {
-  if (!isJsonArray(value)) {
-    throw new UnexpectedValueTypeError(message || 'Value is not a JsonArray');
-  }
-  return value;
+  return ensure(asJsonArray(value), message || 'Value is not JsonArray');
 }
 
 /**
- * Gets `AnyJson` element of a `JsonMap` given a query path.
+ * Tests whether a value of type `T` contains one or more property `keys`. If so, the type of the tested value is
+ * narrowed to reflect the existence of those keys for convenient access in the same scope. Returns false if the
+ * property key does not exist on the target type, which must be an object. Returns true if the property key exists,
+ * even if the associated value is `undefined` or `null`.
  *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- */
-export function getAsAnyJson(
-  json: Optional<JsonMap>,
-  path: Many<string>
-): Optional<AnyJson>;
-/**
- * Gets an `AnyJson` element of a `JsonMap` given a query path, returning a default if not found or not type-compatible.
+ * ```
+ * // type of obj -> unknown
+ * if (has(obj, 'name')) {
+ *   // type of obj -> { name: unknown }
+ *   if (has(obj, 'data')) {
+ *     // type of obj -> { name: unknown } & { data: unknown }
+ *   } else if (has(obj, ['error', 'status'])) {
+ *     // type of obj -> { name: unknown } & { error: unknown, status: unknown }
+ *   }
+ * }
+ * ```
  *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param defaultValue A fallback value.
+ * @param value The value to test.
+ * @param keys One or more `string` keys to check for existence.
  */
-export function getAsAnyJson(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  defaultValue: AnyJson
-): AnyJson;
-// underlying function
-export function getAsAnyJson(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  defaultValue?: AnyJson
-): Optional<AnyJson> {
-  if (typeof path === 'string') {
-    path = path.split('.');
-  }
-  let index = 0;
-  let node: Optional<AnyJson> = json;
-  while (isJsonMap(node) && index < path.length) {
-    node = node[path[index++]];
-  }
-  return (index && index === path.length ? node : undefined) || defaultValue;
+export function has<T, K extends string>(
+  value: T,
+  keys: Many<K>
+): value is T & View<K> {
+  return (
+    isObject(value) &&
+    (isArray(keys) ? keys.every(k => k in value) : keys in value)
+  );
 }
 
 /**
- * Gets a `string` element of a `JsonMap` given a query path.
+ * Tests whether a value of type `T` contains a property `key` of type `string`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `string`.
  *
- * @param json The `JsonMap` to query.
- * @param path The query path.
+ * ```
+ * // type of obj -> unknown
+ * if (hasString(obj, 'name')) {
+ *   // type of obj -> { name: string }
+ *   if (hasString(obj, 'message')) {
+ *     // type of obj -> { name: string } & { message: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `string` key to check for existence.
  */
-export function getAsString(
-  json: Optional<JsonMap>,
-  path: Many<string>
-): Optional<string>;
+export function hasString<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, string> {
+  return has(value, key) && isString(value[key]);
+}
+
 /**
- * Gets a `string` element of a `JsonMap` given a query path, returning a default if not found or not type-compatible.
+ * Tests whether a value of type `T` contains a property `key` of type `number`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `number`.
  *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param defaultValue A fallback value.
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'offset')) {
+ *   // type of obj -> { offset: number }
+ *   if (hasNumber(obj, 'page') && hasArray(obj, 'items')) {
+ *     // type of obj -> { offset: number } & { page: number } & { items: Array<unknown> }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `number` key to check for existence.
  */
-export function getAsString(
-  json: JsonMap,
-  path: Many<string>,
+export function hasNumber<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, number> {
+  return has(value, key) && isNumber(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` of type `boolean`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `boolean`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasBoolean(obj, 'enabled')) {
+ *   // type of obj -> { enabled: boolean }
+ *   if (hasBoolean(obj, 'hidden')) {
+ *     // type of obj -> { enabled: boolean } & { hidden: boolean }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `boolean` key to check for existence.
+ */
+export function hasBoolean<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, boolean> {
+  return has(value, key) && isBoolean(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` of type `object`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `object`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasObject(obj, 'data')) {
+ *     // type of obj -> { status: number } & { data: object }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `object` key to check for existence.
+ */
+export function hasObject<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, object> {
+  return has(value, key) && isObject(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` whose type tests positively when tested with
+ * {@link isPlainObject}. If so, the type of the tested value is narrowed to reflect the existence of that key for
+ * convenient access in the same scope. Returns `false` if the property key does not exist on the object or the value
+ * stored by that key is not of type `object`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasPlainObject(obj, 'data')) {
+ *     // type of obj -> { status: number } & { data: object }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A "plain" `object` key to check for existence.
+ */
+export function hasPlainObject<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, object> {
+  return has(value, key) && isPlainObject(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` whose type tests positively when tested with
+ * {@link isInstance} when compared with the given constructor type `C`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not an instance of `C`.
+ *
+ * ```
+ * class ServerResponse { ... }
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasInstance(obj, 'data', ServerResponse)) {
+ *     // type of obj -> { status: number } & { data: ServerResponse }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An instance of type `C` key to check for existence.
+ */
+export function hasInstance<T, K extends string, C extends AnyConstructor>(
+  value: T,
+  key: K,
+  ctor: C
+): value is T & View<K, InstanceType<C>> {
+  return has(value, key) && value[key] instanceof ctor;
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` of type {@link AnyArray}. If so, the type of the tested
+ * value is narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if
+ * the property key does not exist on the object or the value stored by that key is not of type {@link AnyArray}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'offset')) {
+ *   // type of obj -> { offset: number }
+ *   if (hasNumber(obj, 'page') && hasArray(obj, 'items')) {
+ *     // type of obj -> { offset: number } & { page: number } & { items: AnyArray }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `AnyArray` key to check for existence.
+ */
+export function hasArray<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, AnyArray> {
+  return has(value, key) && isArray(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` of type {@link AnyFunction}. If so, the type of the
+ * tested value is narrowed to reflect the existence of that key for convenient access in the same scope. Returns
+ * `false` if the property key does not exist on the object or the value stored by that key is not of type
+ * {@link AnyFunction}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasFunction(obj, 'callback')) {
+ *   // type of obj -> { callback: AnyFunction }
+ *   obj.callback(response);
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `Array` key to check for existence.
+ */
+export function hasFunction<T, K extends string>(
+  value: T,
+  key: K
+): value is T & View<K, AnyFunction> {
+  return has(value, key) && isFunction(value[key]);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array.
+ *
+ * ```
+ * const obj = { foo: { bar: ['baz'] } };
+ * const value = take(obj, 'foo.bar[0]');
+ * // type of value -> unknown; value === 'baz'
+ *
+ * const value = take(obj, 'foo.bar.nothing', 'default');
+ * // type of value -> unknown; value === 'default'
+ *
+ * const value = take(obj, 'foo["bar"][0]');
+ * // type of value -> unknown; value === 'baz'
+ *
+ * const arr = [obj];
+ * const value = take(arr, '[0].foo.bar[0]');
+ * // type of value -> unknown; value === 'baz'
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function take(
+  from: Nullable<object>,
+  path: string,
+  defaultValue?: unknown
+): unknown {
+  return valueOrDefault(
+    path
+      .split(/[\.\[\]\'\"]/)
+      .filter(p => !!p)
+      .reduce((r: unknown, p: string) => (has(r, p) ? r[p] : undefined), from),
+    defaultValue
+  );
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `string`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: ['baz'] } };
+ * const value = takeString(obj, 'foo.bar[0]');
+ * // type of value -> string; value -> 'baz'
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takeString(
+  from: Nullable<object>,
+  path: string
+): Nullable<string>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `string`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: ['baz'] } };
+ * const value = takeString(obj, 'foo.bar[1]', 'default');
+ * // type of value -> string; value -> 'default'
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takeString(
+  from: Nullable<object>,
+  path: string,
   defaultValue: string
 ): string;
 // underlying function
-export function getAsString(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeString(
+  from: Nullable<object>,
+  path: string,
   defaultValue?: string
-): Optional<string> {
-  if (defaultValue) return ensureString(getAsAnyJson(json, path, defaultValue));
-  return asString(getAsAnyJson(json, path));
+): Nullable<string> {
+  return valueOrDefault(asString(take(from, path)), defaultValue);
 }
 
 /**
- * Gets a `number` element of a `JsonMap` given a query path.
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `number`, or
+ * `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [1] } };
+ * const value = takeNumber(obj, 'foo.bar[0]');
+ * // type of value -> number; value -> 1
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
  */
-export function getAsNumber(
-  json: Optional<JsonMap>,
-  path: Many<string>
-): Optional<number>;
+export function takeNumber(
+  from: Nullable<object>,
+  path: string
+): Nullable<number>;
 /**
- * Gets a `number` element of a `JsonMap` given a query path, returning a default if not found or not type-compatible.
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `number`, or
+ * `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [1] } };
+ * const value = takeNumber(obj, 'foo.bar[1]', 2);
+ * // type of value -> number; value -> 2
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
- * @param defaultValue A fallback value.
+ * @param defaultValue The default to return if the query result was not defined.
  */
-export function getAsNumber(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeNumber(
+  from: Nullable<object>,
+  path: string,
   defaultValue: number
 ): number;
 // underlying function
-export function getAsNumber(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeNumber(
+  from: Nullable<object>,
+  path: string,
   defaultValue?: number
-): Optional<number> {
-  if (defaultValue) return ensureNumber(getAsAnyJson(json, path, defaultValue));
-  return asNumber(getAsAnyJson(json, path));
+): Nullable<number> {
+  return valueOrDefault(asNumber(take(from, path)), defaultValue);
 }
 
 /**
- * Gets a `boolean` element of a `JsonMap` given a query path.
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `boolean`, or
+ * `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [true] } };
+ * const value = takeBoolean(obj, 'foo.bar[0]');
+ * // type of value -> boolean; value -> true
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
  */
-export function getAsBoolean(
-  json: Optional<JsonMap>,
-  path: Many<string>
-): Optional<boolean>;
+export function takeBoolean(
+  from: Nullable<object>,
+  path: string
+): Nullable<boolean>;
 /**
- * Gets a `boolean` element of a `JsonMap` given a query path, returning a default if not found or not type-compatible.
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `boolean`, or
+ * `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [true] } };
+ * const value = takeBoolean(obj, 'foo.bar[1]', false);
+ * // type of value -> boolean; value -> false
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
- * @param defaultValue A fallback value.
+ * @param defaultValue The default to return if the query result was not defined.
  */
-export function getAsBoolean(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeBoolean(
+  from: Nullable<object>,
+  path: string,
   defaultValue: boolean
 ): boolean;
 // underlying function
-export function getAsBoolean(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeBoolean(
+  from: Nullable<object>,
+  path: string,
   defaultValue?: boolean
-): Optional<boolean> {
-  if (defaultValue) {
-    return ensureBoolean(getAsAnyJson(json, path, defaultValue));
-  }
-  return asBoolean(getAsAnyJson(json, path));
+): Nullable<boolean> {
+  return valueOrDefault(asBoolean(take(from, path)), defaultValue);
 }
 
 /**
- * Gets a `JsonMap` element of a `JsonMap` given a query path.
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takeObject(obj, 'foo.bar[0]');
+ * // type of value -> object; value -> { name: 'baz' }
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
  */
-export function getAsJsonMap(
-  json: Optional<JsonMap>,
-  path: Many<string>
-): Optional<JsonMap>;
+export function takeObject(
+  from: Nullable<object>,
+  path: string
+): Nullable<object>;
 /**
- * Gets a `JsonMap` element of a `JsonMap` given a query path, returning a default if not found or not type-compatible.
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takeObject(obj, 'foo.bar[1]', { name: 'buzz' });
+ * // type of value -> object; value -> { name: 'buzz' }
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
- * @param defaultValue A fallback value.
+ * @param defaultValue The default to return if the query result was not defined.
  */
-export function getAsJsonMap(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeObject(
+  obj: Nullable<object>,
+  path: string,
+  defaultValue: object
+): object;
+// underlying function
+export function takeObject(
+  from: Nullable<object>,
+  path: string,
+  defaultValue?: object
+): Nullable<object> {
+  return valueOrDefault(asObject(take(from, path)), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible. This differs from {@link takeObject} by way of
+ * testing for the property value type compatibility using {@link isPlainObject} instead of {@link isObject}.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takePlainObject(obj, 'foo.bar[0]');
+ * // type of value -> object; value -> { name: 'baz' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takePlainObject(
+  from: Nullable<object>,
+  path: string
+): Nullable<object>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible. This differs from {@link takeObject} by way of
+ * testing for the property value type compatibility using {@link isPlainObject} instead of {@link isObject}.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takePlainObject(obj, 'foo.bar[1]', { name: 'buzz' });
+ * // type of value -> object; value -> { name: 'buzz' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takePlainObject(
+  obj: Nullable<object>,
+  path: string,
+  defaultValue: object
+): object;
+// underlying function
+export function takePlainObject(
+  from: Nullable<object>,
+  path: string,
+  defaultValue?: object
+): Nullable<object> {
+  return valueOrDefault(asPlainObject(take(from, path)), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an instance of
+ * class type `C`, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * class Example { ... }
+ * const obj = { foo: { bar: [new Example()] } };
+ * const value = takeInstance(obj, 'foo.bar[0]', Example);
+ * // type of value -> Example
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takeInstance<C extends AnyConstructor>(
+  from: Nullable<object>,
+  path: string,
+  ctor: C
+): Nullable<InstanceType<C>>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an instance of
+ * class type `C`, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * class Example { ... }
+ * const obj = { foo: { bar: [new Example()] } };
+ * const value = takeInstance(obj, 'foo.bar[0]', Example);
+ * // type of value -> Example; value -> new Example()
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takeInstance<C extends AnyConstructor>(
+  from: Nullable<object>,
+  path: string,
+  ctor: C,
+  defaultValue: InstanceType<C>
+): InstanceType<C>;
+// underlying function
+export function takeInstance<C extends AnyConstructor>(
+  from: Nullable<object>,
+  path: string,
+  ctor: C,
+  defaultValue?: InstanceType<C>
+): Nullable<InstanceType<C>> {
+  return valueOrDefault(asInstance(take(from, path), ctor), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyArray}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeArray(obj, 'foo.bar');
+ * // type of value -> AnyArray; value -> [1, 2, 3]
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takeArray(
+  from: Nullable<object>,
+  path: string
+): Nullable<AnyArray>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyArray}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeArray(obj, 'foo.baz', [4, 5, 6]);
+ * // type of value -> AnyArray; value -> [4, 5, 6]
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takeArray(
+  from: Nullable<object>,
+  path: string,
+  defaultValue: AnyArray
+): AnyArray;
+// underlying function
+export function takeArray(
+  from: Nullable<object>,
+  path: string,
+  defaultValue?: AnyArray
+): Nullable<AnyArray> {
+  return valueOrDefault(asArray(take(from, path)), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyFunction}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [(arg: string) => `Hi, ${arg}`] } };
+ * const value = takeFunction(obj, 'foo.bar[0]');
+ * // type of value -> AnyArray; value -> (arg: string) => `Hi, ${arg}`
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takeFunction(
+  from: Nullable<object>,
+  path: string
+): Nullable<AnyFunction>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyFunction}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [(arg: string) => `Hi, ${arg}`] } };
+ * const value = takeFunction(obj, 'foo.bar[1]', (arg: string) => `Bye, ${arg}`);
+ * // type of value -> AnyArray; value -> (arg: string) => `Bye, ${arg}`)
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takeFunction(
+  from: Nullable<object>,
+  path: string,
+  defaultValue: AnyFunction
+): AnyFunction;
+// underlying function
+export function takeFunction(
+  from: Nullable<object>,
+  path: string,
+  defaultValue?: AnyFunction
+): Nullable<AnyFunction> {
+  return valueOrDefault(asFunction(take(from, path)), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * See {@link coerceAnyJson} for caveats regarding shallow type detection of `AnyJson` values from untyped sources.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeAnyJson(obj, 'foo.bar[0]');
+ * // type of value -> AnyJson; value -> { a: 'b' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takeAnyJson(
+  from: Nullable<JsonCollection>,
+  path: string
+): Optional<AnyJson>;
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeAnyJson(obj, 'foo.bar[1]', { c: 'd' });
+ * // type of value -> AnyJson; value -> { c: 'd' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takeAnyJson(
+  from: Nullable<JsonCollection>,
+  path: string,
+  defaultValue: AnyJson
+): AnyJson;
+// underlying function
+export function takeAnyJson(
+  from: Nullable<JsonCollection>,
+  path: string,
+  defaultValue?: AnyJson
+): Optional<AnyJson> {
+  return valueOrDefault(coerceAnyJson(take(from, path)), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeJsonMap(obj, 'foo.bar[0]');
+ * // type of value -> JsonMap; value -> { a: 'b' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
+export function takeJsonMap(
+  from: Nullable<JsonCollection>,
+  path: string
+): Nullable<JsonMap>;
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeJsonMap(obj, 'foo.bar[1]', { c: 'd' });
+ * // type of value -> JsonMap; value -> { c: 'd' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function takeJsonMap(
+  from: Nullable<JsonCollection>,
+  path: string,
   defaultValue: JsonMap
 ): JsonMap;
 // underlying function
-export function getAsJsonMap(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeJsonMap(
+  from: Nullable<JsonCollection>,
+  path: string,
   defaultValue?: JsonMap
-): Optional<JsonMap> {
-  if (defaultValue) {
-    return ensureJsonMap(getAsAnyJson(json, path, defaultValue));
-  }
-  return asJsonMap(getAsAnyJson(json, path));
+): Nullable<JsonMap> {
+  return valueOrDefault(asJsonMap(takeAnyJson(from, path)), defaultValue);
 }
 
 /**
- * Gets a `JsonArray` element of a `JsonMap` given a query path.
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeJsonArray(obj, 'foo.bar');
+ * // type of value -> JsonArray; value -> [1, 2, 3]
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
  */
-export function getAsJsonArray(
-  json: Optional<JsonMap>,
-  path: Many<string>
-): Optional<JsonArray>;
+export function takeJsonArray(
+  from: Nullable<JsonCollection>,
+  path: string
+): Nullable<JsonArray>;
 /**
- * Gets a `JsonArray` element of a `JsonMap` given a query path, returning a default if not found or not type-compatible.
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
  *
- * @param json The `JsonMap` to query.
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeJsonArray(obj, 'foo.baz', [4, 5, 6]);
+ * // type of value -> JsonArray; value -> [4, 5, 6]
+ * ```
+ *
+ * @param from The object or array to query.
  * @param path The query path.
- * @param defaultValue A fallback value.
+ * @param defaultValue The default to return if the query result was not defined.
  */
-export function getAsJsonArray(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeJsonArray(
+  from: Nullable<JsonCollection>,
+  path: string,
   defaultValue: JsonArray
 ): JsonArray;
 // underlying function
-export function getAsJsonArray(
-  json: Optional<JsonMap>,
-  path: Many<string>,
+export function takeJsonArray(
+  from: Nullable<JsonCollection>,
+  path: string,
   defaultValue?: JsonArray
-): Optional<JsonArray> {
-  if (defaultValue) {
-    return ensureJsonArray(getAsAnyJson(json, path, defaultValue));
-  }
-  return asJsonArray(getAsAnyJson(json, path));
-}
-
-/**
- * Gets an `AnyJson` element of a `JsonMap` given a query path, or raises an error if not found or not type-compatible.
- *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined or not type-compatible.
- */
-export function getEnsureAnyJson(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  message?: string
-): AnyJson {
-  return ensureAnyJson(getAsAnyJson(json, path), message);
-}
-
-/**
- * Gets a `string` element of a `JsonMap` given a query path, or raises an error if not found or not type-compatible.
- *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined or not type-compatible.
- */
-export function getEnsureString(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  message?: string
-): string {
-  return ensureString(getAsAnyJson(json, path), message);
-}
-
-/**
- * Gets a `number` element of a `JsonMap` given a query path, or raises an error if not found or not type-compatible.
- *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined or not type-compatible.
- */
-export function getEnsureNumber(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  message?: string
-): number {
-  return ensureNumber(getAsAnyJson(json, path, message));
-}
-
-/**
- * Gets a `boolean` element of a `JsonMap` given a query path, or raises an error if not found or not type-compatible.
- *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined or not type-compatible.
- */
-export function getEnsureBoolean(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  message?: string
-): boolean {
-  return ensureBoolean(getAsAnyJson(json, path), message);
-}
-
-/**
- * Gets a `JsonMap` element of a `JsonMap` given a query path, or raises an error if not found or not type-compatible.
- *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined or not type-compatible.
- */
-
-export function getEnsureJsonMap(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  message?: string
-): JsonMap {
-  return ensureJsonMap(getAsAnyJson(json, path), message);
-}
-
-/**
- * Gets a `JsonArray` element of a `JsonMap` given a query path, or raises an error if not found or not type-compatible.
- *
- * @param json The `JsonMap` to query.
- * @param path The query path.
- * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined or not type-compatible.
- */
-export function getEnsureJsonArray(
-  json: Optional<JsonMap>,
-  path: Many<string>,
-  message?: string
-): JsonArray {
-  return ensureJsonArray(getAsAnyJson(json, path), message);
+): Nullable<JsonArray> {
+  return valueOrDefault(asJsonArray(takeAnyJson(from, path)), defaultValue);
 }
 
 /**
@@ -910,8 +1560,10 @@ export function getEnsureJsonArray(
  *
  * @param obj The object of interest.
  */
-export function keysOf<T extends object, K extends KeyOf<T>>(obj: T): K[] {
-  return Object.keys(obj) as K[];
+export function keysOf<T extends object, K extends KeyOf<T>>(
+  obj: Nullable<T>
+): K[] {
+  return Object.keys(obj || {}) as K[];
 }
 
 /**
@@ -943,9 +1595,9 @@ export function keysOf<T extends object, K extends KeyOf<T>>(obj: T): K[] {
  * @param obj The object of interest.
  */
 export function entriesOf<T extends object, K extends KeyOf<T>>(
-  obj: T
+  obj: Nullable<T>
 ): Array<[K, T[K]]> {
-  return Object.entries(obj) as Array<[K, T[K]]>;
+  return Object.entries(obj || {}) as Array<[K, T[K]]>;
 }
 
 /**
@@ -977,9 +1629,9 @@ export function entriesOf<T extends object, K extends KeyOf<T>>(
  * @param obj The object of interest.
  */
 export function valuesOf<T extends object, K extends KeyOf<T>>(
-  obj: T
+  obj: Nullable<T>
 ): Array<T[K]> {
-  return Object.values(obj) as Array<T[K]>;
+  return Object.values(obj || {});
 }
 
 /**
@@ -990,7 +1642,9 @@ export function valuesOf<T extends object, K extends KeyOf<T>>(
  *
  * @param obj The object of interest.
  */
-export function definiteKeysOf<T extends object>(obj: T): Array<KeyOf<T>> {
+export function definiteKeysOf<T extends object>(
+  obj: Nullable<T>
+): Array<KeyOf<T>> {
   return definiteEntriesOf(obj).map(entry => entry[0]);
 }
 
@@ -1007,7 +1661,7 @@ export function definiteEntriesOf<
   T extends object,
   K extends KeyOf<T>,
   V extends NonNullable<T[K]>
->(obj: T): Array<[K, V]> {
+>(obj: Nullable<T>): Array<[K, V]> {
   return entriesOf(obj).filter((entry): entry is [K, V] => entry[1] != null);
 }
 
@@ -1018,7 +1672,7 @@ export function definiteEntriesOf<
  * @param obj The object of interest.
  */
 export function definiteValuesOf<T extends object>(
-  obj: T
+  obj: Nullable<T>
 ): Array<NonNullable<T[KeyOf<T>]>> {
   return definiteEntriesOf(obj).map(entry => entry[1]);
 }

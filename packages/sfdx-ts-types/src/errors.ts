@@ -6,10 +6,6 @@
  */
 
 /**
- * @module errors
- */
-
-/**
  * A minimal `NamedError` implementation not intended for widespread use -- just enough to support this library's needs.
  * For a complete `NamedError` solution, see [@salesforce/kit]{@link https://preview.npmjs.com/package/@salesforce/kit}.
  */
