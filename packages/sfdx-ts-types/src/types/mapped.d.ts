@@ -12,11 +12,6 @@
 import { Literals } from './conditional';
 
 /**
- * An alias for the commonly needed `Extract<keyof T, string>`.
- */
-export type KeyOf<T> = Extract<keyof T, string>;
-
-/**
  * Creates a new `Record` type from the literal properties of a type `T`, assigning their values
  * the to the type `U`.
  *
@@ -41,7 +36,7 @@ export type KeyOf<T> = Extract<keyof T, string>;
  * //     readonly updated: string;
  * // }
  * // And for an interface with writable properties, use the following:
- * interface QueryRecord extends Writable<LiteralsRecord<typeof QUERY_KEY, string>> { }
+ * interface QueryRecord extends ReadWrite<LiteralsRecord<typeof QUERY_KEY, string>> { }
  * // typeof QueryRecord -> {
  * //     id: string;
  * //     name: string;
@@ -61,4 +56,9 @@ export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
  * Converts readonly properties of a type `T` to writable properties. This is the opposite of the
  * `Readonly<T>` builtin mapped type.
  */
-export type Writable<T> = { -readonly [K in keyof T]: T[K] };
+export type ReadWrite<T> = { -readonly [K in keyof T]: T[K] };
+
+/**
+ * A view over an `object` with constrainable properties.
+ */
+export type View<K extends string, V = unknown> = { [_ in K]: V };
