@@ -39,18 +39,13 @@ module.exports = (packageRoot = require('./package-path')) => {
   if (scriptList.length > 0) {
     const nycPath = join(packageRoot, '.nycrc');
     if (scriptList.includes('test') && !fileExist(nycPath)) {
-      writeFileSync(
-        nycPath,
-        JSON.stringify(
-          {
-            nyc: {
-              extends: '@salesforce/dev-config/nyc'
-            }
-          },
-          null,
-          2
-        )
-      );
+      const nyc = {
+        nyc: {
+          extends: '@salesforce/dev-config/nyc'
+        }
+      };
+      const nycJson = JSON.stringify(nyc, null, 2);
+      writeFileSync(nycPath, nycJson);
       added.push(nycPath);
     }
 
@@ -64,16 +59,11 @@ module.exports = (packageRoot = require('./package-path')) => {
         unlinkSync(tslintPath);
         removed.push(tslintPath);
       } else if (!strict && !exists) {
-        writeFileSync(
-          tslintPath,
-          JSON.stringify(
-            {
-              extends: '@salesforce/dev-config/tslint'
-            },
-            null,
-            2
-          )
-        );
+        const tslint = {
+          extends: '@salesforce/dev-config/tslint'
+        };
+        const tslintJson = JSON.stringify(tslint, null, 2);
+        writeFileSync(tslintPath, tslintJson);
         added.push(tslintPath);
       }
     }
