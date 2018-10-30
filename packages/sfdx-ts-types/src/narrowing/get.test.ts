@@ -9,25 +9,25 @@
 
 import { expect } from 'chai';
 import {
-  take,
-  takeAnyJson,
-  takeArray,
-  takeBoolean,
-  takeFunction,
-  takeInstance,
-  takeJsonArray,
-  takeJsonMap,
-  takeNumber,
-  takeObject,
-  takePlainObject,
-  takeString
+  get,
+  getAnyJson,
+  getArray,
+  getBoolean,
+  getFunction,
+  getInstance,
+  getJsonArray,
+  getJsonMap,
+  getNumber,
+  getObject,
+  getPlainObject,
+  getString
 } from './get';
 
 class TestClass {
   constructor(public name = 'test') {}
 }
 
-describe('take type', () => {
+describe('get type', () => {
   const jsonMap = {
     inner: {
       s: 'string',
@@ -47,260 +47,260 @@ describe('take type', () => {
     })
   };
 
-  describe('take', () => {
+  describe('get', () => {
     it('should return undefined when passed an undefined object', () => {
-      expect(take(undefined, 'foo')).to.be.undefined;
+      expect(get(undefined, 'foo')).to.be.undefined;
     });
 
     it('should return undefined when passed a null object', () => {
-      expect(take(null, 'foo')).to.be.undefined;
+      expect(get(null, 'foo')).to.be.undefined;
     });
 
     it('should return undefined when passed an unknown path', () => {
-      expect(take(jsonMap, 'foo')).to.be.undefined;
+      expect(get(jsonMap, 'foo')).to.be.undefined;
     });
 
     it('should return a default when passed an unknown path and a default', () => {
       const def = 'def';
-      expect(take(jsonMap, 'foo', def)).to.equal(def);
+      expect(get(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a value from an object when passed a valid object path', () => {
       const value = jsonMap.inner.s;
       const path = 'inner.s';
-      expect(take(jsonMap, path)).to.equal(value);
+      expect(get(jsonMap, path)).to.equal(value);
     });
 
     it('should return a value from an array when passed a valid array path', () => {
       const value = jsonArray[0].inner.a[1];
       const path = '[0].inner.a[1]';
-      expect(take(jsonArray, path)).to.equal(value);
+      expect(get(jsonArray, path)).to.equal(value);
     });
 
     it('should support string keys in brackets, with or without any style of quotes', () => {
       const value = jsonArray[0].inner.m.e[0];
       const path = `[0]["inner"][m]['e'][0]`;
-      expect(take(jsonArray, path)).to.equal(value);
+      expect(get(jsonArray, path)).to.equal(value);
     });
   });
 
-  describe('takeString', () => {
+  describe('getString', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = 'def';
-      expect(takeString(jsonMap, 'foo', def)).to.equal(def);
+      expect(getString(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a string when passed a path to a string', () => {
       const value = jsonMap.inner.s;
       const path = 'inner.s';
-      expect(takeString(jsonMap, path)).to.equal(value);
+      expect(getString(jsonMap, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-string', () => {
       const path = 'inner.b';
-      expect(takeString(jsonMap, path)).to.be.undefined;
+      expect(getString(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeNumber', () => {
+  describe('getNumber', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = 1;
-      expect(takeNumber(jsonMap, 'foo', def)).to.equal(def);
+      expect(getNumber(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a number when passed a path to a number', () => {
       const value = jsonMap.inner.n;
       const path = 'inner.n';
-      expect(takeNumber(jsonMap, path)).to.equal(value);
+      expect(getNumber(jsonMap, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-number', () => {
       const path = 'inner.s';
-      expect(takeNumber(jsonMap, path)).to.be.undefined;
+      expect(getNumber(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeBoolean', () => {
+  describe('getBoolean', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = true;
-      expect(takeBoolean(jsonMap, 'foo', def)).to.equal(def);
+      expect(getBoolean(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a boolean when passed a path to a boolean', () => {
       const value = jsonMap.inner.b;
       const path = 'inner.b';
-      expect(takeBoolean(jsonMap, path)).to.equal(value);
+      expect(getBoolean(jsonMap, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-boolean', () => {
       const path = 'inner.s';
-      expect(takeBoolean(jsonMap, path)).to.be.undefined;
+      expect(getBoolean(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeObject', () => {
+  describe('getObject', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = { a: 'b' };
-      expect(takeObject(jsonMap, 'foo', def)).to.equal(def);
+      expect(getObject(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return an object when passed a path to an object', () => {
       const value = jsonMap.inner.m;
       const path = 'inner.m';
-      expect(takeObject(jsonMap, path)).to.equal(value);
+      expect(getObject(jsonMap, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-object', () => {
       const path = 'inner.s';
-      expect(takeObject(jsonMap, path)).to.be.undefined;
+      expect(getObject(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takePlainObject', () => {
+  describe('getPlainObject', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = { a: 'b' };
-      expect(takePlainObject(jsonMap, 'foo', def)).to.equal(def);
+      expect(getPlainObject(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return an object when passed a path to an object', () => {
       const value = jsonMap.inner.m;
       const path = 'inner.m';
-      expect(takePlainObject(jsonMap, path)).to.equal(value);
+      expect(getPlainObject(jsonMap, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-object', () => {
       const path = 'inner.s';
-      expect(takePlainObject(jsonMap, path)).to.be.undefined;
+      expect(getPlainObject(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeInstance', () => {
+  describe('getInstance', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = new TestClass('mine');
-      expect(takeInstance(obj, 'foo', TestClass, def)).to.equal(def);
+      expect(getInstance(obj, 'foo', TestClass, def)).to.equal(def);
     });
 
     it('should return a class instance when passed a path to a class instance', () => {
       const value = obj.inner.c;
       const path = 'inner.c';
-      expect(takeInstance(obj, path, TestClass)).to.equal(value);
+      expect(getInstance(obj, path, TestClass)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-instance', () => {
       const path = 'inner.s';
-      expect(takeInstance(jsonMap, path, TestClass)).to.be.undefined;
+      expect(getInstance(jsonMap, path, TestClass)).to.be.undefined;
     });
   });
 
-  describe('takeArray', () => {
+  describe('getArray', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = ['a', 'b'];
-      expect(takeArray(jsonMap, 'foo', def)).to.equal(def);
+      expect(getArray(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return an array when passed a path to an array', () => {
       const value = jsonMap.inner.a;
       const path = 'inner.a';
-      expect(takeArray(jsonMap, path)).to.equal(value);
+      expect(getArray(jsonMap, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-array', () => {
       const path = 'inner.s';
-      expect(takeArray(jsonMap, path)).to.be.undefined;
+      expect(getArray(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeFunction', () => {
+  describe('getFunction', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = () => {};
-      expect(takeFunction(obj, 'foo', def)).to.equal(def);
+      expect(getFunction(obj, 'foo', def)).to.equal(def);
     });
 
     it('should return a class instance when passed a path to a class instance', () => {
       const value = obj.inner.f;
       const path = 'inner.f';
-      expect(takeFunction(obj, path)).to.equal(value);
+      expect(getFunction(obj, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-function', () => {
       const path = 'inner.s';
-      expect(takeFunction(jsonMap, path)).to.be.undefined;
+      expect(getFunction(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeAnyJson', () => {
+  describe('getAnyJson', () => {
     it('should return undefined when passed an unknown path', () => {
-      expect(takeAnyJson(jsonMap, 'foo')).to.be.undefined;
+      expect(getAnyJson(jsonMap, 'foo')).to.be.undefined;
     });
 
     it('should return a default when passed an unknown path and a default', () => {
       const def = 'def';
-      expect(takeAnyJson(jsonMap, 'foo', def)).to.equal(def);
+      expect(getAnyJson(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a string when passed a path to a string', () => {
       const value = jsonMap.inner.s;
       const path = 'inner.s';
-      expect(takeAnyJson(jsonMap, path)).to.equal(value);
+      expect(getAnyJson(jsonMap, path)).to.equal(value);
     });
 
     it('should return an array element when passed a path containing an array index', () => {
       const value = jsonMap.inner.a[1];
       const path = '[0].inner.a[1]';
-      expect(takeAnyJson(jsonArray, path)).to.equal(value);
+      expect(getAnyJson(jsonArray, path)).to.equal(value);
     });
 
     it('should return a string when passed a path to a string array index', () => {
       const value = jsonMap.inner.a[1];
       const path = 'inner.a[1]';
-      expect(takeAnyJson(jsonMap, path)).to.equal(value);
+      expect(getAnyJson(jsonMap, path)).to.equal(value);
     });
 
     it('should return an array element when passed a path containing an array index', () => {
       const value = jsonArray[0].inner.a[1];
       const path = '[0].inner.a[1]';
-      expect(takeAnyJson(jsonArray, path)).to.equal(value);
+      expect(getAnyJson(jsonArray, path)).to.equal(value);
     });
 
     it('should return undefined when passed a path to a non-json value', () => {
       const path = 'inner.f';
-      expect(takeAnyJson(jsonMap, path)).to.be.undefined;
+      expect(getAnyJson(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeJsonMap', () => {
+  describe('getJsonMap', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = { a: 'b', c: 'd' };
-      expect(takeJsonMap(jsonMap, 'foo', def)).to.equal(def);
+      expect(getJsonMap(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a JsonMap when passed a path to a JsonMap', () => {
       const value = jsonMap.inner.m;
       const path = 'inner.m';
-      expect(takeJsonMap(jsonMap, path)).to.deep.equal(value);
+      expect(getJsonMap(jsonMap, path)).to.deep.equal(value);
     });
 
     it('should return undefined when passed a path to a non-JsonMap', () => {
       const path = 'inner.f';
-      expect(takeJsonMap(jsonMap, path)).to.be.undefined;
+      expect(getJsonMap(jsonMap, path)).to.be.undefined;
     });
   });
 
-  describe('takeJsonArray', () => {
+  describe('getJsonArray', () => {
     it('should return a default when passed an unknown path and a default', () => {
       const def = ['a', 'b'];
-      expect(takeJsonArray(jsonMap, 'foo', def)).to.equal(def);
+      expect(getJsonArray(jsonMap, 'foo', def)).to.equal(def);
     });
 
     it('should return a JsonArray when passed a path to a JsonArray', () => {
       const value = jsonMap.inner.a;
       const path = 'inner.a';
-      expect(takeJsonArray(jsonMap, path)).to.deep.equal(value);
+      expect(getJsonArray(jsonMap, path)).to.deep.equal(value);
     });
 
     it('should return undefined when passed a path to a non-JsonArray value', () => {
       const path = 'inner.f';
-      expect(takeJsonArray(jsonMap, path)).to.be.undefined;
+      expect(getJsonArray(jsonMap, path)).to.be.undefined;
     });
   });
 });
