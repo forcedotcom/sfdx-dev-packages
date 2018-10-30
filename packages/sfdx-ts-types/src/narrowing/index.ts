@@ -6,7 +6,6 @@
  */
 
 export * from './as';
-export * from './base';
 export * from './coerce';
 export * from './ensure';
 export * from './get';
