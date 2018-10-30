@@ -13,6 +13,7 @@ import { Nullable } from '../types';
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was not defined.
+ * @ignore
  */
 export function valueOrDefault<T>(
   value: Nullable<T>,
