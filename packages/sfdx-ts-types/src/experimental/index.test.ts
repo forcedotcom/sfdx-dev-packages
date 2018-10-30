@@ -8,20 +8,32 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { as, is, ObjectShape } from '.';
-import * as narrowing from '.';
+import {
+  as,
+  is,
+  ObjectShape,
+  view,
+  viewArray,
+  viewBoolean,
+  viewFunction,
+  viewInstance,
+  viewNumber,
+  viewObject,
+  viewPlainObject,
+  viewString
+} from '.';
+
+class TestClass {
+  public foo = 'bar';
+}
+
+interface Test {
+  s: string;
+  b?: boolean;
+  c?: TestClass;
+}
 
 describe('experimental', () => {
-  class TestClass {
-    public foo = 'bar';
-  }
-
-  interface Test {
-    s: string;
-    b?: boolean;
-    c?: TestClass;
-  }
-
   const testShape: ObjectShape = {
     s: 'string',
     b: {
@@ -76,199 +88,199 @@ describe('experimental', () => {
 
     describe('view (unknown)', () => {
       it('should fail to view an unknown type if the target key does not exist', () => {
-        const view = narrowing.view(obj, 'z');
-        if (view) {
+        const v = view(obj, 'z');
+        if (v) {
           throw new Error('object should not have property z');
         }
       });
 
       it('should view an unknown type when the target key is found, even if undefined', () => {
-        const view = narrowing.view(obj, 'u');
-        if (!view) {
+        const v = view(obj, 'u');
+        if (!v) {
           throw new Error('object should have property u');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.u).to.equal(view.u);
+        expect(v.u).to.equal(v.u);
       });
 
       it('should view an unknown type when the target key is found', () => {
-        const view = narrowing.view(obj, 's');
-        if (!view) {
+        const v = view(obj, 's');
+        if (!v) {
           throw new Error('object should have property s');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.s).to.equal(view.s);
+        expect(v.s).to.equal(v.s);
       });
 
       it('should progressively view an unknown type when target keys are found', () => {
-        const view = narrowing.view(obj, 's');
-        if (!view) {
+        const v = view(obj, 's');
+        if (!v) {
           throw new Error('object should have property s');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.s).to.equal(view.s);
-        const view2 = narrowing.view(view, 'b');
-        if (!view2) {
+        expect(v.s).to.equal(v.s);
+        const v2 = view(v, 'b');
+        if (!v2) {
           throw new Error('object should have property b');
         }
         // trivial runtime checks but useful for compilation testing
-        expect(view2.s).to.equal(view2.s);
-        expect(view2.b).to.equal(view2.b);
+        expect(v2.s).to.equal(v2.s);
+        expect(v2.b).to.equal(v2.b);
       });
 
       it('should view an unknown type when multiple target keys are found', () => {
-        const view = narrowing.view(obj, ['s', 'b']);
-        if (!view) {
+        const v = view(obj, ['s', 'b']);
+        if (!v) {
           throw new Error('object should have properties s and b');
         }
         // trivial runtime checks but useful for compilation testing
-        expect(view.s).to.equal(view.s);
-        expect(view.b).to.equal(view.b);
+        expect(v.s).to.equal(v.s);
+        expect(v.b).to.equal(v.b);
       });
     });
 
     describe('viewString', () => {
       it('should not view an unknown type when checking a non-string property', () => {
-        if (narrowing.viewString(obj, 'b')) {
+        if (viewString(obj, 'b')) {
           throw new Error('object should not have string property b');
         }
       });
 
       it('should view an unknown type to an object with a string property', () => {
-        const view = narrowing.viewString(obj, 's');
-        if (!view) {
+        const v = viewString(obj, 's');
+        if (!v) {
           throw new Error('object should have string property s');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.s).to.equal(view.s);
+        expect(v.s).to.equal(v.s);
       });
 
       it('should view an unknown type to an object with a, optional string property', () => {
-        const view = narrowing.viewString(obj, 'u');
-        if (!view) {
+        const v = viewString(obj, 'u');
+        if (!v) {
           throw new Error('object should have string property u');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.u).to.equal(view.u);
+        expect(v.u).to.equal(v.u);
       });
     });
 
     describe('viewNumber', () => {
       it('should not view an unknown type when checking a non-number property', () => {
-        if (narrowing.viewNumber(obj, 's')) {
+        if (viewNumber(obj, 's')) {
           throw new Error('object should not have number property s');
         }
       });
 
       it('should view an unknown type to an object with a number property', () => {
-        const view = narrowing.viewNumber(obj, 'n');
-        if (!view) {
+        const v = viewNumber(obj, 'n');
+        if (!v) {
           throw new Error('object should have number property n');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.n).to.equal(view.n);
+        expect(v.n).to.equal(v.n);
       });
     });
 
     describe('viewBoolean', () => {
       it('should not view an unknown type when checking a non-boolean property', () => {
-        if (narrowing.viewBoolean(obj, 's')) {
+        if (viewBoolean(obj, 's')) {
           throw new Error('object should not have boolean property s');
         }
       });
 
       it('should view an unknown type to an object with a boolean property', () => {
-        const view = narrowing.viewBoolean(obj, 'b');
-        if (!view) {
+        const v = viewBoolean(obj, 'b');
+        if (!v) {
           throw new Error('object should have boolean property b');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.b).to.equal(view.b);
+        expect(v.b).to.equal(v.b);
       });
     });
 
     describe('viewObject', () => {
       it('should not view an unknown type when checking a non-object property', () => {
-        if (narrowing.viewObject(obj, 's')) {
+        if (viewObject(obj, 's')) {
           throw new Error('object should not have object property s');
         }
       });
 
       it('should view an unknown type to an object with an object property', () => {
-        const view = narrowing.viewObject(obj, 'm');
-        if (!view) {
+        const v = viewObject(obj, 'm');
+        if (!v) {
           throw new Error('object should have object property m');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.m).to.equal(view.m);
+        expect(v.m).to.equal(v.m);
       });
     });
 
     describe('viewPlainObject', () => {
       it('should not view an unknown type when checking a non-object property', () => {
-        if (narrowing.viewPlainObject(obj, 's')) {
+        if (viewPlainObject(obj, 's')) {
           throw new Error('object should not have object property s');
         }
       });
 
       it('should view an unknown type to an object with an object property', () => {
-        const view = narrowing.viewPlainObject(obj, 'm');
-        if (!view) {
+        const v = viewPlainObject(obj, 'm');
+        if (!v) {
           throw new Error('object should have object property m');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.m).to.equal(view.m);
+        expect(v.m).to.equal(v.m);
       });
     });
 
     describe('viewInstance', () => {
       it('should not view an unknown type when checking a non-instance property', () => {
-        if (narrowing.viewInstance(obj, 's', TestClass)) {
+        if (viewInstance(obj, 's', TestClass)) {
           throw new Error('object should not have instance property s');
         }
       });
 
       it('should view an unknown type to an object with an instance property', () => {
-        const view = narrowing.viewInstance(obj, 'i', TestClass);
-        if (!view) {
+        const v = viewInstance(obj, 'i', TestClass);
+        if (!v) {
           throw new Error('object should have instance property i');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.i).to.equal(view.i);
+        expect(v.i).to.equal(v.i);
       });
     });
 
     describe('viewArray', () => {
       it('should not view an unknown type when checking a non-array property', () => {
-        if (narrowing.viewArray(obj, 's')) {
+        if (viewArray(obj, 's')) {
           throw new Error('object should not have array property s');
         }
       });
 
       it('should view an unknown type to an object with an array property', () => {
-        const view = narrowing.viewArray(obj, 'a');
-        if (!view) {
+        const v = viewArray(obj, 'a');
+        if (!v) {
           throw new Error('object should have array property n');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.a).to.equal(view.a);
+        expect(v.a).to.equal(v.a);
       });
     });
 
     describe('viewFunction', () => {
       it('should not view an unknown type when checking a non-function property', () => {
-        if (narrowing.viewFunction(obj, 's')) {
+        if (viewFunction(obj, 's')) {
           throw new Error('object should not have function property s');
         }
       });
 
       it('should view an unknown type to an object with a function property', () => {
-        const view = narrowing.viewFunction(obj, 'f');
-        if (!view) {
+        const v = viewFunction(obj, 'f');
+        if (!v) {
           throw new Error('object should have object property n');
         }
         // trivial runtime check but useful for compilation testing
-        expect(view.f).to.equal(view.f);
+        expect(v.f).to.equal(v.f);
       });
     });
   });
