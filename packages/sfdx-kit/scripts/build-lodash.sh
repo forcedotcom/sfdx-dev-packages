@@ -3,7 +3,6 @@
 fns=(
   'defaults'
   'findKey'
-  'get'
   'keyBy'
   'mapKeys'
   'minBy'

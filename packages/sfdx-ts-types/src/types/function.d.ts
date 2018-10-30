@@ -12,9 +12,9 @@
 /**
  * Any `function` returning type `T`. `T` defaults to `unknown` when not explicitly supplied.
  */
-export type AnyFunction<T = unknown> = (...args: unknown[]) => T;
+export type AnyFunction<T = unknown> = (...args: any[]) => T;
 
 /**
  * A constructor for any type `T`. `T` defaults to `object` when not explicitly supplied.
  */
-export type AnyConstructor<T = object> = new (...args: unknown[]) => T;
+export type AnyConstructor<T = object> = new (...args: any[]) => T;
