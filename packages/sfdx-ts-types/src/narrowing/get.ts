@@ -28,9 +28,9 @@ import {
   asPlainObject,
   asString
 } from './as';
-import { valueOrDefault } from './base';
 import { coerceAnyJson } from './coerce';
 import { has } from './has';
+import { valueOrDefault } from './internal';
 
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array.

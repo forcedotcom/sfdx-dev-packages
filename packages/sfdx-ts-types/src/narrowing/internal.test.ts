@@ -8,7 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { valueOrDefault } from './base';
+import { valueOrDefault } from './internal';
 
 describe('base', () => {
   describe('valueOrDefault', () => {
