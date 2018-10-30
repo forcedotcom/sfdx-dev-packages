@@ -12,7 +12,7 @@
     "/tslint.json",
     "/tslint-strict.json",
     "/tsconfig.json",
-    "/.prettierrc",
+    "/prettier.json",
     "/nyc.json"
   ],
   "dependencies": {
