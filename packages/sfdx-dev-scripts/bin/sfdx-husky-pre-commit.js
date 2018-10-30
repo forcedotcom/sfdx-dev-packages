@@ -11,8 +11,8 @@ const shell = require('shelljs');
 shell.set('-e');
 shell.set('+v');
 
-const packageRoot = require('../utils/package-root');
-const prettierConfig = require.resolve('@salesforce/dev-config/.prettierrc');
+const packageRoot = require('../utils/package-path');
+const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
 
 shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
   cwd: packageRoot

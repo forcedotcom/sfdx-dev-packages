@@ -7,13 +7,16 @@
     "sfdx-compile": "bin/sfdx-compile.js",
     "sfdx-husky-commit-msg": "bin/sfdx-husky-commit-msg.js",
     "sfdx-husky-pre-commit": "bin/sfdx-husky-pre-commit.js",
-    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js"
+    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js",
+    "sfdx-lint": "bin/sfdx-lint.js",
+    "sfdx-test": "bin/sfdx-test.js"
   },
   "scripts": {
     "clean": "bin/sfdx-clean.js",
     "clean-all": "bin/sfdx-clean.js all",
     "postinstall": "bin/sfdx-gen-scripts-post.js",
-    "preinstall": "bin/sfdx-gen-scripts-pre.js"
+    "preinstall": "bin/sfdx-gen-scripts-pre.js",
+    "test": "bin/sfdx-test.js"
   },
   "keywords": [
     "sfdx"
@@ -29,7 +32,23 @@
     "@salesforce/dev-config": "^1",
     "shelljs": "0.8.2",
     "ts-node": "^7",
-    "typescript": "^3"
+    "@types/chai": "^4",
+    "@types/mocha": "^5",
+    "@types/node": "^10",
+    "@types/sinon": "^4",
+    "chai": "^4",
+    "lodash-cli": "^4",
+    "mocha": "^5",
+    "nyc": "^13",
+    "sinon": "^5",
+    "source-map-support": "0.5.6",
+    "tslint": "^5",
+    "typedoc": "0.12.0",
+    "typedoc-plugin-external-module-name": "1.1.3",
+    "typescript": "^3",
+    "xunit-file": "^1",
+    "prettier": "^1",
+    "pretty-quick": "^1"
   },
   "devDependencies": {}
 }
