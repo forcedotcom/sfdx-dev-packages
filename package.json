@@ -5,8 +5,11 @@
     "bootstrap": "lerna bootstrap",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
+    "compile": "lerna run compile",
+    "lint": "lerna run lint",
     "postinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-post.js",
-    "preinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-pre.js"
+    "preinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-pre.js",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "cz-lerna-changelog": "^2",

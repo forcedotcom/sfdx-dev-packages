@@ -6,24 +6,19 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-/**
- *
- */
+const standardizeFiles = require('../utils/standardize-files');
+const standardizePjson = require('../utils/standardize-pjson');
 
-const { join } = require("path");
-const packageRoot = require("../utils/package-root");
+// Standardize package.json for lerna project, but not files
+console.log(`Standardize package.json for the lerna project`);
+standardizePjson();
 
-const postScript = join(
-  packageRoot,
-  "packages",
-  "sfdx-dev-scripts",
-  "bin",
-  "sfdx-gen-scripts-post.js"
-);
+const runAll = (packagePath, inLernaProject) => {
+  standardizeFiles(packagePath, inLernaProject);
+  standardizePjson(packagePath, inLernaProject);
+};
 
-// Will also run this for the packageRoot when required
-console.log(`Running ${postScript} for the lerna project`);
-const genScriptsPost = require(postScript);
+runAll();
 
 // Run it for all packages in the lerna project
-require("../utils/run-in-lerna-packages")(genScriptsPost);
+require('../utils/run-in-lerna-packages')(runAll);
