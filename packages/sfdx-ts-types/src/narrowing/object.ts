@@ -125,7 +125,7 @@ export function definiteKeysOf<T extends object>(
 
 /**
  * Returns an array of all entry tuples of type `[K, NonNullable<T[K]>]` in an object `T` whose values are neither
- * `null` nor `undefined`. This can be convenient for enumerating the entries of unknown object with optional properties
+ * `null` nor `undefined`. This can be convenient for enumerating the entries of unknown objects with optional properties
  * (including `Dictionary`s) without worrying about performing checks against possibly `undefined` or `null` values.
  *
  * See also caveats outlined in {@link entriesOf}.
@@ -141,8 +141,9 @@ export function definiteEntriesOf<
 }
 
 /**
- * Returns an array of all values of type `T` in a `Dictionary<T>` for values that are neither `null` nor `undefined`.
- * This can be convenient for enumerating all non-nullable values of unknown `Dictionary`.
+ * Returns an array of all values of type `T` in an object `T` for values that are neither `null` nor `undefined`.
+ * This can be convenient for enumerating the values of unknown objects with optional properties (including
+ * `Dictionary`s) without worrying about performing checks against possibly `undefined` or `null` values.
  *
  * @param obj The object of interest.
  */
