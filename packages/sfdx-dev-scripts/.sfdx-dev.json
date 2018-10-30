@@ -1,4 +1,8 @@
 {
   "scripts": [],
-  "husky": []
+  "husky": [],
+  "test": {
+    "mochaOpts": true,
+    "testsPath": "**/*.test.js"
+  }
 }

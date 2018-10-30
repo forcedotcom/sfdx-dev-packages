@@ -20,15 +20,8 @@
     "tslint-microsoft-contrib": "^5",
     "typescript": "^3"
   },
-  "devDependencies": {
-    "@salesforce/dev-scripts": "0.0.0",
-    "husky": "^1"
-  },
   "scripts": {
     "clean": "yarn sfdx-clean",
-    "clean-all": "yarn sfdx-clean all",
-    "compile": "yarn sfdx-compile",
-    "lint": "yarn sfdx-lint",
-    "test": "yarn sfdx-test"
+    "clean-all": "yarn sfdx-clean all"
   }
 }
