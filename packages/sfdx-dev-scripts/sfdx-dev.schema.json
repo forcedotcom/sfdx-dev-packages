@@ -1,0 +1,45 @@
+{
+  "title": "JSON schema for sfdx-dev.json config for @salesforce/dev-scripts",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "type": "object",
+
+  "properties": {
+    "scripts": {
+      "description": "The list of scripts to generate",
+      "default": ["clean", "clean-all", "compile", "test", "lint"],
+      "type": "array"
+    },
+    "husky": {
+      "description": "The list of husky hooks to generate.",
+      "default": ["commit-msg", "pre-commit", "pre-push"],
+      "type": "array"
+    },
+    "lint": {
+      "description": "Options for the lint script.",
+      "type": "object",
+      "properties": {
+        "strict": {
+          "description": "Use the exact version of tslint-strict.json config in @salesforce/dev-confg.",
+          "type": "boolean"
+        }
+      }
+    },
+    "test": {
+      "description": "Options for the test script.",
+      "type": "object",
+      "properties": {
+        "mochaOpts": {
+          "description": "Rely on mocha.opts for all configuration (will not send any additional options to mocha).",
+          "type": "boolean",
+          "default": false
+        },
+        "testsPath": {
+          "description": "The expression path for all tests",
+          "type": "string",
+          "default": "**/*.test.ts"
+        }
+      }
+    }
+  }
+}

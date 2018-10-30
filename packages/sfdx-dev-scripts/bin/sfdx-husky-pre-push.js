@@ -6,12 +6,12 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require("shelljs");
+const shell = require('shelljs');
 
-shell.set("-e");
-shell.set("+v");
+shell.set('-e');
+shell.set('+v');
 
-const packageRoot = require("../utils/package-root");
+const packageRoot = require('../utils/package-path');
 
 // TODO scripts not added yet
 // shell.exec("yarn clean", {

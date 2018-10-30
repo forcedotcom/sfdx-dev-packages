@@ -10,17 +10,15 @@
   "license": "BSD-3-Clause",
   "files": [
     "/tslint.json",
+    "/tslint-strict.json",
     "/tsconfig.json",
-    "/.prettierrc"
+    "/prettier.json",
+    "/nyc.json"
   ],
   "dependencies": {
     "tslint": "^5",
     "tslint-microsoft-contrib": "^5",
     "typescript": "^3"
-  },
-  "devDependencies": {
-    "@salesforce/dev-scripts": "0.0.0",
-    "husky": "^1"
   },
   "scripts": {
     "clean": "yarn sfdx-clean",
