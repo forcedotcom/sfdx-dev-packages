@@ -56,6 +56,11 @@ describe('duration', () => {
     expect(duration.milliseconds).to.equal(60000);
   });
 
+  it('should default to minute units', () => {
+    const duration = new Duration(1);
+    expect(duration.seconds).to.equal(60);
+  });
+
   describe('sleep', () => {
     it('should wait at least a given amount of duration', async () => {
       const start = Date.now();
