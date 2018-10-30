@@ -36,11 +36,11 @@ class SfdxDevConfig {
     } else {
       // Otherwise, clone defaults.
       const defaults = SfdxDevConfig[`DEFAULT_${name.toUpperCase()}`] || [];
-      list = defaults.slice();
+      list = Array.from(defaults);
     }
 
     if (this.get(`exclude-${name}`)) {
-      list.filter(item => this.get(`exclude-${name}`).includes(item));
+      list = list.filter(item => this.get(`exclude-${name}`).includes(item));
     }
     return list;
   }

@@ -33,12 +33,11 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
       if (isLernaProject) {
         scripts[script] = `lerna run ${script}`;
       } else {
-        const scriptArgs = script.split('-');
+        let scriptArgs = script.split('-');
         if (scriptArgs.length > 1) {
           const scriptName = scriptArgs[0];
-          scripts[script] = `yarn sfdx-${scriptName} ${scriptArgs
-            .splice(1)
-            .join(' ')}`;
+          scriptArgs = scriptArgs.splice(1).join(' ');
+          scripts[script] = `yarn sfdx-${scriptName} ${scriptArgs}`;
         } else {
           scripts[script] = `yarn sfdx-${script}`;
         }
