@@ -888,170 +888,170 @@ typedoc.search.data = {
     {
       id: 110,
       kind: 64,
-      name: 'valueOrDefault',
-      url: 'globals.html#valueordefault',
-      classes: 'tsd-kind-function tsd-has-type-parameter'
-    },
-    {
-      id: 111,
-      kind: 64,
       name: 'isString',
       url: 'globals.html#isstring',
       classes: 'tsd-kind-function'
     },
     {
-      id: 112,
+      id: 111,
       kind: 64,
       name: 'isNumber',
       url: 'globals.html#isnumber',
       classes: 'tsd-kind-function'
     },
     {
-      id: 113,
+      id: 112,
       kind: 64,
       name: 'isBoolean',
       url: 'globals.html#isboolean',
       classes: 'tsd-kind-function'
     },
     {
-      id: 114,
+      id: 113,
       kind: 64,
       name: 'isObject',
       url: 'globals.html#isobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 115,
+      id: 114,
       kind: 64,
       name: 'isPlainObject',
       url: 'globals.html#isplainobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 116,
+      id: 115,
       kind: 64,
       name: 'isInstance',
       url: 'globals.html#isinstance',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 117,
+      id: 116,
       kind: 64,
       name: 'isArray',
       url: 'globals.html#isarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 118,
+      id: 117,
       kind: 64,
       name: 'isArrayLike',
       url: 'globals.html#isarraylike',
       classes: 'tsd-kind-function'
     },
     {
-      id: 119,
+      id: 118,
       kind: 64,
       name: 'isFunction',
       url: 'globals.html#isfunction',
       classes: 'tsd-kind-function'
     },
     {
-      id: 120,
-      kind: 64,
-      name: 'isKeyOf',
-      url: 'globals.html#iskeyof',
-      classes: 'tsd-kind-function tsd-has-type-parameter'
-    },
-    {
-      id: 121,
+      id: 119,
       kind: 64,
       name: 'isAnyJson',
       url: 'globals.html#isanyjson',
       classes: 'tsd-kind-function'
     },
     {
-      id: 122,
+      id: 120,
       kind: 64,
       name: 'isJsonMap',
       url: 'globals.html#isjsonmap',
       classes: 'tsd-kind-function'
     },
     {
-      id: 123,
+      id: 121,
       kind: 64,
       name: 'isJsonArray',
       url: 'globals.html#isjsonarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 124,
+      id: 122,
+      kind: 64,
+      name: 'isKeyOf',
+      url: 'globals.html#iskeyof',
+      classes: 'tsd-kind-function tsd-has-type-parameter'
+    },
+    {
+      id: 123,
       kind: 64,
       name: 'asString',
       url: 'globals.html#asstring',
       classes: 'tsd-kind-function'
     },
     {
-      id: 125,
+      id: 124,
       kind: 64,
       name: 'asNumber',
       url: 'globals.html#asnumber',
       classes: 'tsd-kind-function'
     },
     {
-      id: 126,
+      id: 125,
       kind: 64,
       name: 'asBoolean',
       url: 'globals.html#asboolean',
       classes: 'tsd-kind-function'
     },
     {
-      id: 127,
+      id: 126,
       kind: 64,
       name: 'asObject',
       url: 'globals.html#asobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 128,
+      id: 127,
       kind: 64,
       name: 'asPlainObject',
       url: 'globals.html#asplainobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 129,
+      id: 128,
       kind: 64,
       name: 'asInstance',
       url: 'globals.html#asinstance',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 130,
+      id: 129,
       kind: 64,
       name: 'asArray',
       url: 'globals.html#asarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 131,
+      id: 130,
       kind: 64,
       name: 'asFunction',
       url: 'globals.html#asfunction',
       classes: 'tsd-kind-function'
     },
     {
-      id: 132,
+      id: 131,
       kind: 64,
       name: 'asJsonMap',
       url: 'globals.html#asjsonmap',
       classes: 'tsd-kind-function'
     },
     {
-      id: 133,
+      id: 132,
       kind: 64,
       name: 'asJsonArray',
       url: 'globals.html#asjsonarray',
       classes: 'tsd-kind-function'
+    },
+    {
+      id: 133,
+      kind: 64,
+      name: 'valueOrDefault',
+      url: 'globals.html#valueordefault',
+      classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
       id: 134,
@@ -1105,36 +1105,36 @@ typedoc.search.data = {
     {
       id: 141,
       kind: 64,
-      name: 'ensureAnyJson',
-      url: 'globals.html#ensureanyjson',
-      classes: 'tsd-kind-function'
-    },
-    {
-      id: 142,
-      kind: 64,
       name: 'ensureString',
       url: 'globals.html#ensurestring',
       classes: 'tsd-kind-function'
     },
     {
-      id: 143,
+      id: 142,
       kind: 64,
       name: 'ensureNumber',
       url: 'globals.html#ensurenumber',
       classes: 'tsd-kind-function'
     },
     {
-      id: 144,
+      id: 143,
       kind: 64,
       name: 'ensureBoolean',
       url: 'globals.html#ensureboolean',
       classes: 'tsd-kind-function'
     },
     {
-      id: 145,
+      id: 144,
       kind: 64,
       name: 'ensureObject',
       url: 'globals.html#ensureobject',
+      classes: 'tsd-kind-function'
+    },
+    {
+      id: 145,
+      kind: 64,
+      name: 'ensurePlainObject',
+      url: 'globals.html#ensureplainobject',
       classes: 'tsd-kind-function'
     },
     {
@@ -1161,201 +1161,208 @@ typedoc.search.data = {
     {
       id: 149,
       kind: 64,
+      name: 'ensureAnyJson',
+      url: 'globals.html#ensureanyjson',
+      classes: 'tsd-kind-function'
+    },
+    {
+      id: 150,
+      kind: 64,
       name: 'ensureJsonMap',
       url: 'globals.html#ensurejsonmap',
       classes: 'tsd-kind-function'
     },
     {
-      id: 150,
+      id: 151,
       kind: 64,
       name: 'ensureJsonArray',
       url: 'globals.html#ensurejsonarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 151,
+      id: 152,
       kind: 64,
       name: 'has',
       url: 'globals.html#has',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 152,
+      id: 153,
       kind: 64,
       name: 'hasString',
       url: 'globals.html#hasstring',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 153,
+      id: 154,
       kind: 64,
       name: 'hasNumber',
       url: 'globals.html#hasnumber',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 154,
+      id: 155,
       kind: 64,
       name: 'hasBoolean',
       url: 'globals.html#hasboolean',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 155,
+      id: 156,
       kind: 64,
       name: 'hasObject',
       url: 'globals.html#hasobject',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 156,
+      id: 157,
       kind: 64,
       name: 'hasPlainObject',
       url: 'globals.html#hasplainobject',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 157,
+      id: 158,
       kind: 64,
       name: 'hasInstance',
       url: 'globals.html#hasinstance',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 158,
+      id: 159,
       kind: 64,
       name: 'hasArray',
       url: 'globals.html#hasarray',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 159,
+      id: 160,
       kind: 64,
       name: 'hasFunction',
       url: 'globals.html#hasfunction',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 160,
-      kind: 64,
-      name: 'take',
-      url: 'globals.html#take',
-      classes: 'tsd-kind-function'
-    },
-    {
       id: 161,
       kind: 64,
-      name: 'takeString',
-      url: 'globals.html#takestring',
+      name: 'get',
+      url: 'globals.html#get',
       classes: 'tsd-kind-function'
     },
     {
       id: 162,
       kind: 64,
-      name: 'takeNumber',
-      url: 'globals.html#takenumber',
+      name: 'getString',
+      url: 'globals.html#getstring',
       classes: 'tsd-kind-function'
     },
     {
       id: 163,
       kind: 64,
-      name: 'takeBoolean',
-      url: 'globals.html#takeboolean',
+      name: 'getNumber',
+      url: 'globals.html#getnumber',
       classes: 'tsd-kind-function'
     },
     {
       id: 164,
       kind: 64,
-      name: 'takeObject',
-      url: 'globals.html#takeobject',
+      name: 'getBoolean',
+      url: 'globals.html#getboolean',
       classes: 'tsd-kind-function'
     },
     {
       id: 165,
       kind: 64,
-      name: 'takePlainObject',
-      url: 'globals.html#takeplainobject',
+      name: 'getObject',
+      url: 'globals.html#getobject',
       classes: 'tsd-kind-function'
     },
     {
       id: 166,
       kind: 64,
-      name: 'takeInstance',
-      url: 'globals.html#takeinstance',
-      classes: 'tsd-kind-function tsd-has-type-parameter'
+      name: 'getPlainObject',
+      url: 'globals.html#getplainobject',
+      classes: 'tsd-kind-function'
     },
     {
       id: 167,
       kind: 64,
-      name: 'takeArray',
-      url: 'globals.html#takearray',
-      classes: 'tsd-kind-function'
+      name: 'getInstance',
+      url: 'globals.html#getinstance',
+      classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
       id: 168,
       kind: 64,
-      name: 'takeFunction',
-      url: 'globals.html#takefunction',
+      name: 'getArray',
+      url: 'globals.html#getarray',
       classes: 'tsd-kind-function'
     },
     {
       id: 169,
       kind: 64,
-      name: 'takeAnyJson',
-      url: 'globals.html#takeanyjson',
+      name: 'getFunction',
+      url: 'globals.html#getfunction',
       classes: 'tsd-kind-function'
     },
     {
       id: 170,
       kind: 64,
-      name: 'takeJsonMap',
-      url: 'globals.html#takejsonmap',
+      name: 'getAnyJson',
+      url: 'globals.html#getanyjson',
       classes: 'tsd-kind-function'
     },
     {
       id: 171,
       kind: 64,
-      name: 'takeJsonArray',
-      url: 'globals.html#takejsonarray',
+      name: 'getJsonMap',
+      url: 'globals.html#getjsonmap',
       classes: 'tsd-kind-function'
     },
     {
       id: 172,
+      kind: 64,
+      name: 'getJsonArray',
+      url: 'globals.html#getjsonarray',
+      classes: 'tsd-kind-function'
+    },
+    {
+      id: 173,
       kind: 64,
       name: 'keysOf',
       url: 'globals.html#keysof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 173,
+      id: 174,
       kind: 64,
       name: 'entriesOf',
       url: 'globals.html#entriesof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 174,
+      id: 175,
       kind: 64,
       name: 'valuesOf',
       url: 'globals.html#valuesof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 175,
+      id: 176,
       kind: 64,
       name: 'definiteKeysOf',
       url: 'globals.html#definitekeysof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 176,
+      id: 177,
       kind: 64,
       name: 'definiteEntriesOf',
       url: 'globals.html#definiteentriesof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 177,
+      id: 178,
       kind: 64,
       name: 'definiteValuesOf',
       url: 'globals.html#definitevaluesof',

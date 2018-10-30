@@ -11,6 +11,7 @@
 
 import {
   definiteEntriesOf,
+  get,
   has,
   hasArray,
   hasBoolean,
@@ -21,8 +22,7 @@ import {
   hasPlainObject,
   hasString,
   isFunction,
-  isString,
-  take
+  isString
 } from '../narrowing';
 import {
   AnyArray,
@@ -68,8 +68,8 @@ export function is<T extends object>(
         return (
           (optional && !(key in obj)) ||
           (isString(type)
-            ? typeof take(obj, key) === type
-            : take(obj, key) instanceof type)
+            ? typeof get(obj, key) === type
+            : get(obj, key) instanceof type)
         );
       })
   );

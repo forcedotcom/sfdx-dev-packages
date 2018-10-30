@@ -15,7 +15,7 @@ import {
   JsonMap,
   Nullable,
   Optional
-} from 'src/types';
+} from '../types';
 import {
   asArray,
   asBoolean,
@@ -37,17 +37,17 @@ import { has } from './has';
  *
  * ```
  * const obj = { foo: { bar: ['baz'] } };
- * const value = take(obj, 'foo.bar[0]');
+ * const value = get(obj, 'foo.bar[0]');
  * // type of value -> unknown; value === 'baz'
  *
- * const value = take(obj, 'foo.bar.nothing', 'default');
+ * const value = get(obj, 'foo.bar.nothing', 'default');
  * // type of value -> unknown; value === 'default'
  *
- * const value = take(obj, 'foo["bar"][0]');
+ * const value = get(obj, 'foo["bar"][0]');
  * // type of value -> unknown; value === 'baz'
  *
  * const arr = [obj];
- * const value = take(arr, '[0].foo.bar[0]');
+ * const value = get(arr, '[0].foo.bar[0]');
  * // type of value -> unknown; value === 'baz'
  * ```
  *
@@ -55,7 +55,7 @@ import { has } from './has';
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function take(
+export function get(
   from: Nullable<object>,
   path: string,
   defaultValue?: unknown
@@ -75,14 +75,14 @@ export function take(
  *
  * ```
  * const obj = { foo: { bar: ['baz'] } };
- * const value = takeString(obj, 'foo.bar[0]');
+ * const value = getString(obj, 'foo.bar[0]');
  * // type of value -> string; value -> 'baz'
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeString(
+export function getString(
   from: Nullable<object>,
   path: string
 ): Nullable<string>;
@@ -92,7 +92,7 @@ export function takeString(
  *
  * ```
  * const obj = { foo: { bar: ['baz'] } };
- * const value = takeString(obj, 'foo.bar[1]', 'default');
+ * const value = getString(obj, 'foo.bar[1]', 'default');
  * // type of value -> string; value -> 'default'
  * ```
  *
@@ -100,18 +100,18 @@ export function takeString(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeString(
+export function getString(
   from: Nullable<object>,
   path: string,
   defaultValue: string
 ): string;
 // underlying function
-export function takeString(
+export function getString(
   from: Nullable<object>,
   path: string,
   defaultValue?: string
 ): Nullable<string> {
-  return valueOrDefault(asString(take(from, path)), defaultValue);
+  return valueOrDefault(asString(get(from, path)), defaultValue);
 }
 
 /**
@@ -120,14 +120,14 @@ export function takeString(
  *
  * ```
  * const obj = { foo: { bar: [1] } };
- * const value = takeNumber(obj, 'foo.bar[0]');
+ * const value = getNumber(obj, 'foo.bar[0]');
  * // type of value -> number; value -> 1
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeNumber(
+export function getNumber(
   from: Nullable<object>,
   path: string
 ): Nullable<number>;
@@ -137,7 +137,7 @@ export function takeNumber(
  *
  * ```
  * const obj = { foo: { bar: [1] } };
- * const value = takeNumber(obj, 'foo.bar[1]', 2);
+ * const value = getNumber(obj, 'foo.bar[1]', 2);
  * // type of value -> number; value -> 2
  * ```
  *
@@ -145,18 +145,18 @@ export function takeNumber(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeNumber(
+export function getNumber(
   from: Nullable<object>,
   path: string,
   defaultValue: number
 ): number;
 // underlying function
-export function takeNumber(
+export function getNumber(
   from: Nullable<object>,
   path: string,
   defaultValue?: number
 ): Nullable<number> {
-  return valueOrDefault(asNumber(take(from, path)), defaultValue);
+  return valueOrDefault(asNumber(get(from, path)), defaultValue);
 }
 
 /**
@@ -165,14 +165,14 @@ export function takeNumber(
  *
  * ```
  * const obj = { foo: { bar: [true] } };
- * const value = takeBoolean(obj, 'foo.bar[0]');
+ * const value = getBoolean(obj, 'foo.bar[0]');
  * // type of value -> boolean; value -> true
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeBoolean(
+export function getBoolean(
   from: Nullable<object>,
   path: string
 ): Nullable<boolean>;
@@ -182,7 +182,7 @@ export function takeBoolean(
  *
  * ```
  * const obj = { foo: { bar: [true] } };
- * const value = takeBoolean(obj, 'foo.bar[1]', false);
+ * const value = getBoolean(obj, 'foo.bar[1]', false);
  * // type of value -> boolean; value -> false
  * ```
  *
@@ -190,18 +190,18 @@ export function takeBoolean(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeBoolean(
+export function getBoolean(
   from: Nullable<object>,
   path: string,
   defaultValue: boolean
 ): boolean;
 // underlying function
-export function takeBoolean(
+export function getBoolean(
   from: Nullable<object>,
   path: string,
   defaultValue?: boolean
 ): Nullable<boolean> {
-  return valueOrDefault(asBoolean(take(from, path)), defaultValue);
+  return valueOrDefault(asBoolean(get(from, path)), defaultValue);
 }
 
 /**
@@ -210,14 +210,14 @@ export function takeBoolean(
  *
  * ```
  * const obj = { foo: { bar: [{ name: 'baz' }] } };
- * const value = takeObject(obj, 'foo.bar[0]');
+ * const value = getObject(obj, 'foo.bar[0]');
  * // type of value -> object; value -> { name: 'baz' }
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeObject(
+export function getObject(
   from: Nullable<object>,
   path: string
 ): Nullable<object>;
@@ -227,7 +227,7 @@ export function takeObject(
  *
  * ```
  * const obj = { foo: { bar: [{ name: 'baz' }] } };
- * const value = takeObject(obj, 'foo.bar[1]', { name: 'buzz' });
+ * const value = getObject(obj, 'foo.bar[1]', { name: 'buzz' });
  * // type of value -> object; value -> { name: 'buzz' }
  * ```
  *
@@ -235,46 +235,46 @@ export function takeObject(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeObject(
+export function getObject(
   obj: Nullable<object>,
   path: string,
   defaultValue: object
 ): object;
 // underlying function
-export function takeObject(
+export function getObject(
   from: Nullable<object>,
   path: string,
   defaultValue?: object
 ): Nullable<object> {
-  return valueOrDefault(asObject(take(from, path)), defaultValue);
+  return valueOrDefault(asObject(get(from, path)), defaultValue);
 }
 
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
- * `undefined` if a value was not found or was not type-compatible. This differs from {@link takeObject} by way of
+ * `undefined` if a value was not found or was not type-compatible. This differs from {@link getObject} by way of
  * testing for the property value type compatibility using {@link isPlainObject} instead of {@link isObject}.
  *
  * ```
  * const obj = { foo: { bar: [{ name: 'baz' }] } };
- * const value = takePlainObject(obj, 'foo.bar[0]');
+ * const value = getPlainObject(obj, 'foo.bar[0]');
  * // type of value -> object; value -> { name: 'baz' }
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takePlainObject(
+export function getPlainObject(
   from: Nullable<object>,
   path: string
 ): Nullable<object>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
- * `undefined` if a value was not found or was not type-compatible. This differs from {@link takeObject} by way of
+ * `undefined` if a value was not found or was not type-compatible. This differs from {@link getObject} by way of
  * testing for the property value type compatibility using {@link isPlainObject} instead of {@link isObject}.
  *
  * ```
  * const obj = { foo: { bar: [{ name: 'baz' }] } };
- * const value = takePlainObject(obj, 'foo.bar[1]', { name: 'buzz' });
+ * const value = getPlainObject(obj, 'foo.bar[1]', { name: 'buzz' });
  * // type of value -> object; value -> { name: 'buzz' }
  * ```
  *
@@ -282,18 +282,18 @@ export function takePlainObject(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takePlainObject(
+export function getPlainObject(
   obj: Nullable<object>,
   path: string,
   defaultValue: object
 ): object;
 // underlying function
-export function takePlainObject(
+export function getPlainObject(
   from: Nullable<object>,
   path: string,
   defaultValue?: object
 ): Nullable<object> {
-  return valueOrDefault(asPlainObject(take(from, path)), defaultValue);
+  return valueOrDefault(asPlainObject(get(from, path)), defaultValue);
 }
 
 /**
@@ -303,14 +303,14 @@ export function takePlainObject(
  * ```
  * class Example { ... }
  * const obj = { foo: { bar: [new Example()] } };
- * const value = takeInstance(obj, 'foo.bar[0]', Example);
+ * const value = getInstance(obj, 'foo.bar[0]', Example);
  * // type of value -> Example
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeInstance<C extends AnyConstructor>(
+export function getInstance<C extends AnyConstructor>(
   from: Nullable<object>,
   path: string,
   ctor: C
@@ -322,7 +322,7 @@ export function takeInstance<C extends AnyConstructor>(
  * ```
  * class Example { ... }
  * const obj = { foo: { bar: [new Example()] } };
- * const value = takeInstance(obj, 'foo.bar[0]', Example);
+ * const value = getInstance(obj, 'foo.bar[0]', Example);
  * // type of value -> Example; value -> new Example()
  * ```
  *
@@ -330,20 +330,20 @@ export function takeInstance<C extends AnyConstructor>(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeInstance<C extends AnyConstructor>(
+export function getInstance<C extends AnyConstructor>(
   from: Nullable<object>,
   path: string,
   ctor: C,
   defaultValue: InstanceType<C>
 ): InstanceType<C>;
 // underlying function
-export function takeInstance<C extends AnyConstructor>(
+export function getInstance<C extends AnyConstructor>(
   from: Nullable<object>,
   path: string,
   ctor: C,
   defaultValue?: InstanceType<C>
 ): Nullable<InstanceType<C>> {
-  return valueOrDefault(asInstance(take(from, path), ctor), defaultValue);
+  return valueOrDefault(asInstance(get(from, path), ctor), defaultValue);
 }
 
 /**
@@ -352,14 +352,14 @@ export function takeInstance<C extends AnyConstructor>(
  *
  * ```
  * const obj = { foo: { bar: [1, 2, 3] } };
- * const value = takeArray(obj, 'foo.bar');
+ * const value = getArray(obj, 'foo.bar');
  * // type of value -> AnyArray; value -> [1, 2, 3]
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeArray(
+export function getArray(
   from: Nullable<object>,
   path: string
 ): Nullable<AnyArray>;
@@ -369,7 +369,7 @@ export function takeArray(
  *
  * ```
  * const obj = { foo: { bar: [1, 2, 3] } };
- * const value = takeArray(obj, 'foo.baz', [4, 5, 6]);
+ * const value = getArray(obj, 'foo.baz', [4, 5, 6]);
  * // type of value -> AnyArray; value -> [4, 5, 6]
  * ```
  *
@@ -377,18 +377,18 @@ export function takeArray(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeArray(
+export function getArray(
   from: Nullable<object>,
   path: string,
   defaultValue: AnyArray
 ): AnyArray;
 // underlying function
-export function takeArray(
+export function getArray(
   from: Nullable<object>,
   path: string,
   defaultValue?: AnyArray
 ): Nullable<AnyArray> {
-  return valueOrDefault(asArray(take(from, path)), defaultValue);
+  return valueOrDefault(asArray(get(from, path)), defaultValue);
 }
 
 /**
@@ -397,14 +397,14 @@ export function takeArray(
  *
  * ```
  * const obj = { foo: { bar: [(arg: string) => `Hi, ${arg}`] } };
- * const value = takeFunction(obj, 'foo.bar[0]');
+ * const value = getFunction(obj, 'foo.bar[0]');
  * // type of value -> AnyArray; value -> (arg: string) => `Hi, ${arg}`
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeFunction(
+export function getFunction(
   from: Nullable<object>,
   path: string
 ): Nullable<AnyFunction>;
@@ -414,7 +414,7 @@ export function takeFunction(
  *
  * ```
  * const obj = { foo: { bar: [(arg: string) => `Hi, ${arg}`] } };
- * const value = takeFunction(obj, 'foo.bar[1]', (arg: string) => `Bye, ${arg}`);
+ * const value = getFunction(obj, 'foo.bar[1]', (arg: string) => `Bye, ${arg}`);
  * // type of value -> AnyArray; value -> (arg: string) => `Bye, ${arg}`)
  * ```
  *
@@ -422,18 +422,18 @@ export function takeFunction(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeFunction(
+export function getFunction(
   from: Nullable<object>,
   path: string,
   defaultValue: AnyFunction
 ): AnyFunction;
 // underlying function
-export function takeFunction(
+export function getFunction(
   from: Nullable<object>,
   path: string,
   defaultValue?: AnyFunction
 ): Nullable<AnyFunction> {
-  return valueOrDefault(asFunction(take(from, path)), defaultValue);
+  return valueOrDefault(asFunction(get(from, path)), defaultValue);
 }
 
 /**
@@ -444,14 +444,14 @@ export function takeFunction(
  *
  * ```
  * const obj = { foo: { bar: [{ a: 'b' }] } };
- * const value = takeAnyJson(obj, 'foo.bar[0]');
+ * const value = getAnyJson(obj, 'foo.bar[0]');
  * // type of value -> AnyJson; value -> { a: 'b' }
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeAnyJson(
+export function getAnyJson(
   from: Nullable<JsonCollection>,
   path: string
 ): Optional<AnyJson>;
@@ -461,7 +461,7 @@ export function takeAnyJson(
  *
  * ```
  * const obj = { foo: { bar: [{ a: 'b' }] } };
- * const value = takeAnyJson(obj, 'foo.bar[1]', { c: 'd' });
+ * const value = getAnyJson(obj, 'foo.bar[1]', { c: 'd' });
  * // type of value -> AnyJson; value -> { c: 'd' }
  * ```
  *
@@ -469,18 +469,18 @@ export function takeAnyJson(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeAnyJson(
+export function getAnyJson(
   from: Nullable<JsonCollection>,
   path: string,
   defaultValue: AnyJson
 ): AnyJson;
 // underlying function
-export function takeAnyJson(
+export function getAnyJson(
   from: Nullable<JsonCollection>,
   path: string,
   defaultValue?: AnyJson
 ): Optional<AnyJson> {
-  return valueOrDefault(coerceAnyJson(take(from, path)), defaultValue);
+  return valueOrDefault(coerceAnyJson(get(from, path)), defaultValue);
 }
 
 /**
@@ -489,14 +489,14 @@ export function takeAnyJson(
  *
  * ```
  * const obj = { foo: { bar: [{ a: 'b' }] } };
- * const value = takeJsonMap(obj, 'foo.bar[0]');
+ * const value = getJsonMap(obj, 'foo.bar[0]');
  * // type of value -> JsonMap; value -> { a: 'b' }
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeJsonMap(
+export function getJsonMap(
   from: Nullable<JsonCollection>,
   path: string
 ): Nullable<JsonMap>;
@@ -506,7 +506,7 @@ export function takeJsonMap(
  *
  * ```
  * const obj = { foo: { bar: [{ a: 'b' }] } };
- * const value = takeJsonMap(obj, 'foo.bar[1]', { c: 'd' });
+ * const value = getJsonMap(obj, 'foo.bar[1]', { c: 'd' });
  * // type of value -> JsonMap; value -> { c: 'd' }
  * ```
  *
@@ -514,18 +514,18 @@ export function takeJsonMap(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeJsonMap(
+export function getJsonMap(
   from: Nullable<JsonCollection>,
   path: string,
   defaultValue: JsonMap
 ): JsonMap;
 // underlying function
-export function takeJsonMap(
+export function getJsonMap(
   from: Nullable<JsonCollection>,
   path: string,
   defaultValue?: JsonMap
 ): Nullable<JsonMap> {
-  return valueOrDefault(asJsonMap(takeAnyJson(from, path)), defaultValue);
+  return valueOrDefault(asJsonMap(getAnyJson(from, path)), defaultValue);
 }
 
 /**
@@ -534,14 +534,14 @@ export function takeJsonMap(
  *
  * ```
  * const obj = { foo: { bar: [1, 2, 3] } };
- * const value = takeJsonArray(obj, 'foo.bar');
+ * const value = getJsonArray(obj, 'foo.bar');
  * // type of value -> JsonArray; value -> [1, 2, 3]
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function takeJsonArray(
+export function getJsonArray(
   from: Nullable<JsonCollection>,
   path: string
 ): Nullable<JsonArray>;
@@ -551,7 +551,7 @@ export function takeJsonArray(
  *
  * ```
  * const obj = { foo: { bar: [1, 2, 3] } };
- * const value = takeJsonArray(obj, 'foo.baz', [4, 5, 6]);
+ * const value = getJsonArray(obj, 'foo.baz', [4, 5, 6]);
  * // type of value -> JsonArray; value -> [4, 5, 6]
  * ```
  *
@@ -559,16 +559,16 @@ export function takeJsonArray(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function takeJsonArray(
+export function getJsonArray(
   from: Nullable<JsonCollection>,
   path: string,
   defaultValue: JsonArray
 ): JsonArray;
 // underlying function
-export function takeJsonArray(
+export function getJsonArray(
   from: Nullable<JsonCollection>,
   path: string,
   defaultValue?: JsonArray
 ): Nullable<JsonArray> {
-  return valueOrDefault(asJsonArray(takeAnyJson(from, path)), defaultValue);
+  return valueOrDefault(asJsonArray(getAnyJson(from, path)), defaultValue);
 }
