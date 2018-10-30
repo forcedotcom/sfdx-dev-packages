@@ -751,8 +751,27 @@ export function ensureJsonArray(
   return ensure(asJsonArray(value), message || 'Value is not JsonArray');
 }
 
-// const o: unknown = { a: 'a', b: 'b', c: 'c' };
-// if (has(o, 'a') && has(o, ['b', 'c'])) console.log(o.a, o.b, o.c);
+/**
+ * Tests whether a value of type `T` contains one or more property `keys`. If so, the type of the tested value is
+ * narrowed to reflect the existence of those keys for convenient access in the same scope. Returns false if the
+ * property key does not exist on the target type, which must be an object. Returns true if the property key exists,
+ * even if the associated value is `undefined` or `null`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (has(obj, 'name')) {
+ *   // type of obj -> { name: unknown }
+ *   if (has(obj, 'data')) {
+ *     // type of obj -> { name: unknown } & { data: unknown }
+ *   } else if (has(obj, ['error', 'status'])) {
+ *     // type of obj -> { name: unknown } & { error: unknown, status: unknown }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys One or more `string` keys to check for existence.
+ */
 export function has<T, K extends string>(
   value: T,
   keys: Many<K>
@@ -763,6 +782,24 @@ export function has<T, K extends string>(
   );
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` of type `string`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `string`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasString(obj, 'name')) {
+ *   // type of obj -> { name: string }
+ *   if (hasString(obj, 'message')) {
+ *     // type of obj -> { name: string } & { message: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `string` key to check for existence.
+ */
 export function hasString<T, K extends string>(
   value: T,
   key: K
@@ -770,6 +807,24 @@ export function hasString<T, K extends string>(
   return has(value, key) && isString(value[key]);
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` of type `number`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `number`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'offset')) {
+ *   // type of obj -> { offset: number }
+ *   if (hasNumber(obj, 'page') && hasArray(obj, 'items')) {
+ *     // type of obj -> { offset: number } & { page: number } & { items: Array<unknown> }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `number` key to check for existence.
+ */
 export function hasNumber<T, K extends string>(
   value: T,
   key: K
@@ -777,6 +832,24 @@ export function hasNumber<T, K extends string>(
   return has(value, key) && isNumber(value[key]);
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` of type `boolean`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `boolean`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasBoolean(obj, 'enabled')) {
+ *   // type of obj -> { enabled: boolean }
+ *   if (hasBoolean(obj, 'hidden')) {
+ *     // type of obj -> { enabled: boolean } & { hidden: boolean }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `boolean` key to check for existence.
+ */
 export function hasBoolean<T, K extends string>(
   value: T,
   key: K
@@ -784,6 +857,26 @@ export function hasBoolean<T, K extends string>(
   return has(value, key) && isBoolean(value[key]);
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` of type `object`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not of type `object`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasObject(obj, 'data')) {
+ *     // type of obj -> { status: number } & { data: object }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `object` key to check for existence.
+ */
 export function hasObject<T, K extends string>(
   value: T,
   key: K
@@ -791,6 +884,27 @@ export function hasObject<T, K extends string>(
   return has(value, key) && isObject(value[key]);
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` whose type tests positively when tested with
+ * {@link isPlainObject}. If so, the type of the tested value is narrowed to reflect the existence of that key for
+ * convenient access in the same scope. Returns `false` if the property key does not exist on the object or the value
+ * stored by that key is not of type `object`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasPlainObject(obj, 'data')) {
+ *     // type of obj -> { status: number } & { data: object }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A "plain" `object` key to check for existence.
+ */
 export function hasPlainObject<T, K extends string>(
   value: T,
   key: K
@@ -798,11 +912,28 @@ export function hasPlainObject<T, K extends string>(
   return has(value, key) && isPlainObject(value[key]);
 }
 
-// class Foo {
-//   public bar = 'baz';
-// }
-// const o: unknown = { foo: new Foo() };
-// if (hasInstance(o, 'foo', Foo)) console.log(o.foo.bar);
+/**
+ * Tests whether a value of type `T` contains a property `key` whose type tests positively when tested with
+ * {@link isInstance} when compared with the given constructor type `C`. If so, the type of the tested value is
+ * narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if the
+ * property key does not exist on the object or the value stored by that key is not an instance of `C`.
+ *
+ * ```
+ * class ServerResponse { ... }
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasInstance(obj, 'data', ServerResponse)) {
+ *     // type of obj -> { status: number } & { data: ServerResponse }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An instance of type `C` key to check for existence.
+ */
 export function hasInstance<T, K extends string, C extends AnyConstructor>(
   value: T,
   key: K,
@@ -811,6 +942,24 @@ export function hasInstance<T, K extends string, C extends AnyConstructor>(
   return has(value, key) && value[key] instanceof ctor;
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` of type {@link AnyArray}. If so, the type of the tested
+ * value is narrowed to reflect the existence of that key for convenient access in the same scope. Returns `false` if
+ * the property key does not exist on the object or the value stored by that key is not of type {@link AnyArray}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'offset')) {
+ *   // type of obj -> { offset: number }
+ *   if (hasNumber(obj, 'page') && hasArray(obj, 'items')) {
+ *     // type of obj -> { offset: number } & { page: number } & { items: AnyArray }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `AnyArray` key to check for existence.
+ */
 export function hasArray<T, K extends string>(
   value: T,
   key: K
@@ -818,6 +967,23 @@ export function hasArray<T, K extends string>(
   return has(value, key) && isArray(value[key]);
 }
 
+/**
+ * Tests whether a value of type `T` contains a property `key` of type {@link AnyFunction}. If so, the type of the
+ * tested value is narrowed to reflect the existence of that key for convenient access in the same scope. Returns
+ * `false` if the property key does not exist on the object or the value stored by that key is not of type
+ * {@link AnyFunction}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasFunction(obj, 'callback')) {
+ *   // type of obj -> { callback: AnyFunction }
+ *   obj.callback(response);
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `Array` key to check for existence.
+ */
 export function hasFunction<T, K extends string>(
   value: T,
   key: K
@@ -831,22 +997,22 @@ export function hasFunction<T, K extends string>(
  * ```
  * const obj = { foo: { bar: ['baz'] } };
  * const value = take(obj, 'foo.bar[0]');
- * // type of value -> unknown
- * // value === 'baz'
+ * // type of value -> unknown; value === 'baz'
  *
  * const value = take(obj, 'foo.bar.nothing', 'default');
- * // type of value -> unknown
- * // value === 'default'
+ * // type of value -> unknown; value === 'default'
  *
- * const arr = [{ foo: { bar: ['baz'] } }];
+ * const value = take(obj, 'foo["bar"][0]');
+ * // type of value -> unknown; value === 'baz'
+ *
+ * const arr = [obj];
  * const value = take(arr, '[0].foo.bar[0]');
- * // type of value -> unknown
- * // value === 'baz'
+ * // type of value -> unknown; value === 'baz'
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
- * @param defaultValue The default to return if the query result was `undefined`.
+ * @param defaultValue The default to return if the query result was not defined.
  */
 export function take(
   from: Nullable<object>,
@@ -869,8 +1035,7 @@ export function take(
  * ```
  * const obj = { foo: { bar: ['baz'] } };
  * const value = takeString(obj, 'foo.bar[0]');
- * // type of value -> string
- * // value === 'baz'
+ * // type of value -> string; value -> 'baz'
  * ```
  *
  * @param from The object or array to query.
@@ -879,7 +1044,7 @@ export function take(
 export function takeString(
   from: Nullable<object>,
   path: string
-): Optional<string>;
+): Nullable<string>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as a `string`, or
  * `undefined` if a value was not found or was not type-compatible.
@@ -887,13 +1052,12 @@ export function takeString(
  * ```
  * const obj = { foo: { bar: ['baz'] } };
  * const value = takeString(obj, 'foo.bar[1]', 'default');
- * // type of value -> string
- * // value === 'default'
+ * // type of value -> string; value -> 'default'
  * ```
  *
  * @param from The object or array to query.
  * @param path The query path.
- * @param defaultValue The default to return if the query result was `undefined`.
+ * @param defaultValue The default to return if the query result was not defined.
  */
 export function takeString(
   from: Nullable<object>,
@@ -909,10 +1073,37 @@ export function takeString(
   return valueOrDefault(asString(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `number`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1] } };
+ * const value = takeNumber(obj, 'foo.bar[0]');
+ * // type of value -> number; value -> 1
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeNumber(
   from: Nullable<object>,
   path: string
 ): Nullable<number>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `number`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1] } };
+ * const value = takeNumber(obj, 'foo.bar[1]', 2);
+ * // type of value -> number; value -> 2
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeNumber(
   from: Nullable<object>,
   path: string,
@@ -927,10 +1118,37 @@ export function takeNumber(
   return valueOrDefault(asNumber(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `boolean`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [true] } };
+ * const value = takeBoolean(obj, 'foo.bar[0]');
+ * // type of value -> boolean; value -> true
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeBoolean(
   from: Nullable<object>,
   path: string
 ): Nullable<boolean>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `boolean`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [true] } };
+ * const value = takeBoolean(obj, 'foo.bar[1]', false);
+ * // type of value -> boolean; value -> false
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeBoolean(
   from: Nullable<object>,
   path: string,
@@ -945,10 +1163,37 @@ export function takeBoolean(
   return valueOrDefault(asBoolean(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takeObject(obj, 'foo.bar[0]');
+ * // type of value -> object; value -> { name: 'baz' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeObject(
   from: Nullable<object>,
   path: string
 ): Nullable<object>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takeObject(obj, 'foo.bar[1]', { name: 'buzz' });
+ * // type of value -> object; value -> { name: 'buzz' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeObject(
   obj: Nullable<object>,
   path: string,
@@ -963,10 +1208,39 @@ export function takeObject(
   return valueOrDefault(asObject(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible. This differs from {@link takeObject} by way of
+ * testing for the property value type compatibility using {@link isPlainObject} instead of {@link isObject}.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takePlainObject(obj, 'foo.bar[0]');
+ * // type of value -> object; value -> { name: 'baz' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takePlainObject(
   from: Nullable<object>,
   path: string
 ): Nullable<object>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
+ * `undefined` if a value was not found or was not type-compatible. This differs from {@link takeObject} by way of
+ * testing for the property value type compatibility using {@link isPlainObject} instead of {@link isObject}.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = takePlainObject(obj, 'foo.bar[1]', { name: 'buzz' });
+ * // type of value -> object; value -> { name: 'buzz' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takePlainObject(
   obj: Nullable<object>,
   path: string,
@@ -981,11 +1255,40 @@ export function takePlainObject(
   return valueOrDefault(asPlainObject(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an instance of
+ * class type `C`, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * class Example { ... }
+ * const obj = { foo: { bar: [new Example()] } };
+ * const value = takeInstance(obj, 'foo.bar[0]', Example);
+ * // type of value -> Example
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeInstance<C extends AnyConstructor>(
   from: Nullable<object>,
   path: string,
   ctor: C
 ): Nullable<InstanceType<C>>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an instance of
+ * class type `C`, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * class Example { ... }
+ * const obj = { foo: { bar: [new Example()] } };
+ * const value = takeInstance(obj, 'foo.bar[0]', Example);
+ * // type of value -> Example; value -> new Example()
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeInstance<C extends AnyConstructor>(
   from: Nullable<object>,
   path: string,
@@ -1002,10 +1305,37 @@ export function takeInstance<C extends AnyConstructor>(
   return valueOrDefault(asInstance(take(from, path), ctor), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyArray}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeArray(obj, 'foo.bar');
+ * // type of value -> AnyArray; value -> [1, 2, 3]
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeArray(
   from: Nullable<object>,
   path: string
 ): Nullable<AnyArray>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyArray}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeArray(obj, 'foo.baz', [4, 5, 6]);
+ * // type of value -> AnyArray; value -> [4, 5, 6]
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeArray(
   from: Nullable<object>,
   path: string,
@@ -1020,10 +1350,37 @@ export function takeArray(
   return valueOrDefault(asArray(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyFunction}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [(arg: string) => `Hi, ${arg}`] } };
+ * const value = takeFunction(obj, 'foo.bar[0]');
+ * // type of value -> AnyArray; value -> (arg: string) => `Hi, ${arg}`
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeFunction(
   from: Nullable<object>,
   path: string
 ): Nullable<AnyFunction>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an
+ * {@link AnyFunction}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [(arg: string) => `Hi, ${arg}`] } };
+ * const value = takeFunction(obj, 'foo.bar[1]', (arg: string) => `Bye, ${arg}`);
+ * // type of value -> AnyArray; value -> (arg: string) => `Bye, ${arg}`)
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeFunction(
   from: Nullable<object>,
   path: string,
@@ -1038,10 +1395,39 @@ export function takeFunction(
   return valueOrDefault(asFunction(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * See {@link coerceAnyJson} for caveats regarding shallow type detection of `AnyJson` values from untyped sources.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeAnyJson(obj, 'foo.bar[0]');
+ * // type of value -> AnyJson; value -> { a: 'b' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeAnyJson(
   from: Nullable<JsonCollection>,
   path: string
 ): Optional<AnyJson>;
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeAnyJson(obj, 'foo.bar[1]', { c: 'd' });
+ * // type of value -> AnyJson; value -> { c: 'd' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeAnyJson(
   from: Nullable<JsonCollection>,
   path: string,
@@ -1056,10 +1442,37 @@ export function takeAnyJson(
   return valueOrDefault(coerceAnyJson(take(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeJsonMap(obj, 'foo.bar[0]');
+ * // type of value -> JsonMap; value -> { a: 'b' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeJsonMap(
   from: Nullable<JsonCollection>,
   path: string
 ): Nullable<JsonMap>;
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ a: 'b' }] } };
+ * const value = takeJsonMap(obj, 'foo.bar[1]', { c: 'd' });
+ * // type of value -> JsonMap; value -> { c: 'd' }
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeJsonMap(
   from: Nullable<JsonCollection>,
   path: string,
@@ -1074,10 +1487,37 @@ export function takeJsonMap(
   return valueOrDefault(asJsonMap(takeAnyJson(from, path)), defaultValue);
 }
 
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeJsonArray(obj, 'foo.bar');
+ * // type of value -> JsonArray; value -> [1, 2, 3]
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ */
 export function takeJsonArray(
   from: Nullable<JsonCollection>,
   path: string
 ): Nullable<JsonArray>;
+/**
+ * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
+ * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [1, 2, 3] } };
+ * const value = takeJsonArray(obj, 'foo.baz', [4, 5, 6]);
+ * // type of value -> JsonArray; value -> [4, 5, 6]
+ * ```
+ *
+ * @param from The object or array to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
 export function takeJsonArray(
   from: Nullable<JsonCollection>,
   path: string,
