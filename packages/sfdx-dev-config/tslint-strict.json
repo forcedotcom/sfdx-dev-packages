@@ -1,5 +1,5 @@
 {
-  "extends": "./tslint",
+  "extends": "./tslint.json",
   "rules": {
     "no-bitwise": true,
     "no-import-side-effect": true,
