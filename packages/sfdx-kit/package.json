@@ -12,19 +12,17 @@
     "lib/**/*.js",
     "!lib/**/*.test.js",
     "lib/**/*.d.ts",
-    "!lib/**/*.test.d.ts"
+    "!lib/**/*.test.d.ts",
+    "vendor/lodash.js"
   ],
   "scripts": {
     "build": "yarn compile && yarn lint",
     "clean": "yarn sfdx-clean",
     "clean-all": "yarn sfdx-clean all",
     "compile": "yarn sfdx-compile",
-    "copy-lodash": "mkdir -p lib/nodash && cp vendor/lodash.min.js lib/nodash/lodash.js",
     "docs": "rm -rf docs/* && typedoc --out docs",
     "lint": "yarn sfdx-lint",
     "lodash": "./scripts/build-lodash.sh",
-    "postcompile": "cp -r src/nodash/*.d.ts lib/nodash",
-    "precompile": "yarn copy-lodash",
     "prepare": "yarn build && yarn docs",
     "rebuild": "yarn clean-all && yarn install --no-lockfile && yarn build",
     "test": "yarn sfdx-test",
