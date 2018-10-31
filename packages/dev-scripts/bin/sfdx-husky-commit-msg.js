@@ -6,9 +6,9 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require("shelljs");
+const shell = require('shelljs');
 
-shell.set("-e");
-shell.set("+v");
+shell.set('-e');
+shell.set('+v');
 
-shell.exec("commitlint -E HUSKY_GIT_PARAMS");
+shell.exec('commitlint -E HUSKY_GIT_PARAMS');
