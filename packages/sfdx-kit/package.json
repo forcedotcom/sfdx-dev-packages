@@ -13,7 +13,7 @@
     "!lib/**/*.test.js",
     "lib/**/*.d.ts",
     "!lib/**/*.test.d.ts",
-    "vendor"
+    "vendor/lodash.js"
   ],
   "scripts": {
     "build": "yarn compile && yarn lint",
