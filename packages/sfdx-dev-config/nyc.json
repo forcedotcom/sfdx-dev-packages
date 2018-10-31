@@ -6,5 +6,6 @@
   "branches": 90,
   "reporter": ["lcov", "text"],
   "extension": [".ts"],
+  "include": ["**/*.ts"],
   "exclude": ["**/*.d.ts", "**/*.test.ts"]
 }
