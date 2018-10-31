@@ -21,3 +21,4 @@ union=$(printf "|'%s'" "${fns[@]}")
 union=${union:1}
 
 node_modules/.bin/lodash exports=node include="$list" -o vendor/lodash.js
+mv vendor/lodash.min.js vendor/lodash.js

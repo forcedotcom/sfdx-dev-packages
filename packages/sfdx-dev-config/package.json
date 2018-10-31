@@ -21,7 +21,9 @@
     "typescript": "^3"
   },
   "scripts": {
-    "clean": "yarn sfdx-clean",
-    "clean-all": "yarn sfdx-clean all"
+    "clean-all": "shx rm -rf node_modules"
+  },
+  "devDependencies": {
+    "shx": "^0.3.2"
   }
 }

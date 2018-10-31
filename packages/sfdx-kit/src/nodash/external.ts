@@ -25,7 +25,7 @@ import {
   Optional
 } from '@salesforce/ts-types';
 // @ts-ignore ignore the demand for typings for the locally built lodash
-import * as _ from './lodash';
+import * as _ from '../../vendor/lodash';
 import {
   ListIteratee,
   ObjectIteratee,
