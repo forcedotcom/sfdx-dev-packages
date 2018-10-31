@@ -1049,320 +1049,313 @@ typedoc.search.data = {
     {
       id: 133,
       kind: 64,
-      name: 'valueOrDefault',
-      url: 'globals.html#valueordefault',
-      classes: 'tsd-kind-function tsd-has-type-parameter'
-    },
-    {
-      id: 134,
-      kind: 64,
       name: 'coerceAnyJson',
       url: 'globals.html#coerceanyjson',
       classes: 'tsd-kind-function'
     },
     {
-      id: 135,
+      id: 134,
       kind: 64,
       name: 'coerceJsonMap',
       url: 'globals.html#coercejsonmap',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 136,
+      id: 135,
       kind: 64,
       name: 'coerceJsonArray',
       url: 'globals.html#coercejsonarray',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 137,
+      id: 136,
       kind: 64,
       name: 'toAnyJson',
       url: 'globals.html#toanyjson',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 138,
+      id: 137,
       kind: 64,
       name: 'toJsonMap',
       url: 'globals.html#tojsonmap',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 139,
+      id: 138,
       kind: 64,
       name: 'toJsonArray',
       url: 'globals.html#tojsonarray',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 140,
+      id: 139,
       kind: 64,
       name: 'ensure',
       url: 'globals.html#ensure',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 141,
+      id: 140,
       kind: 64,
       name: 'ensureString',
       url: 'globals.html#ensurestring',
       classes: 'tsd-kind-function'
     },
     {
-      id: 142,
+      id: 141,
       kind: 64,
       name: 'ensureNumber',
       url: 'globals.html#ensurenumber',
       classes: 'tsd-kind-function'
     },
     {
-      id: 143,
+      id: 142,
       kind: 64,
       name: 'ensureBoolean',
       url: 'globals.html#ensureboolean',
       classes: 'tsd-kind-function'
     },
     {
-      id: 144,
+      id: 143,
       kind: 64,
       name: 'ensureObject',
       url: 'globals.html#ensureobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 145,
+      id: 144,
       kind: 64,
       name: 'ensurePlainObject',
       url: 'globals.html#ensureplainobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 146,
+      id: 145,
       kind: 64,
       name: 'ensureInstance',
       url: 'globals.html#ensureinstance',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 147,
+      id: 146,
       kind: 64,
       name: 'ensureArray',
       url: 'globals.html#ensurearray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 148,
+      id: 147,
       kind: 64,
       name: 'ensureFunction',
       url: 'globals.html#ensurefunction',
       classes: 'tsd-kind-function'
     },
     {
-      id: 149,
+      id: 148,
       kind: 64,
       name: 'ensureAnyJson',
       url: 'globals.html#ensureanyjson',
       classes: 'tsd-kind-function'
     },
     {
-      id: 150,
+      id: 149,
       kind: 64,
       name: 'ensureJsonMap',
       url: 'globals.html#ensurejsonmap',
       classes: 'tsd-kind-function'
     },
     {
-      id: 151,
+      id: 150,
       kind: 64,
       name: 'ensureJsonArray',
       url: 'globals.html#ensurejsonarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 152,
+      id: 151,
       kind: 64,
       name: 'has',
       url: 'globals.html#has',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 153,
+      id: 152,
       kind: 64,
       name: 'hasString',
       url: 'globals.html#hasstring',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 154,
+      id: 153,
       kind: 64,
       name: 'hasNumber',
       url: 'globals.html#hasnumber',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 155,
+      id: 154,
       kind: 64,
       name: 'hasBoolean',
       url: 'globals.html#hasboolean',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 156,
+      id: 155,
       kind: 64,
       name: 'hasObject',
       url: 'globals.html#hasobject',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 157,
+      id: 156,
       kind: 64,
       name: 'hasPlainObject',
       url: 'globals.html#hasplainobject',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 158,
+      id: 157,
       kind: 64,
       name: 'hasInstance',
       url: 'globals.html#hasinstance',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 159,
+      id: 158,
       kind: 64,
       name: 'hasArray',
       url: 'globals.html#hasarray',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 160,
+      id: 159,
       kind: 64,
       name: 'hasFunction',
       url: 'globals.html#hasfunction',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 161,
+      id: 160,
       kind: 64,
       name: 'get',
       url: 'globals.html#get',
       classes: 'tsd-kind-function'
     },
     {
-      id: 162,
+      id: 161,
       kind: 64,
       name: 'getString',
       url: 'globals.html#getstring',
       classes: 'tsd-kind-function'
     },
     {
-      id: 163,
+      id: 162,
       kind: 64,
       name: 'getNumber',
       url: 'globals.html#getnumber',
       classes: 'tsd-kind-function'
     },
     {
-      id: 164,
+      id: 163,
       kind: 64,
       name: 'getBoolean',
       url: 'globals.html#getboolean',
       classes: 'tsd-kind-function'
     },
     {
-      id: 165,
+      id: 164,
       kind: 64,
       name: 'getObject',
       url: 'globals.html#getobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 166,
+      id: 165,
       kind: 64,
       name: 'getPlainObject',
       url: 'globals.html#getplainobject',
       classes: 'tsd-kind-function'
     },
     {
-      id: 167,
+      id: 166,
       kind: 64,
       name: 'getInstance',
       url: 'globals.html#getinstance',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 168,
+      id: 167,
       kind: 64,
       name: 'getArray',
       url: 'globals.html#getarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 169,
+      id: 168,
       kind: 64,
       name: 'getFunction',
       url: 'globals.html#getfunction',
       classes: 'tsd-kind-function'
     },
     {
-      id: 170,
+      id: 169,
       kind: 64,
       name: 'getAnyJson',
       url: 'globals.html#getanyjson',
       classes: 'tsd-kind-function'
     },
     {
-      id: 171,
+      id: 170,
       kind: 64,
       name: 'getJsonMap',
       url: 'globals.html#getjsonmap',
       classes: 'tsd-kind-function'
     },
     {
-      id: 172,
+      id: 171,
       kind: 64,
       name: 'getJsonArray',
       url: 'globals.html#getjsonarray',
       classes: 'tsd-kind-function'
     },
     {
-      id: 173,
+      id: 172,
       kind: 64,
       name: 'keysOf',
       url: 'globals.html#keysof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 174,
+      id: 173,
       kind: 64,
       name: 'entriesOf',
       url: 'globals.html#entriesof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 175,
+      id: 174,
       kind: 64,
       name: 'valuesOf',
       url: 'globals.html#valuesof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 176,
+      id: 175,
       kind: 64,
       name: 'definiteKeysOf',
       url: 'globals.html#definitekeysof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 177,
+      id: 176,
       kind: 64,
       name: 'definiteEntriesOf',
       url: 'globals.html#definiteentriesof',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 178,
+      id: 177,
       kind: 64,
       name: 'definiteValuesOf',
       url: 'globals.html#definitevaluesof',
