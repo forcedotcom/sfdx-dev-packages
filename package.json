@@ -8,8 +8,8 @@
     "compile": "lerna run compile",
     "postclean-all": "yarn sfdx-clean all",
     "lint": "lerna run lint",
-    "postinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-post.js",
-    "preinstall": "packages/sfdx-dev-scripts/bin/sfdx-gen-lerna-pre.js",
+    "postinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-post.js",
+    "preinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-pre.js",
     "test": "lerna run test"
   },
   "devDependencies": {
