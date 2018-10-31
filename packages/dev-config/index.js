@@ -5,5 +5,4 @@ const tsconfig = require(path.join(__dirname, 'tsconfig'));
 module.exports = {
   tslint,
   tsconfig
-}
-  
+};
