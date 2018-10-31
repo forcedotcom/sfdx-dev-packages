@@ -11,9 +11,8 @@ const orderList = require('../utils/order-map');
 describe('order-maps', () => {
   it('orders unordered keys', () => {
     const obj = { b: 'b', c: 'c', a: 'a' };
-    const expected = { a: 'a', b: 'b', c: 'c' };
+    const expected = '{"a":"a","b":"b","c":"c"}';
 
-    expect(obj).to.equal('{"b":"b", "c"}');
-    expect(orderList(obj).to.equal('{"b":"b", "c"}'));
+    expect(JSON.stringify(orderList(obj))).to.equal(expected);
   });
 });
