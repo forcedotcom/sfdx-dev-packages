@@ -50,6 +50,8 @@ SfdxDevConfig['DEFAULT_SCRIPTS'] = [
   'clean',
   'clean-all',
   'compile',
+  'docs',
+  'format',
   'test',
   'lint'
 ]; // TODO add "build", "lint", "docs"]
