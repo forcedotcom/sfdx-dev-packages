@@ -6,8 +6,10 @@
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
     "compile": "lerna run compile",
-    "postclean-all": "yarn sfdx-clean all",
+    "docs": "lerna run docs",
+    "format": "lerna run format",
     "lint": "lerna run lint",
+    "postclean-all": "yarn sfdx-clean all",
     "postinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-post.js",
     "preinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-pre.js",
     "test": "lerna run test"
