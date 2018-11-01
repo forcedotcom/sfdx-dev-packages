@@ -13,10 +13,15 @@ shell.set('+v');
 
 const packageRoot = require('../utils/package-path');
 
-// TODO scripts not added yet
-// shell.exec("yarn clean", {
-//   cwd: packageRoot
-// });
-// shell.exec("yarn test", {
-//   cwd: packageRoot
-// });
+shell.exec('yarn clean', {
+  cwd: packageRoot
+});
+shell.exec('yarn compile', {
+  cwd: packageRoot
+});
+shell.exec('yarn lint', {
+  cwd: packageRoot
+});
+shell.exec('yarn test', {
+  cwd: packageRoot
+});
