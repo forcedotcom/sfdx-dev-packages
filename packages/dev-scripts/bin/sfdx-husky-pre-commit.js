@@ -20,7 +20,7 @@ shell.exec('yarn docs', {
 });
 
 shell.set('+e');
-shell.exec('git add "**/docs/*"', {
+shell.exec('git add docs', {
   cwd: packageRoot
 });
 shell.set('-e');
