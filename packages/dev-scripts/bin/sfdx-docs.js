@@ -6,10 +6,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require('shelljs');
-
-shell.set('-e');
-shell.set('+v');
+const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
 const typedoc = require.resolve('typedoc/bin/typedoc');
@@ -37,11 +34,3 @@ for (const key of Object.keys(options)) {
 }
 
 shell.rm('-rf', 'docs/*');
-console.log(command);
-try {
-  shell.exec(command, {
-    cwd: packageRoot
-  });
-} catch (err) {
-  process.exitCode = 1;
-}

@@ -28,11 +28,11 @@ import {
 import * as _ from '../../vendor/lodash';
 import {
   ListIteratee,
+  NumericDictionary,
   ObjectIteratee,
   Omit,
   ValueIteratee,
-  ValueIterateeCustom,
-  NumericDictionary
+  ValueIterateeCustom
 } from './support';
 
 /**
