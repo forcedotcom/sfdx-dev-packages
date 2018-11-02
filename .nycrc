@@ -1,0 +1,4 @@
+{
+  "extends": "packages/dev-config/nyc",
+  "exclude": ["**/vendor/**/*", "**/*.ts", "**/*.test.js"]
+}

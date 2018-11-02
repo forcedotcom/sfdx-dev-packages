@@ -44,7 +44,7 @@ module.exports = (packageRoot = require('./package-path')) => {
           extends: '@salesforce/dev-config/nyc'
         }
       };
-      const nycJson = JSON.stringify(nyc, null, 2);
+      const nycJson = JSON.stringify(nyc, null, 2) + '\n';
       writeFileSync(nycPath, nycJson);
       added.push(nycPath);
     }
@@ -59,7 +59,7 @@ module.exports = (packageRoot = require('./package-path')) => {
         const tslint = {
           extends: '@salesforce/dev-config/tslint-strict'
         };
-        const tslintJson = JSON.stringify(tslint, null, 2);
+        const tslintJson = JSON.stringify(tslint, null, 2) + '\n';
         writeFileSync(tslintPath, tslintJson);
         added.push(tslintPath);
       } else if (!strict && !exists) {

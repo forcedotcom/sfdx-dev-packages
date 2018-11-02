@@ -47,6 +47,7 @@ class SfdxDevConfig {
 }
 
 SfdxDevConfig['DEFAULT_SCRIPTS'] = [
+  'build',
   'clean',
   'clean-all',
   'compile',
@@ -54,7 +55,7 @@ SfdxDevConfig['DEFAULT_SCRIPTS'] = [
   'format',
   'test',
   'lint'
-]; // TODO add "build"
+];
 SfdxDevConfig['DEFAULT_HUSKY'] = ['commit-msg', 'pre-commit', 'pre-push'];
 
 module.exports = SfdxDevConfig;

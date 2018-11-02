@@ -9,18 +9,13 @@
 const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
-const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
 
-shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
+shell.exec('yarn clean', {
   cwd: packageRoot
 });
-
-shell.exec('yarn docs', {
+shell.exec('yarn compile', {
   cwd: packageRoot
 });
-
-shell.set('+e');
-shell.exec('git add docs', {
+shell.exec('yarn lint', {
   cwd: packageRoot
 });
-shell.set('-e');

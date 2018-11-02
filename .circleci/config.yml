@@ -19,8 +19,11 @@ jobs:
           name: Bootstraping
           command: yarn bootstrap
       - run:
+          name: Building
+          command: yarn build
+      - run:
           name: Testing
-          command: yarn test
+          command: yarn ci-test
       - run:
           name: Submitting code coverage to codecov
           command: |
