@@ -9,8 +9,7 @@ This is a simple TypeScript-oriented library developed for use in Salesforce CLI
 
 ## Why did we create it?
 
-We were interested in enabling strict compiler settings in TypeScript. Among the sub-settings that comprise strict
-mode are "strict null checks", "strict property initialization", and "no implicit any". These settings have the potential to increase code quality substantially, reducing the frequency of certain classes of runtime errors typical in JavaScript applications. They also encourage the writing of clearer code, which helps teams work together and more rapidly onboard new hires.
+We were interested in enabling strict compiler settings in TypeScript. Among the sub-settings that comprise strict mode are "strict null checks", "strict property initialization", and "no implicit any". These settings have the potential to increase code quality substantially, reducing the frequency of certain classes of runtime errors typical in JavaScript applications. They also encourage the writing of clearer code, which helps teams work together and more rapidly onboard new hires.
 
 Of course, stricter compiler settings require developers to write more type-safe code -- or to work around the compiler's insistence on type-safety. Often this stricter style leads to more verbose code in the way of type declarations and type guards, and can require new and occasionally unfamiliar patterns to accomplish without subverting the compiler's enforcement of the type system (typically via the use of type assertions).
 
