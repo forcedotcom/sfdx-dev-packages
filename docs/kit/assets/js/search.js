@@ -590,20 +590,13 @@ typedoc.search.data = {
     },
     {
       id: 71,
-      kind: 4194304,
-      name: 'NamedErrorLike',
-      url: 'globals.html#namederrorlike',
-      classes: 'tsd-kind-type-alias tsd-is-not-exported'
-    },
-    {
-      id: 72,
       kind: 128,
       name: 'Env',
       url: 'classes/env.html',
       classes: 'tsd-kind-class'
     },
     {
-      id: 73,
+      id: 72,
       kind: 512,
       name: 'constructor',
       url: 'classes/env.html#constructor',
@@ -611,7 +604,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 74,
+      id: 73,
       kind: 2048,
       name: 'getString',
       url: 'classes/env.html#getstring',
@@ -619,7 +612,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 75,
+      id: 74,
       kind: 2048,
       name: 'getStringIn',
       url: 'classes/env.html#getstringin',
@@ -627,7 +620,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 76,
+      id: 75,
       kind: 2048,
       name: 'getKeyOf',
       url: 'classes/env.html#getkeyof',
@@ -635,7 +628,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 77,
+      id: 76,
       kind: 2048,
       name: 'setString',
       url: 'classes/env.html#setstring',
@@ -643,7 +636,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 78,
+      id: 77,
       kind: 2048,
       name: 'getList',
       url: 'classes/env.html#getlist',
@@ -651,7 +644,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 79,
+      id: 78,
       kind: 2048,
       name: 'setList',
       url: 'classes/env.html#setlist',
@@ -659,7 +652,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 80,
+      id: 79,
       kind: 2048,
       name: 'getBoolean',
       url: 'classes/env.html#getboolean',
@@ -667,7 +660,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 81,
+      id: 80,
       kind: 2048,
       name: 'setBoolean',
       url: 'classes/env.html#setboolean',
@@ -675,7 +668,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 82,
+      id: 81,
       kind: 2048,
       name: 'unset',
       url: 'classes/env.html#unset',
@@ -683,7 +676,7 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 83,
+      id: 82,
       kind: 2048,
       name: 'entries',
       url: 'classes/env.html#entries',
@@ -691,59 +684,66 @@ typedoc.search.data = {
       parent: 'Env'
     },
     {
-      id: 84,
+      id: 83,
       kind: 32,
       name: 'env',
       url: 'globals.html#env',
       classes: 'tsd-kind-variable'
     },
     {
-      id: 85,
+      id: 84,
       kind: 64,
       name: 'parseJson',
       url: 'globals.html#parsejson',
       classes: 'tsd-kind-function'
     },
     {
-      id: 86,
+      id: 85,
       kind: 64,
       name: 'parseJsonMap',
       url: 'globals.html#parsejsonmap',
       classes: 'tsd-kind-function'
     },
     {
-      id: 87,
+      id: 86,
       kind: 64,
       name: 'cloneJson',
       url: 'globals.html#clonejson',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 88,
+      id: 87,
       kind: 64,
       name: 'getJsonValuesByName',
       url: 'globals.html#getjsonvaluesbyname',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 89,
+      id: 88,
       kind: 64,
       name: 'jsonIncludes',
       url: 'globals.html#jsonincludes',
       classes: 'tsd-kind-function'
     },
     {
-      id: 90,
+      id: 89,
       kind: 64,
       name: 'defaults',
       url: 'globals.html#defaults',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {
-      id: 91,
+      id: 90,
       kind: 64,
       name: 'findKey',
       url: 'globals.html#findkey',
+      classes: 'tsd-kind-function tsd-has-type-parameter'
+    },
+    {
+      id: 91,
+      kind: 64,
+      name: 'includes',
+      url: 'globals.html#includes',
       classes: 'tsd-kind-function tsd-has-type-parameter'
     },
     {

@@ -52,12 +52,6 @@ This runs `yarn compile` on each of the package in packages.
 
 This run `yarn clean` on each of the package in packages. Running `yarn cleal-all` will also clean up the node_module directories.
 
-### `yarn watch`
-
-This runs `yarn watch` on each of the package in packages. The `--parallel`
-flag tell it to run each in a separate process so that it won't block the main
-thread.
-
 ### `yarn test`
 
 This runs `yarn test` on each of the packages. The `--concurrency 1` is essential

@@ -19,6 +19,9 @@ const clean = config.get('clean');
 
 const cleanAll = process.argv[2] === 'all';
 
+// Don't throw errors when cleaning
+shell.set('+e');
+
 // Add defaults for clean all
 if (cleanAll) {
   defaultDirs.push('node_modules');
@@ -64,3 +67,4 @@ if (cleanAll) {
     });
   }
 }
+shell.set('-e');

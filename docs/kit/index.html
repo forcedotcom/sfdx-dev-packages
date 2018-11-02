@@ -940,9 +940,6 @@ img { max-width: 100%; }
 		<li class=" tsd-kind-type-alias tsd-has-type-parameter">
 			<a href="globals.html#interruptablepromise" class="tsd-kind-icon">Interruptable<wbr>Promise</a>
 		</li>
-		<li class=" tsd-kind-type-alias tsd-is-not-exported">
-			<a href="globals.html#namederrorlike" class="tsd-kind-icon">Named<wbr>Error<wbr>Like</a>
-		</li>
 		<li class=" tsd-kind-variable">
 			<a href="globals.html#env" class="tsd-kind-icon">env</a>
 		</li>
@@ -957,6 +954,9 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-function tsd-has-type-parameter">
 			<a href="globals.html#getjsonvaluesbyname" class="tsd-kind-icon">get<wbr>Json<wbr>Values<wbr>ByName</a>
+		</li>
+		<li class=" tsd-kind-function tsd-has-type-parameter">
+			<a href="globals.html#includes" class="tsd-kind-icon">includes</a>
 		</li>
 		<li class=" tsd-kind-function">
 			<a href="globals.html#isempty" class="tsd-kind-icon">is<wbr>Empty</a>
@@ -1053,7 +1053,6 @@ img { max-width: 100%; }
 						<h3>Type aliases</h3>
 						<ul class="tsd-index-list">
 							<li class="tsd-kind-type-alias tsd-has-type-parameter"><a href="globals.html#interruptablepromise" class="tsd-kind-icon">Interruptable<wbr>Promise</a></li>
-							<li class="tsd-kind-type-alias tsd-is-not-exported"><a href="globals.html#namederrorlike" class="tsd-kind-icon">Named<wbr>Error<wbr>Like</a></li>
 						</ul>
 					</section>
 					<section class="tsd-index-section ">
@@ -1069,6 +1068,7 @@ img { max-width: 100%; }
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#defaults" class="tsd-kind-icon">defaults</a></li>
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#findkey" class="tsd-kind-icon">find<wbr>Key</a></li>
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#getjsonvaluesbyname" class="tsd-kind-icon">get<wbr>Json<wbr>Values<wbr>ByName</a></li>
+							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#includes" class="tsd-kind-icon">includes</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#isempty" class="tsd-kind-icon">is<wbr>Empty</a></li>
 							<li class="tsd-kind-function"><a href="globals.html#jsonincludes" class="tsd-kind-icon">json<wbr>Includes</a></li>
 							<li class="tsd-kind-function tsd-has-type-parameter"><a href="globals.html#keyby" class="tsd-kind-icon">key<wbr>By</a></li>
@@ -1100,27 +1100,12 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">Interruptable<wbr>Promise<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="interfaces/interruptable.html" class="tsd-signature-type">Interruptable</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/duration.ts#L131">duration.ts:131</a></li>
+						<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/duration.ts#L131">duration.ts:131</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
 						<p>A promise of result type <code>T</code> that can be interrupted prematurely, resulting in an early resolution.</p>
-					</div>
-				</div>
-			</section>
-			<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-is-not-exported">
-				<a name="namederrorlike" class="tsd-anchor"></a>
-				<h3>Named<wbr>Error<wbr>Like</h3>
-				<div class="tsd-signature tsd-kind-icon">Named<wbr>Error<wbr>Like<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/errors.ts#L11">errors.ts:11</a></li>
-					</ul>
-				</aside>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>Any <code>Error</code> compatible with the <code>NamedError</code> type signature.</p>
 					</div>
 				</div>
 			</section>
@@ -1133,7 +1118,7 @@ img { max-width: 100%; }
 				<div class="tsd-signature tsd-kind-icon">env<span class="tsd-signature-symbol">:</span> <a href="classes/env.html" class="tsd-signature-type">Env</a><span class="tsd-signature-symbol"> =&nbsp;new Env()</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/env.ts#L261">env.ts:261</a></li>
+						<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/env.ts#L261">env.ts:261</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1155,7 +1140,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/json.ts#L76">json.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/json.ts#L76">json.ts:76</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1204,7 +1189,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L47">nodash/external.ts:47</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L48">nodash/external.ts:48</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1244,7 +1229,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L51">nodash/external.ts:51</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L52">nodash/external.ts:52</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1288,7 +1273,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L59">nodash/external.ts:59</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L60">nodash/external.ts:60</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1340,7 +1325,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L68">nodash/external.ts:68</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L69">nodash/external.ts:69</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1400,7 +1385,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L78">nodash/external.ts:78</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L79">nodash/external.ts:79</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1436,7 +1421,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L91">nodash/external.ts:91</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L92">nodash/external.ts:92</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1480,7 +1465,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/json.ts#L92">json.ts:92</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/json.ts#L92">json.ts:92</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1515,6 +1500,56 @@ img { max-width: 100%; }
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-member tsd-kind-function tsd-has-type-parameter">
+				<a name="includes" class="tsd-anchor"></a>
+				<h3>includes</h3>
+				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">includes&lt;T&gt;<span class="tsd-signature-symbol">(</span>collection<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ArrayLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dictionary</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">NumericDictionary</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, target<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, fromIndex<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				</ul>
+				<ul class="tsd-descriptions">
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L107">nodash/external.ts:107</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Checks if target is in collection using SameValueZero for equality comparisons. If fromIndex is negative,
+								it’s used as the offset from the end of collection.</p>
+							</div>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>collection: <span class="tsd-signature-type">Nullable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ArrayLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Dictionary</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">NumericDictionary</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The collection to search.</p>
+								</div>
+							</li>
+							<li>
+								<h5>target: <span class="tsd-signature-type">T</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The value to search for.</p>
+								</div>
+							</li>
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> fromIndex: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The index to search from.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-member tsd-kind-function">
 				<a name="isempty" class="tsd-anchor"></a>
 				<h3>is<wbr>Empty</h3>
@@ -1525,7 +1560,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L23">nodash/internal.ts:23</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L23">nodash/internal.ts:23</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1557,7 +1592,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/json.ts#L119">json.ts:119</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/json.ts#L119">json.ts:119</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1596,7 +1631,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L106">nodash/external.ts:106</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L123">nodash/external.ts:123</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1632,7 +1667,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L113">nodash/external.ts:113</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L130">nodash/external.ts:130</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1672,7 +1707,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L38">nodash/internal.ts:38</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L38">nodash/internal.ts:38</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1691,7 +1726,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L42">nodash/internal.ts:42</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L42">nodash/internal.ts:42</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1722,7 +1757,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L129">nodash/external.ts:129</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L146">nodash/external.ts:146</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1754,7 +1789,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L136">nodash/external.ts:136</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L153">nodash/external.ts:153</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1793,7 +1828,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L168">nodash/external.ts:168</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L185">nodash/external.ts:185</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1838,7 +1873,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L188">nodash/external.ts:188</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L205">nodash/external.ts:205</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1881,7 +1916,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L192">nodash/external.ts:192</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L209">nodash/external.ts:209</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1925,7 +1960,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L200">nodash/external.ts:200</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L217">nodash/external.ts:217</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1977,7 +2012,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L209">nodash/external.ts:209</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L226">nodash/external.ts:226</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2046,7 +2081,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L153">nodash/external.ts:153</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L170">nodash/external.ts:170</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2090,7 +2125,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L228">nodash/external.ts:228</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L245">nodash/external.ts:245</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2125,7 +2160,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L235">nodash/external.ts:235</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L252">nodash/external.ts:252</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2158,7 +2193,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L242">nodash/external.ts:242</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L259">nodash/external.ts:259</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2197,7 +2232,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L257">nodash/external.ts:257</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L274">nodash/external.ts:274</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2235,7 +2270,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/json.ts#L32">json.ts:32</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/json.ts#L32">json.ts:32</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2283,7 +2318,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/json.ts#L55">json.ts:55</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/json.ts#L55">json.ts:55</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2335,7 +2370,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L270">nodash/external.ts:270</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L287">nodash/external.ts:287</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2377,7 +2412,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L274">nodash/external.ts:274</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L291">nodash/external.ts:291</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2420,7 +2455,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/duration.ts#L149">duration.ts:149</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/duration.ts#L149">duration.ts:149</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2450,7 +2485,7 @@ events.on(<span class="hljs-string">'someEvent'</span>, promise.interrupt);
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/duration.ts#L167">duration.ts:167</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/duration.ts#L167">duration.ts:167</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2496,7 +2531,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L53">nodash/internal.ts:53</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L53">nodash/internal.ts:53</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2518,7 +2553,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L54">nodash/internal.ts:54</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L54">nodash/internal.ts:54</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -2542,7 +2577,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L289">nodash/external.ts:289</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L306">nodash/external.ts:306</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2579,7 +2614,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L296">nodash/external.ts:296</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L313">nodash/external.ts:313</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2618,7 +2653,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/external.ts#L327">nodash/external.ts:327</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/external.ts#L344">nodash/external.ts:344</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2661,7 +2696,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L72">nodash/internal.ts:72</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L72">nodash/internal.ts:72</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2680,7 +2715,7 @@ events.<span class="hljs-keyword">on</span>(<span class="hljs-string">'someEvent
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/7387bfc/packages/kit/src/nodash/internal.ts#L76">nodash/internal.ts:76</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/316ffaa/packages/kit/src/nodash/internal.ts#L76">nodash/internal.ts:76</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
