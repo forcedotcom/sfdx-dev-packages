@@ -20,7 +20,7 @@ jobs:
           command: yarn bootstrap
       - run:
           name: Testing
-          command: yarn test
+          command: yarn build
       - run:
           name: Submitting code coverage to codecov
           command: |

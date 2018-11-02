@@ -6,8 +6,10 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+const { basename, join } = require('path');
 const shell = require('../utils/shelljs');
 
+const loadRootPath = require('../utils/load-root-path');
 const packageRoot = require('../utils/package-path');
 const typedoc = require.resolve('typedoc/bin/typedoc');
 
@@ -18,7 +20,13 @@ try {
   options = Object.assign(options, definedOptions);
 } catch (err) {}
 
-let command = `${typedoc} --out docs`;
+let outDir = 'docs';
+try {
+  const lernaPath = loadRootPath('lerna.json');
+  outDir = join(lernaPath, 'docs', basename(packageRoot));
+} catch (e) {}
+
+let command = `${typedoc} --out ${outDir}`;
 
 // typedocs does not allow extending configs, so merge the
 // defaults and overrides and put them on the command
@@ -33,4 +41,7 @@ for (const key of Object.keys(options)) {
   }
 }
 
-shell.rm('-rf', 'docs/*');
+shell.rm('-rf', `${outDir}/*`);
+shell.exec(command, {
+  cwd: packageRoot
+});

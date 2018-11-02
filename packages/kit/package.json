@@ -16,7 +16,7 @@
     "vendor/lodash.js"
   ],
   "scripts": {
-    "build": "yarn compile && yarn lint",
+    "build": "yarn sfdx-build",
     "clean": "yarn sfdx-clean",
     "clean-all": "yarn sfdx-clean all",
     "compile": "yarn sfdx-compile",
