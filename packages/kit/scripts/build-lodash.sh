@@ -4,6 +4,7 @@ fns=(
   'defaults'
   'findKey'
   'keyBy'
+  'includes'
   'mapKeys'
   'minBy'
   'maxBy'

@@ -11,8 +11,6 @@ const shell = require('shelljs');
 shell.set('-e');
 shell.set('+v');
 
-// rm -rf docs/* && typedoc --out docs
-
 const packageRoot = require('../utils/package-path');
 const typedoc = require.resolve('typedoc/bin/typedoc');
 

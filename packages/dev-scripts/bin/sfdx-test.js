@@ -26,8 +26,8 @@ if (!testConfig.mochaOpts) {
     ' --require ts-node/register --require source-map-support/register';
 }
 
-command += ` --recursive "${testConfig.testsPath ||
-  '**/*.test.ts'}" --color always`;
+const includes = testConfig.testsPath || '**/*.test.ts';
+command += ` --recursive "${includes}" --color always`;
 
 try {
   shell.exec(command, {

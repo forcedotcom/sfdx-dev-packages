@@ -22,7 +22,7 @@
     "docs": "yarn sfdx-docs",
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
-    "postcompile": "cp -r src/types lib",
+    "postcompile": "shx cp -r src/types lib",
     "prepare": "yarn build && yarn docs",
     "test": "yarn sfdx-test"
   },
