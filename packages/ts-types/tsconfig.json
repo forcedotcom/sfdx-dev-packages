@@ -1,11 +1,10 @@
 {
   // FIXME: Temporary fix until github.com/Microsoft/TypeScript/issues/18865 is fixed.
-  // TODO: Change to @salesforce/devconfig/tsconfig when above is resolved.
-  "extends": "../dev-config/tsconfig",
+  // TODO: Change to @salesforce/devconfig/tsconfig-strict when above is resolved.
+  "extends": "../dev-config/tsconfig-strict",
   "compilerOptions": {
     "outDir": "lib",
     "baseUrl": "./",
-    "strict": true,
     "importHelpers": true
   },
   "include": ["src/**/*.ts"]
