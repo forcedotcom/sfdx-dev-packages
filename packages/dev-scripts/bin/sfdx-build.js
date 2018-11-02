@@ -10,16 +10,15 @@ const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
 
-console.log(packageRoot);
-shell.exec(`${__dirname}/sfdx-clean`, {
+shell.exec('yarn clean', {
   cwd: packageRoot
 });
-shell.exec(`${__dirname}/sfdx-compile`, {
+shell.exec('yarn compile', {
   cwd: packageRoot
 });
-shell.exec(`${__dirname}/sfdx-lint`, {
+shell.exec('yarn lint', {
   cwd: packageRoot
 });
-shell.exec(`${__dirname}/sfdx-test`, {
+shell.exec('yarn test', {
   cwd: packageRoot
 });

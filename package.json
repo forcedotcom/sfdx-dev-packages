@@ -34,5 +34,9 @@
       "pre-commit": "yarn sfdx-husky-pre-commit",
       "pre-push": "yarn sfdx-husky-pre-push"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/forcedotcom/sfdx-dev-packages.git"
   }
 }
