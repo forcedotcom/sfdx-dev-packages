@@ -22,12 +22,9 @@
     "docs": "yarn sfdx-docs",
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
-    "postcompile": "cp -r src/types lib",
+    "postcompile": "shx cp -r src/types lib",
     "prepare": "yarn build && yarn docs",
-    "rebuild": "yarn clean-all && yarn install --no-lockfile && yarn build",
-    "test": "yarn sfdx-test",
-    "uts": "nyc mocha --require source-map-support/register --recursive \"lib/**/*.test.js\"",
-    "watch": "tsc -w -p tsconfig.json"
+    "test": "yarn sfdx-test"
   },
   "dependencies": {
     "tslib": "^1"

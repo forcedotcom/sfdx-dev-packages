@@ -25,10 +25,7 @@
     "lint": "yarn sfdx-lint",
     "lodash": "./scripts/build-lodash.sh",
     "prepare": "yarn build && yarn docs",
-    "rebuild": "yarn clean-all && yarn install --no-lockfile && yarn build",
-    "test": "yarn sfdx-test",
-    "uts": "nyc mocha --require source-map-support/register --recursive \"lib/**/*.test.js\"",
-    "watch": "tsc -w -p tsconfig.json"
+    "test": "yarn sfdx-test"
   },
   "dependencies": {
     "@salesforce/ts-types": "^0.16.0",

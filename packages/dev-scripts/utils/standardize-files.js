@@ -55,9 +55,13 @@ module.exports = (packageRoot = require('./package-path')) => {
       const tslintPath = join(packageRoot, 'tslint.json');
       const exists = fileExist(tslintPath);
 
-      if (strict && exists) {
-        unlinkSync(tslintPath);
-        removed.push(tslintPath);
+      if (strict) {
+        const tslint = {
+          extends: '@salesforce/dev-config/tslint-strict'
+        };
+        const tslintJson = JSON.stringify(tslint, null, 2);
+        writeFileSync(tslintPath, tslintJson);
+        added.push(tslintPath);
       } else if (!strict && !exists) {
         const tslint = {
           extends: '@salesforce/dev-config/tslint'

@@ -28,6 +28,7 @@ import {
 import * as _ from '../../vendor/lodash';
 import {
   ListIteratee,
+  NumericDictionary,
   ObjectIteratee,
   Omit,
   ValueIteratee,
@@ -93,6 +94,22 @@ export function findKey<T>(
   predicate?: ObjectIteratee<T>
 ): Optional<string> {
   return _.findKey(obj, predicate);
+}
+
+/**
+ * Checks if target is in collection using SameValueZero for equality comparisons. If fromIndex is negative,
+ * it’s used as the offset from the end of collection.
+ *
+ * @param collection The collection to search.
+ * @param target The value to search for.
+ * @param fromIndex The index to search from.
+ */
+export function includes<T>(
+  collection: Nullable<ArrayLike<T> | Dictionary<T> | NumericDictionary<T>>,
+  target: T,
+  fromIndex?: number
+): boolean {
+  return _.includes(collection, target, fromIndex);
 }
 
 /**
