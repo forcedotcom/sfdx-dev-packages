@@ -13,3 +13,7 @@ const packageRoot = require('../utils/package-path');
 shell.exec('yarn build', {
   cwd: packageRoot
 });
+
+shell.exec('yarn test', {
+  cwd: packageRoot
+});

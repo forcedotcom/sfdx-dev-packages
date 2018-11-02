@@ -13,7 +13,8 @@
     "postclean-all": "yarn sfdx-clean all",
     "postinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-post.js",
     "preinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-pre.js",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "ci-test": "nyc mocha 'packages/**/*.test.js'"
   },
   "devDependencies": {
     "cz-lerna-changelog": "^2",

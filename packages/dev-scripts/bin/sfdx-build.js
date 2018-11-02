@@ -19,6 +19,3 @@ shell.exec('yarn compile', {
 shell.exec('yarn lint', {
   cwd: packageRoot
 });
-shell.exec('yarn test', {
-  cwd: packageRoot
-});
