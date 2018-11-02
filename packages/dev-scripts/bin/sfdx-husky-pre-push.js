@@ -10,15 +10,10 @@ const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
 
-shell.exec('yarn clean', {
+shell.exec('yarn build', {
   cwd: packageRoot
 });
-shell.exec('yarn compile', {
-  cwd: packageRoot
-});
-shell.exec('yarn lint', {
-  cwd: packageRoot
-});
+
 shell.exec('yarn test', {
   cwd: packageRoot
 });
