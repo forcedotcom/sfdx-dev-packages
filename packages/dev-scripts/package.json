@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A set of standard package.json scripts for Salesforce projects.",
   "bin": {
-    "sfdx-build": "bin/sfdx-clean.js",
+    "sfdx-build": "bin/sfdx-build.js",
     "sfdx-clean": "bin/sfdx-clean.js",
     "sfdx-compile": "bin/sfdx-compile.js",
     "sfdx-docs": "bin/sfdx-docs.js",
