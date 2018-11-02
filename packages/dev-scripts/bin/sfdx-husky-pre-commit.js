@@ -6,10 +6,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require('shelljs');
-
-shell.set('-e');
-shell.set('+v');
+const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
 const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
@@ -22,6 +19,8 @@ shell.exec('yarn docs', {
   cwd: packageRoot
 });
 
+shell.set('+e');
 shell.exec('git add "**/docs/*"', {
   cwd: packageRoot
 });
+shell.set('-e');

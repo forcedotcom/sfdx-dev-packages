@@ -6,10 +6,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const shell = require('shelljs');
-
-shell.set('-e');
-shell.set('+v');
+const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
 const SfdxDevConfig = require('../utils/sfdx-dev-config');
@@ -26,8 +23,8 @@ if (!testConfig.mochaOpts) {
     ' --require ts-node/register --require source-map-support/register';
 }
 
-command += ` --recursive "${testConfig.testsPath ||
-  '**/*.test.ts'}" --color always`;
+const includes = testConfig.testsPath || '**/*.test.ts';
+command += ` --recursive "${includes}"`;
 
 try {
   shell.exec(command, {

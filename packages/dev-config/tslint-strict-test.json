@@ -1,0 +1,6 @@
+{
+  "extends": ["./tslint-strict"],
+  "rules": {
+    "no-unused-expression": false
+  }
+}

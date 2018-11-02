@@ -37,6 +37,7 @@
     "@types/node": "^10",
     "@types/sinon": "^4",
     "chai": "^4",
+    "chalk": "2.4.1",
     "lodash-cli": "^4",
     "mocha": "^5",
     "nyc": "^13",

@@ -7,10 +7,7 @@
  */
 
 const { join } = require('path');
-const shell = require('shelljs');
-
-shell.set('-e');
-shell.set('+v');
+const shell = require('../utils/shelljs');
 
 const defaultDirs = ['lib', '*coverage', '.nyc_output'];
 const defaultFiles = ['*xunit.xml', '*checkstyle.xml', 'yarn-error.log'];

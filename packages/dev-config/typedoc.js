@@ -4,7 +4,7 @@ module.exports = {
   mode: 'file',
   module: 'commonjs',
   excludeExternals: true,
-  excludeNotExported: false,
+  excludeNotExported: true,
   excludePrivate: true,
 
   includeDeclarations: true,
