@@ -55,6 +55,9 @@ jobs:
             git config user.email "$GH_EMAIL"
             git config user.name "Deployment Bot"
       - run:
+          name: Install Lerna
+          command: npm install -g lerna
+      - run:
           name: Install dependencies
           command: .circleci/greenkeeper
       - run:
