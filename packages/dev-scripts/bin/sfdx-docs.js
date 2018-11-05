@@ -59,11 +59,13 @@ const cleanDocFiles = dirPath => {
       cleanDocFiles(filePath);
     } else {
       let fileContents = readFileSync(filePath).toString();
-      fileContents = fileContents.replace(
-        /\/Users\/.*\/(node_modules\/.*):/g,
-        '$1:'
-      );
-      writeFileSync(filePath, fileContents);
+      if (fileContents.match(/\/Users\/.*\/(node_modules\/.*):/g)) {
+        fileContents = fileContents.replace(
+          /\/Users\/.*\/(node_modules\/.*):/g,
+          '$1:'
+        );
+        writeFileSync(filePath, fileContents);
+      }
     }
   }
 };
