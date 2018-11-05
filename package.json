@@ -4,17 +4,16 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
+    "ci-test": "nyc mocha 'packages/**/*.test.js'",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
     "compile": "lerna run compile",
     "docs": "lerna run docs",
     "format": "lerna run format",
+    "install": "yarn sfdx-lerna-install",
     "lint": "lerna run lint",
     "postclean-all": "yarn sfdx-clean all",
-    "postinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-post.js",
-    "preinstall": "packages/dev-scripts/bin/sfdx-gen-lerna-pre.js",
-    "test": "lerna run test",
-    "ci-test": "nyc mocha 'packages/**/*.test.js'"
+    "test": "lerna run test"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^2.1.0",
