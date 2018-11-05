@@ -58,15 +58,12 @@ const cleanDocFiles = dirPath => {
     if (stat.isDirectory()) {
       cleanDocFiles(filePath);
     } else {
-      var isWin = process.platform === 'win32';
-      const regex = isWin
-        ? /C:\\.*node_modules\\(.*):/g
-        : /\/Users\/.*\/node_modules\/(.*):/g;
+      const regex = /Defined in .*[\/\\]node_modules[\/\\](.*:\d+)/g;
       let fileContents = readFileSync(filePath).toString();
-      if (fileContents.match(isWin)) {
-        fileContents = fileContents.replace(regex, match => {
-          match = match.replace(/\\/g, '/');
-          return match.replace(regex, '$1:');
+      if (fileContents.match(regex)) {
+        fileContents = fileContents.replace(regex, (match, group1) => {
+          group1 = group1.replace(/\\/g, '/');
+          return `Defined in ${group1}`;
         });
         writeFileSync(filePath, fileContents);
       }
