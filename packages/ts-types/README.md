@@ -82,11 +82,11 @@ After a few iterations of working on the JSON support types and utilities, it be
 
 A small library of types is included to help write more concise TypeScript code. These types are in part designed to augment the standard types included with the TypeScript library. Please see the generated API documentation for the complete set of provided types. Here are a few of the most commonly used types:
 
-- **Optional\<T>**: An alias for the union type `T | undefined`.
-- **NonOptional\<T>**: Subtracts `undefined` from a type `T`, when `T` includes `undefined` as a union member.
-- **Nullable\<T>**: An alias for the union type `Optional<T | null>`, or `T | null | undefined`. `NonNullable` is a TypeScript built-in that subtracts both `null` and `undefined` from a type `T` with either as a union member.
-- **Dictionary\<T=unknown>**: An alias for a `string`-indexed `object` of the form `{ [key: string]: Optional<T> }`.
-- **KeyOf\<T>**: An alias for the commonly needed yet verbose `Extract<keyof T, string>`.
+- **Optional&lt;T&gt;**: An alias for the union type `T | undefined`.
+- **NonOptional&lt;T&gt;**: Subtracts `undefined` from a type `T`, when `T` includes `undefined` as a union member.
+- **Nullable&lt;T&gt;**: An alias for the union type `Optional<T | null>`, or `T | null | undefined`. `NonNullable` is a TypeScript built-in that subtracts both `null` and `undefined` from a type `T` with either as a union member.
+- **Dictionary&lt;T=unknown&gt;**: An alias for a `string`-indexed `object` of the form `{ [key: string]: Optional<T> }`.
+- **KeyOf&lt;T&gt;**: An alias for the commonly needed yet verbose `Extract<keyof T, string>`.
 - **AnyJson**: A union type of all valid JSON values, equal to `null | string | number| boolean | JsonMap | JsonArray`.
 - **JsonMap**: A dictionary of any valid JSON value, defined as `Dictionary<AnyJson>`.
 - **JsonArray**: An array of any valid JSON value, defined as `Array<AnyJson>`.
