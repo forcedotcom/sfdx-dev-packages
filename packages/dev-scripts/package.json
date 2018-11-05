@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/dev-scripts",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A set of standard package.json scripts for Salesforce projects.",
   "bin": {
     "sfdx-build": "bin/sfdx-build.js",
