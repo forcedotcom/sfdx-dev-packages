@@ -55,5 +55,8 @@
     "typescript": "^3",
     "xunit-file": "^1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
 }
