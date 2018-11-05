@@ -27,7 +27,8 @@
   "author": "Platform CLI",
   "license": "BSD-3-Clause",
   "files": [
-    "/bin/"
+    "bin",
+    "utils"
   ],
   "dependencies": {
     "@commitlint/cli": "^7",
@@ -54,5 +55,8 @@
     "typescript": "^3",
     "xunit-file": "^1"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
 }
