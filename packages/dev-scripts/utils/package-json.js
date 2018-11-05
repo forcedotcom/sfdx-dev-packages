@@ -6,13 +6,15 @@
  */
 
 const { writeFileSync } = require('fs');
-const { join } = require('path');
+const { basename, join } = require('path');
 
+const log = require('./log');
 const orderMap = require('./order-map');
 
 class PackageJson {
   constructor(packageRoot = require('./package-path')) {
     this.path = packageRoot;
+    this.name = basename(packageRoot);
     this.pjsonPath = join(packageRoot, 'package.json');
     this.contents = require(this.pjsonPath);
     this.originalContents = this.stringify();
@@ -32,9 +34,9 @@ class PackageJson {
     const pjson = this.stringify();
     if (this.originalContents !== pjson) {
       writeFileSync(this.pjsonPath, pjson);
-      console.log(`wrote changes to ${this.pjsonPath}`);
+      log(`wrote changes to ${this.pjsonPath}`, 1);
     } else {
-      console.log('package.json not changed; skipping write');
+      log('package.json not changed; skipping write', 2);
     }
   }
 

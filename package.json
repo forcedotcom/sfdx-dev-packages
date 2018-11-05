@@ -17,13 +17,13 @@
     "ci-test": "nyc mocha 'packages/**/*.test.js'"
   },
   "devDependencies": {
-    "cz-lerna-changelog": "^2",
+    "cz-conventional-changelog": "^2.1.0",
     "husky": "^1",
     "lerna": "^3"
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
+      "path": "cz-conventional-changelog"
     }
   },
   "workspaces": [

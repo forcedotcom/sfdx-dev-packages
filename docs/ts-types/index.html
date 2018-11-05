@@ -1208,32 +1208,32 @@ img { max-width: 100%; }
 			<h2 id="how-will-it-help-me-">How will it help me?</h2>
 			<p>This library has its roots in solving the problem of how to handle untyped JSON data in a type-safe way. It was born when we added some basic type declarations to replace the unsafe <code>any</code> type as a stand-in for JSON data with a type that could capture the range of data available in any JSON construct. This yielded the <code>AnyJson</code> type, which is effectively a union of all primitive and collection JSON values. The type alone was not enough to make for convenient, type-guarded handling of JSON data, however. TypeScript supports a very elegant system of control flow analysis that will narrow the type of a variable in code after the compiler can prove the set of possible types of the variable has been reduced. Using type guards in your code improves its runtime type safety characteristics, makes it more readable, and provides richer typing information for IDEs. Type guards are implemented as conditional statements, however, and can quickly become noisy and make what was once terse JavaScript code expand into several lines of type checking. This library aimed to simplify the experience of reducing the amount of type guards needed to process a typed-JSON data structure by providing several convenience functions that help extract well-typed data from such JSON structures.</p>
 			<p>For example, look at the following typical untyped JSON processing in JavaScript:</p>
-			<pre><code class="language-javascript"><span class="hljs-comment">// Concise, but not at all null-safe or type-safe; often made to be at least null-safe using lodash fns</span>
+			<pre><code class="language-javascript"><span class="hljs-comment">// concise, but not at all null-safe or type-safe; often made to be at least null-safe using lodash fns</span>
 <span class="hljs-built_in">JSON</span>.parse(response.body).results.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> db.save(item.id, item));</code></pre>
 			<p>Then a safe version in bare TypeScript using type guards:</p>
 			<pre><code class="language-typescript"><span class="hljs-keyword">const</span> json = <span class="hljs-built_in">JSON</span>.parse(response.body);
-<span class="hljs-comment">// Type of json -&gt; `any`, but will not be undefined or JSON.parse would throw</span>
+<span class="hljs-comment">// type of json -&gt; `any`, but will not be undefined or JSON.parse would throw</span>
 <span class="hljs-keyword">if</span> (json === <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> json !== <span class="hljs-string">'object'</span>)
   <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Unexpected json data type'</span>);
 <span class="hljs-keyword">let</span> results = json.results;
-<span class="hljs-comment">// Type of results -&gt; `any`</span>
+<span class="hljs-comment">// type of results -&gt; `any`</span>
 <span class="hljs-keyword">if</span> (!<span class="hljs-built_in">Array</span>.isArray(results)) results = [];
-<span class="hljs-comment">// Type of results -&gt; `any[]`</span>
+<span class="hljs-comment">// type of results -&gt; `any[]`</span>
 results.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> {
-  <span class="hljs-comment">// Type of item -&gt; `any`</span>
+  <span class="hljs-comment">// type of item -&gt; `any`</span>
   <span class="hljs-keyword">const</span> id = item.id;
-  <span class="hljs-comment">// Type of id -&gt; `any`</span>
+  <span class="hljs-comment">// type of id -&gt; `any`</span>
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> id !== <span class="hljs-string">'string'</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Unexpected item id data type'</span>);
-  <span class="hljs-comment">// Type of id -&gt; `string`</span>
+  <span class="hljs-comment">// type of id -&gt; `string`</span>
   db.save(id, item);
 });</code></pre>
 			<p>While that&#39;s pretty safe, it&#39;s also a mess to read and write. That&#39;s why this library is here to help!</p>
 			<pre><code class="language-typescript"><span class="hljs-keyword">const</span> json = ensureJsonMap(<span class="hljs-built_in">JSON</span>.parse(response.body));
-<span class="hljs-comment">// Type of json -&gt; `JsonMap` or raises an error</span>
+<span class="hljs-comment">// type of json -&gt; `JsonMap` or raises an error</span>
 <span class="hljs-keyword">const</span> results = asJsonArray(json.results, []);
-<span class="hljs-comment">// Type of results -&gt; `JsonArray` or uses the default of `[]`</span>
+<span class="hljs-comment">// type of results -&gt; `JsonArray` or uses the default of `[]`</span>
 results.forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> {
-  <span class="hljs-comment">// Type of item -&gt; `AnyJson`</span>
+  <span class="hljs-comment">// type of item -&gt; `AnyJson`</span>
   record = ensureJsonMap(record);
   db.save(ensureString(record.id), record);
 });</code></pre>
@@ -1247,8 +1247,97 @@ results.forEach(<span class="hljs-function"><span class="hljs-params">item</span
 			<p>The <code>ensure*</code> functions are used in this example since they will raise an error when the value being checked either does not exist or does not match the expected type. Additionally, and perhaps more importantly, the generic <code>any</code> and <code>AnyJson</code> types get progressively narrowed when using these functions to more specific types. Of course, you don&#39;t always want to raise an error when these conditions are not met, so alternative forms exist for each of the JSON data types that allow the types to be tested and narrowed -- see the <code>is*</code> and <code>as*</code> variants in the API documentation for testing and narrowing capabilities without additionally raising errors.</p>
 			<h3 id="beyond-json">Beyond JSON</h3>
 			<p>After a few iterations of working on the JSON support types and utilities, it became apparent that we needed other non-JSON types and functions that provide similar capabilities. Rather than create a new library for those, we instead grew the scope of this one to contain all of our commonly used types and narrowing functions.</p>
+			<h3 id="types">Types</h3>
+			<p>A small library of types is included to help write more concise TypeScript code. These types are in part designed to augment the standard types included with the TypeScript library. Please see the generated API documentation for the complete set of provided types. Here are a few of the most commonly used types:</p>
+			<ul>
+				<li><strong>Optional<T&gt;</strong>: An alias for the union type <code>T | undefined</code>.</li>
+				<li><strong>NonOptional<T&gt;</strong>: Subtracts <code>undefined</code> from a type <code>T</code>, when <code>T</code> includes <code>undefined</code> as a union member.</li>
+				<li><strong>Nullable<T&gt;</strong>: An alias for the union type <code>Optional&lt;T | null&gt;</code>, or <code>T | null | undefined</code>. <code>NonNullable</code> is a TypeScript built-in that subtracts both <code>null</code> and <code>undefined</code> from a type <code>T</code> with either as a union member.</li>
+				<li><strong>Dictionary<T=unknown&gt;</strong>: An alias for a <code>string</code>-indexed <code>object</code> of the form <code>{ [key: string]: Optional&lt;T&gt; }</code>.</li>
+				<li><strong>KeyOf<T&gt;</strong>: An alias for the commonly needed yet verbose <code>Extract&lt;keyof T, string&gt;</code>.</li>
+				<li><strong>AnyJson</strong>: A union type of all valid JSON values, equal to <code>null | string | number| boolean | JsonMap | JsonArray</code>.</li>
+				<li><strong>JsonMap</strong>: A dictionary of any valid JSON value, defined as <code>Dictionary&lt;AnyJson&gt;</code>.</li>
+				<li><strong>JsonArray</strong>: An array of any valid JSON value, defined as <code>Array&lt;AnyJson&gt;</code>.</li>
+			</ul>
+			<h3 id="narrowing-functions">Narrowing functions</h3>
+			<p>This library provides several categories of functions to help with safely narrowing variables of broadly typed variables, like <code>unknown</code> or <code>object</code>, to more specific types.</p>
+			<h4 id="is-">is*</h4>
+			<p>The <code>is*</code> suite of functions accept a variable of a broad type such as <code>unknown</code> or <code>object</code> and returns a narrowed type after validating it with a runtime test. If the test is negative or if the value was not defined (i.e. <code>undefined</code> or <code>null</code>), <code>undefined</code> is returned instead.</p>
+			<p>The <code>is*</code> suite of functions test the runtime types of variables, applying an appropriate type predicate to narrow the variables type appropriately.</p>
+			<pre><code class="language-typescript"><span class="hljs-comment">// type of value -&gt; unknown</span>
+<span class="hljs-keyword">if</span> (isString(value)) {
+  <span class="hljs-comment">// type of value -&gt; string</span>
+}</code></pre>
+			<h4 id="as-">as*</h4>
+			<p>The <code>as*</code> suite of functions accept a variable of a broad type such as <code>unknown</code> or <code>object</code> and optionally returns a narrowed type after validating it with a runtime test. If the test is negative or if the value was not defined (i.e. <code>undefined</code> or <code>null</code>), <code>undefined</code> is returned instead.</p>
+			<pre><code class="language-typescript"><span class="hljs-comment">// some function that takes a string or undefined</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">upperFirst</span>(<span class="hljs-params">s: Optional&lt;<span class="hljs-built_in">string</span>&gt;</span>): <span class="hljs-title">Optional</span>&lt;<span class="hljs-title">string</span>&gt; </span>{
+  <span class="hljs-keyword">return</span> s ? s.charAt(<span class="hljs-number">0</span>).toUpperCase() + s.slice(<span class="hljs-number">1</span>) : s;
+}
+<span class="hljs-comment">// type of value -&gt; unknown</span>
+<span class="hljs-keyword">const</span> name = upperFirst(asString(value));
+<span class="hljs-comment">// type of name -&gt; Optional&lt;string&gt;</span></code></pre>
+			<h4 id="ensure-">ensure*</h4>
+			<p>The <code>ensure*</code> suite of functions narrow values&#39; types to a definite value of the designated type, or raises an error if the value is <code>undefined</code> or of an incompatible type.</p>
+			<pre><code class="language-typescript"><span class="hljs-comment">// type of value -&gt; unknown</span>
+<span class="hljs-keyword">try</span> {
+  <span class="hljs-keyword">const</span> s = ensureString(value);
+  <span class="hljs-comment">// type of s -&gt; string</span>
+} <span class="hljs-keyword">catch</span> (err) {
+  <span class="hljs-comment">// s was undefined, null, or not of type string</span>
+}</code></pre>
+			<h4 id="has-">has*</h4>
+			<p>The <code>has*</code> suite of functions both tests for the existence and type-compatibility of a given value and, if the runtime value check succeeds, narrows the type to a view of the original value&#39;s type intersected with the tested property (e.g. <code>T &amp; { [_ in K]: V }</code> where <code>K</code> is the test property key and <code>V</code> is the test property value type).</p>
+			<pre><code class="language-typescript"><span class="hljs-comment">// type of value -&gt; unknown</span>
+<span class="hljs-keyword">if</span> (hasString(value, <span class="hljs-string">'name'</span>)) {
+  <span class="hljs-comment">// type of value -&gt; { name: string }</span>
+  <span class="hljs-comment">// value can be further narrowed with additional checks</span>
+  <span class="hljs-keyword">if</span> (hasArray(value, <span class="hljs-string">'results'</span>)) {
+    <span class="hljs-comment">// type of value -&gt; { name: string } &amp; { results: Array&lt;unknown&gt; }</span>
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (hasInstance(value, <span class="hljs-string">'error'</span>, <span class="hljs-built_in">Error</span>)) {
+    <span class="hljs-comment">// type of value -&gt; { name: string } &amp; { error: Error }</span>
+  }
+}</code></pre>
+			<h4 id="get-">get*</h4>
+			<p>The <code>get*</code> suite of functions search a target <code>object</code> (including <code>Array</code>s) for a given path. Search paths follow the same syntax as <code>lodash</code>&#39;s <code>get</code>, <code>set</code>, <code>at</code>, etc. These functions are more strictly typed, however, increasingly the likelihood that well-typed code stays well-typed as a function&#39;s control flow advances.</p>
+			<pre><code class="language-typescript"><span class="hljs-comment">// imagine response json retrieved from a remote query</span>
+<span class="hljs-keyword">const</span> response: JsonMap = {
+  start: <span class="hljs-number">0</span>,
+  length: <span class="hljs-number">2</span>,
+  results: [{ name: <span class="hljs-string">'first'</span> }, { name: <span class="hljs-string">'second'</span> }]
+};
+<span class="hljs-keyword">const</span> nameOfFirst = getString(response, <span class="hljs-string">'results[0].name'</span>);
+<span class="hljs-comment">// type of nameOfFirst = string</span></code></pre>
+			<h4 id="coerce-">coerce*</h4>
+			<p>The <code>coerce</code> suite of functions accept values of general types and narrow their types to JSON-specific values. They are named with the <code>coerce</code> prefix to indicate that they do not perform an exhaustive runtime check of the entire data structure -- only shallow type checks are performed. As a result, <em>only</em> use these functions when you are confident that the broadly typed subject being coerced was derived from a JSON-compatible value. If you are unsure of an object&#39;s origins or contents but want to avoid runtime errors handling elements, see the <code>to*</code> set of functions.</p>
+			<pre><code class="language-typescript"><span class="hljs-keyword">const</span> response = coerceJsonMap(
+  <span class="hljs-built_in">JSON</span>.parse(<span class="hljs-keyword">await</span> http.get(<span class="hljs-string">'http://example.com/data.json'</span>).body)
+);
+<span class="hljs-comment">// type of response -&gt; JsonMap</span></code></pre>
+			<h4 id="to-">to*</h4>
+			<p>The <code>to*</code> suite of functions is a fully type-safe version of the <code>coerce*</code> functions for JSON narrowing, but at the expense of some runtime performance. Under the hood, the <code>to*</code> functions perform a JSON-clone of their subject arguments, ensuring that the entire data structure is JSON compatible before returning the narrowed type.</p>
+			<pre><code class="language-typescript"><span class="hljs-keyword">const</span> object = {
+  name: <span class="hljs-string">'example'</span>,
+  parse: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">s</span>) </span>{
+    <span class="hljs-keyword">return</span> s.split(<span class="hljs-string">':'</span>);
+  }
+};
+<span class="hljs-keyword">const</span> json = toJsonMap(object);
+<span class="hljs-comment">// type of json -&gt; JsonMap</span>
+<span class="hljs-comment">// json = { name: 'example' }</span>
+<span class="hljs-comment">// notice that the parse function has been omitted to ensure JSON-compatibility!</span></code></pre>
+			<h4 id="object-utilities">object utilities</h4>
+			<p>This suite of functions are used to iterate the keys, entries, and values of objects with some typing conveniences applied that are not present in their built-in counterparts (i.e. <code>Object.keys</code>, <code>Object.entries</code>, and <code>Object.values</code>), but come with some caveats noted in their documentation. Typical uses include iterating over the properties of an object with more useful <code>keyof</code> typings applied during the iterator bodies, and/or filtering out <code>undefined</code> or <code>null</code> values before invoking the iterator functions.</p>
+			<pre><code class="language-typescript"><span class="hljs-keyword">const</span> pets: Dictionary&lt;<span class="hljs-built_in">string</span>&gt; = {
+  fido: <span class="hljs-string">'dog'</span>,
+  bill: <span class="hljs-string">'cat'</span>
+};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logPet</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, <span class="hljs-keyword">type</span>: <span class="hljs-built_in">string</span></span>) </span>{
+  <span class="hljs-built_in">console</span>.log;
+}
+definiteEntriesOf().forEach();</code></pre>
 			<h2 id="references">References</h2>
-			<p>Another Salesforce TypeScript library, <a href="https://www.npmjs.com/package/@salesforce/kit">@salesforce/kit</a>, builds on this library to add additional utilities. It includes additional JSON support, a lightweight replacement for <code>lodash</code>, and growing support for patterns used in other Salesforce CLI libraries and applications.</p>
+			<p>Another Salesforce TypeScript library, <a href="https://www.npmjs.com/package/@salesforce/kit">@salesforce/kit</a>, builds on this library to add additional utilities. It includes additional JSON support, a lightweight replacement for some <code>lodash</code> functions, and growing support for patterns used in other Salesforce CLI libraries and applications.</p>
 		</div>
 		<div style="position:relative;"><a name="typedoc-main-index" class="tsd-anchor"></a></div>
 		<section class="tsd-panel-group tsd-index-group">

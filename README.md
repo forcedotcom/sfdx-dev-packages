@@ -12,10 +12,10 @@ Currently, we have the following packages:
   - See the code at [packages/dev-scripts](packages/dev-scripts).
 - [@salesforce/ts-types](https://www.npmjs.com/package/@salesforce/ts-types) - Common typescript types and helpers.
   - See the code at [packages/ts-types](packages/ts-types).
-  - See the [API docs](https://github.com/pages/forcedotcom/sfdx-dev-packages/ts-types).
+  - See the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/ts-types).
 - [@salesforce/kit](https://www.npmjs.com/package/@salesforce/kit) - Common utility methods and designed patterns.
   - See the code at [packages/kit](packages/kit).
-  - See the [API docs](https://github.com/pages/forcedotcom/sfdx-dev-packages/kit).
+  - See the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/kit).
 
 ## Getting Started
 
