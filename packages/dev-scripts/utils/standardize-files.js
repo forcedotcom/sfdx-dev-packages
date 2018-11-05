@@ -7,6 +7,7 @@
 
 const { join } = require('path');
 const { accessSync, unlinkSync, writeFileSync } = require('fs');
+const log = require('./log');
 const SfdxDevConfig = require('./sfdx-dev-config');
 const PackageJson = require('./package-json');
 
@@ -28,9 +29,11 @@ module.exports = (packageRoot = require('./package-path')) => {
   } catch (err) {}
 
   if (isLernaProject) {
-    console.log('skipping writing files for learn project');
+    log('skipping writing files for learn project', 1);
     return;
   }
+
+  log(`standardizing config files for ${new PackageJson(packageRoot).name}`, 1);
 
   const added = [];
   const removed = [];
@@ -73,9 +76,9 @@ module.exports = (packageRoot = require('./package-path')) => {
     }
   }
   if (added.length > 0) {
-    console.log(`adding config files ${added.join(', ')}`);
+    log(`adding config files ${added.join(', ')}`, 2);
   }
   if (removed.length > 0) {
-    console.log(`removing config files ${removed.join(', ')}`);
+    log(`removing config files ${removed.join(', ')}`, 2);
   }
 };

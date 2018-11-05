@@ -6,11 +6,12 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+const log = require('../utils/log');
 const standardizeFiles = require('../utils/standardize-files');
 const standardizePjson = require('../utils/standardize-pjson');
 
 // Standardize package.json for lerna project, but not files
-console.log(`Standardize package.json for the lerna project`);
+log(`Standardize package.json for the lerna project`);
 standardizePjson();
 
 const runAll = (packagePath, inLernaProject) => {
@@ -21,4 +22,4 @@ const runAll = (packagePath, inLernaProject) => {
 runAll();
 
 // Run it for all packages in the lerna project
-require('../utils/run-in-lerna-packages')(runAll);
+require('../utils/run-in-lerna-packages')('postinstall', runAll);

@@ -6,6 +6,7 @@
  */
 
 const { join } = require('path');
+const log = require('./log');
 
 class SfdxDevConfig {
   constructor(packageRoot = require('./package-path')) {
@@ -13,7 +14,7 @@ class SfdxDevConfig {
     try {
       const configPath = join(packageRoot, '.sfdx-dev.json');
       config = require(configPath);
-      console.warn(`found config at ${configPath}`);
+      log(`found config at ${configPath}`);
     } catch (err) {
       /* The repository doesn't have a config */
     }

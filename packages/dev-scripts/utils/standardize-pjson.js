@@ -7,6 +7,7 @@
 
 const { accessSync } = require('fs');
 const { join } = require('path');
+const log = require('./log');
 const SfdxDevConfig = require('./sfdx-dev-config');
 const PackageJson = require('./package-json');
 
@@ -20,13 +21,13 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
     isLernaProject = true;
   } catch (err) {}
 
-  console.log(`adding scripts to ${pjson.pjsonPath}`);
+  log(`standardizing scripts for ${pjson.name}`, 1);
 
   // GENERATE SCRIPTS
   const scriptList = config.list('scripts');
 
   if (scriptList.length > 0) {
-    console.log(`Updating scripts: ${scriptList.join(', ')}`);
+    log(`updating scripts: ${scriptList.join(', ')}`, 2);
 
     const scripts = pjson.get('scripts');
     for (const script of scriptList) {
@@ -53,7 +54,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
     const huskyList = config.list('husky');
 
     if (huskyList.length > 0) {
-      console.log(`Updating husky: ${huskyList.join(', ')}`);
+      log(`updating husky: ${huskyList.join(', ')}`, 2);
 
       const husky = pjson.get('husky');
 

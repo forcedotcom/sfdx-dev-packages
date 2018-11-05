@@ -7,10 +7,10 @@
 
 const { readdirSync } = require('fs');
 const { join } = require('path');
-
+const log = require('./log');
 const packageRoot = require('./package-path');
 
-module.exports = script => {
+module.exports = (name, script) => {
   // Only get lerna packages that require @salesforce/dev-scripts
   const packageList = readdirSync(join(packageRoot, 'packages')).filter(
     name => {
@@ -30,9 +30,7 @@ module.exports = script => {
     }
   );
 
-  console.warn(
-    `Running '${script && script.name}' for packages ${packageList.join(', ')}`
-  );
+  log(`Running ${name} for packages ${packageList.join(', ')}`);
 
   try {
     packageList.forEach(dir => {
