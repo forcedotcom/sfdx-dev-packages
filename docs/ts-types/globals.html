@@ -1250,11 +1250,11 @@ results.forEach(<span class="hljs-function"><span class="hljs-params">item</span
 			<h3 id="types">Types</h3>
 			<p>A small library of types is included to help write more concise TypeScript code. These types are in part designed to augment the standard types included with the TypeScript library. Please see the generated API documentation for the complete set of provided types. Here are a few of the most commonly used types:</p>
 			<ul>
-				<li><strong>Optional<T&gt;</strong>: An alias for the union type <code>T | undefined</code>.</li>
-				<li><strong>NonOptional<T&gt;</strong>: Subtracts <code>undefined</code> from a type <code>T</code>, when <code>T</code> includes <code>undefined</code> as a union member.</li>
-				<li><strong>Nullable<T&gt;</strong>: An alias for the union type <code>Optional&lt;T | null&gt;</code>, or <code>T | null | undefined</code>. <code>NonNullable</code> is a TypeScript built-in that subtracts both <code>null</code> and <code>undefined</code> from a type <code>T</code> with either as a union member.</li>
-				<li><strong>Dictionary<T=unknown&gt;</strong>: An alias for a <code>string</code>-indexed <code>object</code> of the form <code>{ [key: string]: Optional&lt;T&gt; }</code>.</li>
-				<li><strong>KeyOf<T&gt;</strong>: An alias for the commonly needed yet verbose <code>Extract&lt;keyof T, string&gt;</code>.</li>
+				<li><strong>Optional&lt;T&gt;</strong>: An alias for the union type <code>T | undefined</code>.</li>
+				<li><strong>NonOptional&lt;T&gt;</strong>: Subtracts <code>undefined</code> from a type <code>T</code>, when <code>T</code> includes <code>undefined</code> as a union member.</li>
+				<li><strong>Nullable&lt;T&gt;</strong>: An alias for the union type <code>Optional&lt;T | null&gt;</code>, or <code>T | null | undefined</code>. <code>NonNullable</code> is a TypeScript built-in that subtracts both <code>null</code> and <code>undefined</code> from a type <code>T</code> with either as a union member.</li>
+				<li><strong>Dictionary&lt;T=unknown&gt;</strong>: An alias for a <code>string</code>-indexed <code>object</code> of the form <code>{ [key: string]: Optional&lt;T&gt; }</code>.</li>
+				<li><strong>KeyOf&lt;T&gt;</strong>: An alias for the commonly needed yet verbose <code>Extract&lt;keyof T, string&gt;</code>.</li>
 				<li><strong>AnyJson</strong>: A union type of all valid JSON values, equal to <code>null | string | number| boolean | JsonMap | JsonArray</code>.</li>
 				<li><strong>JsonMap</strong>: A dictionary of any valid JSON value, defined as <code>Dictionary&lt;AnyJson&gt;</code>.</li>
 				<li><strong>JsonArray</strong>: An array of any valid JSON value, defined as <code>Array&lt;AnyJson&gt;</code>.</li>
