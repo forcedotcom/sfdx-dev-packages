@@ -27,7 +27,8 @@
   "author": "Platform CLI",
   "license": "BSD-3-Clause",
   "files": [
-    "/bin/"
+    "bin",
+    "utils"
   ],
   "dependencies": {
     "@commitlint/cli": "^7",
