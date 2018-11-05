@@ -8,7 +8,7 @@
 
 const { join } = require('path');
 const shell = require('../utils/shelljs');
-const log = require('../utils/shelljs');
+const log = require('../utils/log');
 
 const defaultDirs = ['lib', '*coverage', '.nyc_output'];
 const defaultFiles = ['*xunit.xml', '*checkstyle.xml', 'yarn-error.log'];

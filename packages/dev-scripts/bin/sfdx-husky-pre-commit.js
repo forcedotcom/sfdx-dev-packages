@@ -15,6 +15,10 @@ shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
   cwd: packageRoot
 });
 
+shell.exec('yarn compile', {
+  cwd: packageRoot
+});
+
 shell.exec('yarn docs', {
   cwd: packageRoot
 });
