@@ -62,4 +62,5 @@ module.exports = (projectPath, inLernaProject) => {
   }
 
   pjson.write();
+  return added.length > 0;
 };

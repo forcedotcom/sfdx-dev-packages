@@ -32,13 +32,15 @@ module.exports = (name, script) => {
 
   log(`Running ${name} for packages ${packageList.join(', ')}`);
 
+  let changed = false;
   try {
     packageList.forEach(dir => {
       // Run against the packages root
-      script(join(packageRoot, 'packages', dir), true);
+      changed = changed || script(join(packageRoot, 'packages', dir), true);
     });
   } catch (err) {
     console.error(err);
     process.exitCode = 1;
   }
+  return changed;
 };
