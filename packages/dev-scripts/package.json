@@ -11,14 +11,14 @@
     "sfdx-husky-commit-msg": "bin/sfdx-husky-commit-msg.js",
     "sfdx-husky-pre-commit": "bin/sfdx-husky-pre-commit.js",
     "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js",
+    "sfdx-install": "bin/sfdx-install.js",
+    "sfdx-lerna-install": "bin/sfdx-lerna-install.js",
     "sfdx-lint": "bin/sfdx-lint.js",
     "sfdx-test": "bin/sfdx-test.js"
   },
   "scripts": {
     "clean": "bin/sfdx-clean.js",
     "clean-all": "bin/sfdx-clean.js all",
-    "postinstall": "bin/sfdx-gen-scripts-post.js",
-    "preinstall": "bin/sfdx-gen-scripts-pre.js",
     "test": "bin/sfdx-test.js"
   },
   "keywords": [
