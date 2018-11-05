@@ -6,6 +6,7 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+const { readdirSync, readFileSync, statSync, writeFileSync } = require('fs');
 const { basename, join } = require('path');
 const shell = require('../utils/shelljs');
 
@@ -45,3 +46,25 @@ shell.rm('-rf', `${outDir}/*`);
 shell.exec(command, {
   cwd: packageRoot
 });
+
+// Fix any leaked local paths in the music docs
+// See https://github.com/TypeStrong/typedoc/issues/800.
+
+const cleanDocFiles = dirPath => {
+  for (const file of readdirSync(dirPath)) {
+    const filePath = join(dirPath, file);
+    const stat = statSync(filePath);
+
+    if (stat.isDirectory()) {
+      cleanDocFiles(filePath);
+    } else {
+      let fileContents = readFileSync(filePath).toString();
+      fileContents = fileContents.replace(
+        /\/Users\/.*\/(node_modules\/.*):/g,
+        '$1:'
+      );
+      writeFileSync(filePath, fileContents);
+    }
+  }
+};
+cleanDocFiles(outDir);
