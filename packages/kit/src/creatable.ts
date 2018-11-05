@@ -23,40 +23,16 @@ export abstract class AsyncCreatable<O = object> {
     return instance;
   }
 
-  protected readonly options: O;
-
   /**
    * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
    * New subclass instances must be created with the static {@link create} method.
    *
    * @param options An options object providing initialization params.
    */
-  public constructor(options?: O) {
-    this.options = options || this.getDefaultOptions();
-  }
+  public constructor(options?: O) {}
 
   /**
    * Asynchronously initializes newly constructed instances of a concrete subclass.
    */
   protected abstract init(): Promise<void>;
-
-  /**
-   * Must be implemented by all subclasses to return default options of the appropriate type `O` for that
-   * subclass. Note that the compiler will not always enforce this requirement.
-   *
-   * @param options An options object providing initialization params.
-   */
-  protected abstract getDefaultOptions(): O;
-}
-
-/**
- * Convenience subclass for `AsyncCreatable`s that don't need options.
- */
-export abstract class NoOptionsAsyncCreatable extends AsyncCreatable {
-  /**
-   * Returns an empty options object.
-   */
-  protected getDefaultOptions(): object {
-    return {};
-  }
 }
