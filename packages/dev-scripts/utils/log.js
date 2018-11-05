@@ -5,14 +5,20 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const chalk = require('chalk');
+let chalk;
+
+try {
+  // If this is ran in preinstall, chalk won't exist yet.
+  chalk = require('chalk');
+} catch (err) {}
 
 module.exports = (msg, indent) => {
   let prefix = '> ';
   if (indent) {
     prefix = new Array(indent * 2 + 1).join(' ');
   } else {
-    msg = chalk.bold(msg);
+    msg = chalk ? chalk.bold(msg) : msg;
   }
-  console.warn(chalk.dim.yellow(`${prefix}${msg}`));
+  msg = `${prefix}${msg}`;
+  console.warn(chalk ? chalk.dim.yellow(msg) : msg);
 };
