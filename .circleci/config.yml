@@ -96,7 +96,7 @@ jobs:
 
 workflows:
   version: 2
-  'sfdx-core':
+  'sfdx-dev-packages':
     jobs:
       - node-latest
       - node-8
