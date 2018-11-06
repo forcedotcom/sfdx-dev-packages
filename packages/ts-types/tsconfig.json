@@ -4,7 +4,7 @@
   "extends": "../dev-config/tsconfig-strict",
   "compilerOptions": {
     "outDir": "lib",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "importHelpers": true
   },
   "include": ["src/**/*.ts"]
