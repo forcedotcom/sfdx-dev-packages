@@ -64,6 +64,9 @@ jobs:
           name: Bootstraping
           command: yarn bootstrap
       - run:
+          name: Compiling
+          command: yarn compile
+      - run:
           name: Set Credentials
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
       - run:

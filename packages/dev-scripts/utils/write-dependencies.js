@@ -41,6 +41,9 @@ module.exports = (projectPath, inLernaProject) => {
   // Included by dev-scripts
   remove('nyc');
   remove('typescript');
+  remove('ts-node');
+  remove('@commitlint/cli');
+  remove('@commitlint/config-conventional');
   remove('source-map-support');
   remove('tslint');
   remove('xunit-file');
