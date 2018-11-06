@@ -913,12 +913,6 @@ img { max-width: 100%; }
 				<li class=" tsd-kind-constructor tsd-parent-kind-class">
 					<a href="asynccreatable.html#constructor" class="tsd-kind-icon">constructor</a>
 				</li>
-				<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a href="asynccreatable.html#options" class="tsd-kind-icon">options</a>
-				</li>
-				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<a href="asynccreatable.html#getdefaultoptions" class="tsd-kind-icon">get<wbr>Default<wbr>Options</a>
-				</li>
 				<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 					<a href="asynccreatable.html#init" class="tsd-kind-icon">init</a>
 				</li>
@@ -947,9 +941,6 @@ img { max-width: 100%; }
 		</li>
 		<li class=" tsd-kind-class">
 			<a href="namederror.html" class="tsd-kind-icon">Named<wbr>Error</a>
-		</li>
-		<li class=" tsd-kind-class tsd-has-type-parameter">
-			<a href="nooptionsasynccreatable.html" class="tsd-kind-icon">No<wbr>Options<wbr>Async<wbr>Creatable</a>
 		</li>
 		<li class=" tsd-kind-interface">
 			<a href="../interfaces/interruptable.html" class="tsd-kind-icon">Interruptable</a>
@@ -1053,11 +1044,6 @@ img { max-width: 100%; }
 			<ul class="tsd-hierarchy">
 				<li>
 					<span class="target">AsyncCreatable</span>
-					<ul class="tsd-hierarchy">
-						<li>
-							<a href="nooptionsasynccreatable.html" class="tsd-signature-type">NoOptionsAsyncCreatable</a>
-						</li>
-					</ul>
 				</li>
 			</ul>
 		</section>
@@ -1071,16 +1057,9 @@ img { max-width: 100%; }
 							<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="asynccreatable.html#constructor" class="tsd-kind-icon">constructor</a></li>
 						</ul>
 					</section>
-					<section class="tsd-index-section tsd-is-private-protected">
-						<h3>Properties</h3>
-						<ul class="tsd-index-list">
-							<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="asynccreatable.html#options" class="tsd-kind-icon">options</a></li>
-						</ul>
-					</section>
 					<section class="tsd-index-section ">
 						<h3>Methods</h3>
 						<ul class="tsd-index-list">
-							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="asynccreatable.html#getdefaultoptions" class="tsd-kind-icon">get<wbr>Default<wbr>Options</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="asynccreatable.html#init" class="tsd-kind-icon">init</a></li>
 							<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static"><a href="asynccreatable.html#create" class="tsd-kind-icon">create</a></li>
 						</ul>
@@ -1100,7 +1079,7 @@ img { max-width: 100%; }
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in creatable.ts:26</li>
+								<li>Defined in creatable.ts:24</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1125,55 +1104,19 @@ img { max-width: 100%; }
 				</ul>
 			</section>
 		</section>
-		<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
-			<h2>Properties</h2>
-			<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-				<a name="options" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagProtected">Protected</span> options</h3>
-				<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">O</span></div>
-				<aside class="tsd-sources">
-					<ul>
-						<li>Defined in creatable.ts:26</li>
-					</ul>
-				</aside>
-			</section>
-		</section>
 		<section class="tsd-panel-group tsd-member-group ">
 			<h2>Methods</h2>
-			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-				<a name="getdefaultoptions" class="tsd-anchor"></a>
-				<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> get<wbr>Default<wbr>Options</h3>
-				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<li class="tsd-signature tsd-kind-icon">get<wbr>Default<wbr>Options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">O</span></li>
-				</ul>
-				<ul class="tsd-descriptions">
-					<li class="tsd-description">
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in creatable.ts:49</li>
-							</ul>
-						</aside>
-						<div class="tsd-comment tsd-typography">
-							<div class="lead">
-								<p>Must be implemented by all subclasses to return default options of the appropriate type <code>O</code> for that
-								subclass. Note that the compiler will not always enforce this requirement.</p>
-							</div>
-						</div>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">O</span></h4>
-					</li>
-				</ul>
-			</section>
 			<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
 				<a name="init" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> init</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">O</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in creatable.ts:41</li>
+								<li>Defined in creatable.ts:39</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1181,6 +1124,15 @@ img { max-width: 100%; }
 								<p>Asynchronously initializes newly constructed instances of a concrete subclass.</p>
 							</div>
 						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="" class="tsd-signature-type">O</a></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>An options object providing initialization params.</p>
+								</div>
+							</li>
+						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>

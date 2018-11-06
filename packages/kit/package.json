@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/kit",
-  "version": "0.11.1",
+  "version": "0.12.0",
   "description": "Commonly needed utilities for TypeScript and JavaScript",
   "main": "lib/index.js",
   "repository": "https://git.soma.salesforce.com/salesforcedx/sfdx-kit",
@@ -24,16 +24,17 @@
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
     "lodash": "./scripts/build-lodash.sh",
+    "postcompile": "shx cp -r src/nodash/support.d.ts lib/nodash",
     "prepare": "yarn build && yarn docs",
     "test": "yarn sfdx-test"
   },
   "dependencies": {
-    "@salesforce/ts-types": "^0.17.1",
+    "@salesforce/ts-types": "^0.17.3",
     "tslib": "^1"
   },
   "devDependencies": {
-    "@salesforce/dev-config": "^1",
-    "@salesforce/dev-scripts": "^0",
+    "@salesforce/dev-config": "^1.4.0",
+    "@salesforce/dev-scripts": "^0.3.2",
     "lodash-cli": "^4"
   }
 }

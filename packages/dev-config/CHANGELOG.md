@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-config@1.3.1...@salesforce/dev-config@1.4.0) (2018-11-06)
+
+
+### Features
+
+* remove getDefaultOptions from AsyncCreatable ([#19](https://github.com/forcedotcom/sfdx-dev-packages/issues/19)) ([0f7d448](https://github.com/forcedotcom/sfdx-dev-packages/commit/0f7d448))
+
+
+
+
+
 ## [1.3.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-config@1.3.0...@salesforce/dev-config@1.3.1) (2018-11-05)
 
 **Note:** Version bump only for package @salesforce/dev-config
