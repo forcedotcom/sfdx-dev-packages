@@ -8,7 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { AsyncCreatable } from './creatable';
+import { AsyncCreatable } from '../src/creatable';
 
 class Config<O extends Config.Options> extends AsyncCreatable<O> {
   protected options: O;

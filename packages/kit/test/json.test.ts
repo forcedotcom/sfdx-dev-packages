@@ -13,8 +13,8 @@ import {
   JsonDataFormatError,
   JsonParseError,
   JsonStringifyError
-} from './errors';
-import * as json from './json';
+} from '../src/errors';
+import * as json from '../src/json';
 
 describe('json', () => {
   describe('parseJson', () => {

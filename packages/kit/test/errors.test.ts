@@ -8,7 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { JsonParseError, NamedError } from './errors';
+import { JsonParseError, NamedError } from '../src/errors';
 
 describe('NamedError', () => {
   it('should concatenate cause stacks into a fullStack property', () => {

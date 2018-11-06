@@ -8,7 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import * as _ from '.';
+import * as _ from '../../src/nodash';
 
 describe('nodash internal', () => {
   describe('isEmpty', () => {

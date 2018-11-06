@@ -8,7 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { Duration, sleep } from './duration';
+import { Duration, sleep } from '../src/duration';
 
 describe('duration', () => {
   it('should convert milliseconds to milliseconds', () => {
