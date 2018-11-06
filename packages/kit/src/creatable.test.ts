@@ -8,11 +8,15 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { AsyncCreatable, NoOptionsAsyncCreatable } from './creatable';
+import { AsyncCreatable } from './creatable';
 
 class Config<O extends Config.Options> extends AsyncCreatable<O> {
+  protected options: O;
+
   public constructor(options?: O) {
     super(options);
+    if (!options) throw new Error('I can haz options!');
+    this.options = options;
   }
 
   public getFooEnabled(): boolean {
@@ -21,28 +25,6 @@ class Config<O extends Config.Options> extends AsyncCreatable<O> {
 
   protected async init(): Promise<void> {
     await this.options.doAsyncThing();
-  }
-
-  protected getDefaultOptions(): O {
-    const defaults = {
-      fooEnabled: true,
-      doAsyncThing: async () => {}
-    };
-    // This type assertion sucks, but I can't find a way around it...
-    // the issue is that `O` can be a broader type when subclassed, and
-    // this concrete value for that may not be able to satisfy the
-    // requirements of such a broader type.  It may be confusing to
-    // developers that the type assertion is required -- without it,
-    // this method will not compile, and the error description is not
-    // entirely particularly easy to understand.  Good docs around the
-    // expected uses of this pattern will be required.  Note that this
-    // is really only an issue for AsyncCreatable subclasses that themselves
-    // expect to be subclassed with an extension of their own `options` type.
-    // I know we do this in some places, but maybe it's the exception rather
-    // than the rule?
-    //
-    // See also the `getDefaultOptions` notes for this class's subclass.
-    return defaults as O;
   }
 }
 
@@ -65,27 +47,6 @@ class SubConfig extends Config<SubConfig.Options> {
   protected async init(): Promise<void> {
     await super.init();
   }
-
-  protected getDefaultOptions(): SubConfig.Options {
-    // In the subclass we need no such type assertion, though, since the
-    // type of `options` is no longer generic in this context.  That said,
-    // if a subclass does not override the generic super class's version
-    // of this method, there may be errors at runtime, since the super
-    // class's options may be incomplete, and the compiler has been instructed
-    // in the super class's version of `getDefaultOptions` to ignore the
-    // problem... which is a good example of why I hate using type assertions
-    // to work around type system limitations :P  This gist is that if we
-    // adopt this model, then the docs will have to clearly explain that
-    // subclasses of generic super classes MUST override this method, even though
-    // the compiler will happily compile.  There is an exception to this rule,
-    // however -- if this class's options are the same as the super class's options
-    // or only extends the super class's options with optional properties, then
-    // a subclass need not strictly implement this method.  Will have to write up
-    // some examples in the AsyncCreatable docs that captures these nuances.
-    return Object.assign(super.getDefaultOptions(), {
-      barEnabled: true
-    });
-  }
 }
 
 namespace SubConfig {
@@ -95,20 +56,19 @@ namespace SubConfig {
 }
 
 class OptionalConfig extends AsyncCreatable<OptionalConfig.Options> {
-  public constructor() {
-    super();
+  private options?: OptionalConfig.Options;
+
+  public constructor(options?: OptionalConfig.Options) {
+    super(options);
+    this.options = options;
   }
 
   public getBazEnabled(): boolean {
-    return this.options.bazEnabled;
+    return this.options ? this.options.bazEnabled : false;
   }
 
   protected async init(): Promise<void> {
     // Imagine cool async stuff here
-  }
-
-  protected getDefaultOptions(): OptionalConfig.Options {
-    return { bazEnabled: true };
   }
 }
 
@@ -118,7 +78,7 @@ namespace OptionalConfig {
   }
 }
 
-class NoOptionsConfig extends NoOptionsAsyncCreatable {
+class NoOptionsConfig extends AsyncCreatable {
   public constructor() {
     super();
   }
@@ -160,7 +120,7 @@ describe('AsyncCreatable', () => {
   it('should construct a concrete subclass async with optional options', async () => {
     const config1 = await OptionalConfig.create();
 
-    expect(config1.getBazEnabled()).to.be.true;
+    expect(config1.getBazEnabled()).to.be.false;
 
     const config2 = await OptionalConfig.create({
       bazEnabled: true
