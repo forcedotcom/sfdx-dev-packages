@@ -1,9 +1,8 @@
 {
-  "name": "@salesforce/ts-types",
-  "version": "0.17.3",
-  "description": "Types and related utilities for TypeScript",
+  "name": "@salesforce/ts-sinon",
+  "version": "0.2.2",
+  "description": "TypeScript helpers for Sinon",
   "main": "lib/index.js",
-  "repository": "https://git.soma.salesforce.com/salesforcedx/sfdx-ts-types",
   "author": "Salesforce",
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",
@@ -14,6 +13,14 @@
     "lib/**/*.d.ts",
     "!lib/**/*.test.d.ts"
   ],
+  "dependencies": {
+    "@salesforce/ts-types": "0.17.4",
+    "sinon": "5.0.7",
+    "tslib": "^1.9.3"
+  },
+  "devDependencies": {
+    "@salesforce/dev-scripts": "^0.3.2"
+  },
   "scripts": {
     "build": "yarn sfdx-build",
     "clean": "yarn sfdx-clean",
@@ -22,14 +29,6 @@
     "docs": "yarn sfdx-docs",
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
-    "postcompile": "shx cp -r src/types lib",
-    "prepare": "yarn build && yarn docs",
     "test": "yarn sfdx-test"
-  },
-  "dependencies": {
-    "tslib": "^1"
-  },
-  "devDependencies": {
-    "@salesforce/dev-scripts": "^0.3.2"
   }
 }
