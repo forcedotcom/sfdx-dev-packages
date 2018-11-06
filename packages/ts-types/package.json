@@ -10,9 +10,7 @@
   "files": [
     "docs",
     "lib/**/*.js",
-    "!lib/**/*.test.js",
-    "lib/**/*.d.ts",
-    "!lib/**/*.test.d.ts"
+    "lib/**/*.d.ts"
   ],
   "scripts": {
     "build": "yarn sfdx-build",

@@ -18,7 +18,7 @@ import {
   hasObject,
   hasPlainObject,
   hasString
-} from './has';
+} from '../../src/narrowing/has';
 
 class TestClass {
   constructor(public name = 'test') {}

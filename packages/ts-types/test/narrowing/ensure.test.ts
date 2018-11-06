@@ -8,7 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { UnexpectedValueTypeError } from '../errors';
+import { UnexpectedValueTypeError } from '../../src/errors';
 import {
   ensure,
   ensureAnyJson,
@@ -22,7 +22,7 @@ import {
   ensureObject,
   ensurePlainObject,
   ensureString
-} from './ensure';
+} from '../../src/narrowing/ensure';
 
 class TestClass {
   constructor(public name = 'test') {}

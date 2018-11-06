@@ -21,7 +21,7 @@ import {
   viewObject,
   viewPlainObject,
   viewString
-} from '.';
+} from '../../src/experimental';
 
 class TestClass {
   public foo = 'bar';
