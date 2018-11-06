@@ -33,6 +33,8 @@ export abstract class AsyncCreatable<O = object> {
 
   /**
    * Asynchronously initializes newly constructed instances of a concrete subclass.
+   *
+   * @param options An options object providing initialization params.
    */
   protected abstract init(options?: O): Promise<void>;
 }
