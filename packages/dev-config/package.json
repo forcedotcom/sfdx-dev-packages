@@ -14,7 +14,7 @@
     "/tsconfig.json",
     "/prettier.json",
     "/nyc.json",
-    "/typedocs.js"
+    "/typedoc.js"
   ],
   "dependencies": {
     "tslint": "^5",
