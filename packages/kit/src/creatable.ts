@@ -19,7 +19,7 @@ export abstract class AsyncCreatable<O = object> {
     options?: P
   ): Promise<T> {
     const instance = new this(options);
-    await instance.init();
+    await instance.init(options);
     return instance;
   }
 
@@ -34,5 +34,5 @@ export abstract class AsyncCreatable<O = object> {
   /**
    * Asynchronously initializes newly constructed instances of a concrete subclass.
    */
-  protected abstract init(): Promise<void>;
+  protected abstract init(options?: O): Promise<void>;
 }
