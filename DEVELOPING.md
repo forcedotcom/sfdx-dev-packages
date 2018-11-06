@@ -54,9 +54,7 @@ This run `yarn clean` on each of the package in packages. Running `yarn cleal-al
 
 ### `yarn test`
 
-This runs `yarn test` on each of the packages. The `--concurrency 1` is essential
-for VS Code extension tests since they require an instance of Code to run in.
-And, only one instance of that can be running at a single time.
+This runs `yarn test` on each of the packages.
 
 ### `yarn lint`
 
