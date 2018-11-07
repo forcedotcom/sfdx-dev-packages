@@ -1,19 +1,21 @@
-# Types for Salesforce CLI development
+# Types and tools for Salesforce TypeScript development
 
 ## What is this?
 
-This is a simple TypeScript-oriented library developed for use in Salesforce CLI libraries, applications, and plugins consisting of two parts:
+This is a simple TypeScript-oriented library developed for use in Salesforce TypeScript libraries, applications, and plugins consisting of two parts:
 
 1. A collection of commonly desired types.
 1. A collection of type-narrowing convenience functions for writing concise type-guards.
 
+See the [API documentation](https://forcedotcom.github.io/sfdx-dev-packages/ts-types) for more details on each of the utilities that `ts-types` provides.
+
 ## Why did we create it?
 
-We were interested in enabling strict compiler settings in TypeScript. Among the sub-settings that comprise strict mode are "strict null checks", "strict property initialization", and "no implicit any". These settings have the potential to increase code quality substantially, reducing the frequency of certain classes of runtime errors typical in JavaScript applications. They also encourage the writing of clearer code, which helps teams work together and more rapidly onboard new hires.
+We were interested in developing with _strict_ compiler settings in TypeScript. Among the sub-settings that comprise strict mode are `strictNullChecks`, `strictPropertyInitialization`, and `noImplicitAny`. `tslint` provides additional rules that further improve code quality and type correctness by discouraging explicit `any` usages and other unsafe constructs such as some classes of unwarranted type assertions. Together, these settings have the potential to increase code quality substantially, reducing the frequency of certain classes of runtime errors typical in classical JavaScript applications. They also encourage the writing of clearer, more accurately typed code, which helps teams work together more effectively and more rapidly onboard new hires.
 
 Of course, stricter compiler settings require developers to write more type-safe code -- or to work around the compiler's insistence on type-safety. Often this stricter style leads to more verbose code in the way of type declarations and type guards, and can require new and occasionally unfamiliar patterns to accomplish without subverting the compiler's enforcement of the type system (typically via the use of type assertions).
 
-TypeScript provides both syntax and built-in types designed to help write well-typed code, but we can be more terse and concise by employing additional types and type-oriented utilities. That's where this library comes in.
+TypeScript provides both syntax and built-in types designed to help write well-typed code, but we can be more terse and concise by employing additional types and type-narrowing utility functions by leveraging language features like type predicates backed by sound runtime validation, simplified `undefined` and `null` checking, etc. That's where this library comes in.
 
 ## How will it help me?
 
@@ -99,7 +101,7 @@ This library provides several categories of functions to help with safely narrow
 
 The `is*` suite of functions accept a variable of a broad type such as `unknown` or `object` and returns a narrowed type after validating it with a runtime test. If the test is negative or if the value was not defined (i.e. `undefined` or `null`), `undefined` is returned instead.
 
-The `is*` suite of functions test the runtime types of variables, applying an appropriate type predicate to narrow the variables type appropriately.
+These functions test the runtime types of variables, applying an appropriate type predicate to narrow the variables type appropriately.
 
 ```typescript
 // type of value -> unknown
