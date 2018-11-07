@@ -58,6 +58,7 @@ module.exports = (projectPath, inLernaProject) => {
   remove('typedoc-plugin-external-module-name');
   remove('prettier');
   remove('pretty-quick');
+  remove('@salesforce/dev-config');
 
   if (added.length > 0) {
     log(`added`);
