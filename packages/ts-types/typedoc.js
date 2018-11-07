@@ -1,3 +1,3 @@
 module.exports = {
-  exclude: ['**/index.ts', '**/index.d.ts', '**/*.test.ts']
+  exclude: ['**/index.ts', '**/index.d.ts']
 };

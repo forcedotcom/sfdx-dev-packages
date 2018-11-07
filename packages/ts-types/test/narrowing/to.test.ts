@@ -8,9 +8,9 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { JsonCloneError } from '../errors';
-import { Dictionary } from '../types';
-import { toAnyJson, toJsonArray, toJsonMap } from './to';
+import { JsonCloneError } from '../../src/errors';
+import { toAnyJson, toJsonArray, toJsonMap } from '../../src/narrowing/to';
+import { Dictionary } from '../../src/types';
 
 describe('to type', () => {
   describe('toAnyJson', () => {

@@ -21,7 +21,7 @@ import {
   getObject,
   getPlainObject,
   getString
-} from './get';
+} from '../../src/narrowing/get';
 
 class TestClass {
   constructor(public name = 'test') {}

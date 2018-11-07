@@ -5,10 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-// tslint:disable:no-unused-expression
-
 import { expect } from 'chai';
-import { Duration, sleep } from './duration';
+import { Duration, sleep } from '../src/duration';
 
 describe('duration', () => {
   it('should convert milliseconds to milliseconds', () => {

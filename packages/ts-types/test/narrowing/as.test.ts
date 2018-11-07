@@ -8,7 +8,13 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { asBoolean, asJsonArray, asJsonMap, asNumber, asString } from './as';
+import {
+  asBoolean,
+  asJsonArray,
+  asJsonMap,
+  asNumber,
+  asString
+} from '../../src/narrowing/as';
 
 describe('as type', () => {
   describe('asString', () => {
