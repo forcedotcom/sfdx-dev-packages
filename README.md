@@ -16,7 +16,7 @@ Currently, we have the following packages:
 - [@salesforce/kit](https://www.npmjs.com/package/@salesforce/kit) - Common utility methods and designed patterns.
   - See the code at [packages/kit](packages/kit).
   - See the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/kit).
-- [@salesforce/ts-sinon](https://www.npmjs.com/package/@salesforce/ts-sinon) - TypeScript-friendly helpers for testing wiht Sinon.
+- [@salesforce/ts-sinon](https://www.npmjs.com/package/@salesforce/ts-sinon) - TypeScript-friendly helpers for testing with Sinon.
   - See the code at [packages/ts-sinon](packages/ts-sinon).
   - See the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/ts-sinon).
 
