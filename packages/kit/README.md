@@ -2,9 +2,9 @@
 
 ## What is this?
 
-A collection of commonly needed utilities used by the Salesforce CLI and the libraries it is built on. It includes high level support for parsing and working with JSON data, interacting with environment variables, a common error base type, a minimal lodash replacement, and support for commonly needed design patterns, among other things.
+A collection of commonly needed utilities used by the Salesforce CLI and the libraries it is built on. It includes high level support for parsing and working with JSON data, interacting with environment variables, a common error base type, a minimal lodash replacement, and support for commonly needed design patterns, among other things. It is intended specifically for use in Node.js (version 8 or newer) projects -- YMMV in the browser.
 
-See the API documentation for more details on each of the utilities that `kit` provides.
+See the [API documentation](https://forcedotcom.github.io/sfdx-dev-packages/kit) for more details on each of the utilities that `kit` provides.
 
 ## References
 
