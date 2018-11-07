@@ -23,7 +23,7 @@
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
     "postcompile": "shx cp -r src/types lib",
-    "prepare": "yarn build && yarn docs",
+    "prepack": "yarn sfdx-build",
     "test": "yarn sfdx-test"
   },
   "dependencies": {
