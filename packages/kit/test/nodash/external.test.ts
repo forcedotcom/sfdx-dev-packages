@@ -5,11 +5,9 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-// tslint:disable:no-unused-expression
-
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import * as _ from '.';
+import * as _ from '../../src/nodash';
 
 describe('nodash', () => {
   describe('defaults', () => {

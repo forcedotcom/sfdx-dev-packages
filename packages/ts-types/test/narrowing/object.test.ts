@@ -8,7 +8,6 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { Dictionary, Nullable, Optional } from '../types';
 import {
   definiteEntriesOf,
   definiteKeysOf,
@@ -16,7 +15,8 @@ import {
   entriesOf,
   keysOf,
   valuesOf
-} from './object';
+} from '../../src/narrowing/object';
+import { Dictionary, Nullable, Optional } from '../../src/types';
 
 describe('object', () => {
   describe('keysOf', () => {

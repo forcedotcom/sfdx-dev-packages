@@ -8,7 +8,11 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
-import { coerceAnyJson, coerceJsonArray, coerceJsonMap } from './coerce';
+import {
+  coerceAnyJson,
+  coerceJsonArray,
+  coerceJsonMap
+} from '../../src/narrowing/coerce';
 
 describe('coerce type', () => {
   describe('coerceAnyJson', () => {
