@@ -1,4 +1,4 @@
-## Contributing
+# Contributing
 
 1. Familiarize yourself with the codebase and the [development](DEVELOPING.md) doc.
 1. Create a new issue before starting your project so that we can keep track of
@@ -11,7 +11,7 @@
 1. Send us a pull request when you are done. We'll review your code, suggest any
    needed changes, and merge it in.
 
-### CLA
+## CLA
 
 External contributors will be required to sign a Contributor's License
 Agreement. You can do so by going to https://cla.salesforce.com/sign-cla.
@@ -43,7 +43,7 @@ Agreement. You can do so by going to https://cla.salesforce.com/sign-cla.
 
 - When a development cycle finishes, the content of the `develop` branch will become the `master` branch
 
-```
+```bash
 $ git checkout master
 $ git reset --hard develop
 $
