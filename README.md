@@ -38,6 +38,6 @@ Currently, we have the following packages:
 
 ### [@salesforce/ts-sinon](https://www.npmjs.com/package/@salesforce/ts-sinon) - TypeScript-friendly helpers for testing with Sinon
 
-- Learn more in its [README](packages/ts-sinon/README.md)
+- Learn more in its [README](packages/ts-sinon/README.md).
 - See the code at [packages/ts-sinon](packages/ts-sinon).
 - Read the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/ts-sinon).
