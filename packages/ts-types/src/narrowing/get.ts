@@ -55,11 +55,7 @@ import { valueOrDefault } from './internal';
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function get(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: unknown
-): unknown {
+export function get(from: Nullable<object>, path: string, defaultValue?: unknown): unknown {
   return valueOrDefault(
     path
       .split(/[\.\[\]\'\"]/)
@@ -82,10 +78,7 @@ export function get(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getString(
-  from: Nullable<object>,
-  path: string
-): Nullable<string>;
+export function getString(from: Nullable<object>, path: string): Nullable<string>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as a `string`, or
  * `undefined` if a value was not found or was not type-compatible.
@@ -100,17 +93,9 @@ export function getString(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getString(
-  from: Nullable<object>,
-  path: string,
-  defaultValue: string
-): string;
+export function getString(from: Nullable<object>, path: string, defaultValue: string): string;
 // underlying function
-export function getString(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: string
-): Nullable<string> {
+export function getString(from: Nullable<object>, path: string, defaultValue?: string): Nullable<string> {
   return valueOrDefault(asString(get(from, path)), defaultValue);
 }
 
@@ -127,10 +112,7 @@ export function getString(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getNumber(
-  from: Nullable<object>,
-  path: string
-): Nullable<number>;
+export function getNumber(from: Nullable<object>, path: string): Nullable<number>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as a `number`, or
  * `undefined` if a value was not found or was not type-compatible.
@@ -145,17 +127,9 @@ export function getNumber(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getNumber(
-  from: Nullable<object>,
-  path: string,
-  defaultValue: number
-): number;
+export function getNumber(from: Nullable<object>, path: string, defaultValue: number): number;
 // underlying function
-export function getNumber(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: number
-): Nullable<number> {
+export function getNumber(from: Nullable<object>, path: string, defaultValue?: number): Nullable<number> {
   return valueOrDefault(asNumber(get(from, path)), defaultValue);
 }
 
@@ -172,10 +146,7 @@ export function getNumber(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getBoolean(
-  from: Nullable<object>,
-  path: string
-): Nullable<boolean>;
+export function getBoolean(from: Nullable<object>, path: string): Nullable<boolean>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as a `boolean`, or
  * `undefined` if a value was not found or was not type-compatible.
@@ -190,17 +161,9 @@ export function getBoolean(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getBoolean(
-  from: Nullable<object>,
-  path: string,
-  defaultValue: boolean
-): boolean;
+export function getBoolean(from: Nullable<object>, path: string, defaultValue: boolean): boolean;
 // underlying function
-export function getBoolean(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: boolean
-): Nullable<boolean> {
+export function getBoolean(from: Nullable<object>, path: string, defaultValue?: boolean): Nullable<boolean> {
   return valueOrDefault(asBoolean(get(from, path)), defaultValue);
 }
 
@@ -217,10 +180,7 @@ export function getBoolean(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getObject(
-  from: Nullable<object>,
-  path: string
-): Nullable<object>;
+export function getObject(from: Nullable<object>, path: string): Nullable<object>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
  * `undefined` if a value was not found or was not type-compatible.
@@ -235,17 +195,9 @@ export function getObject(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getObject(
-  obj: Nullable<object>,
-  path: string,
-  defaultValue: object
-): object;
+export function getObject(obj: Nullable<object>, path: string, defaultValue: object): object;
 // underlying function
-export function getObject(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: object
-): Nullable<object> {
+export function getObject(from: Nullable<object>, path: string, defaultValue?: object): Nullable<object> {
   return valueOrDefault(asObject(get(from, path)), defaultValue);
 }
 
@@ -263,10 +215,7 @@ export function getObject(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getPlainObject(
-  from: Nullable<object>,
-  path: string
-): Nullable<object>;
+export function getPlainObject(from: Nullable<object>, path: string): Nullable<object>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
  * `undefined` if a value was not found or was not type-compatible. This differs from {@link getObject} by way of
@@ -282,17 +231,9 @@ export function getPlainObject(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getPlainObject(
-  obj: Nullable<object>,
-  path: string,
-  defaultValue: object
-): object;
+export function getPlainObject(obj: Nullable<object>, path: string, defaultValue: object): object;
 // underlying function
-export function getPlainObject(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: object
-): Nullable<object> {
+export function getPlainObject(from: Nullable<object>, path: string, defaultValue?: object): Nullable<object> {
   return valueOrDefault(asPlainObject(get(from, path)), defaultValue);
 }
 
@@ -359,10 +300,7 @@ export function getInstance<C extends AnyConstructor>(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getArray(
-  from: Nullable<object>,
-  path: string
-): Nullable<AnyArray>;
+export function getArray(from: Nullable<object>, path: string): Nullable<AnyArray>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an
  * {@link AnyArray}, or `undefined` if a value was not found or was not type-compatible.
@@ -377,17 +315,9 @@ export function getArray(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getArray(
-  from: Nullable<object>,
-  path: string,
-  defaultValue: AnyArray
-): AnyArray;
+export function getArray(from: Nullable<object>, path: string, defaultValue: AnyArray): AnyArray;
 // underlying function
-export function getArray(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: AnyArray
-): Nullable<AnyArray> {
+export function getArray(from: Nullable<object>, path: string, defaultValue?: AnyArray): Nullable<AnyArray> {
   return valueOrDefault(asArray(get(from, path)), defaultValue);
 }
 
@@ -404,10 +334,7 @@ export function getArray(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getFunction(
-  from: Nullable<object>,
-  path: string
-): Nullable<AnyFunction>;
+export function getFunction(from: Nullable<object>, path: string): Nullable<AnyFunction>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an
  * {@link AnyFunction}, or `undefined` if a value was not found or was not type-compatible.
@@ -422,17 +349,9 @@ export function getFunction(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getFunction(
-  from: Nullable<object>,
-  path: string,
-  defaultValue: AnyFunction
-): AnyFunction;
+export function getFunction(from: Nullable<object>, path: string, defaultValue: AnyFunction): AnyFunction;
 // underlying function
-export function getFunction(
-  from: Nullable<object>,
-  path: string,
-  defaultValue?: AnyFunction
-): Nullable<AnyFunction> {
+export function getFunction(from: Nullable<object>, path: string, defaultValue?: AnyFunction): Nullable<AnyFunction> {
   return valueOrDefault(asFunction(get(from, path)), defaultValue);
 }
 
@@ -451,10 +370,7 @@ export function getFunction(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getAnyJson(
-  from: Nullable<JsonCollection>,
-  path: string
-): Optional<AnyJson>;
+export function getAnyJson(from: Nullable<JsonCollection>, path: string): Optional<AnyJson>;
 /**
  * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
  * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
@@ -469,17 +385,9 @@ export function getAnyJson(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getAnyJson(
-  from: Nullable<JsonCollection>,
-  path: string,
-  defaultValue: AnyJson
-): AnyJson;
+export function getAnyJson(from: Nullable<JsonCollection>, path: string, defaultValue: AnyJson): AnyJson;
 // underlying function
-export function getAnyJson(
-  from: Nullable<JsonCollection>,
-  path: string,
-  defaultValue?: AnyJson
-): Optional<AnyJson> {
+export function getAnyJson(from: Nullable<JsonCollection>, path: string, defaultValue?: AnyJson): Optional<AnyJson> {
   return valueOrDefault(coerceAnyJson(get(from, path)), defaultValue);
 }
 
@@ -496,10 +404,7 @@ export function getAnyJson(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getJsonMap(
-  from: Nullable<JsonCollection>,
-  path: string
-): Nullable<JsonMap>;
+export function getJsonMap(from: Nullable<JsonCollection>, path: string): Nullable<JsonMap>;
 /**
  * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
  * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
@@ -514,17 +419,9 @@ export function getJsonMap(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getJsonMap(
-  from: Nullable<JsonCollection>,
-  path: string,
-  defaultValue: JsonMap
-): JsonMap;
+export function getJsonMap(from: Nullable<JsonCollection>, path: string, defaultValue: JsonMap): JsonMap;
 // underlying function
-export function getJsonMap(
-  from: Nullable<JsonCollection>,
-  path: string,
-  defaultValue?: JsonMap
-): Nullable<JsonMap> {
+export function getJsonMap(from: Nullable<JsonCollection>, path: string, defaultValue?: JsonMap): Nullable<JsonMap> {
   return valueOrDefault(asJsonMap(getAnyJson(from, path)), defaultValue);
 }
 
@@ -541,10 +438,7 @@ export function getJsonMap(
  * @param from The object or array to query.
  * @param path The query path.
  */
-export function getJsonArray(
-  from: Nullable<JsonCollection>,
-  path: string
-): Nullable<JsonArray>;
+export function getJsonArray(from: Nullable<JsonCollection>, path: string): Nullable<JsonArray>;
 /**
  * Given a deep-search query path, returns an object property or array value of a {@link JsonCollection} as an
  * {@link AnyJson}, or `undefined` if a value was not found or was not type-compatible.
@@ -559,11 +453,7 @@ export function getJsonArray(
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getJsonArray(
-  from: Nullable<JsonCollection>,
-  path: string,
-  defaultValue: JsonArray
-): JsonArray;
+export function getJsonArray(from: Nullable<JsonCollection>, path: string, defaultValue: JsonArray): JsonArray;
 // underlying function
 export function getJsonArray(
   from: Nullable<JsonCollection>,

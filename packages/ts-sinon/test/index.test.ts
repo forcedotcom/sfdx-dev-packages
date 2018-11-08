@@ -8,14 +8,7 @@
 import { expect } from 'chai';
 import * as fs from 'fs';
 import { createSandbox, SinonSandbox } from 'sinon';
-import {
-  fromStub,
-  spyMethod,
-  stubCallable,
-  stubInterface,
-  stubMethod,
-  stubObject
-} from '../src/index';
+import { fromStub, spyMethod, stubCallable, stubInterface, stubMethod, stubObject } from '../src/index';
 
 describe('stubs', () => {
   let sandbox: SinonSandbox;

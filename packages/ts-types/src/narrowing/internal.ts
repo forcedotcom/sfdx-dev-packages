@@ -15,9 +15,6 @@ import { Nullable } from '../types';
  * @param defaultValue The default to return if `value` was not defined.
  * @ignore
  */
-export function valueOrDefault<T>(
-  value: Nullable<T>,
-  defaultValue: Nullable<T>
-): Nullable<T> {
+export function valueOrDefault<T>(value: Nullable<T>, defaultValue: Nullable<T>): Nullable<T> {
   return value != null || defaultValue === undefined ? value : defaultValue;
 }

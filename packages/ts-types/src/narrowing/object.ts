@@ -35,9 +35,7 @@ import { KeyOf, Nullable } from '../types';
  *
  * @param obj The object of interest.
  */
-export function keysOf<T extends object, K extends KeyOf<T>>(
-  obj: Nullable<T>
-): K[] {
+export function keysOf<T extends object, K extends KeyOf<T>>(obj: Nullable<T>): K[] {
   return Object.keys(obj || {}) as K[];
 }
 
@@ -69,9 +67,7 @@ export function keysOf<T extends object, K extends KeyOf<T>>(
  *
  * @param obj The object of interest.
  */
-export function entriesOf<T extends object, K extends KeyOf<T>>(
-  obj: Nullable<T>
-): Array<[K, T[K]]> {
+export function entriesOf<T extends object, K extends KeyOf<T>>(obj: Nullable<T>): Array<[K, T[K]]> {
   return Object.entries(obj || {}) as Array<[K, T[K]]>;
 }
 
@@ -103,9 +99,7 @@ export function entriesOf<T extends object, K extends KeyOf<T>>(
  *
  * @param obj The object of interest.
  */
-export function valuesOf<T extends object, K extends KeyOf<T>>(
-  obj: Nullable<T>
-): Array<T[K]> {
+export function valuesOf<T extends object, K extends KeyOf<T>>(obj: Nullable<T>): Array<T[K]> {
   return Object.values(obj || {});
 }
 
@@ -117,9 +111,7 @@ export function valuesOf<T extends object, K extends KeyOf<T>>(
  *
  * @param obj The object of interest.
  */
-export function definiteKeysOf<T extends object>(
-  obj: Nullable<T>
-): Array<KeyOf<T>> {
+export function definiteKeysOf<T extends object>(obj: Nullable<T>): Array<KeyOf<T>> {
   return definiteEntriesOf(obj).map(entry => entry[0]);
 }
 
@@ -132,11 +124,9 @@ export function definiteKeysOf<T extends object>(
  *
  * @param obj The object of interest.
  */
-export function definiteEntriesOf<
-  T extends object,
-  K extends KeyOf<T>,
-  V extends NonNullable<T[K]>
->(obj: Nullable<T>): Array<[K, V]> {
+export function definiteEntriesOf<T extends object, K extends KeyOf<T>, V extends NonNullable<T[K]>>(
+  obj: Nullable<T>
+): Array<[K, V]> {
   return entriesOf(obj).filter((entry): entry is [K, V] => entry[1] != null);
 }
 
@@ -147,8 +137,6 @@ export function definiteEntriesOf<
  *
  * @param obj The object of interest.
  */
-export function definiteValuesOf<T extends object>(
-  obj: Nullable<T>
-): Array<NonNullable<T[KeyOf<T>]>> {
+export function definiteValuesOf<T extends object>(obj: Nullable<T>): Array<NonNullable<T[KeyOf<T>]>> {
   return definiteEntriesOf(obj).map(entry => entry[1]);
 }

@@ -28,10 +28,7 @@ export function coerceAnyJson(value: unknown): Optional<AnyJson>;
  */
 export function coerceAnyJson(value: unknown, defaultValue: AnyJson): AnyJson;
 // underlying function
-export function coerceAnyJson(
-  value: unknown,
-  defaultValue?: AnyJson
-): Optional<AnyJson> {
+export function coerceAnyJson(value: unknown, defaultValue?: AnyJson): Optional<AnyJson> {
   return isAnyJson(value) ? value : defaultValue;
 }
 
@@ -43,9 +40,7 @@ export function coerceAnyJson(
  *
  * @param value The object to coerce.
  */
-export function coerceJsonMap<T extends object>(
-  value: Nullable<T>
-): Optional<JsonMap>;
+export function coerceJsonMap<T extends object>(value: Nullable<T>): Optional<JsonMap>;
 /**
  * Narrows an object of type `T` to a `JsonMap` using a shallow type-compatibility check. Use this when the source of
  * the object is known to be JSON-compatible and you want simple type coercion to a `JsonMap`. Use {@link toJsonMap}
@@ -55,15 +50,9 @@ export function coerceJsonMap<T extends object>(
  * @param value The object to coerce.
  * @param defaultValue The default to return if `value` was not defined.
  */
-export function coerceJsonMap<T extends object>(
-  value: Nullable<T>,
-  defaultValue: JsonMap
-): JsonMap;
+export function coerceJsonMap<T extends object>(value: Nullable<T>, defaultValue: JsonMap): JsonMap;
 // underlying function
-export function coerceJsonMap<T extends object>(
-  value: Nullable<T>,
-  defaultValue?: JsonMap
-): Optional<JsonMap> {
+export function coerceJsonMap<T extends object>(value: Nullable<T>, defaultValue?: JsonMap): Optional<JsonMap> {
   return asJsonMap(coerceAnyJson(value)) || defaultValue;
 }
 
@@ -85,14 +74,8 @@ export function coerceJsonArray<T>(value: Nullable<T[]>): Optional<JsonArray>;
  * @param value The array to coerce.
  * @param defaultValue The default to return if `value` was not defined.
  */
-export function coerceJsonArray<T>(
-  value: Nullable<T[]>,
-  defaultValue: JsonArray
-): JsonArray;
+export function coerceJsonArray<T>(value: Nullable<T[]>, defaultValue: JsonArray): JsonArray;
 // underlying method
-export function coerceJsonArray<T>(
-  value: Nullable<T[]>,
-  defaultValue?: JsonArray
-): Optional<JsonArray> {
+export function coerceJsonArray<T>(value: Nullable<T[]>, defaultValue?: JsonArray): Optional<JsonArray> {
   return asJsonArray(coerceAnyJson(value)) || defaultValue;
 }

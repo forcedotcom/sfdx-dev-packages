@@ -6,15 +6,7 @@
  */
 
 import { AnyArray, AnyConstructor, AnyFunction, Many, View } from '../types';
-import {
-  isArray,
-  isBoolean,
-  isFunction,
-  isNumber,
-  isObject,
-  isPlainObject,
-  isString
-} from './is';
+import { isArray, isBoolean, isFunction, isNumber, isObject, isPlainObject, isString } from './is';
 
 /**
  * Tests whether a value of type `T` contains one or more property `keys`. If so, the type of the tested value is
@@ -37,14 +29,8 @@ import {
  * @param value The value to test.
  * @param keys One or more `string` keys to check for existence.
  */
-export function has<T, K extends string>(
-  value: T,
-  keys: Many<K>
-): value is T & View<K> {
-  return (
-    isObject(value) &&
-    (isArray(keys) ? keys.every(k => k in value) : keys in value)
-  );
+export function has<T, K extends string>(value: T, keys: Many<K>): value is T & View<K> {
+  return isObject(value) && (isArray(keys) ? keys.every(k => k in value) : keys in value);
 }
 
 /**
@@ -65,10 +51,7 @@ export function has<T, K extends string>(
  * @param value The value to test.
  * @param keys A `string` key to check for existence.
  */
-export function hasString<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, string> {
+export function hasString<T, K extends string>(value: T, key: K): value is T & View<K, string> {
   return has(value, key) && isString(value[key]);
 }
 
@@ -90,10 +73,7 @@ export function hasString<T, K extends string>(
  * @param value The value to test.
  * @param keys A `number` key to check for existence.
  */
-export function hasNumber<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, number> {
+export function hasNumber<T, K extends string>(value: T, key: K): value is T & View<K, number> {
   return has(value, key) && isNumber(value[key]);
 }
 
@@ -115,10 +95,7 @@ export function hasNumber<T, K extends string>(
  * @param value The value to test.
  * @param keys A `boolean` key to check for existence.
  */
-export function hasBoolean<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, boolean> {
+export function hasBoolean<T, K extends string>(value: T, key: K): value is T & View<K, boolean> {
   return has(value, key) && isBoolean(value[key]);
 }
 
@@ -142,10 +119,7 @@ export function hasBoolean<T, K extends string>(
  * @param value The value to test.
  * @param keys An `object` key to check for existence.
  */
-export function hasObject<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, object> {
+export function hasObject<T, K extends string>(value: T, key: K): value is T & View<K, object> {
   return has(value, key) && isObject(value[key]);
 }
 
@@ -170,10 +144,7 @@ export function hasObject<T, K extends string>(
  * @param value The value to test.
  * @param keys A "plain" `object` key to check for existence.
  */
-export function hasPlainObject<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, object> {
+export function hasPlainObject<T, K extends string>(value: T, key: K): value is T & View<K, object> {
   return has(value, key) && isPlainObject(value[key]);
 }
 
@@ -225,10 +196,7 @@ export function hasInstance<T, K extends string, C extends AnyConstructor>(
  * @param value The value to test.
  * @param keys An `AnyArray` key to check for existence.
  */
-export function hasArray<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, AnyArray> {
+export function hasArray<T, K extends string>(value: T, key: K): value is T & View<K, AnyArray> {
   return has(value, key) && isArray(value[key]);
 }
 
@@ -249,9 +217,6 @@ export function hasArray<T, K extends string>(
  * @param value The value to test.
  * @param keys An `Array` key to check for existence.
  */
-export function hasFunction<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, AnyFunction> {
+export function hasFunction<T, K extends string>(value: T, key: K): value is T & View<K, AnyFunction> {
   return has(value, key) && isFunction(value[key]);
 }

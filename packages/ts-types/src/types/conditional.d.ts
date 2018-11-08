@@ -26,9 +26,7 @@ export type NonOptional<T> = T extends undefined ? never : T;
  * // RequiredNonOptionalFoo -> { bar: string | null };
  * ```
  */
-export type RequiredNonOptional<T> = T extends object
-  ? { [P in keyof T]-?: NonOptional<T[P]> }
-  : T;
+export type RequiredNonOptional<T> = T extends object ? { [P in keyof T]-?: NonOptional<T[P]> } : T;
 
 /**
  * Converts a type `T` that may have optional, nullable properties into a new type with only required
@@ -40,18 +38,14 @@ export type RequiredNonOptional<T> = T extends object
  * // RequiredNonNullableFoo -> { bar: string };
  * ```
  */
-export type RequiredNonNullable<T> = T extends object
-  ? Required<{ [P in keyof T]: NonNullable<T[P]> }>
-  : T;
+export type RequiredNonNullable<T> = T extends object ? Required<{ [P in keyof T]: NonNullable<T[P]> }> : T;
 
 /**
  * Extracts literally defined property names from a type `T` as a union of key name strings, minus
  * any index signatures.
  */
 export type Literals<T> = Extract<
-  {
-    [K in keyof T]: string extends K ? never : number extends K ? never : K
-  } extends { [_ in keyof T]: infer U }
+  { [K in keyof T]: string extends K ? never : number extends K ? never : K } extends { [_ in keyof T]: infer U }
     ? U
     : never,
   string

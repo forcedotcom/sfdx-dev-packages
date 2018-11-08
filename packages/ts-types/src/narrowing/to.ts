@@ -35,19 +35,11 @@ export function toAnyJson<T>(value: Nullable<T>): Optional<AnyJson>;
  * @param defaultValue The default to return if `value` was not defined.
  * @throws {@link JsonCloneError} If the value values contain circular references.
  */
-export function toAnyJson<T>(
-  value: Nullable<T>,
-  defaultValue: AnyJson
-): AnyJson;
+export function toAnyJson<T>(value: Nullable<T>, defaultValue: AnyJson): AnyJson;
 // underlying function
-export function toAnyJson<T>(
-  value: Nullable<T>,
-  defaultValue?: AnyJson
-): Optional<AnyJson> {
+export function toAnyJson<T>(value: Nullable<T>, defaultValue?: AnyJson): Optional<AnyJson> {
   try {
-    return value !== undefined
-      ? JSON.parse(JSON.stringify(value))
-      : defaultValue;
+    return value !== undefined ? JSON.parse(JSON.stringify(value)) : defaultValue;
   } catch (err) {
     throw new JsonCloneError(err);
   }
@@ -65,9 +57,7 @@ export function toAnyJson<T>(
  * @param value The object to convert.
  * @throws {@link JsonCloneError} If the object values contain circular references.
  */
-export function toJsonMap<T extends object>(
-  value: Nullable<T>
-): Optional<JsonMap>;
+export function toJsonMap<T extends object>(value: Nullable<T>): Optional<JsonMap>;
 /**
  * Narrows an object of type `T` to a `JsonMap` following a deep, brute-force conversion of the object's data to
  * only consist of JSON-compatible values by performing a basic JSON clone on the object. This is preferable to
@@ -81,15 +71,9 @@ export function toJsonMap<T extends object>(
  * @param defaultValue The default to return if `value` was not defined.
  * @throws {@link JsonCloneError} If the object values contain circular references.
  */
-export function toJsonMap<T extends object>(
-  value: Nullable<T>,
-  defaultValue: JsonMap
-): JsonMap;
+export function toJsonMap<T extends object>(value: Nullable<T>, defaultValue: JsonMap): JsonMap;
 // underlying function
-export function toJsonMap<T extends object>(
-  value: Nullable<T>,
-  defaultValue?: JsonMap
-): Optional<JsonMap> {
+export function toJsonMap<T extends object>(value: Nullable<T>, defaultValue?: JsonMap): Optional<JsonMap> {
   return asJsonMap(toAnyJson(value)) || defaultValue;
 }
 
@@ -119,14 +103,8 @@ export function toJsonArray<T>(value: Optional<T[]>): Optional<JsonArray>;
  * @param defaultValue The default to return if the value was undefined or of the incorrect type.
  * @throws {@link JsonCloneError} If the array values contain circular references.
  */
-export function toJsonArray<T>(
-  value: Optional<T[]>,
-  defaultValue: JsonArray
-): JsonArray;
+export function toJsonArray<T>(value: Optional<T[]>, defaultValue: JsonArray): JsonArray;
 // underlying method
-export function toJsonArray<T>(
-  value: Optional<T[]>,
-  defaultValue?: JsonArray
-): Optional<JsonArray> {
+export function toJsonArray<T>(value: Optional<T[]>, defaultValue?: JsonArray): Optional<JsonArray> {
   return asJsonArray(toAnyJson(value)) || defaultValue;
 }

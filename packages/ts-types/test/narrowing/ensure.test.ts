@@ -90,9 +90,7 @@ describe('ensure type', () => {
 
   describe('ensurePlainObject', () => {
     it('should raise an error when passed undefined', () => {
-      expect(() => ensurePlainObject(undefined)).to.throw(
-        UnexpectedValueTypeError
-      );
+      expect(() => ensurePlainObject(undefined)).to.throw(UnexpectedValueTypeError);
     });
 
     it('should return a object when passed a object', () => {
@@ -103,9 +101,7 @@ describe('ensure type', () => {
 
   describe('ensureInstance', () => {
     it('should raise an error when passed undefined', () => {
-      expect(() => ensureInstance(undefined, TestClass)).to.throw(
-        UnexpectedValueTypeError
-      );
+      expect(() => ensureInstance(undefined, TestClass)).to.throw(UnexpectedValueTypeError);
     });
 
     it('should return a class instance when passed a class instance', () => {
@@ -127,9 +123,7 @@ describe('ensure type', () => {
 
   describe('ensureFunction', () => {
     it('should raise an error when passed undefined', () => {
-      expect(() => ensureFunction(undefined)).to.throw(
-        UnexpectedValueTypeError
-      );
+      expect(() => ensureFunction(undefined)).to.throw(UnexpectedValueTypeError);
     });
 
     it('should return a function when passed a function', () => {
@@ -162,9 +156,7 @@ describe('ensure type', () => {
 
   describe('ensureJsonArray', () => {
     it('should raise an error when passed undefined', () => {
-      expect(() => ensureJsonArray(undefined)).to.throw(
-        UnexpectedValueTypeError
-      );
+      expect(() => ensureJsonArray(undefined)).to.throw(UnexpectedValueTypeError);
     });
 
     it('should return a JsonArray when passed a JsonArray', () => {

@@ -62,9 +62,7 @@ export function isObject(value: unknown): value is object {
  */
 export function isPlainObject(value: unknown): value is object {
   const isObjectObject = (o: unknown): o is Dictionary => {
-    return (
-      isObject(o) && Object.prototype.toString.call(o) === '[object Object]'
-    );
+    return isObject(o) && Object.prototype.toString.call(o) === '[object Object]';
   };
   if (!isObjectObject(value)) return false;
   const ctor = value.constructor;
@@ -79,10 +77,7 @@ export function isPlainObject(value: unknown): value is object {
  *
  * @param value The value to test.
  */
-export function isInstance<C extends AnyConstructor>(
-  value: unknown,
-  ctor: C
-): value is InstanceType<C> {
+export function isInstance<C extends AnyConstructor>(value: unknown, ctor: C): value is InstanceType<C> {
   return value instanceof ctor;
 }
 
@@ -102,8 +97,7 @@ export function isArray(value: unknown): value is AnyArray {
  */
 export function isArrayLike(value: unknown): value is AnyArrayLike {
   // avoid circular dependency with has.ts
-  const hasLength = (v: unknown): v is View<'length', number> =>
-    isObject(v) && 'length' in v;
+  const hasLength = (v: unknown): v is View<'length', number> => isObject(v) && 'length' in v;
   return !isFunction(value) && (isString(value) || hasLength(value));
 }
 
@@ -124,12 +118,7 @@ export function isFunction(value: unknown): value is AnyFunction {
  */
 export function isAnyJson(value: unknown): value is AnyJson {
   return (
-    value === null ||
-    isString(value) ||
-    isNumber(value) ||
-    isBoolean(value) ||
-    isPlainObject(value) ||
-    isArray(value)
+    value === null || isString(value) || isNumber(value) || isBoolean(value) || isPlainObject(value) || isArray(value)
   );
 }
 
@@ -157,9 +146,6 @@ export function isJsonArray(value: Optional<AnyJson>): value is JsonArray {
  * @param obj The target object to check the key in.
  * @param key The string to test as a key of the target object.
  */
-export function isKeyOf<T extends object, K extends KeyOf<T>>(
-  obj: T,
-  key: string
-): key is K {
+export function isKeyOf<T extends object, K extends KeyOf<T>>(obj: T, key: string): key is K {
   return Object.keys(obj).includes(key);
 }

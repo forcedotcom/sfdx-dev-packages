@@ -24,25 +24,9 @@ import {
   isFunction,
   isString
 } from '../narrowing';
-import {
-  AnyArray,
-  AnyConstructor,
-  AnyFunction,
-  Dictionary,
-  Many,
-  Nullable,
-  Optional,
-  View
-} from '../types';
+import { AnyArray, AnyConstructor, AnyFunction, Dictionary, Many, Nullable, Optional, View } from '../types';
 
-export type PrimitiveType =
-  | 'boolean'
-  | 'function'
-  | 'number'
-  | 'object'
-  | 'string'
-  | 'symbol'
-  | 'undefined';
+export type PrimitiveType = 'boolean' | 'function' | 'number' | 'object' | 'string' | 'symbol' | 'undefined';
 
 export type VerifiableType = PrimitiveType | AnyConstructor;
 
@@ -50,13 +34,8 @@ export type PropertyShape = { type: VerifiableType; optional: boolean };
 
 export type ObjectShape = Dictionary<VerifiableType | PropertyShape>;
 
-export function is<T extends object>(
-  obj: Nullable<object>,
-  shape: ObjectShape
-): obj is T {
-  const isVerifiable = (
-    v: VerifiableType | PropertyShape
-  ): v is VerifiableType => isString(v) || isFunction(v);
+export function is<T extends object>(obj: Nullable<object>, shape: ObjectShape): obj is T {
+  const isVerifiable = (v: VerifiableType | PropertyShape): v is VerifiableType => isString(v) || isFunction(v);
   return (
     !obj ||
     definiteEntriesOf(shape)
@@ -67,9 +46,7 @@ export function is<T extends object>(
       .every(({ key, type, optional }) => {
         return (
           (optional && !(key in obj)) ||
-          (isString(type)
-            ? typeof get(obj, key) === type
-            : get(obj, key) instanceof type)
+          (isString(type) ? typeof get(obj, key) === type : get(obj, key) instanceof type)
         );
       })
   );
@@ -79,10 +56,7 @@ export function is<T extends object>(
 // class Bar { public baz = 'bar'; }
 // const maybeFoo: object = { name: 'bar', bar: new Bar() };
 // const foo = ensure(as<Foo>(maybeFoo, { name: 'string', bar: Bar }));
-export function as<T extends object>(
-  obj: Nullable<object>,
-  shape: ObjectShape
-): Optional<T> {
+export function as<T extends object>(obj: Nullable<object>, shape: ObjectShape): Optional<T> {
   return is<T>(obj, shape) ? obj : undefined;
 }
 
@@ -91,17 +65,11 @@ export function as<T extends object>(
  */
 export type ViewOptional<K extends string, V = unknown> = { [_ in K]?: V };
 
-export function hasNull<T, K extends string>(
-  value: T,
-  key: K
-): value is T & View<K, string> {
+export function hasNull<T, K extends string>(value: T, key: K): value is T & View<K, string> {
   return has(value, key) && value[key] == null;
 }
 
-export function view<T, K extends string>(
-  value: Nullable<T>,
-  keys: Many<K>
-): Optional<T & ViewOptional<K>> {
+export function view<T, K extends string>(value: Nullable<T>, keys: Many<K>): Optional<T & ViewOptional<K>> {
   return has(value, keys) ? value : undefined;
 }
 
@@ -113,31 +81,19 @@ function viewOptional<T, K extends string, R extends T>(
   return hasType(value, key) ? value : hasNull(value, key) ? value : undefined;
 }
 
-export function viewString<T, K extends string>(
-  value: Nullable<T>,
-  key: K
-): Optional<T & ViewOptional<K, string>> {
+export function viewString<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, string>> {
   return viewOptional(value, key, hasString);
 }
 
-export function viewNumber<T, K extends string>(
-  value: Nullable<T>,
-  key: K
-): Optional<T & ViewOptional<K, number>> {
+export function viewNumber<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, number>> {
   return viewOptional(value, key, hasNumber);
 }
 
-export function viewBoolean<T, K extends string>(
-  value: Nullable<T>,
-  key: K
-): Optional<T & ViewOptional<K, boolean>> {
+export function viewBoolean<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, boolean>> {
   return viewOptional(value, key, hasBoolean);
 }
 
-export function viewObject<T, K extends string>(
-  value: Nullable<T>,
-  key: K
-): Optional<T & ViewOptional<K, object>> {
+export function viewObject<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, object>> {
   return viewOptional(value, key, hasObject);
 }
 
@@ -153,17 +109,11 @@ export function viewInstance<T, K extends string, C extends AnyConstructor>(
   key: K,
   ctor: C
 ): Optional<T & ViewOptional<K, InstanceType<C>>> {
-  const hasType = (
-    v: Nullable<T>,
-    k: K
-  ): v is T & ViewOptional<K, InstanceType<C>> => hasInstance(v, k, ctor);
+  const hasType = (v: Nullable<T>, k: K): v is T & ViewOptional<K, InstanceType<C>> => hasInstance(v, k, ctor);
   return viewOptional(value, key, hasType);
 }
 
-export function viewArray<T, K extends string>(
-  value: Nullable<T>,
-  key: K
-): Optional<T & ViewOptional<K, AnyArray>> {
+export function viewArray<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, AnyArray>> {
   return viewOptional(value, key, hasArray);
 }
 

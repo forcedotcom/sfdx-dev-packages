@@ -66,11 +66,7 @@ export class Duration {
       case Duration.Unit.SECONDS:
         return Math.round(this.quantity / Duration.SECONDS_IN_MINUTE);
       case Duration.Unit.MILLISECONDS:
-        return Math.round(
-          this.quantity /
-            Duration.MILLIS_IN_SECONDS /
-            Duration.SECONDS_IN_MINUTE
-        );
+        return Math.round(this.quantity / Duration.MILLIS_IN_SECONDS / Duration.SECONDS_IN_MINUTE);
     }
   }
 
@@ -94,11 +90,7 @@ export class Duration {
   get milliseconds(): number {
     switch (this.unit) {
       case Duration.Unit.MINUTES:
-        return (
-          this.quantity *
-          Duration.SECONDS_IN_MINUTE *
-          Duration.MILLIS_IN_SECONDS
-        );
+        return this.quantity * Duration.SECONDS_IN_MINUTE * Duration.MILLIS_IN_SECONDS;
       case Duration.Unit.SECONDS:
         return this.quantity * Duration.MILLIS_IN_SECONDS;
       case Duration.Unit.MILLISECONDS:
@@ -164,19 +156,13 @@ export function sleep(duration: Duration): InterruptablePromise<void>;
  * await promise;
  * ```
  */
-export function sleep(
-  quantity: number,
-  unit?: Duration.Unit
-): InterruptablePromise<void>;
+export function sleep(quantity: number, unit?: Duration.Unit): InterruptablePromise<void>;
 // underlying function
 export function sleep(
   durationOrQuantity: Duration | number,
   unit: Duration.Unit = Duration.Unit.MILLISECONDS
 ): InterruptablePromise<void> {
-  const duration =
-    durationOrQuantity instanceof Duration
-      ? durationOrQuantity
-      : new Duration(durationOrQuantity, unit);
+  const duration = durationOrQuantity instanceof Duration ? durationOrQuantity : new Duration(durationOrQuantity, unit);
   let handle: Optional<NodeJS.Timer>;
   let doResolve: () => void;
   const wake = () => {
