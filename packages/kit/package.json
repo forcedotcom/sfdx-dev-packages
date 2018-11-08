@@ -23,7 +23,7 @@
     "lint": "yarn sfdx-lint",
     "lodash": "./scripts/build-lodash.sh",
     "postcompile": "shx cp -r src/nodash/support.d.ts lib/nodash",
-    "prepare": "yarn build && yarn docs",
+    "prepack": "yarn sfdx-build",
     "test": "yarn sfdx-test"
   },
   "dependencies": {

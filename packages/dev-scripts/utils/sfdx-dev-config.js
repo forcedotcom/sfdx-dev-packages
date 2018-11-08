@@ -55,7 +55,8 @@ SfdxDevConfig['DEFAULT_SCRIPTS'] = [
   'docs',
   'format',
   'test',
-  'lint'
+  'lint',
+  ['prepack', 'build']
 ];
 SfdxDevConfig['DEFAULT_HUSKY'] = ['commit-msg', 'pre-commit', 'pre-push'];
 

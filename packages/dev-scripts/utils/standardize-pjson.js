@@ -31,16 +31,18 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
 
     const scripts = pjson.get('scripts');
     for (const script of scriptList) {
+      const scriptName = Array.isArray(script) ? script[0] : script;
+      const scriptFile = Array.isArray(script) ? script[1] : script;
       if (isLernaProject) {
-        scripts[script] = `lerna run ${script}`;
+        scripts[scriptName] = `lerna run ${scriptName}`;
       } else {
-        let scriptArgs = script.split('-');
+        let scriptArgs = scriptFile.split('-');
         if (scriptArgs.length > 1) {
-          const scriptName = scriptArgs[0];
+          const scriptFileName = scriptArgs[0];
           scriptArgs = scriptArgs.splice(1).join(' ');
-          scripts[script] = `yarn sfdx-${scriptName} ${scriptArgs}`;
+          scripts[scriptName] = `yarn sfdx-${scriptFileName} ${scriptArgs}`;
         } else {
-          scripts[script] = `yarn sfdx-${script}`;
+          scripts[scriptName] = `yarn sfdx-${scriptFile}`;
         }
       }
     }

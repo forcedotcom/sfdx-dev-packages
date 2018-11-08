@@ -11,6 +11,9 @@ const shell = require('../utils/shelljs');
 const packageRoot = require('../utils/package-path');
 const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
 
-shell.exec(`pretty-quick --config ${prettierConfig}`, {
-  cwd: packageRoot
-});
+shell.exec(
+  `prettier --config ${prettierConfig} --write '+(src|test)/**/*.+(ts|js|json)'`,
+  {
+    cwd: packageRoot
+  }
+);
