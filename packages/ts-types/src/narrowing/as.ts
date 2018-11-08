@@ -5,15 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import {
-  AnyArray,
-  AnyConstructor,
-  AnyFunction,
-  AnyJson,
-  JsonArray,
-  JsonMap,
-  Optional
-} from '../types';
+import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Optional } from '../types';
 import {
   isArray,
   isBoolean,
@@ -41,10 +33,7 @@ export function asString(value: unknown): Optional<string>;
  */
 export function asString(value: unknown, defaultValue: string): string;
 // underlying function
-export function asString(
-  value: unknown,
-  defaultValue?: string
-): Optional<string> {
+export function asString(value: unknown, defaultValue?: string): Optional<string> {
   return isString(value) ? value : defaultValue;
 }
 
@@ -62,10 +51,7 @@ export function asNumber(value: unknown): Optional<number>;
  */
 export function asNumber(value: unknown, defaultValue: number): number;
 // underlying function
-export function asNumber(
-  value: unknown,
-  defaultValue?: number
-): Optional<number> {
+export function asNumber(value: unknown, defaultValue?: number): Optional<number> {
   return isNumber(value) ? value : defaultValue;
 }
 
@@ -83,10 +69,7 @@ export function asBoolean(value: unknown): Optional<boolean>;
  */
 export function asBoolean(value: unknown, defaultValue: boolean): boolean;
 // underlying function
-export function asBoolean(
-  value: unknown,
-  defaultValue?: boolean
-): Optional<boolean> {
+export function asBoolean(value: unknown, defaultValue?: boolean): Optional<boolean> {
   return isBoolean(value) ? value : defaultValue;
 }
 
@@ -104,10 +87,7 @@ export function asObject(value: unknown): Optional<object>;
  */
 export function asObject(value: unknown, defaultValue: object): object;
 // underlying function
-export function asObject(
-  value: unknown,
-  defaultValue?: object
-): Optional<object> {
+export function asObject(value: unknown, defaultValue?: object): Optional<object> {
   return isObject(value) ? value : defaultValue;
 }
 
@@ -125,10 +105,7 @@ export function asPlainObject(value: unknown): Optional<object>;
  */
 export function asPlainObject(value: unknown, defaultValue: object): object;
 // underlying function
-export function asPlainObject(
-  value: unknown,
-  defaultValue?: object
-): Optional<object> {
+export function asPlainObject(value: unknown, defaultValue?: object): Optional<object> {
   return isPlainObject(value) ? value : defaultValue;
 }
 
@@ -138,10 +115,7 @@ export function asPlainObject(
  *
  * @param value The value to test.
  */
-export function asInstance<C extends AnyConstructor>(
-  value: unknown,
-  ctor: C
-): Optional<InstanceType<C>>;
+export function asInstance<C extends AnyConstructor>(value: unknown, ctor: C): Optional<InstanceType<C>>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
@@ -176,10 +150,7 @@ export function asArray(value: unknown): Optional<AnyArray>;
  */
 export function asArray(value: unknown, defaultValue: AnyArray): AnyArray;
 // underlying function
-export function asArray(
-  value: unknown,
-  defaultValue?: AnyArray
-): Optional<AnyArray> {
+export function asArray(value: unknown, defaultValue?: AnyArray): Optional<AnyArray> {
   return isArray(value) ? value : defaultValue;
 }
 
@@ -195,15 +166,9 @@ export function asFunction(value: unknown): Optional<AnyFunction>;
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asFunction(
-  value: unknown,
-  defaultValue: AnyFunction
-): AnyFunction;
+export function asFunction(value: unknown, defaultValue: AnyFunction): AnyFunction;
 // underlying function
-export function asFunction(
-  value: unknown,
-  defaultValue?: AnyFunction
-): Optional<AnyFunction> {
+export function asFunction(value: unknown, defaultValue?: AnyFunction): Optional<AnyFunction> {
   return isFunction(value) ? value : defaultValue;
 }
 
@@ -219,15 +184,9 @@ export function asJsonMap(value: Optional<AnyJson>): Optional<JsonMap>;
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asJsonMap(
-  value: Optional<AnyJson>,
-  defaultValue: JsonMap
-): JsonMap;
+export function asJsonMap(value: Optional<AnyJson>, defaultValue: JsonMap): JsonMap;
 // underlying function
-export function asJsonMap(
-  value: Optional<AnyJson>,
-  defaultValue?: JsonMap
-): Optional<JsonMap> {
+export function asJsonMap(value: Optional<AnyJson>, defaultValue?: JsonMap): Optional<JsonMap> {
   return isJsonMap(value) ? value : defaultValue;
 }
 
@@ -243,14 +202,8 @@ export function asJsonArray(value: Optional<AnyJson>): Optional<JsonArray>;
  * @param value The value to test.
  * @param defaultValue The default to return if the value was undefined or of the incorrect type.
  */
-export function asJsonArray(
-  value: Optional<AnyJson>,
-  defaultValue: JsonArray
-): JsonArray;
+export function asJsonArray(value: Optional<AnyJson>, defaultValue: JsonArray): JsonArray;
 // underlying function
-export function asJsonArray(
-  value: Optional<AnyJson>,
-  defaultValue?: JsonArray
-): Optional<JsonArray> {
+export function asJsonArray(value: Optional<AnyJson>, defaultValue?: JsonArray): Optional<JsonArray> {
   return isJsonArray(value) ? value : defaultValue;
 }

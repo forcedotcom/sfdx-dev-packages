@@ -5,14 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import {
-  definiteEntriesOf,
-  Dictionary,
-  isKeyOf,
-  KeyValue,
-  Nullable,
-  Optional
-} from '@salesforce/ts-types';
+import { definiteEntriesOf, Dictionary, isKeyOf, KeyValue, Nullable, Optional } from '@salesforce/ts-types';
 import { InvalidDefaultEnvValueError } from './errors';
 
 /**
@@ -20,9 +13,7 @@ import { InvalidDefaultEnvValueError } from './errors';
  * for accessing environment variables of different anticipated shapes.
  */
 export class Env {
-  public constructor(
-    private store: Dictionary<string> = (process && process.env) || {}
-  ) {
+  public constructor(private store: Dictionary<string> = (process && process.env) || {}) {
     this.store = store;
   }
 
@@ -62,16 +53,10 @@ export class Env {
    */
   public getStringIn(key: string, values: string[], def: string): string;
   // underlying method
-  public getStringIn(
-    key: string,
-    values: string[],
-    def?: string
-  ): Optional<string> {
+  public getStringIn(key: string, values: string[], def?: string): Optional<string> {
     const re = new RegExp(values.join('|'), 'i');
     if (def && !re.test(def.toString())) {
-      throw new InvalidDefaultEnvValueError(
-        `${def} is not a member of ${values}`
-      );
+      throw new InvalidDefaultEnvValueError(`${def} is not a member of ${values}`);
     }
     const value = this.getString(key);
     if (!value) return def;

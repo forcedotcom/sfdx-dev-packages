@@ -7,11 +7,7 @@
 
 import { Dictionary, JsonMap } from '@salesforce/ts-types';
 import { expect } from 'chai';
-import {
-  JsonDataFormatError,
-  JsonParseError,
-  JsonStringifyError
-} from '../src/errors';
+import { JsonDataFormatError, JsonParseError, JsonStringifyError } from '../src/errors';
 import * as json from '../src/json';
 
 describe('json', () => {
@@ -37,9 +33,7 @@ describe('json', () => {
     });
 
     it('will parse invalid json as an empty obj if throwOnEmpty is false', () => {
-      expect(() => json.parseJson('{', '/path', false)).to.throw(
-        JsonParseError
-      );
+      expect(() => json.parseJson('{', '/path', false)).to.throw(JsonParseError);
     });
   });
 
@@ -102,11 +96,7 @@ describe('json', () => {
           'fail'
         ]
       };
-      expect(json.getJsonValuesByName(data, 'b')).to.deep.equal([
-        'root',
-        'd',
-        'e'
-      ]);
+      expect(json.getJsonValuesByName(data, 'b')).to.deep.equal(['root', 'd', 'e']);
     });
   });
 
