@@ -20,11 +20,7 @@ export class NamedError extends Error {
 
   constructor(name: string, cause?: NamedErrorLike);
   constructor(name: string, message?: string, cause?: NamedErrorLike);
-  constructor(
-    name: string,
-    messageOrCause?: string | NamedErrorLike,
-    cause?: NamedErrorLike
-  ) {
+  constructor(name: string, messageOrCause?: string | NamedErrorLike, cause?: NamedErrorLike) {
     if (typeof messageOrCause === 'string') {
       super(messageOrCause);
       this.cause = cause;
@@ -38,8 +34,7 @@ export class NamedError extends Error {
   public get fullStack(): string | undefined {
     let stack = this.stack;
     if (this.cause && (this.cause.fullStack || this.cause.stack)) {
-      stack = `${stack ? stack + '\n' : ''}Caused by: ${this.cause.fullStack ||
-        this.cause.stack}`;
+      stack = `${stack ? stack + '\n' : ''}Caused by: ${this.cause.fullStack || this.cause.stack}`;
     }
     return stack;
   }
@@ -53,11 +48,7 @@ export class JsonParseError extends NamedError {
    * @param data The data input that caused the error.
    * @param jsonPath The path from which the data was read, if known.
    */
-  public static create(
-    error: SyntaxError,
-    data: string,
-    jsonPath?: string
-  ): JsonParseError {
+  public static create(error: SyntaxError, data: string, jsonPath?: string): JsonParseError {
     // Get the position of the error from the error message. This is the error index
     // within the file contents as 1 long string.
     const positionMatch = error.message.match(/position (\d+)/);
@@ -79,12 +70,7 @@ export class JsonParseError extends NamedError {
     return new JsonParseError(error, jsonPath, lineNumber, errorPortion);
   }
 
-  private static format(
-    cause: Error,
-    path?: string,
-    line?: number,
-    errorPortion?: string
-  ) {
+  private static format(cause: Error, path?: string, line?: number, errorPortion?: string) {
     if (line == null) return cause.message || 'Unknown cause';
     return `Parse error in file ${path} on line ${line}\n${errorPortion}`;
   }
@@ -95,11 +81,7 @@ export class JsonParseError extends NamedError {
     public readonly line?: number,
     public readonly errorPortion?: string
   ) {
-    super(
-      'JsonParseError',
-      JsonParseError.format(cause, path, line, errorPortion),
-      cause
-    );
+    super('JsonParseError', JsonParseError.format(cause, path, line, errorPortion), cause);
   }
 }
 

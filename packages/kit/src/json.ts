@@ -15,11 +15,7 @@ import {
   JsonMap,
   Optional
 } from '@salesforce/ts-types';
-import {
-  JsonDataFormatError,
-  JsonParseError,
-  JsonStringifyError
-} from './errors';
+import { JsonDataFormatError, JsonParseError, JsonStringifyError } from './errors';
 
 /**
  * Parse JSON `string` data.
@@ -29,11 +25,7 @@ import {
  * @param throwOnEmpty If the data contents are empty.
  * @throws {@link JsonParseError} If the data contents are empty or the data is invalid.
  */
-export function parseJson(
-  data: string,
-  jsonPath?: string,
-  throwOnEmpty = true
-): AnyJson {
+export function parseJson(data: string, jsonPath?: string, throwOnEmpty = true): AnyJson {
   data = data.trim();
   if (!throwOnEmpty && data.length === 0) data = '{}';
   try {
@@ -52,11 +44,7 @@ export function parseJson(
  * @throws {@link JsonParseError} If the data contents are empty or the data is invalid.
  * @throws {@link JsonDataFormatError} If the data contents are not a `JsonMap`.
  */
-export function parseJsonMap(
-  data: string,
-  jsonPath?: string,
-  throwOnEmpty?: boolean
-): JsonMap {
+export function parseJsonMap(data: string, jsonPath?: string, throwOnEmpty?: boolean): JsonMap {
   const json = parseJson(data, jsonPath, throwOnEmpty);
   if (json === null || isJsonArray(json) || typeof json !== 'object') {
     throw new JsonDataFormatError('Expected parsed JSON data to be an object');
@@ -89,10 +77,7 @@ export function cloneJson<T extends object>(obj: T): T {
  * @param json The `JsonMap` tree to search for elements of the given name.
  * @param name The name of elements to search for.
  */
-export function getJsonValuesByName<T extends AnyJson = AnyJson>(
-  json: JsonMap,
-  name: string
-): T[] {
+export function getJsonValuesByName<T extends AnyJson = AnyJson>(json: JsonMap, name: string): T[] {
   let matches: T[] = [];
   if (json.hasOwnProperty(name)) {
     matches.push(json[name] as T); // Asserting T here assumes the caller knows what they are asking for
@@ -102,10 +87,7 @@ export function getJsonValuesByName<T extends AnyJson = AnyJson>(
       matches = matches.concat(getJsonValuesByName(element, name));
     }
   };
-  Object.values(json).forEach(
-    value =>
-      isJsonArray(value) ? value.forEach(maybeRecurse) : maybeRecurse(value)
-  );
+  Object.values(json).forEach(value => (isJsonArray(value) ? value.forEach(maybeRecurse) : maybeRecurse(value)));
   return matches;
 }
 
@@ -116,10 +98,7 @@ export function getJsonValuesByName<T extends AnyJson = AnyJson>(
  * @param json The container to search.
  * @param value The value search for.
  */
-export function jsonIncludes(
-  json: Optional<AnyJson>,
-  value: Optional<AnyJson>
-): boolean {
+export function jsonIncludes(json: Optional<AnyJson>, value: Optional<AnyJson>): boolean {
   if (json == null || isNumber(json) || isBoolean(json)) return false;
   if (isJsonMap(json)) return Object.values(json).includes(value);
   if (isJsonArray(json)) return json.includes(value);

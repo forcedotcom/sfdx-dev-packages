@@ -6,27 +6,8 @@
  */
 
 import { UnexpectedValueTypeError } from '../errors';
-import {
-  AnyArray,
-  AnyConstructor,
-  AnyFunction,
-  AnyJson,
-  JsonArray,
-  JsonMap,
-  Nullable,
-  Optional
-} from '../types';
-import {
-  asArray,
-  asBoolean,
-  asFunction,
-  asInstance,
-  asJsonArray,
-  asJsonMap,
-  asNumber,
-  asObject,
-  asString
-} from './as';
+import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Nullable, Optional } from '../types';
+import { asArray, asBoolean, asFunction, asInstance, asJsonArray, asJsonMap, asNumber, asObject, asString } from './as';
 import { isAnyJson } from './is';
 import { toAnyJson } from './to';
 
@@ -108,15 +89,8 @@ export function ensurePlainObject(value: unknown, message?: string): object {
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureInstance<C extends AnyConstructor>(
-  value: unknown,
-  ctor: C,
-  message?: string
-): InstanceType<C> {
-  return ensure(
-    asInstance(value, ctor),
-    message || `Value is not an instance of ${ctor.name}`
-  );
+export function ensureInstance<C extends AnyConstructor>(value: unknown, ctor: C, message?: string): InstanceType<C> {
+  return ensure(asInstance(value, ctor), message || `Value is not an instance of ${ctor.name}`);
 }
 
 /**
@@ -152,9 +126,7 @@ export function ensureFunction(value: unknown, message?: string): AnyFunction {
  */
 export function ensureAnyJson(value: unknown, message?: string): AnyJson {
   if (!isAnyJson(value)) {
-    throw new UnexpectedValueTypeError(
-      message || 'Value is not a JSON-compatible value type'
-    );
+    throw new UnexpectedValueTypeError(message || 'Value is not a JSON-compatible value type');
   }
   return toAnyJson(value);
 }
@@ -166,10 +138,7 @@ export function ensureAnyJson(value: unknown, message?: string): AnyJson {
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureJsonMap(
-  value: Optional<AnyJson>,
-  message?: string
-): JsonMap {
+export function ensureJsonMap(value: Optional<AnyJson>, message?: string): JsonMap {
   return ensure(asJsonMap(value), message || 'Value is not a JsonMap');
 }
 
@@ -180,9 +149,6 @@ export function ensureJsonMap(
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureJsonArray(
-  value: Optional<AnyJson>,
-  message?: string
-): JsonArray {
+export function ensureJsonArray(value: Optional<AnyJson>, message?: string): JsonArray {
   return ensure(asJsonArray(value), message || 'Value is not JsonArray');
 }

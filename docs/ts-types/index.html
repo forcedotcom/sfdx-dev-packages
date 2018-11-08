@@ -1194,18 +1194,18 @@ img { max-width: 100%; }
 <div class="container container-main">
 	<div class="content-wrap">
 		<div class="tsd-panel tsd-typography">
-			<h1 id="types-for-salesforce-cli-development">Types for Salesforce CLI development</h1>
+			<h1 id="types-and-tools-for-salesforce-typescript-development">Types and tools for Salesforce TypeScript development</h1>
 			<h2 id="what-is-this-">What is this?</h2>
-			<p>This is a simple TypeScript-oriented library developed for use in Salesforce CLI libraries, applications, and plugins consisting of two parts:</p>
+			<p>This is a simple TypeScript-oriented library developed for use in Salesforce TypeScript libraries, applications, and plugins consisting of two parts:</p>
 			<ol>
 				<li>A collection of commonly desired types.</li>
 				<li>A collection of type-narrowing convenience functions for writing concise type-guards.</li>
 			</ol>
 			<p>See the <a href="https://forcedotcom.github.io/sfdx-dev-packages/ts-types">API documentation</a> for more details on each of the utilities that <code>ts-types</code> provides.</p>
 			<h2 id="why-did-we-create-it-">Why did we create it?</h2>
-			<p>We were interested in enabling strict compiler settings in TypeScript. Among the sub-settings that comprise strict mode are &quot;strict null checks&quot;, &quot;strict property initialization&quot;, and &quot;no implicit any&quot;. These settings have the potential to increase code quality substantially, reducing the frequency of certain classes of runtime errors typical in JavaScript applications. They also encourage the writing of clearer code, which helps teams work together and more rapidly onboard new hires.</p>
+			<p>We were interested in developing with <em>strict</em> compiler settings in TypeScript. Among the sub-settings that comprise strict mode are <code>strictNullChecks</code>, <code>strictPropertyInitialization</code>, and <code>noImplicitAny</code>. <code>tslint</code> provides additional rules that further improve code quality and type correctness by discouraging explicit <code>any</code> usages and other unsafe constructs such as some classes of unwarranted type assertions. Together, these settings have the potential to increase code quality substantially, reducing the frequency of certain classes of runtime errors typical in classical JavaScript applications. They also encourage the writing of clearer, more accurately typed code, which helps teams work together more effectively and more rapidly onboard new hires.</p>
 			<p>Of course, stricter compiler settings require developers to write more type-safe code -- or to work around the compiler&#39;s insistence on type-safety. Often this stricter style leads to more verbose code in the way of type declarations and type guards, and can require new and occasionally unfamiliar patterns to accomplish without subverting the compiler&#39;s enforcement of the type system (typically via the use of type assertions).</p>
-			<p>TypeScript provides both syntax and built-in types designed to help write well-typed code, but we can be more terse and concise by employing additional types and type-oriented utilities. That&#39;s where this library comes in.</p>
+			<p>TypeScript provides both syntax and built-in types designed to help write well-typed code, but we can be more terse and concise by employing additional types and type-narrowing utility functions by leveraging language features like type predicates backed by sound runtime validation, simplified <code>undefined</code> and <code>null</code> checking, etc. That&#39;s where this library comes in.</p>
 			<h2 id="how-will-it-help-me-">How will it help me?</h2>
 			<p>This library has its roots in solving the problem of how to handle untyped JSON data in a type-safe way. It was born when we added some basic type declarations to replace the unsafe <code>any</code> type as a stand-in for JSON data with a type that could capture the range of data available in any JSON construct. This yielded the <code>AnyJson</code> type, which is effectively a union of all primitive and collection JSON values. The type alone was not enough to make for convenient, type-guarded handling of JSON data, however. TypeScript supports a very elegant system of control flow analysis that will narrow the type of a variable in code after the compiler can prove the set of possible types of the variable has been reduced. Using type guards in your code improves its runtime type safety characteristics, makes it more readable, and provides richer typing information for IDEs. Type guards are implemented as conditional statements, however, and can quickly become noisy and make what was once terse JavaScript code expand into several lines of type checking. This library aimed to simplify the experience of reducing the amount of type guards needed to process a typed-JSON data structure by providing several convenience functions that help extract well-typed data from such JSON structures.</p>
 			<p>For example, look at the following typical untyped JSON processing in JavaScript:</p>
@@ -1602,7 +1602,7 @@ definiteEntriesOf().forEach();</code></pre>
 				<div class="tsd-signature tsd-kind-icon">Literals<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Extract</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">{ [K in keyof T]: string extends K ? never : number extends K ? never : K; } extends { [_ in keyof T]: infer U; } ? U : never</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in types/conditional.d.ts:51</li>
+						<li>Defined in types/conditional.d.ts:47</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1757,7 +1757,7 @@ definiteEntriesOf().forEach();</code></pre>
 				<div class="tsd-signature tsd-kind-icon">Required<wbr>Non<wbr>Nullable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RequiredNonNullable&lt;T&gt;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in types/conditional.d.ts:43</li>
+						<li>Defined in types/conditional.d.ts:41</li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -1825,7 +1825,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:170</li>
+								<li>Defined in narrowing/as.ts:144</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1847,7 +1847,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:177</li>
+								<li>Defined in narrowing/as.ts:151</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1885,7 +1885,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:77</li>
+								<li>Defined in narrowing/as.ts:63</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1907,7 +1907,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:84</li>
+								<li>Defined in narrowing/as.ts:70</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1945,7 +1945,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:191</li>
+								<li>Defined in narrowing/as.ts:162</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1967,7 +1967,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:198</li>
+								<li>Defined in narrowing/as.ts:169</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2005,7 +2005,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:141</li>
+								<li>Defined in narrowing/as.ts:118</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2037,7 +2037,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:151</li>
+								<li>Defined in narrowing/as.ts:125</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2084,7 +2084,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:239</li>
+								<li>Defined in narrowing/as.ts:198</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2106,7 +2106,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:246</li>
+								<li>Defined in narrowing/as.ts:205</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2144,7 +2144,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:215</li>
+								<li>Defined in narrowing/as.ts:180</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2166,7 +2166,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:222</li>
+								<li>Defined in narrowing/as.ts:187</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2204,7 +2204,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:56</li>
+								<li>Defined in narrowing/as.ts:45</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2226,7 +2226,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:63</li>
+								<li>Defined in narrowing/as.ts:52</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2264,7 +2264,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:98</li>
+								<li>Defined in narrowing/as.ts:81</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2286,7 +2286,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:105</li>
+								<li>Defined in narrowing/as.ts:88</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2324,7 +2324,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:119</li>
+								<li>Defined in narrowing/as.ts:99</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2346,7 +2346,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:126</li>
+								<li>Defined in narrowing/as.ts:106</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2384,7 +2384,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:35</li>
+								<li>Defined in narrowing/as.ts:27</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2406,7 +2406,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/as.ts:42</li>
+								<li>Defined in narrowing/as.ts:34</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2508,7 +2508,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/coerce.ts:78</li>
+								<li>Defined in narrowing/coerce.ts:67</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2539,7 +2539,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/coerce.ts:88</li>
+								<li>Defined in narrowing/coerce.ts:77</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2586,7 +2586,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/coerce.ts:46</li>
+								<li>Defined in narrowing/coerce.ts:43</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2617,7 +2617,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/coerce.ts:58</li>
+								<li>Defined in narrowing/coerce.ts:53</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2663,7 +2663,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/object.ts:135</li>
+								<li>Defined in narrowing/object.ts:127</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2709,7 +2709,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/object.ts:120</li>
+								<li>Defined in narrowing/object.ts:114</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2748,7 +2748,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/object.ts:150</li>
+								<li>Defined in narrowing/object.ts:140</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2787,7 +2787,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:40</li>
+								<li>Defined in narrowing/ensure.ts:21</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2835,7 +2835,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:153</li>
+								<li>Defined in narrowing/ensure.ts:127</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2878,7 +2878,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:129</li>
+								<li>Defined in narrowing/ensure.ts:103</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2920,7 +2920,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:76</li>
+								<li>Defined in narrowing/ensure.ts:57</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -2962,7 +2962,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:140</li>
+								<li>Defined in narrowing/ensure.ts:114</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3004,7 +3004,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:111</li>
+								<li>Defined in narrowing/ensure.ts:92</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3056,7 +3056,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:183</li>
+								<li>Defined in narrowing/ensure.ts:152</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3098,7 +3098,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:169</li>
+								<li>Defined in narrowing/ensure.ts:141</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3140,7 +3140,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:65</li>
+								<li>Defined in narrowing/ensure.ts:46</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3182,7 +3182,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:87</li>
+								<li>Defined in narrowing/ensure.ts:68</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3224,7 +3224,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:99</li>
+								<li>Defined in narrowing/ensure.ts:80</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3267,7 +3267,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/ensure.ts:54</li>
+								<li>Defined in narrowing/ensure.ts:35</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3309,7 +3309,7 @@ definiteEntriesOf().forEach();</code></pre>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/object.ts:72</li>
+								<li>Defined in narrowing/object.ts:70</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3424,7 +3424,7 @@ const <span class="hljs-keyword">value</span> = <span class="hljs-keyword">get</
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:454</li>
+								<li>Defined in narrowing/get.ts:373</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3457,7 +3457,7 @@ const <span class="hljs-keyword">value</span> = getAnyJson(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:472</li>
+								<li>Defined in narrowing/get.ts:388</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3505,7 +3505,7 @@ const <span class="hljs-keyword">value</span> = getAnyJson(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:362</li>
+								<li>Defined in narrowing/get.ts:303</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3537,7 +3537,7 @@ const <span class="hljs-keyword">value</span> = getArray(obj, <span class="hljs-
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:380</li>
+								<li>Defined in narrowing/get.ts:318</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3585,7 +3585,7 @@ const <span class="hljs-keyword">value</span> = getArray(obj, <span class="hljs-
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:175</li>
+								<li>Defined in narrowing/get.ts:149</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3617,7 +3617,7 @@ const <span class="hljs-keyword">value</span> = getBoolean(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:193</li>
+								<li>Defined in narrowing/get.ts:164</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3665,7 +3665,7 @@ const <span class="hljs-keyword">value</span> = getBoolean(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:407</li>
+								<li>Defined in narrowing/get.ts:337</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3697,7 +3697,7 @@ const <span class="hljs-keyword">value</span> = getBoolean(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:425</li>
+								<li>Defined in narrowing/get.ts:352</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3745,7 +3745,7 @@ const <span class="hljs-keyword">value</span> = getBoolean(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:313</li>
+								<li>Defined in narrowing/get.ts:254</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3787,7 +3787,7 @@ const <span class="hljs-keyword">value</span> = getBoolean(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:333</li>
+								<li>Defined in narrowing/get.ts:274</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3845,7 +3845,7 @@ const <span class="hljs-keyword">value</span> = getBoolean(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:544</li>
+								<li>Defined in narrowing/get.ts:441</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3877,7 +3877,7 @@ const <span class="hljs-keyword">value</span> = getJsonArray(obj, <span class="h
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:562</li>
+								<li>Defined in narrowing/get.ts:456</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3925,7 +3925,7 @@ const <span class="hljs-keyword">value</span> = getJsonArray(obj, <span class="h
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:499</li>
+								<li>Defined in narrowing/get.ts:407</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -3957,7 +3957,7 @@ const <span class="hljs-keyword">value</span> = getJsonMap(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:517</li>
+								<li>Defined in narrowing/get.ts:422</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4005,7 +4005,7 @@ const <span class="hljs-keyword">value</span> = getJsonMap(obj, <span class="hlj
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:130</li>
+								<li>Defined in narrowing/get.ts:115</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4037,7 +4037,7 @@ const <span class="hljs-keyword">value</span> = getNumber(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:148</li>
+								<li>Defined in narrowing/get.ts:130</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4085,7 +4085,7 @@ const <span class="hljs-keyword">value</span> = getNumber(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:220</li>
+								<li>Defined in narrowing/get.ts:183</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4117,7 +4117,7 @@ const <span class="hljs-keyword">value</span> = getObject(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:238</li>
+								<li>Defined in narrowing/get.ts:198</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4162,7 +4162,7 @@ const <span class="hljs-keyword">value</span> = getObject(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:266</li>
+								<li>Defined in narrowing/get.ts:218</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4195,7 +4195,7 @@ const <span class="hljs-keyword">value</span> = getPlainObject(obj, <span class=
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:285</li>
+								<li>Defined in narrowing/get.ts:234</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4241,7 +4241,7 @@ const <span class="hljs-keyword">value</span> = getPlainObject(obj, <span class=
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:85</li>
+								<li>Defined in narrowing/get.ts:81</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4273,7 +4273,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/get.ts:103</li>
+								<li>Defined in narrowing/get.ts:96</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4320,7 +4320,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:40</li>
+								<li>Defined in narrowing/has.ts:32</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4378,7 +4378,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:228</li>
+								<li>Defined in narrowing/has.ts:199</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4430,7 +4430,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:118</li>
+								<li>Defined in narrowing/has.ts:98</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4482,7 +4482,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:252</li>
+								<li>Defined in narrowing/has.ts:220</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4533,7 +4533,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:202</li>
+								<li>Defined in narrowing/has.ts:173</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4595,7 +4595,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:93</li>
+								<li>Defined in narrowing/has.ts:76</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4647,7 +4647,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:145</li>
+								<li>Defined in narrowing/has.ts:122</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4701,7 +4701,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:173</li>
+								<li>Defined in narrowing/has.ts:147</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4756,7 +4756,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/has.ts:68</li>
+								<li>Defined in narrowing/has.ts:54</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4808,7 +4808,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:125</li>
+								<li>Defined in narrowing/is.ts:119</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4840,7 +4840,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:94</li>
+								<li>Defined in narrowing/is.ts:89</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4871,7 +4871,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:103</li>
+								<li>Defined in narrowing/is.ts:98</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4933,7 +4933,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:115</li>
+								<li>Defined in narrowing/is.ts:109</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4964,7 +4964,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:82</li>
+								<li>Defined in narrowing/is.ts:80</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5004,7 +5004,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:150</li>
+								<li>Defined in narrowing/is.ts:139</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5035,7 +5035,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:141</li>
+								<li>Defined in narrowing/is.ts:130</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5066,7 +5066,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/is.ts:160</li>
+								<li>Defined in narrowing/is.ts:149</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5389,7 +5389,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:108</li>
+								<li>Defined in narrowing/to.ts:92</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5428,7 +5428,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:122</li>
+								<li>Defined in narrowing/to.ts:106</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5483,7 +5483,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:68</li>
+								<li>Defined in narrowing/to.ts:60</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5522,7 +5522,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:84</li>
+								<li>Defined in narrowing/to.ts:74</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5576,7 +5576,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/object.ts:106</li>
+								<li>Defined in narrowing/object.ts:102</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

@@ -17,23 +17,10 @@
 // * Add tests that verify the expected type signatures... at a minimum, add tests for the relevant fn examples
 //   published in the lodash documentation for that fn.
 
-import {
-  AnyFunction,
-  Dictionary,
-  Many,
-  Nullable,
-  Optional
-} from '@salesforce/ts-types';
+import { AnyFunction, Dictionary, Many, Nullable, Optional } from '@salesforce/ts-types';
 // @ts-ignore ignore the demand for typings for the locally built lodash
 import * as _ from '../../vendor/lodash';
-import {
-  ListIteratee,
-  NumericDictionary,
-  ObjectIteratee,
-  Omit,
-  ValueIteratee,
-  ValueIterateeCustom
-} from './support';
+import { ListIteratee, NumericDictionary, ObjectIteratee, Omit, ValueIteratee, ValueIterateeCustom } from './support';
 
 /**
  * Assigns own enumerable properties of source object(s) to the destination object for all destination
@@ -49,20 +36,11 @@ export function defaults<T, S>(obj: T, source: S): S & T;
 /**
  * @see defaults
  */
-export function defaults<T, S1, S2>(
-  obj: T,
-  source1: S1,
-  source2: S2
-): S2 & S1 & T;
+export function defaults<T, S1, S2>(obj: T, source1: S1, source2: S2): S2 & S1 & T;
 /**
  * @see defaults
  */
-export function defaults<T, S1, S2, S3>(
-  obj: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): S3 & S2 & S1 & T;
+export function defaults<T, S1, S2, S3>(obj: T, source1: S1, source2: S2, source3: S3): S3 & S2 & S1 & T;
 /**
  * @see defaults
  */
@@ -89,10 +67,7 @@ export function defaults(obj: unknown, ...otherArgs: Array<unknown>): unknown {
  * @param obj The object to search.
  * @param predicate The function invoked per iteration.
  */
-export function findKey<T>(
-  obj: Nullable<T>,
-  predicate?: ObjectIteratee<T>
-): Optional<string> {
+export function findKey<T>(obj: Nullable<T>, predicate?: ObjectIteratee<T>): Optional<string> {
   return _.findKey(obj, predicate);
 }
 
@@ -143,17 +118,11 @@ export function keyBy(collection: unknown, iteratee?: unknown): unknown {
  * @param obj The object to iterate over.
  * @param iteratee The function invoked per iteration.
  */
-export function mapKeys<T>(
-  object: Nullable<ArrayLike<T>>,
-  iteratee?: ListIteratee<T>
-): Dictionary<T>;
+export function mapKeys<T>(object: Nullable<ArrayLike<T>>, iteratee?: ListIteratee<T>): Dictionary<T>;
 /**
  * @see mapKeys
  */
-export function mapKeys<T extends object>(
-  object: Nullable<T>,
-  iteratee?: ObjectIteratee<T>
-): Dictionary<T[keyof T]>;
+export function mapKeys<T extends object>(object: Nullable<T>, iteratee?: ObjectIteratee<T>): Dictionary<T[keyof T]>;
 // underlying function
 export function mapKeys(obj: unknown, iteratee?: unknown): unknown {
   return _.mapKeys(obj, iteratee);
@@ -167,10 +136,7 @@ export function mapKeys(obj: unknown, iteratee?: unknown): unknown {
  * @param array The array to iterate over.
  * @param iteratee The iteratee invoked per element.
  */
-export function minBy<T>(
-  collection: Nullable<ArrayLike<T>>,
-  iteratee?: ValueIteratee<T>
-): Optional<T> {
+export function minBy<T>(collection: Nullable<ArrayLike<T>>, iteratee?: ValueIteratee<T>): Optional<T> {
   return _.minBy(collection, iteratee);
 }
 
@@ -182,10 +148,7 @@ export function minBy<T>(
  * @param array The array to iterate over.
  * @param iteratee The iteratee invoked per element.
  */
-export function maxBy<T>(
-  collection: Nullable<ArrayLike<T>>,
-  iteratee?: ValueIteratee<T>
-): Optional<T> {
+export function maxBy<T>(collection: Nullable<ArrayLike<T>>, iteratee?: ValueIteratee<T>): Optional<T> {
   return _.maxBy(collection, iteratee);
 }
 
@@ -206,20 +169,11 @@ export function merge<T, S>(object: T, source: S): T & S;
 /**
  * @see merge
  */
-export function merge<T, S1, S2>(
-  object: T,
-  source1: S1,
-  source2: S2
-): T & S1 & S2;
+export function merge<T, S1, S2>(object: T, source1: S1, source2: S2): T & S1 & S2;
 /**
  * @see merge
  */
-export function merge<T, S1, S2, S3>(
-  object: T,
-  source1: S1,
-  source2: S2,
-  source3: S3
-): T & S1 & S2 & S3;
+export function merge<T, S1, S2, S3>(object: T, source1: S1, source2: S2, source3: S3): T & S1 & S2 & S3;
 /**
  * @see merge
  */
@@ -242,24 +196,15 @@ export function merge(obj: unknown, ...otherArgs: Array<unknown>): unknown {
  * @param obj The source object.
  * @param paths The property names to omit, specified individually or in arrays..
  */
-export function omit<T extends Dictionary<unknown>>(
-  obj: Nullable<T>,
-  ...paths: Array<Many<PropertyKey>>
-): T;
+export function omit<T extends Dictionary<unknown>>(obj: Nullable<T>, ...paths: Array<Many<PropertyKey>>): T;
 /**
  * @see omit
  */
-export function omit<T extends object, K extends keyof T>(
-  obj: Nullable<T>,
-  ...paths: Array<Many<K>>
-): Omit<T, K>;
+export function omit<T extends object, K extends keyof T>(obj: Nullable<T>, ...paths: Array<Many<K>>): Omit<T, K>;
 /**
  * @see omit
  */
-export function omit<T extends object>(
-  obj: Nullable<T>,
-  ...paths: Array<Many<PropertyKey>>
-): Partial<T>;
+export function omit<T extends object>(obj: Nullable<T>, ...paths: Array<Many<PropertyKey>>): Partial<T>;
 // underlying function
 export function omit(obj: unknown, ...paths: Array<unknown>): unknown {
   return _.omit(obj, ...paths);
@@ -303,10 +248,7 @@ export function set(obj: unknown, path: string, value: unknown): unknown {
  * @param collection The collection to iterate over.
  * @param iteratees The iteratees to sort by, specified individually or in arrays.
  */
-export function sortBy<T>(
-  collection: Nullable<ArrayLike<T>>,
-  ...iteratees: Array<Many<ListIteratee<T>>>
-): T[];
+export function sortBy<T>(collection: Nullable<ArrayLike<T>>, ...iteratees: Array<Many<ListIteratee<T>>>): T[];
 /**
  * @see sortBy
  */
@@ -315,10 +257,7 @@ export function sortBy<T extends object>(
   ...iteratees: Array<Many<ObjectIteratee<T>>>
 ): Array<T[keyof T]>;
 // underlying function
-export function sortBy(
-  collection: unknown,
-  ...iteratees: Array<unknown>
-): unknown {
+export function sortBy(collection: unknown, ...iteratees: Array<unknown>): unknown {
   return _.sortBy(collection, ...iteratees);
 }
 

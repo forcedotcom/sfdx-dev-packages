@@ -45,9 +45,7 @@ describe('JsonParseError', () => {
       expect(jsonErr.path).to.equal('fake.json');
       expect(jsonErr.line).to.equal(1);
       expect(jsonErr.errorPortion).to.equal('{blah}');
-      expect(jsonErr.message).to.equal(
-        'Parse error in file fake.json on line 1\n{blah}'
-      );
+      expect(jsonErr.message).to.equal('Parse error in file fake.json on line 1\n{blah}');
     }
   });
 

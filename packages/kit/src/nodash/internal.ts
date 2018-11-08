@@ -5,14 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import {
-  hasNumber,
-  isArrayLike,
-  isBoolean,
-  isNumber,
-  isObject,
-  Optional
-} from '@salesforce/ts-types';
+import { hasNumber, isArrayLike, isBoolean, isNumber, isObject, Optional } from '@salesforce/ts-types';
 
 /**
  * Checks if value is empty. A value is considered empty unless it’s an arguments object, array, string, or

@@ -39,9 +39,7 @@ export type StubbedType<T extends object> = {
  * Any {@link StubbedType} who is also a callable TypeScript function type.
  */
 // tslint:disable-next-line:no-any
-export type StubbedCallableType<T extends object> = Stub<
-  StubbedType<T> & OpenFunction
->;
+export type StubbedCallableType<T extends object> = Stub<StubbedType<T> & OpenFunction>;
 
 /**
  * Provides the ability to stub methods on object instances and prototypes. More it specifically provides a mechanism
@@ -50,11 +48,7 @@ export type StubbedCallableType<T extends object> = Stub<
  * @param target The target object of the stubbing operation.
  * @param method The method name of the stub.
  */
-export function stubMethod<T extends object>(
-  sandbox: SinonSandbox,
-  target: T,
-  method: string
-): SinonStub {
+export function stubMethod<T extends object>(sandbox: SinonSandbox, target: T, method: string): SinonStub {
   // force method to keyof T to allow stubbing private, protected, and methods otherwise not exposed in typings
   return sandbox.stub(target, method as keyof T);
 }
@@ -66,11 +60,7 @@ export function stubMethod<T extends object>(
  * @param target The target object of the stubbing operation.
  * @param method The method name of the stub.
  */
-export function spyMethod<T extends object>(
-  sandbox: SinonSandbox,
-  target: T,
-  method: string
-): SinonSpy {
+export function spyMethod<T extends object>(sandbox: SinonSandbox, target: T, method: string): SinonSpy {
   // force method to keyof T to allow spying on private, protected, and methods otherwise not exposed in typings
   return sandbox.spy(target, method as keyof T);
 }
@@ -113,10 +103,7 @@ export function stubObject<T extends object>(
  * @param sandbox The Sinon sandbox in which to perform the relevant stubbing.
  * @param members Optional overrides of zero or more members of the object.
  */
-export function stubInterface<T extends object>(
-  sandbox: SinonSandbox,
-  members: OpenDictionary = {}
-): StubbedType<T> {
+export function stubInterface<T extends object>(sandbox: SinonSandbox, members: OpenDictionary = {}): StubbedType<T> {
   return new Proxy(
     {},
     {
@@ -140,11 +127,7 @@ export function stubCallable<T extends object>(
 ): StubbedCallableType<T> {
   return new Proxy(sandbox.stub().callsFake(fake), {
     get: makeProxyGet(sandbox, members, false),
-    apply: (
-      target: OpenFunction,
-      thisArg: unknown,
-      argumentsList: Array<unknown>
-    ) => {
+    apply: (target: OpenFunction, thisArg: unknown, argumentsList: Array<unknown>) => {
       return target.apply(thisArg, argumentsList);
     }
   }) as StubbedCallableType<T>;
@@ -165,11 +148,7 @@ export function fromStub<T extends object>(stubbed: StubbedType<T>): T {
 }
 
 // Internal implementation for the generated proxy getters.
-const makeProxyGet = (
-  sandbox: SinonSandbox,
-  members: OpenDictionary,
-  stubMissing: boolean
-) => {
+const makeProxyGet = (sandbox: SinonSandbox, members: OpenDictionary, stubMissing: boolean) => {
   const cache: OpenDictionary = {};
   return (target: OpenDictionary, name: string) => {
     const stubMemberFn = (fn: OpenFunction) => {

@@ -29,6 +29,7 @@
     "docs": "yarn sfdx-docs",
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
+    "prepack": "yarn sfdx-build",
     "test": "yarn sfdx-test"
   }
 }

@@ -59,9 +59,7 @@ describe('Env', () => {
   });
 
   it('should throw given an invalid default and an invalid member of a known set of values', () => {
-    expect(() => env.getStringIn('SET2', ['a', 'b'], 'c')).to.throw(
-      InvalidDefaultEnvValueError
-    );
+    expect(() => env.getStringIn('SET2', ['a', 'b'], 'c')).to.throw(InvalidDefaultEnvValueError);
   });
 
   it('should get a string envar as a key of an object', () => {
