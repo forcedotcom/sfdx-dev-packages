@@ -13,6 +13,7 @@
     "install": "yarn sfdx-lerna-install",
     "lint": "lerna run lint",
     "postclean-all": "yarn sfdx-clean all",
+    "prepack": "lerna run prepack",
     "test": "lerna run test"
   },
   "devDependencies": {
