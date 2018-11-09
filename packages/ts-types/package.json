@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/ts-types",
-  "version": "0.17.3",
+  "version": "0.17.4",
   "description": "Types and related utilities for TypeScript",
   "main": "lib/index.js",
   "repository": "https://git.soma.salesforce.com/salesforcedx/sfdx-ts-types",
@@ -28,6 +28,6 @@
     "tslib": "^1"
   },
   "devDependencies": {
-    "@salesforce/dev-scripts": "^0.3.2"
+    "@salesforce/dev-scripts": "^0.3.3"
   }
 }
