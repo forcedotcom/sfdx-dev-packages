@@ -41,3 +41,15 @@ Currently, we have the following packages:
 - Learn more in its [README](packages/ts-sinon/README.md).
 - See the code at [packages/ts-sinon](packages/ts-sinon).
 - Read the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/ts-sinon).
+
+### [@salesforce/require-analytics](https://www.npmjs.com/package/@salesforce/require-analytics) - Generates simple runtime module loading diagnostic analytics
+
+- Learn more in its [README](packages/require-analytics/README.md).
+- See the code at [packages/ts-sinon](packages/require-analytics).
+- Read the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/require-analytics).
+
+### [@salesforce/lazy-require](https://www.npmjs.com/package/@salesforce/lazy-require) - CommonJS `require` interceptor that lazily loads packages via proxy
+
+- Learn more in its [README](packages/lazy-require/README.md).
+- See the code at [packages/ts-sinon](packages/lazy-require).
+- Read the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/lazy-require).
