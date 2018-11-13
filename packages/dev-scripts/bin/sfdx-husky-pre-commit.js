@@ -14,17 +14,3 @@ const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
 shell.exec(`pretty-quick --staged --config ${prettierConfig}`, {
   cwd: packageRoot
 });
-
-shell.exec('yarn compile', {
-  cwd: packageRoot
-});
-
-shell.exec('yarn docs', {
-  cwd: packageRoot
-});
-
-shell.set('+e');
-shell.exec('git add docs', {
-  cwd: packageRoot
-});
-shell.set('-e');

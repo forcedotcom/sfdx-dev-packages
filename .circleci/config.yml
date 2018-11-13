@@ -96,6 +96,14 @@ jobs:
       - run: git pull origin develop
       - run: git merge origin/master
       - run: git push origin develop
+  ci-docs:
+    <<: *base
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '62:cb:86:a5:2b:57:ef:a8:a1:c2:cf:38:50:d0:61:58'
+      - checkout
+      - run: yarn ci-docs
 
 workflows:
   version: 2
@@ -110,6 +118,11 @@ workflows:
             - node-latest
             - node-8
       - merge:
+          filters:
+            branches: { only: master }
+          requires:
+            - release
+      - ci-docs:
           filters:
             branches: { only: master }
           requires:

@@ -9,7 +9,7 @@
 
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { start } from '.';
+import { start } from '../src';
 
 describe('start', () => {
   let sandbox: sinon.SinonSandbox;
