@@ -921,6 +921,9 @@ img { max-width: 100%; }
 				</li>
 			</ul>
 		</li>
+		<li class=" tsd-kind-class tsd-has-type-parameter">
+			<a href="asyncoptionalcreatable.html" class="tsd-kind-icon">Async<wbr>Optional<wbr>Creatable</a>
+		</li>
 		<li class=" tsd-kind-class">
 			<a href="duration.html" class="tsd-kind-icon">Duration</a>
 		</li>
@@ -1073,13 +1076,13 @@ img { max-width: 100%; }
 				<a name="constructor" class="tsd-anchor"></a>
 				<h3>constructor</h3>
 				<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-					<li class="tsd-signature tsd-kind-icon">new <wbr>Async<wbr>Creatable<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">O</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="asynccreatable.html" class="tsd-signature-type">AsyncCreatable</a></li>
+					<li class="tsd-signature tsd-kind-icon">new <wbr>Async<wbr>Creatable<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">O</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="asynccreatable.html" class="tsd-signature-type">AsyncCreatable</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/60662f0/packages/kit/src/creatable.ts#L21">creatable.ts:21</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/22b2dfd/packages/kit/src/creatable.ts#L21">creatable.ts:21</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1091,7 +1094,7 @@ img { max-width: 100%; }
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="" class="tsd-signature-type">O</a></h5>
+								<h5>options: <span class="tsd-signature-type">O</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<div class="lead">
 										<p>An options object providing initialization params.</p>
@@ -1110,13 +1113,13 @@ img { max-width: 100%; }
 				<a name="init" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagProtected">Protected</span> <span class="tsd-flag ts-flagAbstract">Abstract</span> init</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
-					<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">O</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/60662f0/packages/kit/src/creatable.ts#L36">creatable.ts:36</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/22b2dfd/packages/kit/src/creatable.ts#L34">creatable.ts:34</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1124,15 +1127,6 @@ img { max-width: 100%; }
 								<p>Asynchronously initializes newly constructed instances of a concrete subclass.</p>
 							</div>
 						</div>
-						<h4 class="tsd-parameters-title">Parameters</h4>
-						<ul class="tsd-parameters">
-							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="" class="tsd-signature-type">O</a></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>An options object providing initialization params.</p>
-								</div>
-							</li>
-						</ul>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
@@ -1141,13 +1135,13 @@ img { max-width: 100%; }
 				<a name="create" class="tsd-anchor"></a>
 				<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
 				<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-static">
-					<li class="tsd-signature tsd-kind-icon">create&lt;P, T&gt;<span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, options<span class="tsd-signature-symbol">?: </span><a href="" class="tsd-signature-type">P</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					<li class="tsd-signature tsd-kind-icon">create&lt;P, T&gt;<span class="tsd-signature-symbol">(</span>this<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span>, options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/60662f0/packages/kit/src/creatable.ts#L17">creatable.ts:17</a></li>
+								<li>Defined in <a href="https://github.com/forcedotcom/sfdx-dev-packages/blob/22b2dfd/packages/kit/src/creatable.ts#L17">creatable.ts:17</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -1172,7 +1166,7 @@ img { max-width: 100%; }
 								</ul>
 							</li>
 							<li>
-								<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="" class="tsd-signature-type">P</a></h5>
+								<h5>options: <span class="tsd-signature-type">P</span></h5>
 								<div class="tsd-comment tsd-typography">
 									<p>An options object providing initialization params to the async constructor.</p>
 								</div>
