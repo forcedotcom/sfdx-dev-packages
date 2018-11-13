@@ -1,24 +1,17 @@
 {
-  "name": "@salesforce/lazy-require",
-  "version": "0.0.4",
-  "description": "Lazily load npm packages",
+  "name": "@salesforce/require-analytics",
+  "version": "0.5.0",
+  "description": "Simple CommonJS require analytics",
   "main": "lib/index.js",
+  "repository": "https://git.soma.salesforce.com/salesforcedx/sfdx-require-analytics",
   "author": "Salesforce",
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",
   "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
+    "docs",
+    "lib/**/*.js",
+    "lib/**/*.d.ts"
   ],
-  "dependencies": {
-    "debug": "^3.1.0",
-    "tslib": "^1"
-  },
-  "devDependencies": {
-    "@salesforce/dev-scripts": "^0.3.3",
-    "@salesforce/ts-sinon": "0.2.2",
-    "@types/debug": "^0.0.30"
-  },
   "scripts": {
     "build": "yarn sfdx-build",
     "clean": "yarn sfdx-clean",
@@ -29,5 +22,11 @@
     "lint": "yarn sfdx-lint",
     "prepack": "yarn sfdx-build",
     "test": "yarn sfdx-test"
+  },
+  "devDependencies": {
+    "@salesforce/dev-scripts": "^0.3.3"
+  },
+  "dependencies": {
+    "tslib": "^1.9.3"
   }
 }
