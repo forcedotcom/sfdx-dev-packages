@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-config@1.4.0...@salesforce/dev-config@1.4.1) (2018-11-13)
+
+
+### Bug Fixes
+
+* add tsconfig to test, and lint/compile test ([#30](https://github.com/forcedotcom/sfdx-dev-packages/issues/30)) ([f3c95b2](https://github.com/forcedotcom/sfdx-dev-packages/commit/f3c95b2))
+
+
+
+
+
 # [1.4.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-config@1.3.1...@salesforce/dev-config@1.4.0) (2018-11-06)
 
 
