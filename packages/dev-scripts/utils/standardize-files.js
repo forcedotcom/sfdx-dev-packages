@@ -78,7 +78,9 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
         }
       };
       addLintFile(packageRoot, 'tslint');
-      addLintFile(join(packageRoot, 'test'), 'tslint-test');
+      if (exists(join(packageRoot, 'test'))) {
+        addLintFile(join(packageRoot, 'test'), 'tslint-test');
+      }
     }
 
     // tsconfig files
@@ -107,12 +109,14 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
         },
         include: ['./src/**/*.ts']
       });
-      addConfigFile(join(packageRoot, 'test'), {
-        extends: `${prefix}../node_modules/@salesforce/dev-config/tsconfig-test${postfix}`,
-        // This has to live in this file until there is a way to specify a base
-        // TODO Update when https://github.com/Microsoft/TypeScript/issues/25430 is fixed
-        include: ['./**/*.ts']
-      });
+      if (exists(join(packageRoot, 'test'))) {
+        addConfigFile(join(packageRoot, 'test'), {
+          extends: `${prefix}../node_modules/@salesforce/dev-config/tsconfig-test${postfix}`,
+          // This has to live in this file until there is a way to specify a base
+          // TODO Update when https://github.com/Microsoft/TypeScript/issues/25430 is fixed
+          include: ['./**/*.ts']
+        });
+      }
     }
   }
   if (added.length > 0) {
