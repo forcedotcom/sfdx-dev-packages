@@ -1,0 +1,16 @@
+.DS_Store
+
+node_modules
+
+dist
+docs
+
+*xunit.xml
+*checkstyle.xml
+*unitcoverage
+
+yarn.lock
+package-lock.json
+
+yarn-error.log
+.yarnrc

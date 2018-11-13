@@ -1,0 +1,33 @@
+{
+  "name": "@salesforce/lazy-require",
+  "version": "0.0.4",
+  "description": "Lazily load npm packages",
+  "main": "lib/index.js",
+  "author": "Salesforce",
+  "license": "BSD-3-Clause",
+  "types": "lib/index.d.ts",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "dependencies": {
+    "@types/debug": "^0.0.30",
+    "debug": "^3.1.0",
+    "tslib": "^1"
+  },
+  "devDependencies": {
+    "@salesforce/dev-scripts": "^0.3.3",
+    "@salesforce/ts-sinon": "0.2.2"
+  },
+  "scripts": {
+    "build": "yarn sfdx-build",
+    "clean": "yarn sfdx-clean",
+    "clean-all": "yarn sfdx-clean all",
+    "compile": "yarn sfdx-compile",
+    "docs": "yarn sfdx-docs",
+    "format": "yarn sfdx-format",
+    "lint": "yarn sfdx-lint",
+    "prepack": "yarn sfdx-build",
+    "test": "yarn sfdx-test"
+  }
+}
