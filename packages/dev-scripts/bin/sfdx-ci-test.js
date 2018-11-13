@@ -7,18 +7,13 @@
  */
 
 const shell = require('../utils/shelljs');
-
-const exists = require('../utils/exists');
 const packageRoot = require('../utils/package-path');
-const tsc = require.resolve('typescript/bin/tsc');
 
-shell.exec(`${tsc} -p . --pretty`, {
+// double `--` to first through pass yarn and then through lerna :(
+shell.exec('yarn compile -- -- --emitTests', {
   cwd: packageRoot
 });
 
-if (exists('./test')) {
-  const extras = process.argv[2] !== '--emitTests' ? '--noEmit' : '';
-  shell.exec(`${tsc} -p ./test --pretty ${extras}`, {
-    cwd: packageRoot
-  });
-}
+shell.exec(`nyc mocha 'packages/**/*.test.js'`, {
+  cwd: packageRoot
+});

@@ -8,9 +8,10 @@
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",
   "files": [
-    "docs",
     "lib/**/*.js",
-    "lib/**/*.d.ts"
+    "lib/**/*.d.ts",
+    "!lib/**/*.test.js",
+    "!lib/**/*.test.d.ts"
   ],
   "dependencies": {
     "@salesforce/ts-types": "0.17.4",
