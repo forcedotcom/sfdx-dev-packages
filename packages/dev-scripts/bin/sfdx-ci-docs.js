@@ -24,6 +24,10 @@ shell.exec('yarn docs', {
   cwd: packageRoot
 });
 
+shell.exec('cp README.md docs', {
+  cwd: packageRoot
+});
+
 shell.set('+e');
 shell.exec('git add .', {
   cwd: path.join(packageRoot, 'docs')
