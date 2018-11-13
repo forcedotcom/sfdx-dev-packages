@@ -14,9 +14,41 @@ export abstract class AsyncCreatable<O = object> {
    *
    * @param options An options object providing initialization params to the async constructor.
    */
-  public static async create<P, T extends AsyncCreatable<P>>(this: { new (options?: P): T }, options?: P): Promise<T> {
+  public static async create<P, T extends AsyncCreatable<P>>(this: { new (options: P): T }, options: P): Promise<T> {
     const instance = new this(options);
-    await instance.init(options);
+    await instance.init();
+    return instance;
+  }
+
+  /**
+   * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
+   * New subclass instances must be created with the static {@link create} method.
+   *
+   * @param options An options object providing initialization params.
+   */
+  public constructor(options: O) {}
+
+  /**
+   * Asynchronously initializes newly constructed instances of a concrete subclass.
+   */
+  protected abstract init(): Promise<void>;
+}
+
+/**
+ * A base class for classes that must be constructed and initialized asynchronously without requiring an options object.
+ */
+export abstract class AsyncOptionalCreatable<O = object> {
+  /**
+   * Asynchronously constructs and initializes a new instance of a concrete subclass with the optional `options`.
+   *
+   * @param options An options object providing initialization params to the async constructor.
+   */
+  public static async create<P, T extends AsyncOptionalCreatable<P>>(
+    this: { new (options?: P): T },
+    options?: P
+  ): Promise<T> {
+    const instance = new this(options);
+    await instance.init();
     return instance;
   }
 
@@ -30,8 +62,6 @@ export abstract class AsyncCreatable<O = object> {
 
   /**
    * Asynchronously initializes newly constructed instances of a concrete subclass.
-   *
-   * @param options An options object providing initialization params.
    */
-  protected abstract init(options?: O): Promise<void>;
+  protected abstract init(): Promise<void>;
 }
