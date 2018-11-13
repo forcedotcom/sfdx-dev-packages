@@ -23,11 +23,7 @@
     "format": "yarn sfdx-format",
     "lint": "yarn sfdx-lint",
     "prepack": "yarn sfdx-build",
-    "prepare": "yarn build && yarn docs",
-    "rebuild": "yarn clean-all && yarn install --no-lockfile && yarn build",
-    "test": "yarn sfdx-test",
-    "uts": "nyc mocha --require source-map-support/register --recursive \"lib/**/*.test.js\"",
-    "watch": "tsc -w -p tsconfig.json"
+    "test": "yarn sfdx-test"
   },
   "devDependencies": {
     "@salesforce/dev-scripts": "^0.3.3"
