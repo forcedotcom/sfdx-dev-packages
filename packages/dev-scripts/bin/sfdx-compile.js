@@ -8,9 +8,16 @@
 
 const shell = require('../utils/shelljs');
 
+const exists = require('../utils/exists');
 const packageRoot = require('../utils/package-path');
 const tsc = require.resolve('typescript/bin/tsc');
 
 shell.exec(`${tsc} -p . --pretty`, {
   cwd: packageRoot
 });
+
+if (exists('./test')) {
+  shell.exec(`${tsc} -p ./test --pretty`, {
+    cwd: packageRoot
+  });
+}

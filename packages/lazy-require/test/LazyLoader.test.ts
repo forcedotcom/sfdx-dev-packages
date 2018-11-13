@@ -1,11 +1,11 @@
 // tslint:disable:no-unused-expression
 
+import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import LazyLoader from '../src/LazyLoader';
 import TypeCache from '../src/TypeCache';
-import { ProxiableModule, FileSystem, Module } from '../src/types';
+import { FileSystem, Module, ProxiableModule } from '../src/types';
 
 describe('LazyLoader', () => {
   let origRequire: NodeRequire = require;
@@ -128,8 +128,8 @@ describe('LazyLoader', () => {
 
     it('should require a usable function constructor', () => {
       // tslint:disable-next-line:no-any
-      testModule = function(this: any, _name: string) {
-        this.name = _name;
+      testModule = function(this: any, name: string) {
+        this.name = name;
       };
       const test = require('testFunction');
       expect(new test('foo').name).to.equal('foo');
@@ -137,9 +137,9 @@ describe('LazyLoader', () => {
 
     it('should require a usable class constructor', () => {
       testModule = class {
-        constructor(private _name: string) {}
+        constructor(private innerName: string) {}
         get name() {
-          return this._name;
+          return this.innerName;
         }
       };
       const test = require('testFunction');
@@ -178,22 +178,31 @@ describe('LazyLoader', () => {
         }
       });
 
-      const fooDesc = Object.getOwnPropertyDescriptor(testModule, 'foo')!;
-      expect(fooDesc.configurable).to.be.true;
-      expect(fooDesc.enumerable).to.be.false;
-      expect(fooDesc.writable).to.be.false;
+      const fooDesc = Object.getOwnPropertyDescriptor(testModule, 'foo');
+      expect(fooDesc).to.exist;
+      if (fooDesc) {
+        expect(fooDesc.configurable).to.be.true;
+        expect(fooDesc.enumerable).to.be.false;
+        expect(fooDesc.writable).to.be.false;
+      }
       expect(test.foo).to.equal('foo-value');
 
-      const barDesc = Object.getOwnPropertyDescriptor(testModule, 'bar')!;
-      expect(barDesc.configurable).to.be.false;
-      expect(barDesc.enumerable).to.be.true;
-      expect(barDesc.writable).to.be.false;
+      const barDesc = Object.getOwnPropertyDescriptor(testModule, 'bar');
+      expect(barDesc).to.exist;
+      if (barDesc) {
+        expect(barDesc.configurable).to.be.false;
+        expect(barDesc.enumerable).to.be.true;
+        expect(barDesc.writable).to.be.false;
+      }
       expect(test.bar).to.equal('bar-value');
 
-      const bazDesc = Object.getOwnPropertyDescriptor(testModule, 'baz')!;
-      expect(bazDesc.configurable).to.be.false;
-      expect(bazDesc.enumerable).to.be.false;
-      expect(bazDesc.writable).to.be.true;
+      const bazDesc = Object.getOwnPropertyDescriptor(testModule, 'baz');
+      expect(bazDesc).to.exist;
+      if (bazDesc) {
+        expect(bazDesc.configurable).to.be.false;
+        expect(bazDesc.enumerable).to.be.false;
+        expect(bazDesc.writable).to.be.true;
+      }
       expect(test.baz).to.equal('baz-value');
     });
 
@@ -286,22 +295,31 @@ describe('LazyLoader', () => {
 
       const test = require('testObject');
 
-      const fooDesc = Object.getOwnPropertyDescriptor(test, 'foo')!;
-      expect(fooDesc.configurable).to.be.true;
-      expect(fooDesc.enumerable).to.be.false;
-      expect(fooDesc.writable).to.be.false;
+      const fooDesc = Object.getOwnPropertyDescriptor(test, 'foo');
+      expect(fooDesc).to.exist;
+      if (fooDesc) {
+        expect(fooDesc.configurable).to.be.true;
+        expect(fooDesc.enumerable).to.be.false;
+        expect(fooDesc.writable).to.be.false;
+      }
       expect(test.foo).to.equal('foo-value');
 
-      const barDesc = Object.getOwnPropertyDescriptor(test, 'bar')!;
-      // note: skipping check of configurable value, since the proxy intentionally lies about it
-      expect(barDesc.enumerable).to.be.true;
-      expect(barDesc.writable).to.be.false;
+      const barDesc = Object.getOwnPropertyDescriptor(test, 'bar');
+      expect(barDesc).to.exist;
+      if (barDesc) {
+        // note: skipping check of configurable value, since the proxy intentionally lies about it
+        expect(barDesc.enumerable).to.be.true;
+        expect(barDesc.writable).to.be.false;
+      }
       expect(test.bar).to.equal('bar-value');
 
-      const bazDesc = Object.getOwnPropertyDescriptor(test, 'baz')!;
-      // note: skipping check of configurable value, since the proxy intentionally lies about it
-      expect(bazDesc.enumerable).to.be.false;
-      expect(bazDesc.writable).to.be.true;
+      const bazDesc = Object.getOwnPropertyDescriptor(test, 'baz');
+      expect(bazDesc).to.exist;
+      if (bazDesc) {
+        // note: skipping check of configurable value, since the proxy intentionally lies about it
+        expect(bazDesc.enumerable).to.be.false;
+        expect(bazDesc.writable).to.be.true;
+      }
       expect(test.baz).to.equal('baz-value');
     });
 
@@ -416,10 +434,13 @@ describe('LazyLoader', () => {
 
       const test = require('testObject');
 
-      const fooDesc = Object.getOwnPropertyDescriptor(test, 'foo')!;
-      expect(fooDesc.configurable).to.be.true; // lie!
-      expect(fooDesc.enumerable).to.be.true;
-      expect(fooDesc.writable).to.be.true;
+      const fooDesc = Object.getOwnPropertyDescriptor(test, 'foo');
+      expect(fooDesc).to.exist;
+      if (fooDesc) {
+        expect(fooDesc.configurable).to.be.true; // lie!
+        expect(fooDesc.enumerable).to.be.true;
+        expect(fooDesc.writable).to.be.true;
+      }
       expect(test.foo).to.equal('bar');
       // now, also make sure we can't delete it, despite the lie about its configurability
       expect(() => delete test.foo).to.throw(TypeError);
@@ -445,18 +466,24 @@ describe('LazyLoader', () => {
 
       const test = require('testObject');
 
-      const argsDesc = Object.getOwnPropertyDescriptor(test, 'arguments')!;
-      expect(argsDesc.configurable).to.be.true;
-      expect(argsDesc.enumerable).to.be.false;
-      expect(argsDesc.writable).to.be.false;
+      const argsDesc = Object.getOwnPropertyDescriptor(test, 'arguments');
+      expect(argsDesc).to.exist;
+      if (argsDesc) {
+        expect(argsDesc.configurable).to.be.true;
+        expect(argsDesc.enumerable).to.be.false;
+        expect(argsDesc.writable).to.be.false;
+      }
       expect(test.arguments).to.be.null;
 
       expect(delete test.arguments).to.be.true;
 
-      const lenDesc = Object.getOwnPropertyDescriptor(test, 'length')!;
-      expect(argsDesc.configurable).to.be.true; // lie!
-      expect(lenDesc.enumerable).to.be.false;
-      expect(lenDesc.writable).to.be.false;
+      const lenDesc = Object.getOwnPropertyDescriptor(test, 'length');
+      expect(lenDesc).to.exist;
+      if (lenDesc) {
+        expect(lenDesc.configurable).to.be.true; // lie!
+        expect(lenDesc.enumerable).to.be.false;
+        expect(lenDesc.writable).to.be.false;
+      }
       expect(test.length).to.equal(0);
 
       expect(() => delete test.length).to.throw(TypeError);

@@ -8,18 +8,17 @@
 
 const shell = require('../utils/shelljs');
 
+const exists = require('../utils/exists');
 const packageRoot = require('../utils/package-path');
-const Config = require('../utils/sfdx-dev-config');
-const config = new Config(packageRoot);
-const lintConfig = config.get('lint') || {};
 
 const lint = require.resolve('tslint/bin/tslint');
 
-// If not strict, use the local tslint file
-const configPath = lintConfig['strict']
-  ? require.resolve('@salesforce/dev-config/tslint-strict')
-  : 'tslint.json';
-
-shell.exec(`${lint} -p . -c ${configPath} -t stylish`, {
+shell.exec(`${lint} -p . -t stylish`, {
   cwd: packageRoot
 });
+
+if (exists('./test')) {
+  shell.exec(`${lint} -p ./test -t stylish`, {
+    cwd: packageRoot
+  });
+}
