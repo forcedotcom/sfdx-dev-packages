@@ -3,7 +3,7 @@
   "version": "0.17.4",
   "description": "Types and related utilities for TypeScript",
   "main": "lib/index.js",
-  "repository": "https://git.soma.salesforce.com/salesforcedx/sfdx-ts-types",
+  "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "author": "Salesforce",
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",

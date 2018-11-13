@@ -2,6 +2,7 @@
   "name": "@salesforce/dev-config",
   "version": "1.4.0",
   "description": "A set of standard typescript config and tslint options for Salesforce projects.",
+  "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "main": "index.js",
   "keywords": [
     "sfdx"
@@ -11,7 +12,12 @@
   "files": [
     "/tslint.json",
     "/tslint-strict.json",
+    "/tslint-test.json",
+    "/tslint-test-strict.json",
     "/tsconfig.json",
+    "/tsconfig-strict.json",
+    "/tsconfig-test.json",
+    "/tsconfig-test-strict.json",
     "/prettier.json",
     "/nyc.json",
     "/typedoc.js"
