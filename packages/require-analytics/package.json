@@ -10,9 +10,7 @@
   "files": [
     "docs",
     "lib/**/*.js",
-    "!lib/**/*.test.js",
-    "lib/**/*.d.ts",
-    "!lib/**/*.test.d.ts"
+    "lib/**/*.d.ts"
   ],
   "scripts": {
     "build": "yarn sfdx-build",
@@ -27,20 +25,6 @@
   },
   "devDependencies": {
     "@salesforce/dev-scripts": "^0.3.3"
-  },
-  "nyc": {
-    "check-coverage": true,
-    "lines": 95,
-    "statements": 95,
-    "functions": 95,
-    "branches": 60,
-    "reporter": [
-      "lcov",
-      "text"
-    ],
-    "exclude": [
-      "lib/**/*.test.js"
-    ]
   },
   "dependencies": {
     "tslib": "^1.9.3"
