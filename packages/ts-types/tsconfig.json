@@ -4,5 +4,7 @@
   "compilerOptions": {
     "outDir": "lib"
   },
-  "include": ["./src/**/*.ts"]
+  "include": [
+    "./src/**/*.ts"
+  ]
 }
