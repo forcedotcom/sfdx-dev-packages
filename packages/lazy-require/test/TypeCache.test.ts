@@ -1,8 +1,8 @@
 /* tslint:disable:no-unused-expression */
 
+import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import { expect } from 'chai';
 import { createSandbox, SinonSandbox } from 'sinon';
-import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import TypeCache from '../src/TypeCache';
 import { FileSystem } from '../src/types';
 

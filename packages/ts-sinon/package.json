@@ -3,6 +3,7 @@
   "version": "0.2.2",
   "description": "TypeScript helpers for Sinon",
   "main": "lib/index.js",
+  "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "author": "Salesforce",
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",

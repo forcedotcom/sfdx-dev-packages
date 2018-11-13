@@ -5,6 +5,10 @@
   "type": "object",
 
   "properties": {
+    "strict": {
+      "description": "Use tslint and tsconfig strict.",
+      "type": "boolean"
+    },
     "scripts": {
       "description": "The list of scripts to generate",
       "default": ["clean", "clean-all", "compile", "test", "lint"],
@@ -21,6 +25,16 @@
       "properties": {
         "strict": {
           "description": "Use the exact version of tslint-strict.json config in @salesforce/dev-confg.",
+          "type": "boolean"
+        }
+      }
+    },
+    "compile": {
+      "description": "Options for the compile script.",
+      "type": "object",
+      "properties": {
+        "strict": {
+          "description": "Use the exact version of tsconfig-strict.json config in @salesforce/dev-confg.",
           "type": "boolean"
         }
       }

@@ -1,5 +1,5 @@
 {
-  "extends": ["./tslint-strict"],
+  "extends": "./tslint-strict.json",
   "rules": {
     "no-unused-expression": false
   }
