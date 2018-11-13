@@ -6,12 +6,12 @@
  */
 
 import { expect } from 'chai';
-import { AsyncCreatable } from '../src/creatable';
+import { AsyncCreatable, AsyncOptionalCreatable } from '../src/creatable';
 
 class Config<O extends Config.Options> extends AsyncCreatable<O> {
   protected options: O;
 
-  public constructor(options?: O) {
+  public constructor(options: O) {
     super(options);
     if (!options) throw new Error('I can haz options!');
     this.options = options;
@@ -34,7 +34,7 @@ namespace Config {
 }
 
 class SubConfig extends Config<SubConfig.Options> {
-  public constructor(options?: SubConfig.Options) {
+  public constructor(options: SubConfig.Options) {
     super(options);
   }
 
@@ -53,7 +53,7 @@ namespace SubConfig {
   }
 }
 
-class OptionalConfig extends AsyncCreatable<OptionalConfig.Options> {
+class OptionalConfig extends AsyncOptionalCreatable<OptionalConfig.Options> {
   private options?: OptionalConfig.Options;
 
   public constructor(options?: OptionalConfig.Options) {
@@ -76,7 +76,7 @@ namespace OptionalConfig {
   }
 }
 
-class NoOptionsConfig extends AsyncCreatable {
+class NoOptionsConfig extends AsyncOptionalCreatable {
   public constructor() {
     super();
   }
@@ -89,7 +89,8 @@ class NoOptionsConfig extends AsyncCreatable {
 describe('AsyncCreatable', () => {
   it('should construct a concrete subclass async with options', async () => {
     let doAsyncThingRan = false;
-    const config = await Config.create({
+
+    const config: Config<Config.Options> = await Config.create({
       fooEnabled: true,
       doAsyncThing: async () => {
         doAsyncThingRan = true;
