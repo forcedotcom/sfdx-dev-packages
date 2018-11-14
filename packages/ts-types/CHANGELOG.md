@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@0.18.0...@salesforce/ts-types@0.19.0) (2018-11-14)
+
+
+### Features
+
+* remove undefined as a valid AnyJson value :facepalm: ([#33](https://github.com/forcedotcom/sfdx-dev-packages/issues/33)) ([fcb74ad](https://github.com/forcedotcom/sfdx-dev-packages/commit/fcb74ad))
+
+
+
+
+
 # [0.18.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@0.17.4...@salesforce/ts-types@0.18.0) (2018-11-14)
 
 
