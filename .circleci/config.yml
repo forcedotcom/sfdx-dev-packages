@@ -114,6 +114,7 @@ jobs:
       - run: *install
       - run: *bootstrap
       - run: *build
+      - run: *gh-config
       - run: yarn ci-docs
       - save_cache: *save-cache
 
