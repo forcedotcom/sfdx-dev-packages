@@ -1553,7 +1553,7 @@ definiteEntriesOf().forEach();</code></pre>
 			<section class="tsd-panel tsd-member tsd-kind-type-alias">
 				<a name="jsonprimitive" class="tsd-anchor"></a>
 				<h3>Json<wbr>Primitive</h3>
-				<div class="tsd-signature tsd-kind-icon">Json<wbr>Primitive<span class="tsd-signature-symbol">:</span> <a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></div>
+				<div class="tsd-signature tsd-kind-icon">Json<wbr>Primitive<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
 						<li>Defined in types/json.d.ts:18</li>
@@ -5288,8 +5288,8 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 				<a name="toanyjson" class="tsd-anchor"></a>
 				<h3>to<wbr>Any<wbr>Json</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Any<wbr>Json&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a></li>
 					<li class="tsd-signature tsd-kind-icon">to<wbr>Any<wbr>Json&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a><span class="tsd-signature-symbol">&gt;</span></li>
-					<li class="tsd-signature tsd-kind-icon">to<wbr>Any<wbr>Json&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, defaultValue<span class="tsd-signature-symbol">: </span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
@@ -5306,7 +5306,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
 									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
 									JSON data structure. Use <code>coerceAnyJson(unknown)</code> when the <code>value</code> object can be guaranteed to be JSON-compatible
-								and only needs type</p>
+								and only needs type coercion.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>throws</dt>
@@ -5323,18 +5323,20 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>value: <a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<h5>value: <a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a></h5>
 								<div class="tsd-comment tsd-typography">
-									<p>The value to convert.</p>
+									<div class="lead">
+										<p>The value to convert.</p>
+									</div>
 								</div>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						<h4 class="tsd-returns-title">Returns <a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a></h4>
 					</li>
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:38</li>
+								<li>Defined in narrowing/to.ts:37</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5345,7 +5347,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
 									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
 									JSON data structure. Use <code>coerceAnyJson(unknown)</code> when the <code>value</code> object can be guaranteed to be JSON-compatible
-								and only needs type</p>
+								and only needs type coercion.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>throws</dt>
@@ -5364,17 +5366,13 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 							<li>
 								<h5>value: <a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								<div class="tsd-comment tsd-typography">
-									<p>The value to convert.</p>
-								</div>
-							</li>
-							<li>
-								<h5>defaultValue: <a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a></h5>
-								<div class="tsd-comment tsd-typography">
-									<p>The default to return if <code>value</code> was not defined.</p>
+									<div class="lead">
+										<p>The value to convert.</p>
+									</div>
 								</div>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a></h4>
+						<h4 class="tsd-returns-title">Returns <a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><a href="globals.html#anyjson" class="tsd-signature-type">AnyJson</a><span class="tsd-signature-symbol">&gt;</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -5382,6 +5380,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 				<a name="tojsonarray" class="tsd-anchor"></a>
 				<h3>to<wbr>Json<wbr>Array</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/jsonarray.html" class="tsd-signature-type">JsonArray</a></li>
 					<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/jsonarray.html" class="tsd-signature-type">JsonArray</a><span class="tsd-signature-symbol">&gt;</span></li>
 					<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span>, defaultValue<span class="tsd-signature-symbol">: </span><a href="interfaces/jsonarray.html" class="tsd-signature-type">JsonArray</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/jsonarray.html" class="tsd-signature-type">JsonArray</a></li>
 				</ul>
@@ -5389,7 +5388,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:92</li>
+								<li>Defined in narrowing/to.ts:117</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5400,7 +5399,46 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
 									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
 									JSON data structure. Non-JSON entries will be converted to <code>null</code>s. Use <code>coerceJsonArray(array)</code> when the <code>value</code>
-								object can be guaranteed to be JSON-compatible and only needs type</p>
+								object can be guaranteed to be JSON-compatible and only needs type coercion.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>throws</dt>
+								<dd><p><a href="classes/jsoncloneerror.html">JsonCloneError</a> If the array values contain circular references.</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T</h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>value: <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The array to convert.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="interfaces/jsonarray.html" class="tsd-signature-type">JsonArray</a></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in narrowing/to.ts:130</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Narrows an array of type <code>T</code> to a <code>JsonArray</code> following a deep, brute-force conversion of the array&#39;s data to
+									only consist of JSON-compatible values by performing a basic JSON clone on the array. This is preferable to
+									using the weaker <code>coerceJsonArray(array)</code> to type-narrow an arbitrary array to a <code>JsonArray</code> when the array&#39;s source
+									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
+									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
+									JSON data structure. Non-JSON entries will be converted to <code>null</code>s. Use <code>coerceJsonArray(array)</code> when the <code>value</code>
+								object can be guaranteed to be JSON-compatible and only needs type coercion.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>throws</dt>
@@ -5428,7 +5466,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:106</li>
+								<li>Defined in narrowing/to.ts:144</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5439,7 +5477,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
 									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
 									JSON data structure. Non-JSON entries will be converted to <code>null</code>s. Use <code>coerceJsonArray(array)</code> when the <code>value</code>
-								object can be guaranteed to be JSON-compatible and only needs type</p>
+								object can be guaranteed to be JSON-compatible and only needs type coercion.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>throws</dt>
@@ -5476,6 +5514,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 				<a name="tojsonmap" class="tsd-anchor"></a>
 				<h3>to<wbr>Json<wbr>Map</h3>
 				<ul class="tsd-signatures tsd-kind-function tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>Map&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/jsonmap.html" class="tsd-signature-type">JsonMap</a></li>
 					<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>Map&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="globals.html#optional" class="tsd-signature-type">Optional</a><span class="tsd-signature-symbol">&lt;</span><a href="interfaces/jsonmap.html" class="tsd-signature-type">JsonMap</a><span class="tsd-signature-symbol">&gt;</span></li>
 					<li class="tsd-signature tsd-kind-icon">to<wbr>Json<wbr>Map&lt;T&gt;<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="globals.html#nullable" class="tsd-signature-type">Nullable</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span>, defaultValue<span class="tsd-signature-symbol">: </span><a href="interfaces/jsonmap.html" class="tsd-signature-type">JsonMap</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="interfaces/jsonmap.html" class="tsd-signature-type">JsonMap</a></li>
 				</ul>
@@ -5483,7 +5522,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:60</li>
+								<li>Defined in narrowing/to.ts:72</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5494,7 +5533,46 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
 									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
 									JSON data structure. Use <code>coerceJsonMap(object)</code> when the <code>value</code> object can be guaranteed to be JSON-compatible
-								and only needs type</p>
+								and only needs type coercion.</p>
+							</div>
+							<dl class="tsd-comment-tags">
+								<dt>throws</dt>
+								<dd><p><a href="classes/jsoncloneerror.html">JsonCloneError</a> If the object values contain circular references.</p>
+								</dd>
+							</dl>
+						</div>
+						<h4 class="tsd-type-parameters-title">Type parameters</h4>
+						<ul class="tsd-type-parameters">
+							<li>
+								<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></h4>
+							</li>
+						</ul>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>value: <span class="tsd-signature-type">T</span></h5>
+								<div class="tsd-comment tsd-typography">
+									<p>The object to convert.</p>
+								</div>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="interfaces/jsonmap.html" class="tsd-signature-type">JsonMap</a></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in narrowing/to.ts:85</li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Narrows an object of type <code>T</code> to a <code>JsonMap</code> following a deep, brute-force conversion of the object&#39;s data to
+									only consist of JSON-compatible values by performing a basic JSON clone on the object. This is preferable to
+									using the weaker <code>coerceJsonMap(object)</code> to type-narrow an arbitrary object to a <code>JsonMap</code> when the object&#39;s source
+									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
+									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
+									JSON data structure. Use <code>coerceJsonMap(object)</code> when the <code>value</code> object can be guaranteed to be JSON-compatible
+								and only needs type coercion.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>throws</dt>
@@ -5522,7 +5600,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in narrowing/to.ts:74</li>
+								<li>Defined in narrowing/to.ts:99</li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -5533,7 +5611,7 @@ const <span class="hljs-keyword">value</span> = getString(obj, <span class="hljs
 									is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
 									safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
 									JSON data structure. Use <code>coerceJsonMap(object)</code> when the <code>value</code> object can be guaranteed to be JSON-compatible
-								and only needs type</p>
+								and only needs type coercion.</p>
 							</div>
 							<dl class="tsd-comment-tags">
 								<dt>throws</dt>

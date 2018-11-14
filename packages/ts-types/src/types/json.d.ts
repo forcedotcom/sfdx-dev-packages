@@ -15,7 +15,7 @@ import { Nullable } from './union';
 /**
  * Any valid JSON primitive value.
  */
-export type JsonPrimitive = Nullable<boolean | number | string>;
+export type JsonPrimitive = null | boolean | number | string;
 
 /**
  * Any valid JSON collection value.
