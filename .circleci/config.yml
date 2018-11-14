@@ -76,6 +76,9 @@ jobs:
       - run: *gh-config
       - run: *npm-config
       - run:
+          name: Status
+          command: git status
+      - run:
           name: Publishing
           command: lerna publish --conventional-commits -y
       - save_cache: *save-cache

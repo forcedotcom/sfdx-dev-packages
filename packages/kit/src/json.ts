@@ -99,7 +99,7 @@ export function getJsonValuesByName<T extends AnyJson = AnyJson>(json: JsonMap, 
  * @param value The value search for.
  */
 export function jsonIncludes(json: Optional<AnyJson>, value: Optional<AnyJson>): boolean {
-  if (json == null || isNumber(json) || isBoolean(json)) return false;
+  if (json == null || value === undefined || isNumber(json) || isBoolean(json)) return false;
   if (isJsonMap(json)) return Object.values(json).includes(value);
   if (isJsonArray(json)) return json.includes(value);
   if (isString(value)) return json.includes(value);

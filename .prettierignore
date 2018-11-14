@@ -1,2 +1,4 @@
 docs/
 packages/kit/vendor/lodash.js
+**/tsconfig.json
+**/tslint.json
