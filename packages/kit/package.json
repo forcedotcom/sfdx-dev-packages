@@ -8,10 +8,9 @@
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",
   "files": [
+    "docs",
     "lib/**/*.js",
     "lib/**/*.d.ts",
-    "!lib/**/*.test.js",
-    "!lib/**/*.test.d.ts",
     "vendor/lodash.js"
   ],
   "scripts": {

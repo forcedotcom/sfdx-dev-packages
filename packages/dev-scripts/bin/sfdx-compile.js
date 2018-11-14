@@ -17,8 +17,7 @@ shell.exec(`${tsc} -p . --pretty`, {
 });
 
 if (exists('./test')) {
-  const extras = process.argv[2] !== '--emitTests' ? '--noEmit' : '';
-  shell.exec(`${tsc} -p ./test --pretty ${extras}`, {
+  shell.exec(`${tsc} -p ./test --pretty`, {
     cwd: packageRoot
   });
 }

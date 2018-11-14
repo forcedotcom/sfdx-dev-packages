@@ -114,9 +114,6 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
           extends: `${prefix}../node_modules/@salesforce/dev-config/tsconfig-test${postfix}`,
           // This has to live in this file until there is a way to specify a base
           // TODO Update when https://github.com/Microsoft/TypeScript/issues/25430 is fixed
-          compilerOptions: {
-            outDir: '../lib'
-          },
           include: ['./**/*.ts']
         });
       }

@@ -6,7 +6,6 @@
   "bin": {
     "sfdx-build": "bin/sfdx-build.js",
     "sfdx-ci-docs": "bin/sfdx-ci-docs.js",
-    "sfdx-ci-test": "bin/sfdx-ci-test.js",
     "sfdx-clean": "bin/sfdx-clean.js",
     "sfdx-compile": "bin/sfdx-compile.js",
     "sfdx-docs": "bin/sfdx-docs.js",

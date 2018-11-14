@@ -1,3 +1,6 @@
 {
-  "extends": "./tsconfig-strict"
+  "extends": "./tsconfig-strict",
+  "compilerOptions": {
+    "noEmit": true
+  }
 }

@@ -8,10 +8,8 @@
   "license": "BSD-3-Clause",
   "types": "lib/index.d.ts",
   "files": [
-    "lib/**/*.js",
-    "lib/**/*.d.ts",
-    "!lib/**/*.test.js",
-    "!lib/**/*.test.d.ts"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "dependencies": {
     "debug": "^3.1.0",
