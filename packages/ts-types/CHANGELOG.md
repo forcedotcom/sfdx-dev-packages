@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.3](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@0.19.2...@salesforce/ts-types@0.19.3) (2018-11-14)
+
+
+### Bug Fixes
+
+* cleanup to* apis ([#36](https://github.com/forcedotcom/sfdx-dev-packages/issues/36)) ([c3ddea0](https://github.com/forcedotcom/sfdx-dev-packages/commit/c3ddea0))
+
+
+
+
+
 ## [0.19.2](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@0.19.1...@salesforce/ts-types@0.19.2) (2018-11-14)
 
 **Note:** Version bump only for package @salesforce/ts-types
