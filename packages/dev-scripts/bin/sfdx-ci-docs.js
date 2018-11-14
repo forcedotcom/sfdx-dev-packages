@@ -10,15 +10,13 @@ const shell = require('../utils/shelljs');
 const path = require('path');
 const packageRoot = require('../utils/package-path');
 
-shell.exec('yarn compile', {
+shell.exec('git fetch origin gh-pages:gh-pages', {
   cwd: packageRoot
 });
 
-shell.set('+e');
-shell.exec('git worktree add --checkout docs gh-pages', {
+shell.exec('git worktree add docs gh-pages', {
   cwd: packageRoot
 });
-shell.set('-e');
 
 shell.exec('yarn docs', {
   cwd: packageRoot
