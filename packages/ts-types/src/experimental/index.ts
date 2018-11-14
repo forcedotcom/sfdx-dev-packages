@@ -26,14 +26,29 @@ import {
 } from '../narrowing';
 import { AnyArray, AnyConstructor, AnyFunction, Dictionary, Many, Nullable, Optional, View } from '../types';
 
+/**
+ * @ignore
+ */
 export type PrimitiveType = 'boolean' | 'function' | 'number' | 'object' | 'string' | 'symbol' | 'undefined';
 
+/**
+ * @ignore
+ */
 export type VerifiableType = PrimitiveType | AnyConstructor;
 
+/**
+ * @ignore
+ */
 export type PropertyShape = { type: VerifiableType; optional: boolean };
 
+/**
+ * @ignore
+ */
 export type ObjectShape = Dictionary<VerifiableType | PropertyShape>;
 
+/**
+ * @ignore
+ */
 export function is<T extends object>(obj: Nullable<object>, shape: ObjectShape): obj is T {
   const isVerifiable = (v: VerifiableType | PropertyShape): v is VerifiableType => isString(v) || isFunction(v);
   return (
@@ -52,6 +67,9 @@ export function is<T extends object>(obj: Nullable<object>, shape: ObjectShape):
   );
 }
 
+/**
+ * @ignore
+ */
 // type Foo = { name: string, bar: Bar };
 // class Bar { public baz = 'bar'; }
 // const maybeFoo: object = { name: 'bar', bar: new Bar() };
@@ -62,17 +80,28 @@ export function as<T extends object>(obj: Nullable<object>, shape: ObjectShape):
 
 /**
  * A view over an `object` with constrainable, optional properties.
+ *
+ * @ignore
  */
 export type ViewOptional<K extends string, V = unknown> = { [_ in K]?: V };
 
+/**
+ * @ignore
+ */
 export function hasNull<T, K extends string>(value: T, key: K): value is T & View<K, string> {
   return has(value, key) && value[key] == null;
 }
 
+/**
+ * @ignore
+ */
 export function view<T, K extends string>(value: Nullable<T>, keys: Many<K>): Optional<T & ViewOptional<K>> {
   return has(value, keys) ? value : undefined;
 }
 
+/**
+ * @ignore
+ */
 function viewOptional<T, K extends string, R extends T>(
   value: Nullable<T>,
   key: K,
@@ -81,22 +110,37 @@ function viewOptional<T, K extends string, R extends T>(
   return hasType(value, key) ? value : hasNull(value, key) ? value : undefined;
 }
 
+/**
+ * @ignore
+ */
 export function viewString<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, string>> {
   return viewOptional(value, key, hasString);
 }
 
+/**
+ * @ignore
+ */
 export function viewNumber<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, number>> {
   return viewOptional(value, key, hasNumber);
 }
 
+/**
+ * @ignore
+ */
 export function viewBoolean<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, boolean>> {
   return viewOptional(value, key, hasBoolean);
 }
 
+/**
+ * @ignore
+ */
 export function viewObject<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, object>> {
   return viewOptional(value, key, hasObject);
 }
 
+/**
+ * @ignore
+ */
 export function viewPlainObject<T, K extends string>(
   value: Nullable<T>,
   key: K
@@ -104,6 +148,9 @@ export function viewPlainObject<T, K extends string>(
   return viewOptional(value, key, hasPlainObject);
 }
 
+/**
+ * @ignore
+ */
 export function viewInstance<T, K extends string, C extends AnyConstructor>(
   value: Nullable<T>,
   key: K,
@@ -113,10 +160,16 @@ export function viewInstance<T, K extends string, C extends AnyConstructor>(
   return viewOptional(value, key, hasType);
 }
 
+/**
+ * @ignore
+ */
 export function viewArray<T, K extends string>(value: Nullable<T>, key: K): Optional<T & ViewOptional<K, AnyArray>> {
   return viewOptional(value, key, hasArray);
 }
 
+/**
+ * @ignore
+ */
 export function viewFunction<T, K extends string>(
   value: Nullable<T>,
   key: K
