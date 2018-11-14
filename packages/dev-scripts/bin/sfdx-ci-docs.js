@@ -15,7 +15,7 @@ shell.exec('yarn compile', {
 });
 
 shell.set('+e');
-shell.exec('git worktree add docs gh-pages', {
+shell.exec('git worktree add --checkout docs gh-pages', {
   cwd: packageRoot
 });
 shell.set('-e');
