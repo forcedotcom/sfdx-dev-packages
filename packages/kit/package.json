@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/kit",
-  "version": "0.13.2",
+  "version": "0.13.3",
   "description": "Commonly needed utilities for TypeScript and JavaScript",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -27,7 +27,7 @@
     "test": "yarn sfdx-test"
   },
   "dependencies": {
-    "@salesforce/ts-types": "^0.19.2",
+    "@salesforce/ts-types": "^0.19.3",
     "tslib": "^1"
   },
   "devDependencies": {
