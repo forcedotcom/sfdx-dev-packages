@@ -60,16 +60,16 @@ describe('duration', () => {
   });
 
   describe('sleep', () => {
-    it('should wait at least a given amount of duration', async () => {
+    it('should wait at least a given duration', async () => {
       const start = Date.now();
       await sleep(new Duration(20, Duration.Unit.MILLISECONDS));
-      expect(Date.now() - start).to.be.gte(20);
+      expect(Date.now() - start).to.be.gte(20 - 1); // -1 to allow for rounding errors
     });
 
-    it('should wait at least a given amount of milliseconds', async () => {
+    it('should wait at least a given number of milliseconds', async () => {
       const start = Date.now();
       await sleep(20);
-      expect(Date.now() - start).to.be.gte(20);
+      expect(Date.now() - start).to.be.gte(20 - 1); // -1 to allow for rounding errors
     });
 
     it('should be interruptable', async () => {
@@ -77,7 +77,7 @@ describe('duration', () => {
       const promise = sleep(20);
       promise.interrupt();
       await promise;
-      expect(Date.now() - start).to.be.lt(20);
+      expect(Date.now() - start).to.be.lte(20); // ltE to allow for rounding errs
     });
   });
 });
