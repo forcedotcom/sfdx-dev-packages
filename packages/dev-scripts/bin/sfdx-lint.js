@@ -13,12 +13,14 @@ const packageRoot = require('../utils/package-path');
 
 const lint = require.resolve('tslint/bin/tslint');
 
-shell.exec(`${lint} -p . -t stylish`, {
+const extras = process.argv.slice(2).join(' ');
+
+shell.exec(`${lint} -p . -t stylish ${extras}`, {
   cwd: packageRoot
 });
 
 if (exists('./test')) {
-  shell.exec(`${lint} -p ./test -t stylish`, {
+  shell.exec(`${lint} -p ./test -t stylish ${extras}`, {
     cwd: packageRoot
   });
 }
