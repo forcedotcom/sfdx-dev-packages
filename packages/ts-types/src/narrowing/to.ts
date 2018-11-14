@@ -48,6 +48,7 @@ export function toAnyJson<T>(value: Nullable<T>): Optional<AnyJson>;
  * @param defaultValue The default to return if `value` was not defined.
  * @throws {@link JsonCloneError} If the value values contain circular references.
  */
+export function toAnyJson<T>(value: Nullable<T>, defaultValue: AnyJson): AnyJson;
 // underlying function
 export function toAnyJson<T>(value: Nullable<T>, defaultValue?: AnyJson): Optional<AnyJson> {
   try {
