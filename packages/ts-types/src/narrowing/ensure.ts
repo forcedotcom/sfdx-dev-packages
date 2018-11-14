@@ -8,7 +8,6 @@
 import { UnexpectedValueTypeError } from '../errors';
 import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Nullable, Optional } from '../types';
 import { asArray, asBoolean, asFunction, asInstance, asJsonArray, asJsonMap, asNumber, asObject, asString } from './as';
-import { isAnyJson } from './is';
 import { toAnyJson } from './to';
 
 /**
@@ -125,10 +124,7 @@ export function ensureFunction(value: unknown, message?: string): AnyFunction {
  * @throws {@link UnexpectedValueTypeError} If the value was not a JSON value type.
  */
 export function ensureAnyJson(value: unknown, message?: string): AnyJson {
-  if (!isAnyJson(value)) {
-    throw new UnexpectedValueTypeError(message || 'Value is not a JSON-compatible value type');
-  }
-  return toAnyJson(value);
+  return ensure(toAnyJson(value), message || 'Value is not a JSON-compatible value type');
 }
 
 /**
