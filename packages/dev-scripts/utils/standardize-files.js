@@ -115,7 +115,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
           // This has to live in this file until there is a way to specify a base
           // TODO Update when https://github.com/Microsoft/TypeScript/issues/25430 is fixed
           compilerOptions: {
-            outDir: 'lib'
+            outDir: '../lib'
           },
           include: ['./**/*.ts']
         });
