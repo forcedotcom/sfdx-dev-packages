@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/dev-scripts",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A set of standard package.json scripts for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "bin": {

@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/ts-sinon",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "TypeScript helpers for Sinon",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -13,12 +13,12 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "@salesforce/ts-types": "^0.19.1",
+    "@salesforce/ts-types": "^0.19.2",
     "sinon": "5.0.7",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
-    "@salesforce/dev-scripts": "^0.3.6"
+    "@salesforce/dev-scripts": "^0.3.7"
   },
   "scripts": {
     "build": "yarn sfdx-build",
