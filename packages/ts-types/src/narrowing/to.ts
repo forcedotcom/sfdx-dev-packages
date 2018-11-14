@@ -21,19 +21,6 @@ import { asJsonArray, asJsonMap } from './as';
  * @param value The value to convert.
  * @throws {@link JsonCloneError} If the value values contain circular references.
  */
-export function toAnyJson<T>(value: AnyJson): AnyJson;
-/**
- * Narrows an object of type `T` to an `AnyJson` following a deep, brute-force conversion of the object's data to
- * only consist of JSON-compatible values by performing a basic JSON clone on the object. This is preferable to
- * using the weaker `coerceAnyJson(unknown)` to type-narrow an arbitrary value to an `AnyJson` when the value's source
- * is unknown, but it comes with the increased overhead of performing the deep JSON clone to ensure runtime type
- * safety. The use of JSON cloning guarantees type safety by omitting non-JSON-compatible elements from the resulting
- * JSON data structure. Use `coerceAnyJson(unknown)` when the `value` object can be guaranteed to be JSON-compatible
- * and only needs type coercion.
- *
- * @param value The value to convert.
- * @throws {@link JsonCloneError} If the value values contain circular references.
- */
 export function toAnyJson<T>(value: Nullable<T>): Optional<AnyJson>;
 /**
  * Narrows an object of type `T` to an `AnyJson` following a deep, brute-force conversion of the object's data to
