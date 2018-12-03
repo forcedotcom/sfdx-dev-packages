@@ -1,5 +1,7 @@
 # Development Packages for Salesforce
 
+[![CircleCI](https://circleci.com/gh/forcedotcom/sfdx-dev-packages.svg?style=svg&circle-token=c3835e2d22637c21c8eb54b491f635e27eef35f9)](https://circleci.com/gh/forcedotcom/sfdx-dev-packages)
+
 ## Introduction
 
 This repository contains packages that help with development and configuration of Salesforce typescript projects.
