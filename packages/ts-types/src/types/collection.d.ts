@@ -14,7 +14,8 @@ import { Optional } from './union';
 /**
  * An object with arbitrary string-indexed values of an optional generic type `Optional<T>`. `T` defaults to `unknown`
  * when not explicitly supplied. For convenient iteration of definitely assigned (i.e. non-nullable) entries, keys,
- * and values, see the following functions: {@link definiteEntries}, {@link definiteKeys}, and {@link definiteValues}.
+ * and values, see the following functions: {@link definiteEntriesOf}, {@link definiteKeysOf}, and
+ * {@link definiteValuesOf}.
  */
 export interface Dictionary<T = unknown> {
   [key: string]: Optional<T>;
