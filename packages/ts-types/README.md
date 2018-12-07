@@ -33,8 +33,7 @@ Then a safe version in bare TypeScript using type guards:
 ```typescript
 const json = JSON.parse(response.body);
 // type of json -> `any`, but will not be undefined or JSON.parse would throw
-if (json === null && typeof json !== 'object')
-  throw new Error('Unexpected json data type');
+if (json === null && typeof json !== 'object') throw new Error('Unexpected json data type');
 let results = json.results;
 // type of results -> `any`
 if (!Array.isArray(results)) results = [];
@@ -66,12 +65,10 @@ results.forEach(item => {
 Removing the comments, we can shorten the above somewhat to achieve something not much more complex than the original example, but with robust type and null checking implemented:
 
 ```typescript
-asJsonArray(ensureJsonMap(JSON.parse(response.body)).results, []).forEach(
-  item => {
-    const record = ensureJsonMap(item);
-    db.save(ensureString(record.id), record);
-  }
-);
+asJsonArray(ensureJsonMap(JSON.parse(response.body)).results, []).forEach(item => {
+  const record = ensureJsonMap(item);
+  db.save(ensureString(record.id), record);
+});
 ```
 
 The `ensure*` functions are used in this example since they will raise an error when the value being checked either does not exist or does not match the expected type. Additionally, and perhaps more importantly, the generic `any` and `AnyJson` types get progressively narrowed when using these functions to more specific types. Of course, you don't always want to raise an error when these conditions are not met, so alternative forms exist for each of the JSON data types that allow the types to be tested and narrowed -- see the `is*` and `as*` variants in the API documentation for testing and narrowing capabilities without additionally raising errors.
@@ -89,9 +86,11 @@ A small library of types is included to help write more concise TypeScript code.
 - **Nullable&lt;T&gt;**: An alias for the union type `Optional<T | null>`, or `T | null | undefined`. `NonNullable` is a TypeScript built-in that subtracts both `null` and `undefined` from a type `T` with either as a union member.
 - **Dictionary&lt;T=unknown&gt;**: An alias for a `string`-indexed `object` of the form `{ [key: string]: Optional<T> }`.
 - **KeyOf&lt;T&gt;**: An alias for the commonly needed yet verbose `Extract<keyof T, string>`.
-- **AnyJson**: A union type of all valid JSON values, equal to `null | string | number| boolean | JsonMap | JsonArray`.
+- **AnyJson**: A union type of all valid JSON values, equal to `JsonPrimitive | JsonCollection`.
+- **JsonPrimitive**: A union of all valid JSON primitive values, qual to `null | string | number| boolean`.
 - **JsonMap**: A dictionary of any valid JSON value, defined as `Dictionary<AnyJson>`.
 - **JsonArray**: An array of any valid JSON value, defined as `Array<AnyJson>`.
+- **JsonCollection**: A union of all JSON collection types, equal to `JsonMap | JsonArray`.
 
 ### Narrowing functions
 
@@ -99,15 +98,14 @@ This library provides several categories of functions to help with safely narrow
 
 #### is\*
 
-The `is*` suite of functions accept a variable of a broad type such as `unknown` or `object` and returns a narrowed type after validating it with a runtime test. If the test is negative or if the value was not defined (i.e. `undefined` or `null`), `undefined` is returned instead.
-
-These functions test the runtime types of variables, applying an appropriate type predicate to narrow the variables type appropriately.
+The `is*` suite of functions accept a variable of a broad type such as `unknown` or `object` and returns a `boolean` type-predicate useful for narrowing the type in conditional scopes.
 
 ```typescript
-// type of value -> unknown
+// type of value -> string | boolean
 if (isString(value)) {
   // type of value -> string
 }
+// type of value -> boolean
 ```
 
 #### as\*
@@ -157,11 +155,11 @@ if (hasString(value, 'name')) {
 
 #### get\*
 
-The `get*` suite of functions search a target `object` (including `Array`s) for a given path. Search paths follow the same syntax as `lodash`'s `get`, `set`, `at`, etc. These functions are more strictly typed, however, increasingly the likelihood that well-typed code stays well-typed as a function's control flow advances.
+The `get*` suite of functions search an `unknown` target value for a given path. Search paths follow the same syntax as `lodash`'s `get`, `set`, `at`, etc. These functions are more strictly typed, however, increasingly the likelihood that well-typed code stays well-typed as a function's control flow advances.
 
 ```typescript
 // imagine response json retrieved from a remote query
-const response: JsonMap = {
+const response = {
   start: 0,
   length: 2,
   results: [{ name: 'first' }, { name: 'second' }]
@@ -175,9 +173,7 @@ const nameOfFirst = getString(response, 'results[0].name');
 The `coerce` suite of functions accept values of general types and narrow their types to JSON-specific values. They are named with the `coerce` prefix to indicate that they do not perform an exhaustive runtime check of the entire data structure -- only shallow type checks are performed. As a result, _only_ use these functions when you are confident that the broadly typed subject being coerced was derived from a JSON-compatible value. If you are unsure of an object's origins or contents but want to avoid runtime errors handling elements, see the `to*` set of functions.
 
 ```typescript
-const response = coerceJsonMap(
-  JSON.parse(await http.get('http://example.com/data.json').body)
-);
+const response = coerceJsonMap(JSON.parse(await http.get('http://example.com/data.json').body));
 // type of response -> JsonMap
 ```
 
@@ -186,13 +182,13 @@ const response = coerceJsonMap(
 The `to*` suite of functions is a fully type-safe version of the `coerce*` functions for JSON narrowing, but at the expense of some runtime performance. Under the hood, the `to*` functions perform a JSON-clone of their subject arguments, ensuring that the entire data structure is JSON compatible before returning the narrowed type.
 
 ```typescript
-const object = {
+const obj = {
   name: 'example',
   parse: function(s) {
     return s.split(':');
   }
 };
-const json = toJsonMap(object);
+const json = toJsonMap(obj);
 // type of json -> JsonMap
 // json = { name: 'example' }
 // notice that the parse function has been omitted to ensure JSON-compatibility!
@@ -205,12 +201,16 @@ This suite of functions are used to iterate the keys, entries, and values of obj
 ```typescript
 const pets: Dictionary<string> = {
   fido: 'dog',
-  bill: 'cat'
+  bill: 'cat',
+  fred: undefined
 };
-function logPet(name: string, type: string) {
-  console.log;
+// note that the array is typed as [string, string] rather than [string, string | undefined]
+function logPet([name, type]: [string, string]) {
+  console.log('%s is a %s', name, type);
 }
-definiteEntriesOf().forEach();
+definiteEntriesOf(pets).forEach(logPet);
+// fido is a dog
+// bill is a cat
 ```
 
 ## References

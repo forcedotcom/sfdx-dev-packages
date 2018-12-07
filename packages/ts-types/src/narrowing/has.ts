@@ -5,8 +5,19 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { AnyArray, AnyConstructor, AnyFunction, Many, View } from '../types';
-import { isArray, isBoolean, isFunction, isNumber, isObject, isPlainObject, isString } from './is';
+import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Many, Optional, View } from '../types';
+import {
+  isAnyJson,
+  isArray,
+  isBoolean,
+  isFunction,
+  isJsonArray,
+  isJsonMap,
+  isNumber,
+  isObject,
+  isPlainObject,
+  isString
+} from './is';
 
 /**
  * Tests whether a value of type `T` contains one or more property `keys`. If so, the type of the tested value is
@@ -29,7 +40,7 @@ import { isArray, isBoolean, isFunction, isNumber, isObject, isPlainObject, isSt
  * @param value The value to test.
  * @param keys One or more `string` keys to check for existence.
  */
-export function has<T, K extends string>(value: T, keys: Many<K>): value is T & View<K> {
+export function has<T extends unknown, K extends string>(value: T, keys: Many<K>): value is T & object & View<K> {
   return isObject(value) && (isArray(keys) ? keys.every(k => k in value) : keys in value);
 }
 
@@ -51,7 +62,10 @@ export function has<T, K extends string>(value: T, keys: Many<K>): value is T & 
  * @param value The value to test.
  * @param keys A `string` key to check for existence.
  */
-export function hasString<T, K extends string>(value: T, key: K): value is T & View<K, string> {
+export function hasString<T extends unknown, K extends string>(
+  value: T,
+  key: K
+): value is T & object & View<K, string> {
   return has(value, key) && isString(value[key]);
 }
 
@@ -73,7 +87,10 @@ export function hasString<T, K extends string>(value: T, key: K): value is T & V
  * @param value The value to test.
  * @param keys A `number` key to check for existence.
  */
-export function hasNumber<T, K extends string>(value: T, key: K): value is T & View<K, number> {
+export function hasNumber<T extends unknown, K extends string>(
+  value: T,
+  key: K
+): value is T & object & View<K, number> {
   return has(value, key) && isNumber(value[key]);
 }
 
@@ -95,7 +112,10 @@ export function hasNumber<T, K extends string>(value: T, key: K): value is T & V
  * @param value The value to test.
  * @param keys A `boolean` key to check for existence.
  */
-export function hasBoolean<T, K extends string>(value: T, key: K): value is T & View<K, boolean> {
+export function hasBoolean<T extends unknown, K extends string>(
+  value: T,
+  key: K
+): value is T & object & View<K, boolean> {
   return has(value, key) && isBoolean(value[key]);
 }
 
@@ -119,7 +139,10 @@ export function hasBoolean<T, K extends string>(value: T, key: K): value is T & 
  * @param value The value to test.
  * @param keys An `object` key to check for existence.
  */
-export function hasObject<T, K extends string>(value: T, key: K): value is T & View<K, object> {
+export function hasObject<T extends unknown, K extends string>(
+  value: T,
+  key: K
+): value is T & object & View<K, object> {
   return has(value, key) && isObject(value[key]);
 }
 
@@ -144,7 +167,10 @@ export function hasObject<T, K extends string>(value: T, key: K): value is T & V
  * @param value The value to test.
  * @param keys A "plain" `object` key to check for existence.
  */
-export function hasPlainObject<T, K extends string>(value: T, key: K): value is T & View<K, object> {
+export function hasPlainObject<T extends unknown, K extends string>(
+  value: T,
+  key: K
+): value is T & object & View<K, object> {
   return has(value, key) && isPlainObject(value[key]);
 }
 
@@ -170,8 +196,8 @@ export function hasPlainObject<T, K extends string>(value: T, key: K): value is 
  * @param value The value to test.
  * @param keys An instance of type `C` key to check for existence.
  */
-export function hasInstance<T, K extends string, C extends AnyConstructor>(
-  value: T,
+export function hasInstance<T extends unknown, K extends string, C extends AnyConstructor>(
+  value: Optional<T>,
   key: K,
   ctor: C
 ): value is T & View<K, InstanceType<C>> {
@@ -196,7 +222,10 @@ export function hasInstance<T, K extends string, C extends AnyConstructor>(
  * @param value The value to test.
  * @param keys An `AnyArray` key to check for existence.
  */
-export function hasArray<T, K extends string>(value: T, key: K): value is T & View<K, AnyArray> {
+export function hasArray<T extends unknown, K extends string>(
+  value: Optional<T>,
+  key: K
+): value is T & object & View<K, AnyArray> {
   return has(value, key) && isArray(value[key]);
 }
 
@@ -215,8 +244,81 @@ export function hasArray<T, K extends string>(value: T, key: K): value is T & Vi
  * ```
  *
  * @param value The value to test.
- * @param keys An `Array` key to check for existence.
+ * @param keys An `AnyFunction` key to check for existence.
  */
-export function hasFunction<T, K extends string>(value: T, key: K): value is T & View<K, AnyFunction> {
+export function hasFunction<T extends unknown, K extends string>(
+  value: Optional<T>,
+  key: K
+): value is T & object & View<K, AnyFunction> {
   return has(value, key) && isFunction(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` of type {@link AnyJson}, _using a shallow test for
+ * `AnyJson` compatibility_ (see {@link isAnyJson} for more information). If so, the type of the
+ * tested value is narrowed to reflect the existence of that key for convenient access in the same scope. Returns
+ * `false` if the property key does not exist on the object or the value stored by that key is not of type
+ * {@link AnyJson}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasAnyJson(obj, 'body')) {
+ *   // type of obj -> { body: AnyJson }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys An `AnyJson` key to check for existence.
+ */
+export function hasAnyJson<T extends unknown, K extends string>(
+  value: Optional<T>,
+  key: K
+): value is T & object & View<K, AnyJson> {
+  return has(value, key) && isAnyJson(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T extends AnyJson` contains a property `key` of type {@link JsonMap}. If so, the type
+ * of the tested value is narrowed to reflect the existence of that key for convenient access in the same scope. Returns
+ * `false` if the property key does not exist on the object or the value stored by that key is not of type
+ * {@link JsonMap}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasJsonMap(obj, 'body')) {
+ *   // type of obj -> { body: JsonMap }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `JsonMap` key to check for existence.
+ */
+export function hasJsonMap<T extends AnyJson, K extends string>(
+  value: Optional<T>,
+  key: K
+): value is T & JsonMap & View<K, JsonMap> {
+  return hasAnyJson(value, key) && isJsonMap(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T extends AnyJson` contains a property `key` of type {@link JsonArray}. If so, the
+ * type of the tested value is narrowed to reflect the existence of that key for convenient access in the same scope.
+ * Returns `false` if the property key does not exist on the object or the value stored by that key is not of type
+ * {@link JsonArray}.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasJsonArray(obj, 'body')) {
+ *   // type of obj -> { body: JsonArray }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A `JsonArray` key to check for existence.
+ */
+export function hasJsonArray<T extends AnyJson, K extends string>(
+  value: Optional<T>,
+  key: K
+): value is T & JsonMap & View<K, JsonArray> {
+  return hasAnyJson(value, key) && isJsonArray(value[key]);
 }
