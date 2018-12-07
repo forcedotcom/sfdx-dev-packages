@@ -21,7 +21,7 @@ import { Literals } from './conditional';
  *
  * ```
  * enum QUERY_KEY { id, name, created, updated }
- * // typeof QUERY_KEY -> {
+ * // type of QUERY_KEY -> {
  * //     [x: number]: number;
  * //     readonly id: number;
  * //     readonly name: number;
@@ -29,7 +29,7 @@ import { Literals } from './conditional';
  * //     readonly updated: number;
  * // }
  * interface QueryRecord extends LiteralsRecord<typeof QUERY_KEY, string> { }
- * // typeof QueryRecord -> {
+ * // type of QueryRecord -> {
  * //     readonly id: string;
  * //     readonly name: string;
  * //     readonly created: string;
@@ -37,7 +37,7 @@ import { Literals } from './conditional';
  * // }
  * // And for an interface with writable properties, use the following:
  * interface QueryRecord extends ReadWrite<LiteralsRecord<typeof QUERY_KEY, string>> { }
- * // typeof QueryRecord -> {
+ * // type of QueryRecord -> {
  * //     id: string;
  * //     name: string;
  * //     created: string;
@@ -62,3 +62,17 @@ export type ReadWrite<T> = { -readonly [K in keyof T]: T[K] };
  * A view over an `object` with constrainable properties.
  */
 export type View<K extends string, V = unknown> = { [_ in K]: V };
+
+/**
+ * Returns a new type consisting of all properties declared for an input type `T2` overlaid on the
+ * properties of type `T1`. Any definitions in `T2` replace those previously defined in `T1`. This can
+ * be useful for redefining the types of properties on `T1` with values from an inline type `T2`, perhaps to
+ * change their type or to make them optional.
+ *
+ * ```
+ * type NameAndStringValue = { name: string, value: string }
+ * type NameAndOptionalNumericValue = Overwrite<NameAndValue, { value?: number }>
+ * // type of NameAndOptionalNumericValue -> { name: string } & { value?: number | undefined }
+ * ```
+ */
+export type Overwrite<T1, T2> = { [P in Exclude<keyof T1, keyof T2>]: T1[P] } & T2;
