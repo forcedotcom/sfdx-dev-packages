@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@0.19.3...@salesforce/ts-types@0.20.0) (2018-12-11)
+
+
+### Features
+
+* doc fixes, make get/has fns more widely useful ([0122724](https://github.com/forcedotcom/sfdx-dev-packages/commit/0122724))
+
+
+
+
+
 ## [0.19.3](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@0.19.2...@salesforce/ts-types@0.19.3) (2018-11-14)
 
 
