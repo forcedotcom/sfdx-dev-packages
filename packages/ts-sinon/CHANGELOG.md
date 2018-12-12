@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@0.2.8...@salesforce/ts-sinon@0.2.9) (2018-12-12)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
 ## [0.2.8](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@0.2.7...@salesforce/ts-sinon@0.2.8) (2018-12-11)
 
 **Note:** Version bump only for package @salesforce/ts-sinon
