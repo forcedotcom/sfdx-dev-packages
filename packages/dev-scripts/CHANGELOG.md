@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.3.8...@salesforce/dev-scripts@0.3.9) (2018-12-12)
+
+
+### Bug Fixes
+
+* remove ^3 of tsc from dev-scripts ([b700627](https://github.com/forcedotcom/sfdx-dev-packages/commit/b700627))
+
+
+
+
+
 ## [0.3.8](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.3.7...@salesforce/dev-scripts@0.3.8) (2018-12-12)
 
 **Note:** Version bump only for package @salesforce/dev-scripts
