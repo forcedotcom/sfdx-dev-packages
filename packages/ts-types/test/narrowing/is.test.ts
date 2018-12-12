@@ -5,10 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-// tslint:disable:no-unused-expression
-
 import { expect } from 'chai';
-import { JsonArray } from '../types';
 import {
   isAnyJson,
   isArray,
@@ -23,7 +20,8 @@ import {
   isObject,
   isPlainObject,
   isString
-} from './is';
+} from '../../src/narrowing/is';
+import { JsonArray } from '../../src/types';
 
 class TestClass {
   constructor(public name = 'Test') {}
