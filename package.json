@@ -4,11 +4,11 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
+    "ci-docs": "yarn sfdx-ci-docs",
     "ci-test": "nyc mocha 'packages/**/*.test.js'",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
     "compile": "lerna run compile",
-    "ci-docs": "yarn sfdx-ci-docs",
     "docs": "lerna run docs",
     "format": "lerna run format",
     "install": "yarn sfdx-lerna-install",
