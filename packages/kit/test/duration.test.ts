@@ -9,6 +9,12 @@ import { expect } from 'chai';
 import { Duration, sleep } from '../src/duration';
 
 describe('duration', () => {
+  it('should have accessible quantity and units', () => {
+    const duration = Duration.milliseconds(60000);
+    expect(duration.quantity).to.equal(60000);
+    expect(duration.unit).to.equal(Duration.Unit.MILLISECONDS);
+  });
+
   it('should convert milliseconds to milliseconds', () => {
     const duration = Duration.milliseconds(60000);
     expect(duration.milliseconds).to.equal(60000);
