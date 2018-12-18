@@ -48,8 +48,8 @@ export class Duration {
     return new Duration(quantity, Duration.Unit.MINUTES);
   }
 
-  private readonly quantity: number;
-  private readonly unit: Duration.Unit;
+  public readonly quantity: number;
+  public readonly unit: Duration.Unit;
 
   constructor(quantity: number, unit: Duration.Unit = Duration.Unit.MINUTES) {
     this.quantity = quantity;
