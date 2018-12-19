@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.7](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@0.13.6...@salesforce/kit@0.13.7) (2018-12-19)
+
+
+### Bug Fixes
+
+* make duration quantity and unit public readonly props ([73365bd](https://github.com/forcedotcom/sfdx-dev-packages/commit/73365bd))
+
+
+
+
+
 ## [0.13.6](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@0.13.5...@salesforce/kit@0.13.6) (2018-12-12)
 
 **Note:** Version bump only for package @salesforce/kit
