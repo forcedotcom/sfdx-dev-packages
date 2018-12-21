@@ -5,21 +5,14 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const { accessSync } = require('fs');
-const { join } = require('path');
 const log = require('./log');
 const SfdxDevConfig = require('./sfdx-dev-config');
 const PackageJson = require('./package-json');
+const { isMultiPackageProject } = require('./project-type');
 
 module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   const config = new SfdxDevConfig(packageRoot);
   const pjson = new PackageJson(packageRoot);
-  let isLernaProject = false;
-
-  try {
-    accessSync(join(packageRoot, 'lerna.json'));
-    isLernaProject = true;
-  } catch (err) {}
 
   log(`standardizing scripts for ${pjson.name}`, 1);
 
@@ -33,7 +26,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
     for (const script of scriptList) {
       const scriptName = Array.isArray(script) ? script[0] : script;
       const scriptFile = Array.isArray(script) ? script[1] : script;
-      if (isLernaProject) {
+      if (isMultiPackageProject(packageRoot)) {
         scripts[scriptName] = `lerna run ${scriptName}`;
       } else {
         let scriptArgs = scriptFile.split('-');
