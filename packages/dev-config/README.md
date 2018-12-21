@@ -2,7 +2,7 @@
 
 ## What is this?
 
-A collection of commonly needed configuration files which include configuration for:
+A collection of commonly needed configuration files and dependencies for:
 
 - tslint
 - tsconfig
