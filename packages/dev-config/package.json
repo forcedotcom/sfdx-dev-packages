@@ -31,6 +31,7 @@
     "clean-all": "shx rm -rf node_modules"
   },
   "devDependencies": {
-    "shx": "^0.3.2"
+    "shx": "^0.3.2",
+    "commitizen": "^3.0.5"
   }
 }
