@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.7](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/require-analytics@0.6.6...@salesforce/require-analytics@0.6.7) (2018-12-21)
+
+**Note:** Version bump only for package @salesforce/require-analytics
+
+
+
+
+
 ## [0.6.6](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/require-analytics@0.6.5...@salesforce/require-analytics@0.6.6) (2018-12-21)
 
 **Note:** Version bump only for package @salesforce/require-analytics
