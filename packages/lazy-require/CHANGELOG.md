@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.10](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.1.9...@salesforce/lazy-require@0.1.10) (2019-01-07)
+
+
+### Bug Fixes
+
+* **ts-types:** replace dist with lib in pjson files list ([1edf2ce](https://github.com/forcedotcom/sfdx-dev-packages/commit/1edf2ce))
+
+
+
+
+
 ## [0.1.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.1.8...@salesforce/lazy-require@0.1.9) (2018-12-21)
 
 **Note:** Version bump only for package @salesforce/lazy-require
