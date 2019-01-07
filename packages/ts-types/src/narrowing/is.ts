@@ -47,12 +47,13 @@ export function isBoolean(value: unknown): value is boolean {
 }
 
 /**
- * Tests whether an `unknown` value is an `object` subtype.
+ * Tests whether an `unknown` value is an `Object` subtype (e.g., arrays, functions, objects, regexes,
+ * new Number(0), new String(''), and new Boolean(true)).
  *
  * @param value The value to test.
  */
 export function isObject(value: unknown): value is object {
-  return value != null && typeof value === 'object';
+  return value != null && (typeof value === 'object' || typeof value === 'function');
 }
 
 /**
@@ -79,6 +80,18 @@ export function isPlainObject(value: unknown): value is object {
  */
 export function isInstance<C extends AnyConstructor>(value: unknown, ctor: C): value is InstanceType<C> {
   return value instanceof ctor;
+}
+
+/**
+ * Tests whether an `unknown` value is a class that is either equal to or extends another class.
+ *
+ * @param value The value to test.
+ * @param cls The class to test against.
+ */
+export function isType<C extends AnyConstructor>(value: unknown, cls: C): value is C {
+  // can't use `./has#has` since it would create a circular module dependency
+  const has = <T, K extends string>(v: T, k: K): v is T & View<K> => isObject(v) && k in v;
+  return value === cls || (has(value, 'prototype') && value.prototype instanceof cls);
 }
 
 /**

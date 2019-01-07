@@ -19,12 +19,19 @@ import {
   isNumber,
   isObject,
   isPlainObject,
-  isString
+  isString,
+  isType
 } from '../../src/narrowing/is';
 import { JsonArray } from '../../src/types';
 
 class TestClass {
   constructor(public name = 'Test') {}
+}
+
+class TestSubclass extends TestClass {
+  constructor(name = 'SubTest') {
+    super(name);
+  }
 }
 
 describe('is type', () => {
@@ -95,45 +102,26 @@ describe('is type', () => {
     });
 
     it('should accept function', () => {
-      expect(isObject([])).to.be.true;
-    });
-  });
-
-  describe('isInstance', () => {
-    it('should reject undefined', () => {
-      expect(isInstance(undefined, TestClass)).to.be.false;
+      expect(isObject(() => {})).to.be.true;
     });
 
-    it('should reject null', () => {
-      expect(isInstance(null, TestClass)).to.be.false;
+    it('should accept new String()', () => {
+      // tslint:disable-next-line:no-construct
+      expect(isObject(new String('foo'))).to.be.true;
     });
 
-    it('should reject string', () => {
-      expect(isInstance('string', TestClass)).to.be.false;
+    it('should accept new Number()', () => {
+      // tslint:disable-next-line:no-construct
+      expect(isObject(new Number(0))).to.be.true;
     });
 
-    it('should reject number', () => {
-      expect(isInstance(1, TestClass)).to.be.false;
+    it('should accept new String()', () => {
+      // tslint:disable-next-line:no-construct
+      expect(isObject(new Boolean(true))).to.be.true;
     });
 
-    it('should reject boolean', () => {
-      expect(isInstance(true, TestClass)).to.be.false;
-    });
-
-    it('should reject array', () => {
-      expect(isInstance([], TestClass)).to.be.false;
-    });
-
-    it('should reject object', () => {
-      expect(isInstance({}, TestClass)).to.be.false;
-    });
-
-    it('should accept instance of TestClass', () => {
-      expect(isInstance(new TestClass(), TestClass)).to.be.true;
-    });
-
-    it('should reject function', () => {
-      expect(isInstance([], TestClass)).to.be.false;
+    it('should accept new RegExp()', () => {
+      expect(isObject(new RegExp('foo'))).to.be.true;
     });
   });
 
@@ -179,6 +167,94 @@ describe('is type', () => {
 
     it('should reject function', () => {
       expect(isPlainObject(() => {})).to.be.false;
+    });
+  });
+
+  describe('isInstance', () => {
+    it('should reject undefined', () => {
+      expect(isInstance(undefined, TestClass)).to.be.false;
+    });
+
+    it('should reject null', () => {
+      expect(isInstance(null, TestClass)).to.be.false;
+    });
+
+    it('should reject string', () => {
+      expect(isInstance('string', TestClass)).to.be.false;
+    });
+
+    it('should reject number', () => {
+      expect(isInstance(1, TestClass)).to.be.false;
+    });
+
+    it('should reject boolean', () => {
+      expect(isInstance(true, TestClass)).to.be.false;
+    });
+
+    it('should reject array', () => {
+      expect(isInstance([], TestClass)).to.be.false;
+    });
+
+    it('should reject object', () => {
+      expect(isInstance({}, TestClass)).to.be.false;
+    });
+
+    it('should accept instance of TestClass', () => {
+      expect(isInstance(new TestClass(), TestClass)).to.be.true;
+    });
+
+    it('should accept instance of TestSubclass', () => {
+      expect(isInstance(new TestSubclass(), TestClass)).to.be.true;
+    });
+
+    it('should reject function', () => {
+      expect(isInstance(() => {}, TestClass)).to.be.false;
+    });
+  });
+
+  describe('isType', () => {
+    it('should reject undefined', () => {
+      expect(isType(undefined, TestClass)).to.be.false;
+    });
+
+    it('should reject null', () => {
+      expect(isType(null, TestClass)).to.be.false;
+    });
+
+    it('should reject string', () => {
+      expect(isType('string', TestClass)).to.be.false;
+    });
+
+    it('should reject number', () => {
+      expect(isType(1, TestClass)).to.be.false;
+    });
+
+    it('should reject boolean', () => {
+      expect(isType(true, TestClass)).to.be.false;
+    });
+
+    it('should reject array', () => {
+      expect(isType([], TestClass)).to.be.false;
+    });
+
+    it('should reject object', () => {
+      expect(isType({}, TestClass)).to.be.false;
+    });
+
+    it('should accept TestClass as TestClass', () => {
+      expect(isType(TestClass, TestClass)).to.be.true;
+    });
+
+    it('should accept TestSubclass as TestClass', () => {
+      expect(isType(TestSubclass, TestClass)).to.be.true;
+    });
+
+    it('should reject TestClass as TestSubclass', () => {
+      expect(isType(TestClass, TestSubclass)).to.be.false;
+    });
+
+    it('should reject function', () => {
+      expect(isType(() => {}, TestClass)).to.be.false;
     });
   });
 
