@@ -11,6 +11,7 @@ import {
   isArray,
   isArrayLike,
   isBoolean,
+  isClassAssignableTo,
   isFunction,
   isInstance,
   isJsonArray,
@@ -19,8 +20,7 @@ import {
   isNumber,
   isObject,
   isPlainObject,
-  isString,
-  isType
+  isString
 } from '../../src/narrowing/is';
 import { JsonArray } from '../../src/types';
 
@@ -214,47 +214,47 @@ describe('is type', () => {
 
   describe('isType', () => {
     it('should reject undefined', () => {
-      expect(isType(undefined, TestClass)).to.be.false;
+      expect(isClassAssignableTo(undefined, TestClass)).to.be.false;
     });
 
     it('should reject null', () => {
-      expect(isType(null, TestClass)).to.be.false;
+      expect(isClassAssignableTo(null, TestClass)).to.be.false;
     });
 
     it('should reject string', () => {
-      expect(isType('string', TestClass)).to.be.false;
+      expect(isClassAssignableTo('string', TestClass)).to.be.false;
     });
 
     it('should reject number', () => {
-      expect(isType(1, TestClass)).to.be.false;
+      expect(isClassAssignableTo(1, TestClass)).to.be.false;
     });
 
     it('should reject boolean', () => {
-      expect(isType(true, TestClass)).to.be.false;
+      expect(isClassAssignableTo(true, TestClass)).to.be.false;
     });
 
     it('should reject array', () => {
-      expect(isType([], TestClass)).to.be.false;
+      expect(isClassAssignableTo([], TestClass)).to.be.false;
     });
 
     it('should reject object', () => {
-      expect(isType({}, TestClass)).to.be.false;
+      expect(isClassAssignableTo({}, TestClass)).to.be.false;
     });
 
     it('should accept TestClass as TestClass', () => {
-      expect(isType(TestClass, TestClass)).to.be.true;
+      expect(isClassAssignableTo(TestClass, TestClass)).to.be.true;
     });
 
     it('should accept TestSubclass as TestClass', () => {
-      expect(isType(TestSubclass, TestClass)).to.be.true;
+      expect(isClassAssignableTo(TestSubclass, TestClass)).to.be.true;
     });
 
     it('should reject TestClass as TestSubclass', () => {
-      expect(isType(TestClass, TestSubclass)).to.be.false;
+      expect(isClassAssignableTo(TestClass, TestSubclass)).to.be.false;
     });
 
     it('should reject function', () => {
-      expect(isType(() => {}, TestClass)).to.be.false;
+      expect(isClassAssignableTo(() => {}, TestClass)).to.be.false;
     });
   });
 
