@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.0.1...@salesforce/ts-types@1.1.0) (2019-01-09)
+
+
+### Features
+
+* **ts-types:** add isTypeOf and fix isObject ([e9a5314](https://github.com/forcedotcom/sfdx-dev-packages/commit/e9a5314))
+* **ts-types:** use more explicit name for isType; update docs ([60453cf](https://github.com/forcedotcom/sfdx-dev-packages/commit/60453cf))
+
+
+
+
+
 ## [1.0.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.0.0...@salesforce/ts-types@1.0.1) (2018-12-21)
 
 **Note:** Version bump only for package @salesforce/ts-types
