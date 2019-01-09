@@ -86,7 +86,8 @@ export function isInstance<C extends AnyConstructor>(value: unknown, ctor: C): v
 }
 
 /**
- * Tests whether an `unknown` value is a class constructor that is either equal to or extends a class.
+ * Tests whether an `unknown` value is a class constructor that is either equal to or extends another class
+ * constructor.
  *
  * @param value The value to test.
  * @param cls The class to test against.
