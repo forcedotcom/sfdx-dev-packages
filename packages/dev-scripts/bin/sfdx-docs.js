@@ -7,11 +7,12 @@
  */
 
 const { readdirSync, readFileSync, statSync, writeFileSync } = require('fs');
-const { basename, join } = require('path');
+const { basename, join, resolve } = require('path');
 const shell = require('../utils/shelljs');
 
 const loadRootPath = require('../utils/load-root-path');
 const packageRoot = require('../utils/package-path');
+const { isMultiPackageProject } = require('../utils/project-type');
 const typedoc = require.resolve('typedoc/bin/typedoc');
 
 const options = require('@salesforce/dev-config/typedoc');
@@ -22,10 +23,15 @@ try {
 } catch (err) {}
 
 let outDir = 'docs';
-try {
-  const lernaPath = loadRootPath('lerna.json');
-  outDir = join(lernaPath, 'docs', basename(packageRoot));
-} catch (e) {}
+
+if (isMultiPackageProject(packageRoot)) {
+  try {
+    const lernaPath = loadRootPath('lerna.json');
+    outDir = join(lernaPath, outDir, basename(packageRoot));
+  } catch (e) {}
+} else {
+  outDir = join(packageRoot, outDir, 'tmp');
+}
 
 let command = `${typedoc} --out ${outDir}`;
 
@@ -47,7 +53,12 @@ shell.exec(command, {
   cwd: packageRoot
 });
 
-// Fix any leaked local paths in the music docs
+if (!isMultiPackageProject(packageRoot)) {
+  shell.mv(`${outDir}/*`, `${outDir}/..`);
+  shell.rm('-rf', `${outDir}`);
+}
+
+// Fix any leaked local paths in the generated docs
 // See https://github.com/TypeStrong/typedoc/issues/800.
 
 const cleanDocFiles = dirPath => {
@@ -70,4 +81,9 @@ const cleanDocFiles = dirPath => {
     }
   }
 };
-cleanDocFiles(outDir);
+
+if (isMultiPackageProject(packageRoot)) {
+  cleanDocFiles(outDir);
+} else {
+  cleanDocFiles(resolve(`${outDir}/..`));
+}

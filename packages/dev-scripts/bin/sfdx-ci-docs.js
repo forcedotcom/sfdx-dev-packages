@@ -9,33 +9,29 @@
 const shell = require('../utils/shelljs');
 const path = require('path');
 const packageRoot = require('../utils/package-path');
+const { isMultiPackageProject } = require('../utils/project-type');
 
-shell.exec('git fetch origin gh-pages:gh-pages', {
-  cwd: packageRoot
-});
+shell.set('-e');
 
-shell.exec('git worktree add docs gh-pages', {
-  cwd: packageRoot
-});
+shell.cd(packageRoot);
 
-shell.exec('yarn docs', {
-  cwd: packageRoot
-});
+shell.rm('-rf', 'docs');
+shell.exec('git worktree prune');
 
-shell.exec('cp README.md docs', {
-  cwd: packageRoot
-});
+shell.exec('git fetch origin gh-pages:gh-pages');
+shell.exec('git worktree add docs gh-pages');
+shell.exec('yarn docs');
+
+if (isMultiPackageProject(packageRoot)) {
+  shell.exec('cp README.md docs');
+}
 
 shell.set('+e');
-shell.exec('git add .', {
-  cwd: path.join(packageRoot, 'docs')
-});
 
-shell.exec('git commit -m "docs: publishing gh-pages"', {
-  cwd: path.join(packageRoot, 'docs')
-});
+shell.cd(path.join(packageRoot, 'docs'));
 
-shell.exec('git push origin gh-pages', {
-  cwd: path.join(packageRoot, 'docs')
-});
+shell.exec('git add .');
+shell.exec('git commit -m "docs: publishing gh-pages [skip ci]"');
+shell.exec('git push origin gh-pages');
+
 shell.set('-e');
