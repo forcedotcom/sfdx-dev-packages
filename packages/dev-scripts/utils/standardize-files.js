@@ -6,11 +6,12 @@
  */
 
 const { join } = require('path');
-const { accessSync, writeFileSync } = require('fs');
+const { writeFileSync } = require('fs');
 const log = require('./log');
 const exists = require('./exists');
 const SfdxDevConfig = require('./sfdx-dev-config');
 const PackageJson = require('./package-json');
+const { isMultiPackageProject } = require('./project-type');
 
 const addFile = (filePath, strict, config) => {
   const fileExists = exists(filePath);
@@ -29,14 +30,8 @@ const addFile = (filePath, strict, config) => {
 
 module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   const config = new SfdxDevConfig(packageRoot);
-  let isLernaProject = false;
 
-  try {
-    accessSync(join(packageRoot, 'lerna.json'));
-    isLernaProject = true;
-  } catch (err) {}
-
-  if (isLernaProject) {
+  if (isMultiPackageProject(packageRoot)) {
     log('skipping writing files for learn project', 1);
     return;
   }
