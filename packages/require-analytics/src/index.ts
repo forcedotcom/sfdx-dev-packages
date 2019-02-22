@@ -36,6 +36,11 @@ export interface Analytics {
   dump: (arg?: any) => void;
 }
 
+const micros = () => {
+  const [seconds, nanoseconds] = process.hrtime();
+  return seconds * 1000000 + Math.floor(nanoseconds / 1000);
+};
+
 export function start(enabled: boolean, Module?: any): Analytics {
   const list: { [key: string]: number } = {};
   let node = new Node();
@@ -60,17 +65,18 @@ export function start(enabled: boolean, Module?: any): Analytics {
       }
       node = lastNode.children[request];
 
-      const mark = Date.now();
+      const mark = micros();
       const mod = origLoad.call(Module, request, parent, isMain);
-      const elapsed = Date.now() - mark;
+      const elapsed = micros() - mark;
 
       if (!list[path]) list[path] = elapsed;
-      if (node.elapsed == null) node.elapsed = elapsed;
+      if (node.elapsed === 0) node.elapsed = elapsed;
       node = lastNode;
       path = lastPath;
 
       if (!wasLoading) {
         loading = false;
+        node.elapsed += elapsed;
         time += elapsed;
       }
 
