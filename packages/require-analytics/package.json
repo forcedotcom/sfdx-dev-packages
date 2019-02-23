@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/require-analytics",
-  "version": "0.6.9",
+  "version": "0.6.10",
   "description": "Simple CommonJS require analytics",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
