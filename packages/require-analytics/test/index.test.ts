@@ -8,6 +8,7 @@
 // tslint:disable:no-unused-expression
 
 import { expect } from 'chai';
+import * as fs from 'fs';
 import * as sinon from 'sinon';
 import { start } from '../src';
 
@@ -20,7 +21,11 @@ describe('start', () => {
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     error = sandbox.stub(console, 'error');
-    load = sandbox.stub().returns({});
+    load = sandbox.stub().callsFake(() => {
+      // simply read any file synchronously to make this mock take nontrivial time to execute
+      // in node v10 we could use Atomics.wait, but test still run on node v8
+      return fs.readFileSync(`${__dirname}/../package.json`);
+    });
     mock = { _load: load };
   });
 
@@ -35,11 +40,11 @@ describe('start', () => {
     const report = analytics.report();
     analytics.dump();
 
-    expect(report.time).to.be.gte(0);
+    expect(report.time).to.be.gt(0);
     expect(report.size).to.equal(2);
     expect(Object.keys(report.list).length).to.equal(2);
     expect(Object.keys(report.tree.children).length).to.equal(2);
-    expect(report.tree.elapsed).to.be.gte(0);
+    expect(report.tree.elapsed).to.be.gt(0);
     expect(error.calledOnce).to.be.true;
   });
 
