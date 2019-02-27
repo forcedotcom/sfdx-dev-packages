@@ -73,7 +73,8 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
       pjson.contents.engines &&
       pjson.contents.engines.node
     ) {
-      // Because tsconfig in dev-config compiles to 2017, it should require node >= 8.4
+      // Because tsconfig in dev-config compiles to 2017, it should require node >= 8.0. However
+      // we require 8.4 to match other repos. We will bump this if we compile to 2018.
       pjson.contents.engines.node = '>=8.4.0';
     }
   } catch (err) {
