@@ -5,6 +5,8 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+const { readFileSync } = require('fs');
+const { join } = require('path');
 const log = require('./log');
 const SfdxDevConfig = require('./sfdx-dev-config');
 const PackageJson = require('./package-json');
@@ -61,6 +63,22 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
         husky.hooks[hookName] = `yarn sfdx-husky-${hookName}`;
       }
     }
+  }
+
+  try {
+    const tsconfig = readFileSync(join(packageRoot, 'tsconfig.json')).toString();
+    // Don't control for non dev-config projects, or projects that don't specify an engine already.
+    if (
+      tsconfig.match(/"extends"\s*:\s*\".*@salesforce\/dev-config/) &&
+      pjson.contents.engines &&
+      pjson.contents.engines.node
+    ) {
+      // Because tsconfig in dev-config compiles to 2017, it should require node >= 8.0. However
+      // we require 8.4 to match other repos. We will bump this if we compile to 2018.
+      pjson.contents.engines.node = '>=8.4.0';
+    }
+  } catch (err) {
+    // Don't control for non typescript projects.
   }
 
   pjson.write();
