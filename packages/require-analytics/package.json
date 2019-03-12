@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/require-analytics",
-  "version": "0.6.10",
+  "version": "0.6.11",
   "description": "Simple CommonJS require analytics",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -23,7 +23,7 @@
     "test": "yarn sfdx-test"
   },
   "devDependencies": {
-    "@salesforce/dev-scripts": "^0.3.12"
+    "@salesforce/dev-scripts": "^0.3.13"
   },
   "dependencies": {
     "tslib": "^1.9.3"
