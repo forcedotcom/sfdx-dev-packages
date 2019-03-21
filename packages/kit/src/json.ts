@@ -25,7 +25,7 @@ import { JsonDataFormatError, JsonParseError, JsonStringifyError } from './error
  * @param throwOnEmpty If the data contents are empty.
  * @throws {@link JsonParseError} If the data contents are empty or the data is invalid.
  */
-export function parseJson(data: string, jsonPath?: string, throwOnEmpty = true): AnyJson {
+export function parseJson<T extends AnyJson = AnyJson>(data: string, jsonPath?: string, throwOnEmpty = true): T {
   data = data.trim();
   if (!throwOnEmpty && data.length === 0) data = '{}';
   try {
@@ -44,8 +44,8 @@ export function parseJson(data: string, jsonPath?: string, throwOnEmpty = true):
  * @throws {@link JsonParseError} If the data contents are empty or the data is invalid.
  * @throws {@link JsonDataFormatError} If the data contents are not a `JsonMap`.
  */
-export function parseJsonMap(data: string, jsonPath?: string, throwOnEmpty?: boolean): JsonMap {
-  const json = parseJson(data, jsonPath, throwOnEmpty);
+export function parseJsonMap<T extends JsonMap = JsonMap>(data: string, jsonPath?: string, throwOnEmpty?: boolean): T {
+  const json = parseJson<T>(data, jsonPath, throwOnEmpty);
   if (json === null || isJsonArray(json) || typeof json !== 'object') {
     throw new JsonDataFormatError('Expected parsed JSON data to be an object');
   }
