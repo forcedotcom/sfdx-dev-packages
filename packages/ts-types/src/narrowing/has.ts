@@ -79,7 +79,7 @@ export function hasString<T extends unknown, K extends string>(
  * if (hasNumber(obj, 'offset')) {
  *   // type of obj -> { offset: number }
  *   if (hasNumber(obj, 'page') && hasArray(obj, 'items')) {
- *     // type of obj -> { offset: number } & { page: number } & { items: Array<unknown> }
+ *     // type of obj -> { offset: number } & { page: number } & { items: unknown[] }
  *   }
  * }
  * ```
