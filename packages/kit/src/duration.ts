@@ -97,6 +97,22 @@ export class Duration {
         return this.quantity;
     }
   }
+
+  public toString() {
+    const pluralize = (num: number, unit: string): string => {
+      if (num === 0) return '0';
+      if (num === 1) return `${num} ${unit}`;
+      return `${num} ${unit}s`;
+    };
+    switch (this.unit) {
+      case Duration.Unit.MINUTES:
+        return pluralize(this.minutes, 'minute');
+      case Duration.Unit.SECONDS:
+        return pluralize(this.seconds, 'second');
+      case Duration.Unit.MILLISECONDS:
+        return pluralize(this.milliseconds, 'millisecond');
+    }
+  }
 }
 
 export namespace Duration {

@@ -56,7 +56,7 @@ export function defaults<T, S1, S2, S3, S4>(
  */
 export function defaults<T>(obj: T): T;
 // underlying function
-export function defaults(obj: unknown, ...otherArgs: unknown[]): unknown {
+export function defaults(obj: unknown, ...otherArgs: Array<unknown>): unknown {
   return _.defaults(obj, ...otherArgs);
 }
 
@@ -185,7 +185,7 @@ export function merge<T, S1, S2, S3, S4>(
   source4: S4
 ): T & S1 & S2 & S3 & S4;
 // underlying function
-export function merge(obj: unknown, ...otherArgs: unknown[]): unknown {
+export function merge(obj: unknown, ...otherArgs: Array<unknown>): unknown {
   return _.merge(obj, ...otherArgs);
 }
 
@@ -206,7 +206,7 @@ export function omit<T extends object, K extends keyof T>(obj: Nullable<T>, ...p
  */
 export function omit<T extends object>(obj: Nullable<T>, ...paths: Array<Many<PropertyKey>>): Partial<T>;
 // underlying function
-export function omit(obj: unknown, ...paths: unknown[]): unknown {
+export function omit(obj: unknown, ...paths: Array<unknown>): unknown {
   return _.omit(obj, ...paths);
 }
 
@@ -257,7 +257,7 @@ export function sortBy<T extends object>(
   ...iteratees: Array<Many<ObjectIteratee<T>>>
 ): Array<T[keyof T]>;
 // underlying function
-export function sortBy(collection: unknown, ...iteratees: unknown[]): unknown {
+export function sortBy(collection: unknown, ...iteratees: Array<unknown>): unknown {
   return _.sortBy(collection, ...iteratees);
 }
 

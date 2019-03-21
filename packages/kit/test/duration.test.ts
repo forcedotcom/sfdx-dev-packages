@@ -65,6 +65,43 @@ describe('duration', () => {
     expect(duration.seconds).to.equal(60);
   });
 
+  it('should default to minute units', () => {
+    const duration = new Duration(1);
+    expect(duration.seconds).to.equal(60);
+  });
+
+  describe('as strings', () => {
+    it('should print 0 regardless of unit', () => {
+      expect(new Duration(0, Duration.Unit.MILLISECONDS) + '').to.equal('0');
+      expect(new Duration(0, Duration.Unit.SECONDS) + '').to.equal('0');
+      expect(new Duration(0, Duration.Unit.MINUTES) + '').to.equal('0');
+    });
+    it('should print minute', () => {
+      const duration = new Duration(1);
+      expect(duration + '').to.equal('1 minute');
+    });
+    it('should print minutes', () => {
+      const duration = new Duration(2);
+      expect(duration + '').to.equal('2 minutes');
+    });
+    it('should print second', () => {
+      const duration = new Duration(1, Duration.Unit.SECONDS);
+      expect(duration + '').to.equal('1 second');
+    });
+    it('should print seconds', () => {
+      const duration = new Duration(2, Duration.Unit.SECONDS);
+      expect(duration + '').to.equal('2 seconds');
+    });
+    it('should print millisecond', () => {
+      const duration = new Duration(1, Duration.Unit.MILLISECONDS);
+      expect(duration + '').to.equal('1 millisecond');
+    });
+    it('should print millisecond', () => {
+      const duration = new Duration(2, Duration.Unit.MILLISECONDS);
+      expect(duration + '').to.equal('2 milliseconds');
+    });
+  });
+
   describe('sleep', () => {
     it('should wait at least a given duration', async () => {
       const start = Date.now();

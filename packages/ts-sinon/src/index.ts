@@ -127,7 +127,7 @@ export function stubCallable<T extends object>(
 ): StubbedCallableType<T> {
   return new Proxy(sandbox.stub().callsFake(fake), {
     get: makeProxyGet(sandbox, members, false),
-    apply: (target: OpenFunction, thisArg: unknown, argumentsList: unknown[]) => {
+    apply: (target: OpenFunction, thisArg: unknown, argumentsList: Array<unknown>) => {
       return target.apply(thisArg, argumentsList);
     }
   }) as StubbedCallableType<T>;
