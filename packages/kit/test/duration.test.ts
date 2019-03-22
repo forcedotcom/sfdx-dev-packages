@@ -20,12 +20,12 @@ describe('duration', () => {
       const duration = Duration.milliseconds(60000);
       expect(duration.milliseconds).to.equal(60000);
     });
-  
+
     it('should convert milliseconds to seconds', () => {
       const duration = Duration.milliseconds(60000);
       expect(duration.seconds).to.equal(60);
     });
-  
+
     it('should convert milliseconds to minutes', () => {
       const duration = Duration.milliseconds(60000);
       expect(duration.minutes).to.equal(1);
