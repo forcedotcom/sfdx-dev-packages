@@ -22,6 +22,21 @@ export class Duration {
   public static readonly SECONDS_IN_MINUTE: number = 60;
 
   /**
+   * The number of minutes in one hour.
+   */
+  public static readonly MINUTES_IN_HOUR: number = 60;
+
+  /**
+   * The number of hours in one day.
+   */
+  public static readonly HOURS_IN_DAY: number = 24;
+
+  /**
+   * The number of days in one week.
+   */
+  public static readonly DAYS_IN_WEEK: number = 7;
+
+  /**
    * Returns a new `Duration` instance created from the specified number of milliseconds.
    *
    * @param quantity The number of milliseconds.
@@ -48,6 +63,33 @@ export class Duration {
     return new Duration(quantity, Duration.Unit.MINUTES);
   }
 
+  /**
+   * Returns a new `Duration` instance created from the specified number of hours.
+   *
+   * @param quantity The number of hours.
+   */
+  public static hours(quantity: number): Duration {
+    return new Duration(quantity, Duration.Unit.HOURS);
+  }
+
+  /**
+   * Returns a new `Duration` instance created from the specified number of days.
+   *
+   * @param quantity The number of days.
+   */
+  public static days(quantity: number): Duration {
+    return new Duration(quantity, Duration.Unit.DAYS);
+  }
+
+  /**
+   * Returns a new `Duration` instance created from the specified number of weeks.
+   *
+   * @param quantity The number of weeks.
+   */
+  public static weeks(quantity: number): Duration {
+    return new Duration(quantity, Duration.Unit.WEEKS);
+  }
+
   public readonly quantity: number;
   public readonly unit: Duration.Unit;
 
@@ -57,16 +99,35 @@ export class Duration {
   }
 
   /**
-   * Returns the current number of minutes represented by this `Duration` instance, rounded to the nearest integer value.
+   * Returns the current number of milliseconds represented by this `Duration` instance.
    */
-  get minutes(): number {
+  get milliseconds(): number {
     switch (this.unit) {
-      case Duration.Unit.MINUTES:
+      case Duration.Unit.MILLISECONDS:
         return this.quantity;
       case Duration.Unit.SECONDS:
-        return Math.round(this.quantity / Duration.SECONDS_IN_MINUTE);
-      case Duration.Unit.MILLISECONDS:
-        return Math.round(this.quantity / Duration.MILLIS_IN_SECONDS / Duration.SECONDS_IN_MINUTE);
+        return this.quantity * Duration.MILLIS_IN_SECONDS;
+      case Duration.Unit.MINUTES:
+        return this.quantity * Duration.MILLIS_IN_SECONDS * Duration.SECONDS_IN_MINUTE;
+      case Duration.Unit.HOURS:
+        return this.quantity * Duration.MILLIS_IN_SECONDS * Duration.SECONDS_IN_MINUTE * Duration.MINUTES_IN_HOUR;
+      case Duration.Unit.DAYS:
+        return (
+          this.quantity *
+          Duration.MILLIS_IN_SECONDS *
+          Duration.SECONDS_IN_MINUTE *
+          Duration.MINUTES_IN_HOUR *
+          Duration.HOURS_IN_DAY
+        );
+      case Duration.Unit.WEEKS:
+        return (
+          this.quantity *
+          Duration.MILLIS_IN_SECONDS *
+          Duration.SECONDS_IN_MINUTE *
+          Duration.MINUTES_IN_HOUR *
+          Duration.HOURS_IN_DAY *
+          Duration.DAYS_IN_WEEK
+        );
     }
   }
 
@@ -75,43 +136,141 @@ export class Duration {
    */
   get seconds(): number {
     switch (this.unit) {
-      case Duration.Unit.MINUTES:
-        return this.quantity * Duration.SECONDS_IN_MINUTE;
-      case Duration.Unit.SECONDS:
-        return this.quantity;
       case Duration.Unit.MILLISECONDS:
         return Math.round(this.quantity / Duration.MILLIS_IN_SECONDS);
+      case Duration.Unit.SECONDS:
+        return this.quantity;
+      case Duration.Unit.MINUTES:
+        return this.quantity * Duration.SECONDS_IN_MINUTE;
+      case Duration.Unit.HOURS:
+        return this.quantity * Duration.SECONDS_IN_MINUTE * Duration.MINUTES_IN_HOUR;
+      case Duration.Unit.DAYS:
+        return this.quantity * Duration.SECONDS_IN_MINUTE * Duration.MINUTES_IN_HOUR * Duration.HOURS_IN_DAY;
+      case Duration.Unit.WEEKS:
+        return (
+          this.quantity *
+          Duration.SECONDS_IN_MINUTE *
+          Duration.MINUTES_IN_HOUR *
+          Duration.HOURS_IN_DAY *
+          Duration.DAYS_IN_WEEK
+        );
     }
   }
 
   /**
-   * Returns the current number of milliseconds represented by this `Duration` instance.
+   * Returns the current number of minutes represented by this `Duration` instance, rounded to the nearest integer value.
    */
-  get milliseconds(): number {
+  get minutes(): number {
     switch (this.unit) {
-      case Duration.Unit.MINUTES:
-        return this.quantity * Duration.SECONDS_IN_MINUTE * Duration.MILLIS_IN_SECONDS;
-      case Duration.Unit.SECONDS:
-        return this.quantity * Duration.MILLIS_IN_SECONDS;
       case Duration.Unit.MILLISECONDS:
+        return Math.round(this.quantity / Duration.MILLIS_IN_SECONDS / Duration.SECONDS_IN_MINUTE);
+      case Duration.Unit.SECONDS:
+        return Math.round(this.quantity / Duration.SECONDS_IN_MINUTE);
+      case Duration.Unit.MINUTES:
+        return this.quantity;
+      case Duration.Unit.HOURS:
+        return this.quantity * Duration.MINUTES_IN_HOUR;
+      case Duration.Unit.DAYS:
+        return this.quantity * Duration.MINUTES_IN_HOUR * Duration.HOURS_IN_DAY;
+      case Duration.Unit.WEEKS:
+        return this.quantity * Duration.MINUTES_IN_HOUR * Duration.HOURS_IN_DAY * Duration.DAYS_IN_WEEK;
+    }
+  }
+
+  /**
+   * Returns the current number of hours represented by this `Duration` instance.
+   */
+  get hours(): number {
+    switch (this.unit) {
+      case Duration.Unit.MILLISECONDS:
+        return Math.round(
+          this.quantity / Duration.MILLIS_IN_SECONDS / Duration.SECONDS_IN_MINUTE / Duration.MINUTES_IN_HOUR
+        );
+      case Duration.Unit.SECONDS:
+        return Math.round(this.quantity / Duration.SECONDS_IN_MINUTE / Duration.MINUTES_IN_HOUR);
+      case Duration.Unit.MINUTES:
+        return Math.round(this.quantity / Duration.MINUTES_IN_HOUR);
+      case Duration.Unit.HOURS:
+        return this.quantity;
+      case Duration.Unit.DAYS:
+        return this.quantity * Duration.HOURS_IN_DAY;
+      case Duration.Unit.WEEKS:
+        return this.quantity * Duration.HOURS_IN_DAY * Duration.DAYS_IN_WEEK;
+    }
+  }
+
+  /**
+   * Returns the current number of days represented by this `Duration` instance.
+   */
+  get days(): number {
+    switch (this.unit) {
+      case Duration.Unit.MILLISECONDS:
+        return Math.round(
+          this.quantity /
+            Duration.MILLIS_IN_SECONDS /
+            Duration.SECONDS_IN_MINUTE /
+            Duration.MINUTES_IN_HOUR /
+            Duration.HOURS_IN_DAY
+        );
+      case Duration.Unit.SECONDS:
+        return Math.round(
+          this.quantity / Duration.SECONDS_IN_MINUTE / Duration.MINUTES_IN_HOUR / Duration.HOURS_IN_DAY
+        );
+      case Duration.Unit.MINUTES:
+        return Math.round(this.quantity / Duration.MINUTES_IN_HOUR / Duration.HOURS_IN_DAY);
+      case Duration.Unit.HOURS:
+        return Math.round(this.quantity / Duration.HOURS_IN_DAY);
+      case Duration.Unit.DAYS:
+        return this.quantity;
+      case Duration.Unit.WEEKS:
+        return this.quantity * Duration.DAYS_IN_WEEK;
+    }
+  }
+
+  /**
+   * Returns the current number of weeks represented by this `Duration` instance.
+   */
+  get weeks(): number {
+    switch (this.unit) {
+      case Duration.Unit.MILLISECONDS:
+        return Math.round(
+          this.quantity /
+            Duration.MILLIS_IN_SECONDS /
+            Duration.SECONDS_IN_MINUTE /
+            Duration.MINUTES_IN_HOUR /
+            Duration.HOURS_IN_DAY /
+            Duration.DAYS_IN_WEEK
+        );
+      case Duration.Unit.SECONDS:
+        return Math.round(
+          this.quantity /
+            Duration.SECONDS_IN_MINUTE /
+            Duration.MINUTES_IN_HOUR /
+            Duration.HOURS_IN_DAY /
+            Duration.DAYS_IN_WEEK
+        );
+      case Duration.Unit.MINUTES:
+        return Math.round(this.quantity / Duration.MINUTES_IN_HOUR / Duration.HOURS_IN_DAY / Duration.DAYS_IN_WEEK);
+      case Duration.Unit.HOURS:
+        return Math.round(this.quantity / Duration.HOURS_IN_DAY / Duration.DAYS_IN_WEEK);
+      case Duration.Unit.DAYS:
+        return Math.round(this.quantity / Duration.DAYS_IN_WEEK);
+      case Duration.Unit.WEEKS:
         return this.quantity;
     }
   }
 
+  /**
+   * The string representation of this `Duration`. e.g. "645 seconds"
+   */
   public toString() {
-    const pluralize = (num: number, unit: string): string => {
-      if (num === 0) return '0';
-      if (num === 1) return `${num} ${unit}`;
-      return `${num} ${unit}s`;
-    };
-    switch (this.unit) {
-      case Duration.Unit.MINUTES:
-        return pluralize(this.minutes, 'minute');
-      case Duration.Unit.SECONDS:
-        return pluralize(this.seconds, 'second');
-      case Duration.Unit.MILLISECONDS:
-        return pluralize(this.milliseconds, 'millisecond');
-    }
+    return this.pluralize();
+  }
+
+  private pluralize(num = this.quantity, unit = this.unit): string {
+    const name = Duration.Unit[unit].toLowerCase();
+    if (num === 1) return `${num} ${name.slice(0, name.length - 1)}`;
+    return `${num} ${name}`;
   }
 }
 
@@ -122,7 +281,10 @@ export namespace Duration {
   export enum Unit {
     MINUTES,
     MILLISECONDS,
-    SECONDS
+    SECONDS,
+    HOURS,
+    DAYS,
+    WEEKS
   }
 }
 
