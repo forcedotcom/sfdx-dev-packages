@@ -146,7 +146,7 @@ if (hasString(value, 'name')) {
   // type of value -> { name: string }
   // value can be further narrowed with additional checks
   if (hasArray(value, 'results')) {
-    // type of value -> { name: string } & { results: Array<unknown> }
+    // type of value -> { name: string } & { results: unknown[] }
   } else if (hasInstance(value, 'error', Error)) {
     // type of value -> { name: string } & { error: Error }
   }
