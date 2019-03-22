@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/lazy-require",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Lazily load npm packages",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "main": "lib/index.js",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@salesforce/dev-scripts": "^0.3.13",
-    "@salesforce/ts-sinon": "^1.0.4",
+    "@salesforce/ts-sinon": "^1.0.5",
     "@types/debug": "^0.0.30"
   },
   "scripts": {

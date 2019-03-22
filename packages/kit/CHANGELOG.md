@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.0.4...@salesforce/kit@1.1.0) (2019-03-22)
+
+
+### Bug Fixes
+
+* add typedoc ([86b4eb3](https://github.com/forcedotcom/sfdx-dev-packages/commit/86b4eb3))
+* allow json-compatible type assertions on json parsing fns ([e1d1b8c](https://github.com/forcedotcom/sfdx-dev-packages/commit/e1d1b8c))
+* don't show [object Object] when cast to string ([4902bcc](https://github.com/forcedotcom/sfdx-dev-packages/commit/4902bcc))
+* update yarn.lock ([6b4366c](https://github.com/forcedotcom/sfdx-dev-packages/commit/6b4366c))
+
+
+### Features
+
+* add hour, day, week to duration ([ff97940](https://github.com/forcedotcom/sfdx-dev-packages/commit/ff97940))
+
+
+
+
+
 ## [1.0.4](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.0.3...@salesforce/kit@1.0.4) (2019-03-12)
 
 **Note:** Version bump only for package @salesforce/kit
