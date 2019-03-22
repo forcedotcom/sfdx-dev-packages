@@ -38,18 +38,43 @@ export function parseJson(data: string, jsonPath?: string, throwOnEmpty = true):
 /**
  * Parse JSON `string` data, expecting the result to be a `JsonMap`.
  *
+ * ```
+ * const json = parseJson(myJsonString);
+ * // typeof json -> AnyJson
+ * ```
+ *
+ * If you are the producer of the JSON being parsed or have a high degree of confidence in the source of the JSON
+ * (e.g. static resources in your project or unwavering data services of high integrity) then you may provide a more
+ * specific type as the type parameter, `T`. This practice is _not_ recommended unless you are fully confident in the
+ * ability of the type provided to accurately reflect the parsed data, given that _no_ runtime checks will be performed
+ * by this method to validate the JSON. In particular, despite the fact that the provided type must extend `JsonMap`,
+ * it is possible to circumvent the compiler's ability to do strict null checking by failing to capture `undefined` or
+ * `null` property states in the types you apply. It's a best practice to mark all properties of such types as
+ * optional, especially when in doubt.
+ *
+ * ```
+ * interface Location extends JsonMap { lat: number; lng: number; }
+ * interface WayPoint extends JsonMap { name: string; loc: Location; }
+ * const json = JSON.stringify({ name: 'Bill', loc: { lat: 10.0, lng: -10.0 } });
+ * // Warning -- since the properties in the interfaces above are non-optional, the type assertion below is not
+ * // perfectly type-sound -- make sure you trust your JSON data exactly conforms to the interface(s) you supply,
+ * // or you are risking runtime errors!
+ * const wayPoint = parseJsonMap<WayPoint>(json);
+ * // typeof wayPoint -> WayPoint
+ * ```
+ *
  * @param data The string data to parse.
  * @param jsonPath The file path from which the JSON was loaded.
  * @param throwOnEmpty If the data contents are empty.
  * @throws {@link JsonParseError} If the data contents are empty or the data is invalid.
  * @throws {@link JsonDataFormatError} If the data contents are not a `JsonMap`.
  */
-export function parseJsonMap(data: string, jsonPath?: string, throwOnEmpty?: boolean): JsonMap {
+export function parseJsonMap<T extends JsonMap = JsonMap>(data: string, jsonPath?: string, throwOnEmpty?: boolean): T {
   const json = parseJson(data, jsonPath, throwOnEmpty);
   if (json === null || isJsonArray(json) || typeof json !== 'object') {
     throw new JsonDataFormatError('Expected parsed JSON data to be an object');
   }
-  return json;
+  return json as T; // apply the requested type assertion
 }
 
 /**
