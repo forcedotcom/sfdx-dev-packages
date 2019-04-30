@@ -28,8 +28,12 @@ if (isMultiPackageProject(packageRoot)) {
   try {
     const lernaPath = loadRootPath('lerna.json');
     outDir = join(lernaPath, outDir, basename(packageRoot));
+    // clean docs _after_ resolving outDir in multi-package projects
+    shell.rm('-rf', `${outDir}/*`);
   } catch (e) {}
 } else {
+  // clean docs _before_ resolving tmp outDir in multi-package projects
+  shell.rm('-rf', `${outDir}/*`);
   outDir = join(packageRoot, outDir, 'tmp');
 }
 
@@ -48,7 +52,6 @@ for (const key of Object.keys(options)) {
   }
 }
 
-shell.rm('-rf', `${outDir}/*`);
 shell.exec(command, {
   cwd: packageRoot
 });
