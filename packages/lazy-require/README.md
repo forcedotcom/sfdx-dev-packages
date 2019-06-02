@@ -12,6 +12,6 @@ Note that not all modules are well-suited for lazy loading -- some modules expec
 
 ```javascript
 // Enable lazy loading of modules
-const lazyLoad = require('@salesforce/lazy-require').create('name-of-typecache');
+const lazyLoad = require('@salesforce/lazy-require').default.create('name-of-typecache');
 lazyLoad.start();
 ```
