@@ -13,8 +13,8 @@
   ],
   "dependencies": {
     "@salesforce/ts-types": "^1.1.4",
-    "sinon": "5.0.7",
-    "tslib": "^1.9.3"
+    "sinon": "5.1.1",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@salesforce/dev-scripts": "^0.3.14"
