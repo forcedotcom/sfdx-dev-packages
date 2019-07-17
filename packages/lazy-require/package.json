@@ -12,13 +12,13 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "debug": "^3.1.0",
-    "tslib": "^1"
+    "debug": "^3.2.6",
+    "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@salesforce/dev-scripts": "^0.3.14",
     "@salesforce/ts-sinon": "^1.0.6",
-    "@types/debug": "^0.0.30"
+    "@types/debug": "^0.0.31"
   },
   "scripts": {
     "build": "yarn sfdx-build",

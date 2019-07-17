@@ -26,6 +26,6 @@
     "@salesforce/dev-scripts": "^0.3.14"
   },
   "dependencies": {
-    "tslib": "^1.9.3"
+    "tslib": "^1.10.0"
   }
 }
