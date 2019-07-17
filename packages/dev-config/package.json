@@ -23,15 +23,15 @@
     "/typedoc.js"
   ],
   "dependencies": {
-    "tslint": "^5",
-    "tslint-microsoft-contrib": "^5",
-    "typescript": "3.1.6"
+    "tslint": "^5.18.0",
+    "tslint-microsoft-contrib": "^5.2.1",
+    "typescript": "~3.1.6"
   },
   "scripts": {
     "clean-all": "shx rm -rf node_modules"
   },
   "devDependencies": {
-    "commitizen": "^3.0.5",
+    "commitizen": "^3.1.1",
     "shx": "^0.3.2"
   }
 }
