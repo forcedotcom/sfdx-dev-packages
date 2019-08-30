@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.4.0...@salesforce/dev-scripts@0.4.1) (2019-08-30)
+
+
+### Bug Fixes
+
+* npm security upgrades ([053d507](https://github.com/forcedotcom/sfdx-dev-packages/commit/053d507))
+
+
+
+
+
 # [0.4.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.3.14...@salesforce/dev-scripts@0.4.0) (2019-07-17)
 
 
