@@ -12,6 +12,7 @@ import {
   isArrayLike,
   isBoolean,
   isClassAssignableTo,
+  isDictionary,
   isFunction,
   isInstance,
   isJsonArray,
@@ -167,6 +168,51 @@ describe('is type', () => {
 
     it('should reject function', () => {
       expect(isPlainObject(() => {})).to.be.false;
+    });
+  });
+
+  describe('isDictionary', () => {
+    it('should reject undefined', () => {
+      expect(isDictionary(undefined)).to.be.false;
+    });
+
+    it('should reject null', () => {
+      expect(isDictionary(null)).to.be.false;
+    });
+
+    it('should reject string', () => {
+      expect(isDictionary('string')).to.be.false;
+    });
+
+    it('should reject number', () => {
+      expect(isDictionary(1)).to.be.false;
+    });
+
+    it('should reject boolean', () => {
+      expect(isDictionary(true)).to.be.false;
+    });
+
+    it('should reject array', () => {
+      expect(isDictionary([])).to.be.false;
+    });
+
+    it('should accept object', () => {
+      expect(isDictionary({})).to.be.true;
+    });
+
+    it('should reject instance of TestClass', () => {
+      expect(isDictionary(new TestClass())).to.be.false;
+    });
+
+    it('should reject mock class', () => {
+      expect(isDictionary({ constructor: true })).to.be.false;
+      const wtf = () => {};
+      wtf.prototype = TestClass;
+      expect(isDictionary({ constructor: wtf })).to.be.false;
+    });
+
+    it('should reject function', () => {
+      expect(isDictionary(() => {})).to.be.false;
     });
   });
 
