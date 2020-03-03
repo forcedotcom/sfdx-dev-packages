@@ -12,7 +12,7 @@ const packageRoot = require('../utils/package-path');
 const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
 
 // double -- to pass through yarn then lerna
-shell.exec(`yarn lint-fix`, {
+shell.exec(`yarn lint`, {
   cwd: packageRoot
 });
 
