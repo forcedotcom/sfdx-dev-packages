@@ -1,0 +1,28 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - '@commitlint/cli > lodash':
+        patched: '2020-04-30T21:18:40.563Z'
+    - typedoc > lodash:
+        patched: '2020-04-30T21:18:40.563Z'
+    - '@commitlint/cli > @commitlint/load > lodash':
+        patched: '2020-04-30T21:18:40.563Z'
+    - '@commitlint/cli > @commitlint/load > @commitlint/resolve-extends > lodash':
+        patched: '2020-04-30T21:18:40.563Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > lodash:
+        patched: '2020-04-30T21:18:40.563Z'
+    - '@commitlint/cli > @commitlint/lint > @commitlint/parse > conventional-commits-parser > lodash':
+        patched: '2020-04-30T21:18:40.563Z'
+    - '@commitlint/cli > @commitlint/lint > @commitlint/rules > @commitlint/ensure > lodash':
+        patched: '2020-04-30T21:18:40.563Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-04-30T21:18:40.563Z'
+    - sinon > nise > @sinonjs/formatio > @sinonjs/samsam > lodash:
+        patched: '2020-04-30T21:18:40.563Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-04-30T21:18:40.563Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2020-04-30T21:18:40.563Z'
