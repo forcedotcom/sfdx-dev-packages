@@ -21,6 +21,15 @@ export class NamedError extends Error {
 /**
  * Indicates an unexpected type was encountered during a type-narrowing operation.
  */
+export class AssertionFailedError extends NamedError {
+  constructor(message: string) {
+    super('AssertionFailedError', message);
+  }
+}
+
+/**
+ * Indicates an unexpected type was encountered during a type-narrowing operation.
+ */
 export class UnexpectedValueTypeError extends NamedError {
   constructor(message: string) {
     super('UnexpectedValueTypeError', message);

@@ -25,7 +25,7 @@
   "dependencies": {
     "tslint": "^5.18.0",
     "tslint-microsoft-contrib": "^5.2.1",
-    "typescript": "~3.1.6"
+    "typescript": "~3.7.4"
   },
   "scripts": {
     "clean-all": "shx rm -rf node_modules"
