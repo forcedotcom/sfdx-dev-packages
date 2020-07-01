@@ -32,7 +32,7 @@ export type Stub<V extends OpenFunction> = V & SinonStub;
  */
 export type StubbedType<T extends object> = {
   // tslint:disable-next-line:no-any
-  [K in keyof T]: T[K] extends OpenFunction ? Stub<T[K]> : T[K]
+  [K in keyof T]: T[K] extends OpenFunction ? Stub<T[K]> : T[K];
 };
 
 /**
@@ -157,6 +157,10 @@ const makeProxyGet = (sandbox: SinonSandbox, members: OpenDictionary, stubMissin
       }
       return sandbox.stub().callsFake(fn);
     };
+    // We are not a promise.
+    if (target[name] == null && members[name] == null && name === 'then') {
+      return undefined;
+    }
     if (cache[name] != null) {
       return cache[name];
     }
