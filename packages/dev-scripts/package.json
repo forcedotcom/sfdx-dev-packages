@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/dev-scripts",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "A set of standard package.json scripts for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "bin": {
@@ -35,7 +35,7 @@
   "dependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^7.6.0",
-    "@salesforce/dev-config": "^1.5.0",
+    "@salesforce/dev-config": "^1.6.0",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.7",
     "@types/node": "^10.14.12",
