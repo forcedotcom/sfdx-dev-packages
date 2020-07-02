@@ -5,8 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { UnexpectedValueTypeError } from '../errors';
-import { AnyConstructor, AnyFunction, AnyJson, Dictionary, JsonArray, JsonMap, Nullable, Optional } from '../types';
+import { AssertionFailedError } from '../errors';
+import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Nullable, Optional } from '../types';
 import {
   asArray,
   asBoolean,
@@ -23,6 +23,19 @@ import {
 import { toAnyJson } from './to';
 
 /**
+ * Asserts that a given `condition` is true, or raises an error otherwise.
+ *
+ * @param condition The condition to test.
+ * @param message The error message to use if the condition is false.
+ * @throws {@link AssertionFailedError} If the assertion failed.
+ */
+export function assert(condition: boolean, message?: string): asserts condition {
+  if (!condition) {
+    throw new AssertionFailedError(message || 'Assertion condition was false');
+  }
+}
+
+/**
  * Narrows a type `Nullable<T>` to a `T` or raises an error.
  *
  * Use of the type parameter `T` to further narrow the type signature of the value being tested is
@@ -35,13 +48,10 @@ import { toAnyJson } from './to';
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is `undefined` or `null`.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensure<T = unknown>(value: Nullable<T>, message?: string): T {
-  if (value == null) {
-    throw new UnexpectedValueTypeError(message || 'Value is not defined');
-  }
-  return value;
+export function assertNonNull<T = unknown>(value: Nullable<T>, message?: string): asserts value is T {
+  assert(value != null, message || 'Value is not defined');
 }
 
 /**
@@ -49,10 +59,10 @@ export function ensure<T = unknown>(value: Nullable<T>, message?: string): T {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureString(value: unknown, message?: string): string {
-  return ensure(asString(value), message || 'Value is not a string');
+export function assertString(value: unknown, message?: string): asserts value is string {
+  assertNonNull(asString(value), message || 'Value is not a string');
 }
 
 /**
@@ -60,10 +70,10 @@ export function ensureString(value: unknown, message?: string): string {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureNumber(value: unknown, message?: string): number {
-  return ensure(asNumber(value), message || 'Value is not a number');
+export function assertNumber(value: unknown, message?: string): asserts value is number {
+  assertNonNull(asNumber(value), message || 'Value is not a number');
 }
 
 /**
@@ -71,10 +81,10 @@ export function ensureNumber(value: unknown, message?: string): number {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureBoolean(value: unknown, message?: string): boolean {
-  return ensure(asBoolean(value), message || 'Value is not a boolean');
+export function assertBoolean(value: unknown, message?: string): asserts value is boolean {
+  assertNonNull(asBoolean(value), message || 'Value is not a boolean');
 }
 
 /**
@@ -82,10 +92,10 @@ export function ensureBoolean(value: unknown, message?: string): boolean {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureObject<T = object>(value: unknown, message?: string): T {
-  return ensure(asObject(value), message || 'Value is not an object');
+export function assertObject(value: unknown, message?: string): asserts value is object {
+  assertNonNull(asObject(value), message || 'Value is not an object');
 }
 
 /**
@@ -94,10 +104,10 @@ export function ensureObject<T = object>(value: unknown, message?: string): T {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensurePlainObject<T = object>(value: unknown, message?: string): T {
-  return ensure(asPlainObject<T>(value), message || 'Value is not a plain object');
+export function assertPlainObject(value: unknown, message?: string): asserts value is object {
+  assertNonNull(asPlainObject(value), message || 'Value is not an object');
 }
 
 /**
@@ -106,10 +116,10 @@ export function ensurePlainObject<T = object>(value: unknown, message?: string):
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureDictionary<T = unknown>(value: unknown, message?: string): Dictionary<T> {
-  return ensure(asDictionary(value), message || 'Value is not a dictionary object');
+export function assertDictionary(value: unknown, message?: string): asserts value is object {
+  assertNonNull(asDictionary(value), message || 'Value is not an object');
 }
 
 /**
@@ -118,10 +128,14 @@ export function ensureDictionary<T = unknown>(value: unknown, message?: string):
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureInstance<C extends AnyConstructor>(value: unknown, ctor: C, message?: string): InstanceType<C> {
-  return ensure(asInstance(value, ctor), message || `Value is not an instance of ${ctor.name}`);
+export function assertInstance<C extends AnyConstructor>(
+  value: unknown,
+  ctor: C,
+  message?: string
+): asserts value is InstanceType<C> {
+  assertNonNull(asInstance(value, ctor), message || `Value is not an instance of ${ctor.name}`);
 }
 
 /**
@@ -129,10 +143,10 @@ export function ensureInstance<C extends AnyConstructor>(value: unknown, ctor: C
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureArray<T = unknown>(value: unknown, message?: string): T[] {
-  return ensure(asArray(value), message || 'Value is not an array');
+export function assertArray(value: unknown, message?: string): asserts value is AnyArray {
+  assertNonNull(asArray(value), message || 'Value is not an array');
 }
 
 /**
@@ -140,10 +154,10 @@ export function ensureArray<T = unknown>(value: unknown, message?: string): T[] 
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureFunction(value: unknown, message?: string): AnyFunction {
-  return ensure(asFunction(value), message || 'Value is not a function');
+export function assertFunction(value: unknown, message?: string): asserts value is AnyFunction {
+  assertNonNull(asFunction(value), message || 'Value is not a function');
 }
 
 /**
@@ -153,10 +167,10 @@ export function ensureFunction(value: unknown, message?: string): AnyFunction {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was not a JSON value type.
+ * @throws {@link AssertionFailedError} If the value was not a JSON value type.
  */
-export function ensureAnyJson(value: unknown, message?: string): AnyJson {
-  return ensure(toAnyJson(value), message || 'Value is not a JSON-compatible value type');
+export function assertAnyJson(value: unknown, message?: string): asserts value is AnyJson {
+  assertNonNull(toAnyJson(value), message || 'Value is not a JSON-compatible value type');
 }
 
 /**
@@ -164,10 +178,10 @@ export function ensureAnyJson(value: unknown, message?: string): AnyJson {
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureJsonMap(value: Optional<AnyJson>, message?: string): JsonMap {
-  return ensure(asJsonMap(value), message || 'Value is not a JsonMap');
+export function assertJsonMap(value: Optional<AnyJson>, message?: string): asserts value is JsonMap {
+  assertNonNull(asJsonMap(value), message || 'Value is not a JsonMap');
 }
 
 /**
@@ -175,8 +189,8 @@ export function ensureJsonMap(value: Optional<AnyJson>, message?: string): JsonM
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.
- * @throws {@link UnexpectedValueTypeError} If the value was undefined.
+ * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function ensureJsonArray(value: Optional<AnyJson>, message?: string): JsonArray {
-  return ensure(asJsonArray(value), message || 'Value is not a JsonArray');
+export function assertJsonArray(value: Optional<AnyJson>, message?: string): asserts value is JsonArray {
+  assertNonNull(asJsonArray(value), message || 'Value is not a JsonArray');
 }
