@@ -80,13 +80,17 @@ module.exports = (projectPath, inLernaProject) => {
   remove('@salesforce/dev-config');
 
   const eslintPjson = require('eslint-config-salesforce-typescript/package.json');
+  const eslintHeaderPjson = require('eslint-config-salesforce-license/package.json');
   if (isMultiPackageProject(projectPath)) {
     // We don't need these at the lerna level
     Object.keys(eslintPjson.devDependencies).forEach(remove);
   } else {
+    add('eslint-config-salesforce-typescript');
+    add('eslint-config-salesforce-license');
     // eslint and all plugins must be installed on a local bases, regardless of if it uses a shared config.
     // https://eslint.org/docs/user-guide/getting-started
     Object.entries(eslintPjson.devDependencies).forEach(([name, version]) => add(name, version));
+    Object.entries(eslintHeaderPjson.devDependencies).forEach(([name, version]) => add(name, version));
   }
 
   if (added.length > 0) {

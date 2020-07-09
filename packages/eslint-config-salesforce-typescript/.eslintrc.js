@@ -131,4 +131,5 @@ module.exports = {
     'jsdoc/check-indentation': 'error',
     'jsdoc/newline-after-description': 'error',
   },
+  ignorePatterns: ['*.js'],
 };

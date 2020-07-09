@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable @typescript-eslint/no-empty-function */
 /*
  * Copyright (c) 2018, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-empty-function */
 
 import { expect } from 'chai';
 import {
@@ -108,15 +109,18 @@ describe('is type', () => {
     });
 
     it('should accept new String()', () => {
-      expect(isObject(String('foo'))).to.be.true;
+      // eslint-disable-next-line no-new-wrappers
+      expect(isObject(new String('foo'))).to.be.true;
     });
 
     it('should accept new Number()', () => {
-      expect(isObject(Number(0))).to.be.true;
+      // eslint-disable-next-line no-new-wrappers
+      expect(isObject(new Number(0))).to.be.true;
     });
 
     it('should accept new String()', () => {
-      expect(isObject(Boolean(true))).to.be.true;
+      // eslint-disable-next-line no-new-wrappers
+      expect(isObject(new Boolean(true))).to.be.true;
     });
 
     it('should accept new RegExp()', () => {

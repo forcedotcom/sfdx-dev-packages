@@ -80,7 +80,9 @@ export function isPlainObject(value: unknown): value is object {
   const ctor = value.constructor;
   if (!isFunction(ctor)) return false;
   if (!isObjectObject(ctor.prototype)) return false;
-  if (!Object.prototype.hasOwnProperty.call(ctor, 'isPrototypeOf')) return false;
+  // Moving this to Object.prototype.hasOwnProperties.call(ctor, 'isPrototypeOf') cause a lot of test failures.
+  // eslint-disable-next-line no-prototype-builtins
+  if (!ctor.prototype.hasOwnProperty('isPrototypeOf')) return false;
   return true;
 }
 
