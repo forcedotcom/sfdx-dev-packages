@@ -18,6 +18,7 @@ class PackageJson {
     this.pjsonPath = join(packageRoot, 'package.json');
     this.contents = require(this.pjsonPath);
     this.originalContents = this.stringify();
+    this.actions = [];
   }
 
   stringify() {
@@ -33,10 +34,13 @@ class PackageJson {
   write() {
     const pjson = this.stringify();
     if (this.originalContents !== pjson) {
+      log(`Found changes for ${this.contents.name}`);
+      for (const action of this.actions) {
+        log(action, 2);
+      }
+
       writeFileSync(this.pjsonPath, pjson);
       log(`wrote changes to ${this.pjsonPath}`, 1);
-    } else {
-      log('package.json not changed; skipping write', 2);
     }
   }
 

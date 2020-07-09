@@ -9,19 +9,18 @@
 let chalk = require('chalk');
 const log = require('../utils/log');
 const writeDeps = require('../utils/write-dependencies');
+const packageRoot = require('../utils/package-path');
 
 let changed = false;
 log(`Writing dependencies for the lerna project`);
-changed = changed || writeDeps();
+changed = changed || writeDeps(packageRoot);
 
 // Run it for all packages in the lerna project
-changed =
-  changed || require('../utils/run-in-lerna-packages')('preinstall', writeDeps);
+changed = changed || require('../utils/run-in-lerna-packages')('preinstall', writeDeps);
 
 if (changed) {
   const errorHeader = chalk.red('ERROR: ');
-  const errorMsg =
-    "Dependencies have changed and saved to package.json. Rerun 'yarn install' to finish the install";
+  const errorMsg = "Dependencies have changed and saved to package.json. Rerun 'yarn install' to finish the install";
   console.error(chalk.bold(`\n${errorHeader}${errorMsg}\n`));
   process.exitCode = 1;
 } else {
@@ -37,7 +36,7 @@ if (changed) {
     standardizePjson(packagePath, inLernaProject);
   };
 
-  runAll();
+  runAll(packageRoot);
 
   // Run it for all packages in the lerna project
   require('../utils/run-in-lerna-packages')('postinstall', runAll);

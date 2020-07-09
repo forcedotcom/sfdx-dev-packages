@@ -1,7 +1,7 @@
 {
   "name": "@salesforce/dev-scripts",
-  "version": "0.4.2",
-  "description": "A set of standard package.json scripts for Salesforce projects.",
+  "version": "1.0.0",
+  "description": "Standardize package.json scripts and config files for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "bin": {
     "sfdx-build": "bin/sfdx-build.js",
@@ -33,29 +33,35 @@
     "utils"
   ],
   "dependencies": {
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^7.6.0",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@salesforce/dev-config": "^1.5.0",
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^10.14.12",
-    "@types/sinon": "^4.3.3",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^12.12.6",
+    "@types/sinon": "^9.0.4",
     "chai": "^4.2.0",
-    "chalk": "2.4.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.3.0",
-    "prettier": "^1.18.2",
-    "pretty-quick": "^1.11.1",
-    "shelljs": "~0.8.3",
-    "sinon": "^5.1.1",
-    "source-map-support": "~0.5.12",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.18.0",
-    "typedoc": "~0.15.0",
-    "typedoc-plugin-external-module-name": "~1.1.3",
+    "chalk": "^4.0.0",
+    "config": "^3.3.1",
+    "cosmiconfig": "^6.0.0",
+    "eslint-config-salesforce-typescript": "1.0.0",
+    "mocha": "^7.2.0",
+    "nyc": "^15.1.0",
+    "shelljs": "~0.8.4",
+    "sinon": "^9.0.2",
+    "source-map-support": "~0.5.19",
+    "ts-node": "^8.10.2",
+    "typedoc": "~0.17.7",
+    "typedoc-plugin-external-module-name": "~4.0.0",
+    "typescript": "^3.9.3",
     "xunit-file": "^1.0.0"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
   }
 }

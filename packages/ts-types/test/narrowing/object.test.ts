@@ -12,7 +12,7 @@ import {
   definiteValuesOf,
   entriesOf,
   keysOf,
-  valuesOf
+  valuesOf,
 } from '../../src/narrowing/object';
 import { Dictionary, Nullable, Optional } from '../../src/types';
 
@@ -33,7 +33,10 @@ describe('object', () => {
       for (const key of keys) {
         acc.push([key, point[key]]);
       }
-      expect(acc).to.deep.equal([['x', 1], ['y', 2]]);
+      expect(acc).to.deep.equal([
+        ['x', 1],
+        ['y', 2],
+      ]);
     });
   });
 
@@ -53,7 +56,10 @@ describe('object', () => {
       for (const entry of entries) {
         acc.push([entry[0], entry[1]]);
       }
-      expect(acc).to.deep.equal([['x', 1], ['y', 2]]);
+      expect(acc).to.deep.equal([
+        ['x', 1],
+        ['y', 2],
+      ]);
     });
   });
 
@@ -87,7 +93,7 @@ describe('object', () => {
     const dict: Dictionary<Nullable<string>> = {
       a: 'foo',
       b: undefined,
-      c: null
+      c: null,
     };
 
     describe('definiteEntriesOf', () => {

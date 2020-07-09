@@ -7,9 +7,9 @@
 
 // A simple utility for gathering module loading statistics for diagnostic purposes.
 
-// tslint:disable:no-any
-// tslint:disable:no-var-requires
-// tslint:disable:variable-name
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // -------------------------------------------------------------------------------
 // No requires or imports so we can instrument as much module loading as possible.
@@ -36,7 +36,7 @@ export interface Analytics {
   dump: (arg?: any) => void;
 }
 
-const micros = () => {
+const micros = (): number => {
   const [seconds, nanoseconds] = process.hrtime();
   return seconds * 1000000 + Math.floor(nanoseconds / 1000);
 };
@@ -53,7 +53,7 @@ export function start(enabled: boolean, Module?: any): Analytics {
     const origLoad = Module._load;
     let path = '';
 
-    Module._load = (request: string, parent: object, isMain: boolean) => {
+    Module._load = (request: string, parent: object, isMain: boolean): any => {
       const wasLoading = loading;
       loading = true;
 
@@ -90,9 +90,10 @@ export function start(enabled: boolean, Module?: any): Analytics {
     },
     dump(): void {
       if (enabled) {
+        // eslint-disable-next-line no-console
         console.error(JSON.stringify(analytics.report(), null, 2));
       }
-    }
+    },
   };
 
   return analytics;

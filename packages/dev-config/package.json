@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/dev-config",
-  "version": "1.5.0",
+  "version": "2.0.0",
   "description": "A set of standard typescript config and tslint options for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "main": "index.js",
@@ -22,16 +22,11 @@
     "/nyc.json",
     "/typedoc.js"
   ],
-  "dependencies": {
-    "tslint": "^5.18.0",
-    "tslint-microsoft-contrib": "^5.2.1",
-    "typescript": "~3.1.6"
-  },
   "scripts": {
     "clean-all": "shx rm -rf node_modules"
   },
   "devDependencies": {
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.1.2",
     "shx": "^0.3.2"
   }
 }

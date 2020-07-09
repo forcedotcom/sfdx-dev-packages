@@ -1,5 +1,3 @@
-/* tslint:disable:no-unused-expression */
-
 import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import { expect } from 'chai';
 import { createSandbox, SinonSandbox } from 'sinon';
@@ -12,8 +10,14 @@ const cacheNone: CacheValue = null;
 const cacheInvalid: CacheValue = 'this is not json';
 const cacheValid: CacheValue = JSON.stringify({
   '/fake/testObject.js': 'object',
-  '/fake/testFunction.js': 'function'
+  '/fake/testFunction.js': 'function',
 });
+
+class SystemError extends Error {
+  public constructor(public code: string) {
+    super();
+  }
+}
 
 describe('TypeCache', () => {
   let sandbox: SinonSandbox;
@@ -26,17 +30,17 @@ describe('TypeCache', () => {
     sandbox = createSandbox();
 
     fs = stubInterface<FileSystem>(sandbox, {
-      readFileSync: (path: string) => {
+      readFileSync: () => {
         if (!cacheValue) {
           throw new SystemError('ENOENT');
         }
         return Buffer.from(cacheValue);
       },
-      writeFileSync: (path: string) => {
+      writeFileSync: () => {
         if (writeError) {
           throw writeError;
         }
-      }
+      },
     });
 
     typeCache = new TypeCache(fs, '/fake/cache.json');
@@ -206,9 +210,3 @@ describe('TypeCache', () => {
     expect(typeCache.hasType('/fake/foo.js')).to.be.false;
   });
 });
-
-class SystemError extends Error {
-  public constructor(public code: string) {
-    super();
-  }
-}

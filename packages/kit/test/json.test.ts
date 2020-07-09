@@ -84,17 +84,17 @@ describe('json', () => {
         d: {
           a: 'fail',
           b: 'd',
-          c: 'fail'
+          c: 'fail',
         },
         e: [
           'fail',
           {
             a: 'fail',
             b: 'e',
-            c: 'fail'
+            c: 'fail',
           },
-          'fail'
-        ]
+          'fail',
+        ],
       };
       expect(json.getJsonValuesByName(data, 'b')).to.deep.equal(['root', 'd', 'e']);
     });

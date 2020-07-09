@@ -22,7 +22,7 @@ describe('Env', () => {
       SET3: 'b',
       LIST: 'a,b,c',
       ENUM: 'test',
-      NONE: undefined
+      NONE: undefined,
     });
   });
 
@@ -41,7 +41,7 @@ describe('Env', () => {
   it('should get a string envar from a known set of values from an enum with differently cased keys', () => {
     enum Expected {
       A,
-      B
+      B,
     }
     expect(env.getStringIn('SET3', Object.keys(Expected))).to.equal('b');
   });
@@ -70,16 +70,16 @@ describe('Env', () => {
 
   it('should get a string envar as a key of an object, with a transform', () => {
     const obj = { bar: 'TEST' };
-    const value = env.getKeyOf('FOO', obj, v => v.toLowerCase());
+    const value = env.getKeyOf('FOO', obj, (v) => v.toLowerCase());
     expect(value).to.equal('bar');
   });
 
   it('should get a string envar as a key of an enum, with a transform', () => {
     enum Mode {
       TEST = 'test',
-      DEMO = 'demo'
+      DEMO = 'demo',
     }
-    const value = env.getKeyOf('ENUM', Mode, Mode.DEMO, v => v.toUpperCase());
+    const value = env.getKeyOf('ENUM', Mode, Mode.DEMO, (v) => v.toUpperCase());
     expect(value).to.equal('TEST');
     expect(Mode[value]).to.equal(Mode.TEST);
   });
@@ -87,9 +87,9 @@ describe('Env', () => {
   it('should get a default for an undefined envar from an enum, with a transform', () => {
     enum Mode {
       TEST = 'test',
-      DEMO = 'demo'
+      DEMO = 'demo',
     }
-    const value = env.getKeyOf('ENUM2', Mode, Mode.DEMO, v => v.toUpperCase());
+    const value = env.getKeyOf('ENUM2', Mode, Mode.DEMO, (v) => v.toUpperCase());
     expect(value).to.equal('DEMO');
     expect(Mode[value]).to.equal(Mode.DEMO);
   });
@@ -165,7 +165,7 @@ describe('Env', () => {
       ['SET2', 'c'],
       ['SET3', 'b'],
       ['LIST', 'a,b,c'],
-      ['ENUM', 'test']
+      ['ENUM', 'test'],
     ]);
   });
 });

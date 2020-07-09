@@ -54,7 +54,7 @@ namespace SubConfig {
 }
 
 class OptionalConfig extends AsyncOptionalCreatable<OptionalConfig.Options> {
-  private options?: OptionalConfig.Options;
+  protected options?: OptionalConfig.Options;
 
   public constructor(options?: OptionalConfig.Options) {
     super(options);
@@ -92,9 +92,10 @@ describe('AsyncCreatable', () => {
 
     const config: Config<Config.Options> = await Config.create({
       fooEnabled: true,
-      doAsyncThing: async () => {
+      doAsyncThing: () => {
         doAsyncThingRan = true;
-      }
+        return Promise.resolve();
+      },
     });
 
     expect(doAsyncThingRan).to.be.true;
@@ -105,10 +106,11 @@ describe('AsyncCreatable', () => {
     let doAsyncThingRan = false;
     const config = await SubConfig.create({
       fooEnabled: true,
-      doAsyncThing: async () => {
+      doAsyncThing: () => {
         doAsyncThingRan = true;
+        return Promise.resolve();
       },
-      barEnabled: true
+      barEnabled: true,
     });
 
     expect(doAsyncThingRan).to.be.true;
@@ -122,7 +124,7 @@ describe('AsyncCreatable', () => {
     expect(config1.getBazEnabled()).to.be.false;
 
     const config2 = await OptionalConfig.create({
-      bazEnabled: true
+      bazEnabled: true,
     });
 
     expect(config2.getBazEnabled()).to.be.true;

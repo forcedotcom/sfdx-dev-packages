@@ -1,3 +1,8 @@
+// This file does a lot of trickery with low level javascript and proxies. So turn off some eslint features.
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable no-underscore-dangle */
+
 /**
  * An override of the Node.js Module._load mechanism that replaces loaded modules with
  * JavaScript proxy objects if the module is either a function or object type.  These
@@ -21,7 +26,7 @@ import TypeCache from './TypeCache';
 import { LoadModuleFunction, Module, ProxiableModule } from './types';
 
 export default class LazyLoader {
-  private moduleCache: { [key: string]: any } = {}; // tslint:disable-line:no-any
+  private moduleCache: { [key: string]: any } = {};
 
   private readonly excludes: RegExp;
 
@@ -32,7 +37,7 @@ export default class LazyLoader {
     private modLib: Module = require('module')
   ) {
     const allExclusions = this.buildExclusionPatterns();
-    this.excludes = new RegExp(`^(?:${allExclusions.join('|')})\$`);
+    this.excludes = new RegExp(`^(?:${allExclusions.join('|')})$`);
   }
 
   public enable(): void {
@@ -62,8 +67,9 @@ export default class LazyLoader {
 
   private buildExclusionPatterns(): string[] {
     // Exclude Node SDK builtin modules, which are already bootstrapped, so proxying them will only slow things down
-    // tslint:disable-next-line:no-any (accessing internal, un-typed process binding fn)
-    const builtins = Object.keys((process as any).binding('natives')).filter(el => !/^_|^internal|\//.test(el));
+
+    // accessing internal, un-typed process binding fn
+    const builtins = Object.keys((process as any).binding('natives')).filter((el) => !/^_|^internal|\//.test(el));
     // Add in a pattern to ignore requires of json files, and finally add any caller-defined exclusions
     return Array.from(new Set(builtins.concat(['.+\\.json']).concat(this.exclusions)));
   }
@@ -90,7 +96,7 @@ export default class LazyLoader {
     let disabled = false;
 
     // The lazy loading wrapper
-    return (request: string, parent: ProxiableModule, isMain: boolean) => {
+    return (request: string, parent: ProxiableModule, isMain: boolean): ProxiableModule => {
       // Skip the main module, since there's not point to proxying it
       if (isMain) {
         trace('[main]', request);
@@ -141,8 +147,8 @@ export default class LazyLoader {
     };
   }
 
-  private getModuleType(mod: ProxiableModule) {
-    function isPlainObject() {
+  private getModuleType(mod: ProxiableModule): string {
+    function isPlainObject(): boolean {
       if (typeof mod === 'object' && mod !== null) {
         const proto = Object.getPrototypeOf(mod);
         return proto === Object.prototype || proto === null;
@@ -166,7 +172,7 @@ export default class LazyLoader {
     request: string,
     parent: ProxiableModule,
     isMain: boolean
-  ) {
+  ): ProxiableModule {
     const mod = realLoad(request, parent, isMain);
     const moduleType = this.getModuleType(mod);
     // Circular module refs can cause premature requires of modules to
@@ -195,13 +201,13 @@ export default class LazyLoader {
     request: string,
     parent: ProxiableModule,
     isMain: boolean
-  ) {
+  ): any {
     trace('[proxy]', request, filename, this.typeCache.getType(filename));
     // Create a new lazy loading module proxy
-    let mod: any; // tslint:disable-line:no-any
+    let mod: any;
     const proxyTarget = this.typeCache.getTargetForProxiableType(filename);
     const proxy = new Proxy(proxyTarget, {
-      apply: (target, thisArg, argumentsList) => {
+      apply: (target, thisArg, argumentsList): any => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           if (typeof mod !== 'function') {
@@ -214,7 +220,7 @@ export default class LazyLoader {
         }
       },
 
-      construct: (target, argumentsList, newTarget) => {
+      construct: (target, argumentsList, newTarget): any => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           if (typeof mod !== 'function') {
@@ -227,7 +233,7 @@ export default class LazyLoader {
         }
       },
 
-      defineProperty: (target, propertyKey, attributes) => {
+      defineProperty: (target, propertyKey, attributes): boolean => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           return Reflect.defineProperty(mod, propertyKey, attributes);
@@ -237,7 +243,7 @@ export default class LazyLoader {
         }
       },
 
-      deleteProperty: (target, propertyKey) => {
+      deleteProperty: (target, propertyKey): boolean => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           const modDesc = Reflect.getOwnPropertyDescriptor(mod, propertyKey);
@@ -252,14 +258,14 @@ export default class LazyLoader {
       },
 
       // eslint-disable-next-line no-unused-vars
-      get: (target, propertyKey, receiver) => {
+      get: (target, propertyKey /* , receiver */): any => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         if (propertyKey === 'toString') {
           // The JS proxy spec has an annoying gap that causes toString on proxied functions
           // to throw an error, so we override the proxy's built-in toString function
           // with our own as a workaround. To see the root issue, try the following:
           //     > node -e 'new Proxy(function () {}, {}).toString()'
-          return (...args: any[]) => mod.toString(...args); // tslint:disable-line:no-any
+          return (...args: any[]): string => mod.toString(...args);
         }
         if (mod[propertyKey] !== undefined) {
           return mod[propertyKey];
@@ -278,7 +284,7 @@ export default class LazyLoader {
         return undefined;
       },
 
-      getOwnPropertyDescriptor: (target, propertyKey) => {
+      getOwnPropertyDescriptor: (target: any, propertyKey: string): PropertyDescriptor | undefined => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         const targetDesc = Object.getOwnPropertyDescriptor(target, propertyKey);
         let modDesc;
@@ -301,8 +307,7 @@ export default class LazyLoader {
         return modDesc;
       },
 
-      // eslint-disable-next-line no-unused-vars
-      getPrototypeOf: target => {
+      getPrototypeOf: (/* target */): any => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           return Object.getPrototypeOf(mod);
@@ -312,7 +317,7 @@ export default class LazyLoader {
         }
       },
 
-      has: (target, propertyKey) => {
+      has: (target: any, propertyKey: string): boolean => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           return Reflect.has(mod, propertyKey);
@@ -322,7 +327,7 @@ export default class LazyLoader {
         }
       },
 
-      isExtensible: target => {
+      isExtensible: (target: any): boolean => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           const isExtensible = Reflect.isExtensible(mod);
@@ -336,10 +341,10 @@ export default class LazyLoader {
         }
       },
 
-      ownKeys: target => {
+      ownKeys: (target: any): any => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         // Target keys need to filter out configurable properties
-        const targetKeys = Object.getOwnPropertyNames(target).filter(k => {
+        const targetKeys = Object.getOwnPropertyNames(target).filter((k) => {
           const d = Object.getOwnPropertyDescriptor(target, k);
           return !!d && !d.configurable;
         });
@@ -358,8 +363,7 @@ export default class LazyLoader {
         }
       },
 
-      // eslint-disable-next-line no-unused-vars
-      preventExtensions: target => {
+      preventExtensions: (/* target: any */): boolean => {
         // See notes in ownKeys, but in short, freezing modules across the proxy membrane is
         // fraught with peril due to type mismatches, and I have not found a way to make it work
         // while not either breaking or severely complicating other use cases; since it's rare,
@@ -367,7 +371,7 @@ export default class LazyLoader {
         throw new TypeError(`Proxied modules cannot properly support freezing; add '${request}' to the excludes list`);
       },
 
-      set: (target, propertyKey, value, receiver) => {
+      set: (target, propertyKey, value: any, receiver: any): boolean => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           return Reflect.set(mod, propertyKey, value, receiver);
@@ -377,7 +381,7 @@ export default class LazyLoader {
         }
       },
 
-      setPrototypeOf: (target, prototype) => {
+      setPrototypeOf: (target: any, prototype: any): boolean => {
         mod = this.loadIfNeeded(mod, realLoad, request, parent, isMain);
         try {
           return Reflect.setPrototypeOf(mod, prototype);
@@ -385,7 +389,7 @@ export default class LazyLoader {
           trace('error:setPrototypeOf', request, mod, err);
           throw err;
         }
-      }
+      },
     });
 
     this.moduleCache[filename] = proxy;

@@ -10,7 +10,6 @@
  */
 
 import { Dictionary } from './collection';
-import { Nullable } from './union';
 
 /**
  * Any valid JSON primitive value.

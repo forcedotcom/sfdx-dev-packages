@@ -11,16 +11,16 @@ const shell = require('../utils/shelljs');
 const exists = require('../utils/exists');
 const packageRoot = require('../utils/package-path');
 
-const lint = require.resolve('tslint/bin/tslint');
+const lint = require.resolve('eslint/bin/eslint');
 
 const extras = process.argv.slice(2).join(' ');
-
-shell.exec(`${lint} -p . -t stylish ${extras}`, {
-  cwd: packageRoot
+console.log(`${lint} ${extras} ./src/**/*.ts`);
+shell.exec(`${lint} ${extras} ./src/**/*.ts`, {
+  cwd: packageRoot,
 });
 
 if (exists('./test')) {
-  shell.exec(`${lint} -p ./test -t stylish ${extras}`, {
-    cwd: packageRoot
+  shell.exec(`${lint} ${extras} ./test/**/*.ts`, {
+    cwd: packageRoot,
   });
 }

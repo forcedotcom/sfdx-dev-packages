@@ -16,7 +16,7 @@ import {
   asNumber,
   asObject,
   asPlainObject,
-  asString
+  asString,
 } from './as';
 import { coerceAnyJson } from './coerce';
 import { has } from './has';
@@ -48,8 +48,8 @@ import { valueOrDefault } from './internal';
 export function get(from: unknown, path: string, defaultValue?: unknown): unknown {
   return valueOrDefault(
     path
-      .split(/[\.\[\]\'\"]/)
-      .filter(p => !!p)
+      .split(/[.[\]'"]/)
+      .filter((p) => !!p)
       .reduce((r: unknown, p: string) => (has(r, p) ? r[p] : undefined), from),
     defaultValue
   );

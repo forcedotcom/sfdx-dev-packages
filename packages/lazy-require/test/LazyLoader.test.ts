@@ -1,16 +1,17 @@
-// tslint:disable:no-unused-expression
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import { expect } from 'chai';
 import * as sinon from 'sinon';
 import LazyLoader from '../src/LazyLoader';
 import TypeCache from '../src/TypeCache';
-import { FileSystem, Module, ProxiableModule } from '../src/types';
+import { FileSystem, Module } from '../src/types';
 
 describe('LazyLoader', () => {
   let origRequire: NodeRequire = require;
   let sandbox: sinon.SinonSandbox;
-  let testModule: any; // tslint:disable-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let testModule: any;
   let typeCache: TypeCache;
   let modLib: Module;
   let fsLib: StubbedType<FileSystem>;
@@ -22,19 +23,17 @@ describe('LazyLoader', () => {
     sandbox = sinon.createSandbox();
 
     modLib = {
-      _load: (request: string, parent: ProxiableModule, isMain: boolean) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      _load: (/* request: string, parent: ProxiableModule, isMain: boolean */): any => {
         realLoadTime = Date.now();
         return testModule;
       },
-      _resolveFilename: request => {
-        return `/fake/${request}.js`;
-      }
+      _resolveFilename: (request: string): string => `/fake/${request}.js`,
     };
 
     origRequire = require;
-    require = ((request: string) => {
-      return modLib._load(request, {}, false);
-    }) as NodeRequire;
+    // eslint-disable-next-line no-underscore-dangle
+    require = ((request: string) => modLib._load(request, {}, false)) as NodeRequire;
 
     fsLib = stubInterface<FileSystem>(sandbox);
 
@@ -46,7 +45,7 @@ describe('LazyLoader', () => {
       '/fake/testObject.js': 'object',
       '/fake/testString.js': 'string',
       '/fake/excludedObject.js': 'object',
-      '/fake/excludedString.json': 'string'
+      '/fake/excludedString.json': 'string',
     });
     lazyModules = new LazyLoader(typeCache, [], true, modLib);
     sandbox.stub(lazyModules, 'getExcludes').callsFake(() => /^(?:.+\.json|excludedObject|excludedString)$/);
@@ -63,7 +62,7 @@ describe('LazyLoader', () => {
   });
 
   describe('basic behaviors', () => {
-    it('should lazy load modules', done => {
+    it('should lazy load modules', (done) => {
       testModule = { foo: 'bar' };
       lazyLoadTime = Date.now();
       const test = require('testObject');
@@ -78,7 +77,7 @@ describe('LazyLoader', () => {
       }, 110);
     });
 
-    it('should immediately load excluded modules', done => {
+    it('should immediately load excluded modules', (done) => {
       testModule = { foo: 'bar' };
       lazyLoadTime = Date.now();
       const test = require('excludedObject');
@@ -93,7 +92,7 @@ describe('LazyLoader', () => {
       }, 110);
     });
 
-    it('should immediately load json files', done => {
+    it('should immediately load json files', (done) => {
       testModule = '{"foo": "bar"}';
       lazyLoadTime = Date.now();
       const test = require('excludedString.json');
@@ -127,8 +126,7 @@ describe('LazyLoader', () => {
     });
 
     it('should require a usable function constructor', () => {
-      // tslint:disable-next-line:no-any
-      testModule = function(this: any, name: string) {
+      testModule = function (this: { name: string }, name: string): void {
         this.name = name;
       };
       const test = require('testFunction');
@@ -137,8 +135,8 @@ describe('LazyLoader', () => {
 
     it('should require a usable class constructor', () => {
       testModule = class {
-        constructor(private innerName: string) {}
-        get name() {
+        public constructor(private innerName: string) {}
+        public get name(): string {
           return this.innerName;
         }
       };
@@ -149,7 +147,7 @@ describe('LazyLoader', () => {
     it('should require a usable function', () => {
       let aReceived;
       let bReceived;
-      testModule = (a: string, b: string) => {
+      testModule = (a: string, b: string): void => {
         aReceived = a;
         bReceived = b;
       };
@@ -166,16 +164,16 @@ describe('LazyLoader', () => {
       Object.defineProperties(test, {
         foo: {
           configurable: true,
-          value: 'foo-value'
+          value: 'foo-value',
         },
         bar: {
           enumerable: true,
-          value: 'bar-value'
+          value: 'bar-value',
         },
         baz: {
           writable: true,
-          value: 'baz-value'
-        }
+          value: 'baz-value',
+        },
       });
 
       const fooDesc = Object.getOwnPropertyDescriptor(testModule, 'foo');
@@ -230,11 +228,11 @@ describe('LazyLoader', () => {
     });
 
     it('should require an object with a usable property getter', () => {
-      testModule = new class {
-        get name() {
+      testModule = new (class {
+        public get name(): string {
           return 'foo';
         }
-      }();
+      })();
       const test = require('testObject');
       expect(test.name).to.equal('foo');
     });
@@ -245,7 +243,7 @@ describe('LazyLoader', () => {
         enumerable: false,
         value() {
           return JSON.stringify(testModule);
-        }
+        },
       });
       const test = require('testObject');
       expect(Object.keys(test)).to.deep.equal(['foo']);
@@ -269,7 +267,7 @@ describe('LazyLoader', () => {
         enumerable: false,
         value(key: string) {
           return testModule[key];
-        }
+        },
       });
       const test = require('testObject');
       expect(Object.keys(test)).to.deep.equal(['foo']);
@@ -281,16 +279,16 @@ describe('LazyLoader', () => {
       Object.defineProperties(testModule, {
         foo: {
           configurable: true,
-          value: 'foo-value'
+          value: 'foo-value',
         },
         bar: {
           enumerable: true,
-          value: 'bar-value'
+          value: 'bar-value',
         },
         baz: {
           writable: true,
-          value: 'baz-value'
-        }
+          value: 'baz-value',
+        },
       });
 
       const test = require('testObject');
@@ -359,12 +357,14 @@ describe('LazyLoader', () => {
 
     it('should require a function that accurately reports its own keys', () => {
       // `function(){}` returns different keys than `()=>{}` and we need to match the proxy target type
-      // tslint:disable-next-line:only-arrow-functions
-      testModule = function() {};
+      // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+      testModule = function () {
+        /* Do nothing */
+      };
       testModule.foo = 'bar';
       const test = require('testFunction');
       const testKeys = Reflect.ownKeys(test)
-        .map(k => k.toString())
+        .map((k) => k.toString())
         .sort();
       expect(testKeys).to.deep.equal(['foo', 'length', 'name', 'prototype']);
     });
@@ -381,7 +381,7 @@ describe('LazyLoader', () => {
       testModule = {};
       Object.defineProperty(testModule, 'foo', {
         writable: false,
-        value: 'bar'
+        value: 'bar',
       });
       const test = require('testObject');
       expect(test.foo).to.equal('bar');
@@ -429,7 +429,7 @@ describe('LazyLoader', () => {
         configurable: false,
         enumerable: true,
         writable: true,
-        value: 'bar'
+        value: 'bar',
       });
 
       const test = require('testObject');
@@ -456,12 +456,12 @@ describe('LazyLoader', () => {
       Object.defineProperties(testModule, {
         arguments: {
           configurable: true,
-          value: null
+          value: null,
         },
         length: {
           configurable: false,
-          value: 0
-        }
+          value: 0,
+        },
       });
 
       const test = require('testObject');

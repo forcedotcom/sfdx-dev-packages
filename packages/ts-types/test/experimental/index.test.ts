@@ -20,7 +20,7 @@ import {
   viewNumber,
   viewObject,
   viewPlainObject,
-  viewString
+  viewString,
 } from '../../src/experimental';
 
 class TestClass {
@@ -38,12 +38,12 @@ describe('experimental', () => {
     s: 'string',
     b: {
       type: 'boolean',
-      optional: true
+      optional: true,
     },
     c: {
       type: TestClass,
-      optional: true
-    }
+      optional: true,
+    },
   };
 
   describe('is', () => {
@@ -82,7 +82,7 @@ describe('experimental', () => {
         m: {},
         i: new TestClass(),
         a: [],
-        f: () => {}
+        f: () => {},
       };
     });
 

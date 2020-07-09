@@ -9,18 +9,17 @@
 const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
-const SfdxDevConfig = require('../utils/sfdx-dev-config');
+const { resolveConfig } = require('../utils/sfdx-dev-config');
 
 const nyc = require.resolve('nyc/bin/nyc');
 
-const config = new SfdxDevConfig(packageRoot);
-const testConfig = config.get('test') || {};
+const config = resolveConfig(packageRoot);
+const testConfig = config.test || {};
 
 let command = `${nyc} mocha`;
 
 if (!testConfig.mochaOpts) {
-  command +=
-    ' --require ts-node/register --require source-map-support/register';
+  command += ' --require ts-node/register --require source-map-support/register';
 }
 
 const includes = testConfig.testsPath || '**/*.test.ts';
@@ -28,7 +27,7 @@ command += ` --recursive "${includes}"`;
 
 try {
   shell.exec(command, {
-    cwd: packageRoot
+    cwd: packageRoot,
   });
 } catch (err) {
   process.exitCode = 1;

@@ -16,7 +16,7 @@ import {
   JsonMap,
   KeyOf,
   Optional,
-  View
+  View,
 } from '../types';
 
 /**
@@ -59,20 +59,28 @@ export function isObject(value: unknown): value is object {
 }
 
 /**
+ * Tests whether an `unknown` value is a `function`.
+ *
+ * @param value The value to test.
+ */
+export function isFunction(value: unknown): value is AnyFunction {
+  return typeof value === 'function';
+}
+
+/**
  * Tests whether or not an `unknown` value is a plain JavaScript object. That is, if it is an object created
  * by the Object constructor or one with a null `prototype`.
  *
  * @param value The value to test.
  */
 export function isPlainObject(value: unknown): value is object {
-  const isObjectObject = (o: unknown): o is Dictionary => {
-    return isObject(o) && Object.prototype.toString.call(o) === '[object Object]';
-  };
+  const isObjectObject = (o: unknown): o is Dictionary =>
+    isObject(o) && Object.prototype.toString.call(o) === '[object Object]';
   if (!isObjectObject(value)) return false;
   const ctor = value.constructor;
   if (!isFunction(ctor)) return false;
   if (!isObjectObject(ctor.prototype)) return false;
-  if (!ctor.prototype.hasOwnProperty('isPrototypeOf')) return false;
+  if (!Object.prototype.hasOwnProperty.call(ctor, 'isPrototypeOf')) return false;
   return true;
 }
 
@@ -116,15 +124,6 @@ export function isArrayLike(value: unknown): value is AnyArrayLike {
   // avoid circular dependency with has.ts
   const hasLength = (v: unknown): v is View<'length', number> => isObject(v) && 'length' in v;
   return !isFunction(value) && (isString(value) || hasLength(value));
-}
-
-/**
- * Tests whether an `unknown` value is a `function`.
- *
- * @param value The value to test.
- */
-export function isFunction(value: unknown): value is AnyFunction {
-  return typeof value === 'function';
 }
 
 /**

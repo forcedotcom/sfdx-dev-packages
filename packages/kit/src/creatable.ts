@@ -9,6 +9,18 @@
  * A base class for classes that must be constructed and initialized asynchronously.
  */
 export abstract class AsyncCreatable<O = object> {
+  protected options: O;
+
+  /**
+   * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
+   * New subclass instances must be created with the static {@link create} method.
+   *
+   * @param options An options object providing initialization params.
+   */
+  public constructor(options: O) {
+    this.options = options;
+  }
+
   /**
    * Asynchronously constructs and initializes a new instance of a concrete subclass with the provided `options`.
    *
@@ -21,14 +33,6 @@ export abstract class AsyncCreatable<O = object> {
   }
 
   /**
-   * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
-   * New subclass instances must be created with the static {@link create} method.
-   *
-   * @param options An options object providing initialization params.
-   */
-  public constructor(options: O) {}
-
-  /**
    * Asynchronously initializes newly constructed instances of a concrete subclass.
    */
   protected abstract init(): Promise<void>;
@@ -38,6 +42,18 @@ export abstract class AsyncCreatable<O = object> {
  * A base class for classes that must be constructed and initialized asynchronously without requiring an options object.
  */
 export abstract class AsyncOptionalCreatable<O = object> {
+  protected options?: O;
+
+  /**
+   * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
+   * New subclass instances must be created with the static {@link create} method.
+   *
+   * @param options An options object providing initialization params.
+   */
+  public constructor(options?: O) {
+    this.options = options;
+  }
+
   /**
    * Asynchronously constructs and initializes a new instance of a concrete subclass with the optional `options`.
    *
@@ -51,14 +67,6 @@ export abstract class AsyncOptionalCreatable<O = object> {
     await instance.init();
     return instance;
   }
-
-  /**
-   * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
-   * New subclass instances must be created with the static {@link create} method.
-   *
-   * @param options An options object providing initialization params.
-   */
-  public constructor(options?: O) {}
 
   /**
    * Asynchronously initializes newly constructed instances of a concrete subclass.

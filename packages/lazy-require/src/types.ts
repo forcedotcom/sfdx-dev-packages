@@ -5,15 +5,16 @@ export type FileSystem = Pick<typeof fs, 'readFileSync' | 'writeFileSync' | 'unl
 export type ResolveFilenameFunction = (request: string, parent: ProxiableModule, isMain: boolean) => string;
 
 export type KeyedObject = {
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: number]: any;
   // TODO: un-comment this once tsc supports symbol-keyed index signatures
   // [key: symbol]: any;
 };
 export type ObjectModule = object;
-export type FunctionModule = (...args: any[]) => any; // tslint:disable-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FunctionModule = (...args: any[]) => any;
 export type ProxiableModule = (ObjectModule | FunctionModule) & KeyedObject;
 
 export type LoadModuleFunction = (request: string, parent: ProxiableModule, isMain: boolean) => ProxiableModule;

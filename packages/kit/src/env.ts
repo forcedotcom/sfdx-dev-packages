@@ -56,7 +56,8 @@ export class Env {
   public getStringIn(key: string, values: string[], def?: string): Optional<string> {
     const re = new RegExp(values.join('|'), 'i');
     if (def && !re.test(def.toString())) {
-      throw new InvalidDefaultEnvValueError(`${def} is not a member of ${values}`);
+      const valueAsString = values.join(', ');
+      throw new InvalidDefaultEnvValueError(`${def} is not a member of ${valueAsString}`);
     }
     const value = this.getString(key);
     if (!value) return def;
@@ -71,7 +72,7 @@ export class Env {
    * @param key The name of the envar.
    * @param obj The object providing the keys to test with.
    * @param transform A transform function applied to both the default and value before testing that
-   *  either is a key of `T`.
+   * either is a key of `T`.
    *
    * ```
    * enum Mode { TEST = 'test', DEMO = 'demo' }
@@ -87,7 +88,7 @@ export class Env {
    * // typeof enumValue -> Mode
    * ```
    */
-  public getKeyOf<T extends object>(
+  public getKeyOf<T extends Record<string, unknown>>(
     key: string,
     obj: T,
     transform?: (k: string) => string
@@ -102,7 +103,7 @@ export class Env {
    * @param obj The object providing the keys to test with.
    * @param def A default value.
    * @param transform A transform function applied to both the default and value before testing that
-   *  either is a key of `T`.
+   * either is a key of `T`.
    * @param {@link InvalidDefaultEnvValueError} If the provided default value is not a member of the expected set.
    *
    * ```
@@ -119,14 +120,14 @@ export class Env {
    * // typeof enumValue -> Mode
    * ```
    */
-  public getKeyOf<T extends object>(
+  public getKeyOf<T extends Record<string, unknown>>(
     key: string,
     obj: T,
     def: string,
     transform?: (k: string) => string
   ): Extract<keyof T, string>;
   // underlying method
-  public getKeyOf<T extends object>(
+  public getKeyOf<T extends Record<string, unknown>>(
     key: string,
     obj: T,
     defOrTransform?: string | ((k: string) => string),
