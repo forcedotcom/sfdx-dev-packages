@@ -1,4 +1,6 @@
 // Generated - Do not modify. Controlled by @salesforce/dev-scripts
+// See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
+
 {
   "extends": "@salesforce/dev-config/tsconfig-test-strict",
   "include": ["./**/*.ts"]

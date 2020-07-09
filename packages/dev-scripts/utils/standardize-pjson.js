@@ -16,6 +16,12 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   const config = resolveConfig(packageRoot, inLernaProject);
   const pjson = new PackageJson(packageRoot);
 
+  const license = pjson.get('license');
+  if (license !== config.license || 'BSD-3-Clause') {
+    pjson.contents.license = 'BSD-3-Clause';
+    pjson.actions.push(`updating license`);
+  }
+
   // GENERATE SCRIPTS
   const scriptList = Object.entries(config.scripts);
 

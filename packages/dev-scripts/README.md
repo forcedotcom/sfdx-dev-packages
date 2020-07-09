@@ -29,4 +29,10 @@ The common hooks that are added to each project include:
 
 ## Configuration
 
-To configure what this generates and controls, create a `.sfdx-dev.json`. Look at the [schema](https://github.com/forcedotcom/sfdx-dev-packages/blob/master/packages/dev-scripts/sfdx-dev.schema.json) to see what options are available.
+To configure what this generates and controls, create a `.sfdevrc` file. Look at the [schema](https://github.com/forcedotcom/sfdx-dev-packages/blob/master/packages/dev-scripts/sfdx-dev.schema.json) to see what options are available.
+
+## Config File Notes
+
+### tsconfig
+
+The `include` section has to live in the repository's tsconfig file until there is a way to specify a base. We plan to remove this section when https://github.com/Microsoft/TypeScript/issues/25430 is fixed

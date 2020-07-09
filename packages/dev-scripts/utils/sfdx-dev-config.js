@@ -86,9 +86,9 @@ const resolveConfig = (path, inLernaProject) => {
   const configFromFile = (result && result.config) || {};
 
   // Allow users to override certain scripts
-  const config = Object.assign(defaults, configFromFile, {
-    scripts: Object.assign(defaults.scripts || {}, configFromFile.script || {}),
-    husky: Object.assign(defaults.husky || {}, configFromFile.husky || {}),
+  const config = Object.assign({}, defaults, configFromFile, {
+    scripts: Object.assign({}, defaults.scripts || {}, configFromFile.script || {}),
+    husky: Object.assign({}, defaults.husky || {}, configFromFile.husky || {}),
   });
 
   let excludeScripts = config['exclude-scripts'] || [];
@@ -110,7 +110,7 @@ const resolveConfig = (path, inLernaProject) => {
 
   // Remove excluded items
   excludeScripts.forEach((scriptName) => {
-    delete config.scrips[scriptName];
+    delete config.scripts[scriptName];
   });
   excludeHusky.forEach((scriptName) => {
     delete config.husky[scriptName];

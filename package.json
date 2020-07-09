@@ -44,5 +44,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/forcedotcom/sfdx-dev-packages.git"
-  }
+  },
+  "license": "BSD-3-Clause"
 }
