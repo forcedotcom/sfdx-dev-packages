@@ -5,19 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import {
-  AnyArray,
-  AnyArrayLike,
-  AnyConstructor,
-  AnyFunction,
-  AnyJson,
-  Dictionary,
-  JsonArray,
-  JsonMap,
-  KeyOf,
-  Optional,
-  View,
-} from '../types';
+import { AnyConstructor, AnyFunction, AnyJson, Dictionary, JsonArray, JsonMap, KeyOf, Optional, View } from '../types';
 
 /**
  * Tests whether an `unknown` value is a `string`.
@@ -89,14 +77,13 @@ export function isFunction(value: unknown): value is AnyFunction {
  *
  * @param value The value to test.
  */
-export function isPlainObject(value: unknown): value is object {
+export function isPlainObject<T = object>(value: unknown): value is T {
   const isObjectObject = (o: unknown): o is Dictionary =>
     isObject(o) && Object.prototype.toString.call(o) === '[object Object]';
   if (!isObjectObject(value)) return false;
   const ctor = value.constructor;
   if (!isFunction(ctor)) return false;
   if (!isObjectObject(ctor.prototype)) return false;
-  // Moving this to Object.prototype.hasOwnProperties.call(ctor, 'isPrototypeOf') cause a lot of test failures.
   // eslint-disable-next-line no-prototype-builtins
   if (!ctor.prototype.hasOwnProperty('isPrototypeOf')) return false;
   return true;

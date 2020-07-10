@@ -21,11 +21,11 @@ import {
   assertNumber,
   assertObject,
   assertPlainObject,
-  assertString
+  assertString,
 } from '../../src/narrowing/assert';
 
 class TestClass {
-  constructor(public name = 'test') {}
+  public constructor(public name = 'test') {}
 }
 
 describe('assert type', () => {

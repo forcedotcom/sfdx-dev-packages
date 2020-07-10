@@ -112,16 +112,16 @@ describe('stubs', () => {
     expect(await Promise.resolve(stub)).to.equal(stub);
   });
 
-  it('should stub when target has a then method', async () => {
+  it('should stub when target has a then method', () => {
     const stub = stubObject<{ then: () => string }>(sandbox, {
-      then: () => 'test'
+      then: () => 'test',
     });
     expect(stub.then()).to.equal('test');
   });
 
-  it('should stub when members have a then method', async () => {
+  it('should stub when members have a then method', () => {
     const stub = stubInterface<{ then: () => string }>(sandbox, {
-      then: () => 'test'
+      then: () => 'test',
     });
     expect(stub.then()).to.equal('test');
   });

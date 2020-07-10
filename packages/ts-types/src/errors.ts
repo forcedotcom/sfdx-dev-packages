@@ -22,7 +22,7 @@ export class NamedError extends Error {
  * Indicates an unexpected type was encountered during a type-narrowing operation.
  */
 export class AssertionFailedError extends NamedError {
-  constructor(message: string) {
+  public constructor(message: string) {
     super('AssertionFailedError', message);
   }
 }
