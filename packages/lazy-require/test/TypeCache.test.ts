@@ -9,7 +9,7 @@ import { StubbedType, stubInterface } from '@salesforce/ts-sinon';
 import { expect } from 'chai';
 import { createSandbox, SinonSandbox } from 'sinon';
 import TypeCache from '../src/TypeCache';
-import { FileSystem } from '../types';
+import { FileSystem } from '../src/types';
 
 type CacheValue = string | null;
 

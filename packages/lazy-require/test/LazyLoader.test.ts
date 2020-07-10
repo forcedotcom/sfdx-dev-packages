@@ -12,7 +12,7 @@ import { expect } from 'chai';
 import * as sinon from 'sinon';
 import LazyLoader from '../src/LazyLoader';
 import TypeCache from '../src/TypeCache';
-import { FileSystem, Module } from '../types';
+import { FileSystem, Module } from '../src/types';
 
 describe('LazyLoader', () => {
   let origRequire: NodeRequire = require;

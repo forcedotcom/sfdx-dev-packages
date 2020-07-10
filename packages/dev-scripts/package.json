@@ -21,7 +21,7 @@
   "scripts": {
     "clean": "bin/sfdx-clean.js",
     "clean-all": "bin/sfdx-clean.js all",
-    "test": "bin/sfdx-test.js"
+    "test": "nyc mocha test/**/*.test.js"
   },
   "keywords": [
     "sfdx"
