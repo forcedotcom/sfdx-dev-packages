@@ -1,3 +1,5 @@
 {
-  "extends": "@salesforce/dev-config/nyc"
+  "nyc": {
+    "extends": "@salesforce/dev-config/nyc"
+  }
 }
