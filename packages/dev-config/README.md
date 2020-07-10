@@ -4,8 +4,9 @@
 
 A collection of commonly needed configuration files and dependencies for:
 
-- tslint
 - tsconfig
 - nyc
 - typedoc
 - prettier
+
+For eslint config, look at [eslint-config-salesforce-typescript](../eslint-config-salesforce-typescript);

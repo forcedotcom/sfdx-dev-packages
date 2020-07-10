@@ -31,7 +31,8 @@
   "files": [
     "bin",
     "utils",
-    "files"
+    "files",
+    "sfdevrc.schema.json"
   ],
   "dependencies": {
     "@commitlint/cli": "^8.3.5",

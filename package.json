@@ -1,5 +1,5 @@
 {
-  "name": "dev-config",
+  "name": "sfdx-dev-packages",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
