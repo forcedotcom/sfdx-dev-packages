@@ -107,6 +107,25 @@ describe('stubs', () => {
     expect(result).to.equal(stub);
   });
 
+  it('should resolve a stub', async () => {
+    const stub = stubObject(sandbox, {});
+    expect(await Promise.resolve(stub)).to.equal(stub);
+  });
+
+  it('should stub when target has a then method', async () => {
+    const stub = stubObject<{ then: () => string }>(sandbox, {
+      then: () => 'test'
+    });
+    expect(stub.then()).to.equal('test');
+  });
+
+  it('should stub when members have a then method', async () => {
+    const stub = stubInterface<{ then: () => string }>(sandbox, {
+      then: () => 'test'
+    });
+    expect(stub.then()).to.equal('test');
+  });
+
   it('should stub a callable', () => {
     interface Callable {
       foo: () => string;

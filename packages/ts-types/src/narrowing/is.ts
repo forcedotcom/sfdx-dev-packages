@@ -52,9 +52,17 @@ export function isBoolean(value: unknown): value is boolean {
  * were created from literals or that otherwise were not created via a non-`Object` constructor and do
  * not have a prototype chain should instead use {@link isPlainObject}.
  *
+ * Use of the type parameter `T` to further narrow the type signature of the value being tested is
+ * strongly discouraged unless you are completely confident that the value is of the necessary shape to
+ * conform with `T`. This function does nothing at either compile time or runtime to prove the value is of
+ * shape `T`, so doing so amounts to nothing more than performing a type assertion, which is generally a
+ * bad practice unless you have performed some other due diligence in proving that the value must be of
+ * shape `T`. Use of the functions in the `has` co-library are useful for performing such full or partial
+ * proofs.
+ *
  * @param value The value to test.
  */
-export function isObject(value: unknown): value is object {
+export function isObject<T = object>(value: unknown): value is T {
   return value != null && (typeof value === 'object' || typeof value === 'function');
 }
 
@@ -71,6 +79,14 @@ export function isFunction(value: unknown): value is AnyFunction {
  * Tests whether or not an `unknown` value is a plain JavaScript object. That is, if it is an object created
  * by the Object constructor or one with a null `prototype`.
  *
+ * Use of the type parameter `T` to further narrow the type signature of the value being tested is
+ * strongly discouraged unless you are completely confident that the value is of the necessary shape to
+ * conform with `T`. This function does nothing at either compile time or runtime to prove the value is of
+ * shape `T`, so doing so amounts to nothing more than performing a type assertion, which is generally a
+ * bad practice unless you have performed some other due diligence in proving that the value must be of
+ * shape `T`. Use of the functions in the `has` co-library are useful for performing such full or partial
+ * proofs.
+ *
  * @param value The value to test.
  */
 export function isPlainObject(value: unknown): value is object {
@@ -84,6 +100,25 @@ export function isPlainObject(value: unknown): value is object {
   // eslint-disable-next-line no-prototype-builtins
   if (!ctor.prototype.hasOwnProperty('isPrototypeOf')) return false;
   return true;
+}
+
+/**
+ * A shortcut for testing the suitability of a value to be used as a `Dictionary<T>` type.  Shorthand for
+ * writing `isPlainObject<Dictionary<T>>(value)`.  While some non-plain-object types are compatible with
+ * index signatures, they were less typically used as such, so this function focuses on the 80% case.
+ *
+ * Use of the type parameter `T` to further narrow the type signature of the value being tested is
+ * strongly discouraged unless you are completely confident that the value is of the necessary shape to
+ * conform with `T`. This function does nothing at either compile time or runtime to prove the value is of
+ * shape `T`, so doing so amounts to nothing more than performing a type assertion, which is generally a
+ * bad practice unless you have performed some other due diligence in proving that the value must be of
+ * shape `T`. Use of the functions in the `has` co-library are useful for performing such full or partial
+ * proofs.
+ *
+ * @param value The value to test.
+ */
+export function isDictionary<T = unknown>(value: unknown): value is Dictionary<T> {
+  return isPlainObject(value);
 }
 
 /**
@@ -111,18 +146,34 @@ export function isClassAssignableTo<C extends AnyConstructor>(value: unknown, cl
 /**
  * Tests whether an `unknown` value is an `Array`.
  *
+ * Use of the type parameter `T` to further narrow the type signature of the value being tested is
+ * strongly discouraged unless you are completely confident that the value is of the necessary shape to
+ * conform with `T`. This function does nothing at either compile time or runtime to prove the value is of
+ * shape `T`, so doing so amounts to nothing more than performing a type assertion, which is generally a
+ * bad practice unless you have performed some other due diligence in proving that the value must be of
+ * shape `T`. Use of the functions in the `has` co-library are useful for performing such full or partial
+ * proofs.
+ *
  * @param value The value to test.
  */
-export function isArray(value: unknown): value is AnyArray {
+export function isArray<T = unknown>(value: unknown): value is T[] {
   return Array.isArray(value);
 }
 
 /**
  * Tests whether an `unknown` value conforms to {@link AnyArrayLike}.
  *
+ * Use of the type parameter `T` to further narrow the type signature of the value being tested is
+ * strongly discouraged unless you are completely confident that the value is of the necessary shape to
+ * conform with `T`. This function does nothing at either compile time or runtime to prove the value is of
+ * shape `T`, so doing so amounts to nothing more than performing a type assertion, which is generally a
+ * bad practice unless you have performed some other due diligence in proving that the value must be of
+ * shape `T`. Use of the functions in the `has` co-library are useful for performing such full or partial
+ * proofs.
+ *
  * @param value The value to test.
  */
-export function isArrayLike(value: unknown): value is AnyArrayLike {
+export function isArrayLike<T = unknown>(value: unknown): value is ArrayLike<T> {
   // avoid circular dependency with has.ts
   const hasLength = (v: unknown): v is View<'length', number> => isObject(v) && 'length' in v;
   return !isFunction(value) && (isString(value) || hasLength(value));

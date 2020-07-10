@@ -5,10 +5,11 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Optional } from '../types';
+import { AnyConstructor, AnyFunction, AnyJson, Dictionary, JsonArray, JsonMap, Optional } from '../types';
 import {
   isArray,
   isBoolean,
+  isDictionary,
   isFunction,
   isInstance,
   isJsonArray,
@@ -78,17 +79,17 @@ export function asBoolean(value: unknown, defaultValue?: boolean): Optional<bool
  *
  * @param value The value to test.
  */
-export function asObject(value: unknown): Optional<object>;
+export function asObject<T = object>(value: unknown): Optional<T>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asObject(value: unknown, defaultValue: object): object;
+export function asObject<T = object>(value: unknown, defaultValue: T): T;
 // underlying function
-export function asObject(value: unknown, defaultValue?: object): Optional<object> {
-  return isObject(value) ? value : defaultValue;
+export function asObject<T = object>(value: unknown, defaultValue?: T): Optional<T> {
+  return isObject<T>(value) ? value : defaultValue;
 }
 
 /**
@@ -96,17 +97,35 @@ export function asObject(value: unknown, defaultValue?: object): Optional<object
  *
  * @param value The value to test.
  */
-export function asPlainObject(value: unknown): Optional<object>;
+export function asPlainObject<T = object>(value: unknown): Optional<T>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asPlainObject(value: unknown, defaultValue: object): object;
+export function asPlainObject<T = object>(value: unknown, defaultValue: T): T;
 // underlying function
-export function asPlainObject(value: unknown, defaultValue?: object): Optional<object> {
-  return isPlainObject(value) ? value : defaultValue;
+export function asPlainObject<T = object>(value: unknown, defaultValue?: T): Optional<T> {
+  return isPlainObject<T>(value) ? value : defaultValue;
+}
+
+/**
+ * Narrows an `unknown` value to a `Dictionary<T>` if it is type-compatible, or returns `undefined` otherwise.
+ *
+ * @param value The value to test.
+ */
+export function asDictionary<T = object>(value: unknown): Optional<Dictionary<T>>;
+/**
+ * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
+ *
+ * @param value The value to test.
+ * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
+ */
+export function asDictionary<T = object>(value: unknown, defaultValue: Dictionary<T>): Dictionary<T>;
+// underlying function
+export function asDictionary<T = object>(value: unknown, defaultValue?: Dictionary<T>): Optional<Dictionary<T>> {
+  return isDictionary<T>(value) ? value : defaultValue;
 }
 
 /**
@@ -141,17 +160,17 @@ export function asInstance<C extends AnyConstructor>(
  *
  * @param value The value to test.
  */
-export function asArray(value: unknown): Optional<AnyArray>;
+export function asArray<T = unknown>(value: unknown): Optional<T[]>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asArray(value: unknown, defaultValue: AnyArray): AnyArray;
+export function asArray<T = unknown>(value: unknown, defaultValue: T[]): T[];
 // underlying function
-export function asArray(value: unknown, defaultValue?: AnyArray): Optional<AnyArray> {
-  return isArray(value) ? value : defaultValue;
+export function asArray<T = unknown>(value: unknown, defaultValue?: T[]): Optional<T[]> {
+  return isArray<T>(value) ? value : defaultValue;
 }
 
 /**

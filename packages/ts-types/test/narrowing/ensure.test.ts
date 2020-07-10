@@ -12,6 +12,7 @@ import {
   ensureAnyJson,
   ensureArray,
   ensureBoolean,
+  ensureDictionary,
   ensureFunction,
   ensureInstance,
   ensureJsonArray,
@@ -91,9 +92,20 @@ describe('ensure type', () => {
       expect(() => ensurePlainObject(undefined)).to.throw(UnexpectedValueTypeError);
     });
 
-    it('should return a object when passed a object', () => {
+    it('should return a plain object when passed a plain object', () => {
       const value = { a: 'b' };
       expect(ensurePlainObject(value)).to.equal(value);
+    });
+  });
+
+  describe('ensureDictionary', () => {
+    it('should raise an error when passed undefined', () => {
+      expect(() => ensureDictionary(undefined)).to.throw(UnexpectedValueTypeError);
+    });
+
+    it('should return a dictionary object when passed a dictionary object', () => {
+      const value = { a: 'b' };
+      expect(ensureDictionary(value)).to.equal(value);
     });
   });
 
