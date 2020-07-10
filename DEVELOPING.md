@@ -19,9 +19,9 @@ You would only do this once after you cloned the repository.
 1. Clone this repository from git.
 1. `cd` into `sfdx-dev-packages`.
 1. We develop on the `develop` branch and release from the `master` branch. At
-   this point, you should do initiate a `git checkout -t origin/develop`.
-1. `yarn` to bring in all the top-level dependencies.
-1. `yarn bootstrap` to setup and link all packages.
+   this point, it should be set to develop by default. If not, run
+   `git checkout -t origin/develop`.
+1. `yarn` to bring in all the top-level dependencies and bootstrap.
 1. Open the project in your editor of choice.
 
 When you are ready to commit
@@ -60,10 +60,4 @@ This runs `yarn test` on each of the packages.
 
 ### `yarn lint`
 
-This runs `yarn lint` on each of the packages. If there are no errors/warnings
-from tslint, then you get a clean output. But, if they are errors from tslint,
-you will see a long error that can be confusing – just focus on the tslint
-errors. The results of this is deeper than what the tslint extension in VS Code
-does because of [semantic lint
-rules](https://palantir.github.io/tslint/usage/type-checking/) which requires a
-tsconfig.json to be passed to tslint.
+This runs `yarn lint` on each of the packages.

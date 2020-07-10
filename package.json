@@ -11,18 +11,18 @@
     "compile": "lerna run compile",
     "docs": "lerna run docs",
     "format": "lerna run format",
-    "install": "yarn sfdx-lerna-install",
+    "install": "./packages/dev-scripts/bin/sfdx-lerna-install.js",
     "lint": "lerna run lint",
     "lint-fix": "lerna run lint -- --fix",
     "postclean-all": "yarn sfdx-clean all",
+    "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
-    "test": "lerna run test",
-    "undefined": "lerna run undefined"
+    "test": "lerna run test"
   },
   "devDependencies": {
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^4.2.5",
-    "lerna": "^3.15.0",
+    "lerna": "^3.22.1",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1"
   },

@@ -5,8 +5,8 @@
  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const { join, dirname, basename } = require('path');
-const { readFileSync, writeFileSync, copyFileSync, statSync } = require('fs');
+const { join } = require('path');
+const { readFileSync, unlinkSync, copyFileSync, statSync } = require('fs');
 const log = require('./log');
 const exists = require('./exists');
 const { resolveConfig } = require('./sfdx-dev-config');
@@ -84,6 +84,19 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
       const eslintTestSourcePath = join(FILES_PATH, strict ? 'eslintrc-test-strict.js' : 'eslintrc-test.js');
       const eslintTestTargetPath = join(testPath, '.eslintrc.js');
       added.push(copyFile(eslintTestSourcePath, eslintTestTargetPath, strict));
+    }
+
+    // We don't use tslint anymore.
+    const tslintPath = join(packageRoot, 'tslint.json');
+    if (exists(tslintPath)) {
+      unlinkSync(tslintPath);
+      removed.push(tslintPath);
+    }
+
+    const tslintTestPath = join(testPath, 'tslint.json');
+    if (exists(tslintTestPath)) {
+      unlinkSync(tslintTestPath);
+      removed.push(tslintTestPath);
     }
   }
 

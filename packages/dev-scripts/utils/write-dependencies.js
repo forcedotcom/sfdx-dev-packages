@@ -22,7 +22,7 @@ module.exports = (projectPath, inLernaProject) => {
 
   const devScriptsPjson = require(join(__dirname, '..', 'package.json'));
   const add = (name, version) => {
-    version = version || devScriptsPjson.devDependencies[name];
+    version = version || devScriptsPjson.dependencies[name] || devScriptsPjson.devDependencies[name];
     if (!version)
       throw new Error(
         `Version empty for ${name}. Make sure it is in the devDependencies in dev-scripts since it is being added to the actual projects devDependencies.`
@@ -43,8 +43,14 @@ module.exports = (projectPath, inLernaProject) => {
   const scripts = config.scripts;
 
   if (Object.keys(config.husky).length > 0) {
+    // Only add husky hooks at the root level.
     if (!inLernaProject) {
       add('husky');
+      if (config.husky['pre-commit']) {
+        add('pretty-quick');
+      } else {
+        remove('pretty-quick');
+      }
     } else {
       remove('husky');
     }
@@ -52,32 +58,39 @@ module.exports = (projectPath, inLernaProject) => {
 
   if (scripts.format) {
     add('prettier');
-    add('pretty-quick');
   } else {
     remove('prettier');
-    remove('pretty-quick');
   }
 
+  // We don't need to install these for root lerna packages. They will be installed for the packages.
+  if (!inLernaProject) {
+    return;
+  }
+
+  // ensure all are on the same versions
+  add('typescript');
+  add('@salesforce/dev-config');
+
   // Included by dev-scripts
-  remove('nyc');
-  remove('typescript');
-  remove('ts-node');
+  add('nyc');
+  add('ts-node');
+  add('mocha');
+  add('sinon');
+  add('chai');
+
   remove('@commitlint/cli');
   remove('@commitlint/config-conventional');
   remove('source-map-support');
-  // We use eslint now
-  remove('tslint');
   remove('xunit-file');
-  remove('sinon');
-  remove('mocha');
-  remove('chai');
   remove('@types/chai');
   remove('@types/mocha');
   remove('@types/node');
   remove('@types/sinon');
   remove('typedoc');
   remove('typedoc-plugin-external-module-name');
-  remove('@salesforce/dev-config');
+
+  // We use eslint now
+  remove('tslint');
 
   const eslintPjson = require('eslint-config-salesforce-typescript/package.json');
   const eslintHeaderPjson = require('eslint-config-salesforce-license/package.json');

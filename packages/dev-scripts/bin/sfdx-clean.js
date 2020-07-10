@@ -14,9 +14,6 @@ const defaultDirs = ['lib', '*coverage', '.nyc_output'];
 const defaultFiles = ['*xunit.xml', '*checkstyle.xml', 'yarn-error.log'];
 
 const packageRoot = require('../utils/package-path');
-const { resolveConfig } = require('../utils/sfdx-dev-config');
-const config = resolveConfig(packageRoot);
-const clean = config.clean;
 
 const cleanAll = process.argv[2] === 'all';
 
@@ -25,43 +22,11 @@ if (cleanAll) {
   defaultDirs.push('node_modules');
 }
 
-if (!clean || clean.skipDefaults !== true) {
-  log(`cleaning default directories: ${defaultDirs.join()}`);
-  defaultDirs.forEach((dir) => {
-    shell.rm('-rf', join(packageRoot, dir));
-  });
-  log(`cleaning default files: ${defaultFiles.join()}`);
-  defaultFiles.forEach((file) => {
-    shell.rm('-f', join(packageRoot, file));
-  });
-}
-
-if (clean && clean.dirs) {
-  log(`cleaning config directories: ${clean.dirs.join()}`);
-  clean.dirs.forEach((dir) => {
-    shell.rm('-rf', join(packageRoot, dir));
-  });
-}
-
-if (clean && clean.files) {
-  log(`cleaning config files: ${clean.files.join()}`);
-  clean.files.forEach((file) => {
-    shell.rm('-f', join(packageRoot, file));
-  });
-}
-
-if (cleanAll) {
-  if (clean && clean.allDirs) {
-    log(`cleaning all directories: ${clean.allDirs.join()}`);
-    clean.allDirs.forEach((dir) => {
-      shell.rm('-rf', join(packageRoot, dir));
-    });
-  }
-
-  if (clean && clean.allFiles) {
-    log(`cleaning all files: ${clean.allFiles.join()}`);
-    clean.allFiles.forEach((file) => {
-      shell.rm('-f', join(packageRoot, file));
-    });
-  }
-}
+log(`cleaning default directories: ${defaultDirs.join()}`);
+defaultDirs.forEach((dir) => {
+  shell.rm('-rf', join(packageRoot, dir));
+});
+log(`cleaning default files: ${defaultFiles.join()}`);
+defaultFiles.forEach((file) => {
+  shell.rm('-f', join(packageRoot, file));
+});
