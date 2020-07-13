@@ -1,15 +1,14 @@
 /*
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-const log = require('./log');
-const PackageJson = require('./package-json');
-const { resolveConfig } = require('./sfdx-dev-config');
 const { join } = require('path');
 const { isMultiPackageProject } = require('../utils/project-type');
+const PackageJson = require('./package-json');
+const { resolveConfig } = require('./sfdx-dev-config');
 
 module.exports = (projectPath, inLernaProject) => {
   const pjson = new PackageJson(projectPath);
@@ -23,10 +22,12 @@ module.exports = (projectPath, inLernaProject) => {
   const devScriptsPjson = require(join(__dirname, '..', 'package.json'));
   const add = (name, version) => {
     version = version || devScriptsPjson.dependencies[name] || devScriptsPjson.devDependencies[name];
-    if (!version)
+    if (!version) {
       throw new Error(
+        // eslint-disable-next-line max-len
         `Version empty for ${name}. Make sure it is in the devDependencies in dev-scripts since it is being added to the actual projects devDependencies.`
       );
+    }
     if (!dependencies[name] || dependencies[name] !== version) {
       dependencies[name] = version;
       added.push(name);
@@ -98,6 +99,7 @@ module.exports = (projectPath, inLernaProject) => {
     // We don't need these at the lerna level
     Object.keys(eslintPjson.devDependencies).forEach(remove);
   } else {
+    add('eslint-config-salesforce');
     add('eslint-config-salesforce-typescript');
     add('eslint-config-salesforce-license');
     // eslint and all plugins must be installed on a local bases, regardless of if it uses a shared config.

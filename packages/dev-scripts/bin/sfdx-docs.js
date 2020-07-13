@@ -1,26 +1,28 @@
 #!/usr/bin/env node
 /*
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
 const { readdirSync, readFileSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
 const shell = require('../utils/shelljs');
-
 const loadRootPath = require('../utils/load-root-path');
 const packageRoot = require('../utils/package-path');
 const { isMultiPackageProject } = require('../utils/project-type');
 const typedoc = require.resolve('typedoc/bin/typedoc');
 
-const options = require('@salesforce/dev-config/typedoc');
+// eslint-disable-next-line import/order
+let options = require('@salesforce/dev-config/typedoc');
 
 try {
   const definedOptions = require(`${packageRoot}/typedoc`);
   options = Object.assign(options, definedOptions);
-} catch (err) {}
+} catch (err) {
+  /* do nothing */
+}
 
 let outDir = 'docs';
 
@@ -30,7 +32,9 @@ if (isMultiPackageProject(packageRoot)) {
     outDir = join(lernaPath, outDir, basename(packageRoot));
     // clean docs _after_ resolving outDir in multi-package projects
     shell.rm('-rf', `${outDir}/*`);
-  } catch (e) {}
+  } catch (e) {
+    /* do nothing */
+  }
 } else {
   // clean docs _before_ resolving tmp outDir in multi-package projects
   shell.rm('-rf', `${outDir}/*`);
@@ -53,7 +57,7 @@ for (const key of Object.keys(options)) {
 }
 
 shell.exec(command, {
-  cwd: packageRoot
+  cwd: packageRoot,
 });
 
 if (!isMultiPackageProject(packageRoot)) {
@@ -64,7 +68,7 @@ if (!isMultiPackageProject(packageRoot)) {
 // Fix any leaked local paths in the generated docs
 // See https://github.com/TypeStrong/typedoc/issues/800.
 
-const cleanDocFiles = dirPath => {
+const cleanDocFiles = (dirPath) => {
   for (const file of readdirSync(dirPath)) {
     const filePath = join(dirPath, file);
     const stat = statSync(filePath);
@@ -72,7 +76,7 @@ const cleanDocFiles = dirPath => {
     if (stat.isDirectory()) {
       cleanDocFiles(filePath);
     } else {
-      const regex = /Defined in .*[\/\\]node_modules[\/\\](.*:\d+)/g;
+      const regex = /Defined in .*[/\\]node_modules[/\\](.*:\d+)/g;
       let fileContents = readFileSync(filePath).toString();
       if (fileContents.match(regex)) {
         fileContents = fileContents.replace(regex, (match, group1) => {

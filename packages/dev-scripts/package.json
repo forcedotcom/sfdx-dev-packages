@@ -19,6 +19,8 @@
     "sfdx-test": "bin/sfdx-test.js"
   },
   "scripts": {
+    "format": "prettier --write \"**/*.+(js|json)\"",
+    "lint": "eslint \"**/*.js\"",
     "clean": "bin/sfdx-clean.js",
     "clean-all": "bin/sfdx-clean.js all",
     "test": "nyc mocha test/**/*.test.js"
@@ -48,8 +50,6 @@
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "typescript": "^3.9.3",
-    "eslint-config-salesforce-typescript": "^1.0.0",
-    "eslint-config-salesforce-license": "^1.0.0",
     "sinon": "^9.0.2",
     "mocha": "^7.2.0",
     "nyc": "^15.1.0",
@@ -64,5 +64,16 @@
   "publishConfig": {
     "access": "public"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-salesforce": "^1.0.0",
+    "eslint-config-salesforce-license": "^1.0.0",
+    "eslint-config-salesforce-typescript": "^1.0.0",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsdoc": "^27.0.3",
+    "eslint-plugin-prefer-arrow": "^1.2.1",
+    "eslint-plugin-prettier": "^3.1.3"
+  }
 }

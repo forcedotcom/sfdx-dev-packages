@@ -1,8 +1,8 @@
 /*
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
 const { join } = require('path');
@@ -23,7 +23,9 @@ function isDifferent(sourcePath, targetPath) {
       return true;
     }
     return readFileSync(sourcePath, 'utf8') !== readFileSync(targetPath, 'utf8');
-  } catch (error) {}
+  } catch (error) {
+    /* do nothing */
+  }
   return true;
 }
 
@@ -44,6 +46,7 @@ function writeLicenseFile(targetDir) {
   return copyFile(licenseSourcePath, licenseTargetPath, true);
 }
 
+// eslint-disable-next-line complexity
 module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   const config = resolveConfig(packageRoot, inLernaProject);
   const testPath = join(packageRoot, 'test');
@@ -117,9 +120,9 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
     added.push(copyFile(tsconfigSourcePath, tsconfigTargetPath, strict));
 
     if (exists(testPath)) {
-      const tsconfigSourcePath = join(FILES_PATH, strict ? 'tsconfig-test-strict.json' : 'tsconfig-test.json');
-      const tsconfigTargetPath = join(testPath, 'tsconfig.json');
-      added.push(copyFile(tsconfigSourcePath, tsconfigTargetPath, strict));
+      const tsconfigTestSourcePath = join(FILES_PATH, strict ? 'tsconfig-test-strict.json' : 'tsconfig-test.json');
+      const tsconfigTestTargetPath = join(testPath, 'tsconfig.json');
+      added.push(copyFile(tsconfigTestSourcePath, tsconfigTestTargetPath, strict));
     }
   }
 

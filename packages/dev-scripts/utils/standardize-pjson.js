@@ -1,13 +1,12 @@
 /*
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
 const { readFileSync } = require('fs');
 const { join } = require('path');
-const log = require('./log');
 const { resolveConfig } = require('./sfdx-dev-config');
 const PackageJson = require('./package-json');
 const { isMultiPackageProject } = require('./project-type');
@@ -17,7 +16,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   const pjson = new PackageJson(packageRoot);
 
   const license = pjson.get('license');
-  if (license !== config.license || 'BSD-3-Clause') {
+  if (license !== (config.license || 'BSD-3-Clause')) {
     pjson.contents.license = 'BSD-3-Clause';
     pjson.actions.push(`updating license`);
   }
@@ -29,6 +28,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
     const scriptsChanged = [];
 
     const scripts = pjson.get('scripts');
+    // eslint-disable-next-line prefer-const
     for (let [scriptName, scriptCommand] of scriptList) {
       if (isMultiPackageProject(packageRoot)) {
         scriptCommand = `lerna run ${scriptName}`;
@@ -79,7 +79,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
     const engineVersion = '>=12.0.0';
     // Don't control for non dev-config projects, or projects that don't specify an engine already.
     if (
-      tsconfig.match(/"extends"\s*:\s*\".*@salesforce\/dev-config/) &&
+      tsconfig.match(/"extends"\s*:\s*".*@salesforce\/dev-config/) &&
       pjson.contents.engines &&
       pjson.contents.engines.node &&
       pjson.contents.engines.node !== engineVersion

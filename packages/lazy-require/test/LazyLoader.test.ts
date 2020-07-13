@@ -39,7 +39,7 @@ describe('LazyLoader', () => {
     };
 
     origRequire = require;
-    // eslint-disable-next-line no-underscore-dangle
+    // eslint-disable-next-line no-underscore-dangle, no-global-assign
     require = ((request: string) => modLib._load(request, {}, false)) as NodeRequire;
 
     fsLib = stubInterface<FileSystem>(sandbox);
@@ -64,6 +64,7 @@ describe('LazyLoader', () => {
   });
 
   afterEach(() => {
+    // eslint-disable-next-line no-global-assign
     require = origRequire;
     sandbox.restore();
   });
