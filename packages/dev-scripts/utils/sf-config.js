@@ -17,6 +17,8 @@ const PACKAGE_DEFAULTS = {
     compile: 'sf-compile',
     docs: 'sf-docs',
     format: 'sf-format',
+    // Cleaner errors than ts-node through tests
+    pretest: 'sf-compile-test',
     test: 'sf-test',
     lint: 'sf-lint',
     prepack: 'sf-build',
@@ -54,6 +56,8 @@ const LERNA_PACKAGE_DEFAULTS = {
     compile: 'sf-compile',
     docs: 'sf-docs',
     format: 'sf-format',
+    // Cleaner errors than ts-node through tests
+    pretest: 'sf-compile-test',
     test: 'sf-test',
     lint: 'sf-lint',
     prepack: 'sf-build',

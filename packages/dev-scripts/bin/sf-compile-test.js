@@ -9,4 +9,4 @@
 const shell = require('../utils/shelljs');
 
 // Simple one line command. If it needs to be customized, override script in sfdevrc file.
-shell.exec(`tsc -p . --pretty`);
+shell.exec(`tsc -p ./test --pretty`);

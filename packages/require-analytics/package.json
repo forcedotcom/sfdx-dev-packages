@@ -20,6 +20,7 @@
     "format": "sf-format",
     "lint": "sf-lint",
     "prepack": "sf-build",
+    "pretest": "sf-compile-test",
     "test": "sf-test"
   },
   "devDependencies": {

@@ -9,7 +9,7 @@
 const shell = require('../utils/shelljs');
 
 const packageRoot = require('../utils/package-path');
-const { resolveConfig } = require('../utils/sfdx-dev-config');
+const { resolveConfig } = require('../utils/sf-config');
 
 const nyc = require.resolve('nyc/bin/nyc');
 

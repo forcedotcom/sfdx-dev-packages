@@ -23,6 +23,7 @@
     "lodash": "./scripts/build-lodash.sh",
     "postcompile": "shx cp -r src/nodash/support.d.ts lib/nodash",
     "prepack": "sf-build",
+    "pretest": "sf-compile-test",
     "test": "sf-test"
   },
   "dependencies": {

@@ -8,6 +8,7 @@
     "sf-ci-docs": "bin/sf-ci-docs.js",
     "sf-clean": "bin/sf-clean.js",
     "sf-compile": "bin/sf-compile.js",
+    "sf-compile-test": "bin/sf-compile-test.js",
     "sf-docs": "bin/sf-docs.js",
     "sf-format": "bin/sf-format.js",
     "sf-husky-commit-msg": "bin/sf-husky-commit-msg.js",

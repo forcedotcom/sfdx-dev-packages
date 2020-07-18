@@ -54,7 +54,7 @@ function writeGitignore(targetDir) {
   const copied = copyFile(gitignoreSourcePath, gitignoreTargetPath);
 
   if (!copied) {
-    if (!readFileSync(gitignoreTargetPath, 'utf-8').includes('#-- CLEAN')) {
+    if (!readFileSync(gitignoreTargetPath, 'utf-8').includes('# -- CLEAN')) {
       log(`The .gitignore doesn't contain any clean entries. See ${gitignoreTargetPath} for examples.`);
     }
   }
@@ -85,7 +85,6 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   }
 
   if (isMultiPackageProject(packageRoot)) {
-    log('skipping writing files for learn project', 1);
     return;
   }
 
