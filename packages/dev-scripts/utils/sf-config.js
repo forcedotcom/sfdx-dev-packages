@@ -11,20 +11,20 @@ const { isMultiPackageProject } = require('./project-type');
 
 const PACKAGE_DEFAULTS = {
   scripts: {
-    build: 'yarn sfdx-build',
-    clean: 'yarn sfdx-clean',
-    'clean-all': 'yarn sfdx-clean all',
-    compile: 'yarn sfdx-compile',
-    docs: 'yarn sfdx-docs',
-    format: 'prettier --write "+(src|test)/**/*.+(ts|js|json)"',
-    test: 'yarn sfdx-test',
-    lint: 'eslint "src/**/*.ts" "test/**/*.ts"',
-    prepack: 'yarn sfdx-build',
+    build: 'sf-build',
+    clean: 'sf-clean',
+    'clean-all': '-clean all',
+    compile: 'sf-compile',
+    docs: 'sf-docs',
+    format: 'sf-format',
+    test: 'sf-test',
+    lint: 'sf-lint',
+    prepack: 'sf-build',
   },
   husky: {
-    'commit-msg': 'yarn sfdx-husky-commit-msg',
-    'pre-commit': 'yarn sfdx-husky-pre-commit',
-    'pre-push': 'yarn sfdx-husky-pre-push',
+    'commit-msg': 'sf-husky-commit-msg',
+    'pre-commit': 'sf-husky-pre-commit',
+    'pre-push': 'sf-husky-pre-push',
   },
 };
 
@@ -32,7 +32,7 @@ const LERNA_DEFAULTS = {
   scripts: {
     build: 'lerna build',
     clean: 'lerna clean',
-    'clean-all': 'lerna sfdx-clean',
+    'clean-all': 'lerna sf-clean-all',
     compile: 'lerna compile',
     docs: 'lerna docs',
     format: 'lerna format',
@@ -40,23 +40,23 @@ const LERNA_DEFAULTS = {
     lint: 'lerna lint',
   },
   husky: {
-    'commit-msg': 'yarn sfdx-husky-commit-msg',
-    'pre-commit': 'yarn sfdx-husky-pre-commit',
-    'pre-push': 'yarn sfdx-husky-pre-push',
+    'commit-msg': 'sf-husky-commit-msg',
+    'pre-commit': 'sf-husky-pre-commit',
+    'pre-push': 'sf-husky-pre-push',
   },
 };
 
 const LERNA_PACKAGE_DEFAULTS = {
   scripts: {
-    build: 'yarn sfdx-build',
-    clean: 'yarn sfdx-clean',
-    'clean-all': 'yarn sfdx-clean all',
-    compile: 'yarn sfdx-compile',
-    docs: 'yarn sfdx-docs',
-    format: 'prettier --write "+(src|test)/**/*.+(ts|js|json)"',
-    test: 'yarn sfdx-test',
-    lint: 'eslint "src/**/*.ts" "test/**/*.ts"',
-    prepack: 'yarn sfdx-build',
+    build: 'sf-build',
+    clean: 'sf-clean',
+    'clean-all': 'sf-clean all',
+    compile: 'sf-compile',
+    docs: 'sf-docs',
+    format: 'sf-format',
+    test: 'sf-test',
+    lint: 'sf-lint',
+    prepack: 'sf-build',
   },
 };
 

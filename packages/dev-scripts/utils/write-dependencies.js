@@ -8,7 +8,7 @@
 const { join } = require('path');
 const { isMultiPackageProject } = require('../utils/project-type');
 const PackageJson = require('./package-json');
-const { resolveConfig } = require('./sfdx-dev-config');
+const { resolveConfig } = require('./sf-config');
 
 module.exports = (projectPath, inLernaProject) => {
   const pjson = new PackageJson(projectPath);
@@ -92,6 +92,8 @@ module.exports = (projectPath, inLernaProject) => {
 
   // We use eslint now
   remove('tslint');
+
+  add('@salesforce/prettier-config');
 
   const eslintPjson = require('eslint-config-salesforce-typescript/package.json');
   const eslintHeaderPjson = require('eslint-config-salesforce-license/package.json');

@@ -8,9 +8,5 @@
 
 const shell = require('../utils/shelljs');
 
-const packageRoot = require('../utils/package-path');
-const prettierConfig = require.resolve('@salesforce/dev-config/prettier');
-
-shell.exec(`prettier --config ${prettierConfig} --write '+(src|test)/**/*.+(ts|js|json)'`, {
-  cwd: packageRoot,
-});
+// Simple one line command. If it needs to be customized, override script in sfdevrc file.
+shell.exec(`eslint "src/**/*.ts" "test/**/*.ts"`);

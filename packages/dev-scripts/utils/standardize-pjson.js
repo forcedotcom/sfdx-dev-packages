@@ -7,7 +7,7 @@
 
 const { readFileSync } = require('fs');
 const { join } = require('path');
-const { resolveConfig } = require('./sfdx-dev-config');
+const { resolveConfig } = require('./sf-config');
 const PackageJson = require('./package-json');
 const { isMultiPackageProject } = require('./project-type');
 

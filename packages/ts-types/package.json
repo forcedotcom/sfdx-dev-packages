@@ -12,15 +12,15 @@
     "lib/**/*.d.ts"
   ],
   "scripts": {
-    "build": "yarn sfdx-build",
-    "clean": "yarn sfdx-clean",
-    "clean-all": "yarn sfdx-clean all",
-    "compile": "yarn sfdx-compile",
-    "docs": "yarn sfdx-docs",
-    "format": "prettier --write \"+(src|test)/**/*.+(ts|js|json)\"",
-    "lint": "eslint \"src/**/*.ts\" \"test/**/*.ts\"",
-    "prepack": "yarn sfdx-build",
-    "test": "yarn sfdx-test"
+    "build": "sf-build",
+    "clean": "sf-clean",
+    "clean-all": "sf-clean all",
+    "compile": "sf-compile",
+    "docs": "sf-docs",
+    "format": "sf-format",
+    "lint": "sf-lint",
+    "prepack": "sf-build",
+    "test": "sf-test"
   },
   "dependencies": {
     "tslib": "^1.10.0"
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@salesforce/dev-config": "^2.0.0",
     "@salesforce/dev-scripts": "^1.0.0",
+    "@salesforce/prettier-config": "^1.0.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "chai": "^4.2.0",

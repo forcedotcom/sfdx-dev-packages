@@ -4,17 +4,17 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "ci-docs": "yarn sfdx-ci-docs",
+    "ci-docs": "yarn sf-ci-docs",
     "ci-test": "nyc mocha 'packages/**/*.test.js'",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
     "compile": "lerna run compile",
     "docs": "lerna run docs",
     "format": "lerna run format",
-    "install": "./packages/dev-scripts/bin/sfdx-lerna-install.js",
+    "install": "./packages/dev-scripts/bin/sf-lerna-install.js",
     "lint": "lerna run lint",
     "lint-fix": "lerna run lint -- --fix",
-    "postclean-all": "yarn sfdx-clean all",
+    "postclean-all": "yarn sf-clean all",
     "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
     "test": "lerna run test"
@@ -36,9 +36,9 @@
   ],
   "husky": {
     "hooks": {
-      "commit-msg": "yarn sfdx-husky-commit-msg",
-      "pre-commit": "yarn sfdx-husky-pre-commit",
-      "pre-push": "yarn sfdx-husky-pre-push"
+      "commit-msg": "sf-husky-commit-msg",
+      "pre-commit": "sf-husky-pre-commit",
+      "pre-push": "sf-husky-pre-push"
     }
   },
   "repository": {

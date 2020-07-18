@@ -4,25 +4,25 @@
   "description": "Standardize package.json scripts and config files for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "bin": {
-    "sfdx-build": "bin/sfdx-build.js",
-    "sfdx-ci-docs": "bin/sfdx-ci-docs.js",
-    "sfdx-clean": "bin/sfdx-clean.js",
-    "sfdx-compile": "bin/sfdx-compile.js",
-    "sfdx-docs": "bin/sfdx-docs.js",
-    "sfdx-format": "bin/sfdx-format.js",
-    "sfdx-husky-commit-msg": "bin/sfdx-husky-commit-msg.js",
-    "sfdx-husky-pre-commit": "bin/sfdx-husky-pre-commit.js",
-    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js",
-    "sfdx-install": "bin/sfdx-install.js",
-    "sfdx-lerna-install": "bin/sfdx-lerna-install.js",
-    "sfdx-lint": "bin/sfdx-lint.js",
-    "sfdx-test": "bin/sfdx-test.js"
+    "sf-build": "bin/sf-build.js",
+    "sf-ci-docs": "bin/sf-ci-docs.js",
+    "sf-clean": "bin/sf-clean.js",
+    "sf-compile": "bin/sf-compile.js",
+    "sf-docs": "bin/sf-docs.js",
+    "sf-format": "bin/sf-format.js",
+    "sf-husky-commit-msg": "bin/sf-husky-commit-msg.js",
+    "sf-husky-pre-commit": "bin/sf-husky-pre-commit.js",
+    "sf-husky-pre-push": "bin/sf-husky-pre-push.js",
+    "sf-install": "bin/sf-install.js",
+    "sf-lerna-install": "bin/sf-lerna-install.js",
+    "sf-lint": "bin/sf-lint.js",
+    "sf-test": "bin/sf-test.js"
   },
   "scripts": {
     "format": "prettier --write \"**/*.+(js|json)\"",
     "lint": "eslint \"**/*.js\"",
-    "clean": "bin/sfdx-clean.js",
-    "clean-all": "bin/sfdx-clean.js all",
+    "clean": "bin/sf-clean.js",
+    "clean-all": "bin/sf-clean.js all",
     "test": "nyc mocha test/**/*.test.js"
   },
   "keywords": [
@@ -65,6 +65,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@salesforce/prettier-config": "^1.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-config-salesforce": "^1.0.0",
