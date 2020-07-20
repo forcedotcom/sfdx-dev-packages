@@ -8,12 +8,5 @@
 
 const shell = require('../utils/shelljs');
 
-const packageRoot = require('../utils/package-path');
-
-shell.exec('yarn build', {
-  cwd: packageRoot,
-});
-
-shell.exec('yarn test', {
-  cwd: packageRoot,
-});
+shell.exec('yarn build');
+shell.exec('yarn test');

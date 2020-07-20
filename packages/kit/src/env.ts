@@ -5,8 +5,9 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { definiteEntriesOf, Dictionary, isKeyOf, KeyValue, Nullable, Optional } from '@salesforce/ts-types';
+import { definiteEntriesOf, Dictionary, isKeyOf, KeyValue, Nullable, Optional, isNumber } from '@salesforce/ts-types';
 import { InvalidDefaultEnvValueError } from './errors';
+import { toNumber } from './nodash';
 
 /**
  * An injectable abstraction on top of `process.env` with various convenience functions
@@ -222,6 +223,35 @@ export class Env {
       return;
     }
     this.setString(key, value.toString());
+  }
+
+  /**
+   * Gets a `number` value for a given key. Returns the default value if no value was found.
+   *
+   * @param key The name of the envar.
+   * @param def A default number, which itself defaults to `undefined` if not otherwise supplied.
+   */
+  public getNumber(key: string, def?: number): Optional<number> {
+    const value = this.getString(key);
+    if (value) {
+      const num = toNumber(value);
+      return isNaN(num) && isNumber(def) ? def : num;
+    }
+    return isNumber(def) ? def : undefined;
+  }
+
+  /**
+   * Sets a `number` value for a given key, or removes the current value when no value is given.
+   *
+   * @param key The name of the envar.
+   * @param value The value to set.
+   */
+  public setNumber(key: string, value: Nullable<number>): void {
+    if (value == null) {
+      this.unset(key);
+      return;
+    }
+    this.setString(key, isNumber(value) ? String(value) : value);
   }
 
   /**

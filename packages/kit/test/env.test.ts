@@ -156,6 +156,56 @@ describe('Env', () => {
     expect(env.getBoolean('BOOL')).to.be.false;
   });
 
+  it('should get a number envar set to 0', () => {
+    env.setNumber('NUM', 0);
+    expect(env.getString('NUM')).to.equal('0');
+    expect(env.getNumber('NUM')).to.equal(0);
+    expect(env.getBoolean('NUM')).to.be.false;
+  });
+
+  it('should get a number envar set to positive', () => {
+    env.setNumber('NUM2', 1);
+    expect(env.getString('NUM2')).to.equal('1');
+    expect(env.getNumber('NUM2')).to.equal(1);
+    expect(env.getBoolean('NUM2')).to.be.true;
+  });
+
+  it('should set a number envar to float', () => {
+    env.setNumber('NUM3', 1.123);
+    expect(env.getString('NUM3')).to.equal('1.123');
+    expect(env.getNumber('NUM3')).to.equal(1.123);
+  });
+
+  it('should not get a number that is not set', () => {
+    expect(env.getNumber('NUM4')).to.be.undefined;
+  });
+
+  it('should get a default number when asked for a non-existent boolean envar', () => {
+    expect(env.getNumber('NUM5', 0)).to.equal(0);
+  });
+
+  it('should get NaN for invalid numbers', () => {
+    env.setString('NUM6', 'invalid');
+    expect(isNaN(env.getNumber('NUM6') as number)).to.be.true;
+  });
+
+  it('should get default number for NaN values', () => {
+    env.setString('NUM6', 'invalid');
+    expect(env.getNumber('NUM6', 0)).to.equal(0);
+  });
+
+  it('should delete a number envar', () => {
+    env.unset('NUM');
+    expect(env.getString('NUM')).to.be.undefined;
+    expect(env.getNumber('NUM')).to.be.undefined;
+  });
+
+  it('should delete a number envar implicitly', () => {
+    env.setNumber('NUM', undefined);
+    expect(env.getString('NUM')).to.be.undefined;
+    expect(env.getNumber('NUM')).to.be.undefined;
+  });
+
   it('should easily enumerate all defined entries', () => {
     expect(env.entries()).to.deep.equal([
       ['FOO', 'BAR'],
