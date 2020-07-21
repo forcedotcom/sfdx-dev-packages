@@ -6,7 +6,17 @@
  */
 
 import { AssertionFailedError } from '../errors';
-import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Nullable, Optional } from '../types';
+import {
+  AnyArray,
+  AnyConstructor,
+  AnyFunction,
+  AnyJson,
+  JsonArray,
+  JsonMap,
+  Nullable,
+  Optional,
+  Dictionary,
+} from '../types';
 import {
   asArray,
   asBoolean,
@@ -94,8 +104,8 @@ export function assertBoolean(value: unknown, message?: string): asserts value i
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function assertObject(value: unknown, message?: string): asserts value is object {
-  assertNonNull(asObject(value), message || 'Value is not an object');
+export function assertObject<T extends object = object>(value: unknown, message?: string): asserts value is T {
+  assertNonNull(asObject<T>(value), message || 'Value is not an object');
 }
 
 /**
@@ -106,8 +116,8 @@ export function assertObject(value: unknown, message?: string): asserts value is
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function assertPlainObject(value: unknown, message?: string): asserts value is object {
-  assertNonNull(asPlainObject(value), message || 'Value is not an object');
+export function assertPlainObject<T extends object = object>(value: unknown, message?: string): asserts value is T {
+  assertNonNull(asPlainObject<T>(value), message || 'Value is not a plain object');
 }
 
 /**
@@ -118,8 +128,8 @@ export function assertPlainObject(value: unknown, message?: string): asserts val
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link AssertionFailedError} If the value was undefined.
  */
-export function assertDictionary(value: unknown, message?: string): asserts value is object {
-  assertNonNull(asDictionary(value), message || 'Value is not an object');
+export function assertDictionary<T = unknown>(value: unknown, message?: string): asserts value is Dictionary<T> {
+  assertNonNull(asDictionary<T>(value), message || 'Value is not a dictionary object');
 }
 
 /**

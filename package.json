@@ -5,7 +5,6 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
     "ci-docs": "yarn sf-ci-docs",
-    "ci-test": "nyc mocha 'packages/**/*.test.js'",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
     "compile": "lerna run compile",
@@ -17,9 +16,11 @@
     "postclean-all": "yarn sf-clean all",
     "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "codecov": "codecov --disable=gcov"
   },
   "devDependencies": {
+    "codecov": "^3.7.1",
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
     "lerna": "^3.22.1",

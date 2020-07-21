@@ -20,6 +20,7 @@ import {
   hasObject,
   hasPlainObject,
   hasString,
+  hasDictionary,
 } from '../../src/narrowing/has';
 
 class TestClass {
@@ -155,15 +156,31 @@ describe('has type', () => {
   });
 
   describe('hasPlainObject', () => {
-    it('should not narrow an unknown type when checking a non-object property', () => {
+    it('should not narrow an unknown type when checking a non-plain-object property', () => {
       if (hasPlainObject(obj, 's')) {
         throw new Error('object should not have object property s');
       }
     });
 
-    it('should narrow an unknown type to an object with an object property', () => {
+    it('should narrow an unknown type to an object with a plain object property', () => {
       if (!hasPlainObject(obj, 'm')) {
-        throw new Error('object should have object property m');
+        throw new Error('object should have plain object property m');
+      }
+      // trivial runtime check but useful for compilation testing
+      expect(obj.m).to.deep.equal(obj.m);
+    });
+  });
+
+  describe('hasDictionary', () => {
+    it('should not narrow an unknown type when checking a non-dictionary property', () => {
+      if (hasDictionary(obj, 's')) {
+        throw new Error('object should not have dictionary property s');
+      }
+    });
+
+    it('should narrow an unknown type to an object with a dictionary property', () => {
+      if (!hasDictionary(obj, 'm')) {
+        throw new Error('object should have dictionary property m');
       }
       // trivial runtime check but useful for compilation testing
       expect(obj.m).to.deep.equal(obj.m);

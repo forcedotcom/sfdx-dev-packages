@@ -19,6 +19,7 @@ import {
   getObject,
   getPlainObject,
   getString,
+  getDictionary,
 } from '../../src/narrowing/get';
 
 class TestClass {
@@ -160,7 +161,7 @@ describe('get type', () => {
       expect(getPlainObject(jsonMap, 'foo', def)).to.equal(def);
     });
 
-    it('should return an object when passed a path to an object', () => {
+    it('should return a plain object when passed a path to an object', () => {
       const value = jsonMap.inner.m;
       const path = 'inner.m';
       expect(getPlainObject(jsonMap, path)).to.equal(value);
@@ -169,6 +170,24 @@ describe('get type', () => {
     it('should return undefined when passed a path to a non-object', () => {
       const path = 'inner.s';
       expect(getPlainObject(jsonMap, path)).to.be.undefined;
+    });
+  });
+
+  describe('getDictionary', () => {
+    it('should return a default when passed an unknown path and a default', () => {
+      const def = { a: 'b' };
+      expect(getDictionary(jsonMap, 'foo', def)).to.equal(def);
+    });
+
+    it('should return a dictionary when passed a path to an object', () => {
+      const value = jsonMap.inner.m;
+      const path = 'inner.m';
+      expect(getDictionary(jsonMap, path)).to.equal(value);
+    });
+
+    it('should return undefined when passed a path to a non-object', () => {
+      const path = 'inner.s';
+      expect(getDictionary(jsonMap, path)).to.be.undefined;
     });
   });
 

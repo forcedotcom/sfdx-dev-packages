@@ -9,16 +9,15 @@
  * A base class for classes that must be constructed and initialized asynchronously.
  */
 export abstract class AsyncCreatable<O = object> {
-  protected options: O;
-
   /**
    * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
    * New subclass instances must be created with the static {@link create} method.
    *
    * @param options An options object providing initialization params.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public constructor(options: O) {
-    this.options = options;
+    /* leave up to implementer */
   }
 
   /**
@@ -42,16 +41,15 @@ export abstract class AsyncCreatable<O = object> {
  * A base class for classes that must be constructed and initialized asynchronously without requiring an options object.
  */
 export abstract class AsyncOptionalCreatable<O = object> {
-  protected options?: O;
-
   /**
    * Constructs a new `AsyncCreatable` instance. For internal and subclass use only.
    * New subclass instances must be created with the static {@link create} method.
    *
    * @param options An options object providing initialization params.
    */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public constructor(options?: O) {
-    this.options = options;
+    /* leave up to implementer */
   }
 
   /**

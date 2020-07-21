@@ -50,7 +50,7 @@ export function isBoolean(value: unknown): value is boolean {
  *
  * @param value The value to test.
  */
-export function isObject<T = object>(value: unknown): value is T {
+export function isObject<T extends object = object>(value: unknown): value is T {
   return value != null && (typeof value === 'object' || typeof value === 'function');
 }
 
@@ -59,7 +59,7 @@ export function isObject<T = object>(value: unknown): value is T {
  *
  * @param value The value to test.
  */
-export function isFunction(value: unknown): value is AnyFunction {
+export function isFunction<T extends Function = AnyFunction>(value: unknown): value is T {
   return typeof value === 'function';
 }
 
@@ -77,7 +77,7 @@ export function isFunction(value: unknown): value is AnyFunction {
  *
  * @param value The value to test.
  */
-export function isPlainObject<T = object>(value: unknown): value is T {
+export function isPlainObject<T extends object = object>(value: unknown): value is T {
   const isObjectObject = (o: unknown): o is Dictionary =>
     isObject(o) && Object.prototype.toString.call(o) === '[object Object]';
   if (!isObjectObject(value)) return false;
@@ -105,7 +105,7 @@ export function isPlainObject<T = object>(value: unknown): value is T {
  * @param value The value to test.
  */
 export function isDictionary<T = unknown>(value: unknown): value is Dictionary<T> {
-  return isPlainObject(value);
+  return isPlainObject<Dictionary<T>>(value);
 }
 
 /**
