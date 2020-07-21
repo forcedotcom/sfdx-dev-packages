@@ -16,7 +16,8 @@
     "postclean-all": "yarn sf-clean all",
     "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "codecov": "codecov --disable=gcov"
   },
   "devDependencies": {
     "codecov": "^3.7.1",

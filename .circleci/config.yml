@@ -33,7 +33,7 @@ _refs:
   coverage: &coverage
     name: Submitting code coverage to codecov
     command: |
-      codecov --disable=gcov
+      # yarn codecov
   gh-config: &gh-config
     name: Configuring GitHub
     command: |
