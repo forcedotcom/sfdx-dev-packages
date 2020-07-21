@@ -79,16 +79,16 @@ export function asBoolean(value: unknown, defaultValue?: boolean): Optional<bool
  *
  * @param value The value to test.
  */
-export function asObject<T = object>(value: unknown): Optional<T>;
+export function asObject<T extends object = object>(value: unknown): Optional<T>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asObject<T = object>(value: unknown, defaultValue: T): T;
+export function asObject<T extends object = object>(value: unknown, defaultValue: T): T;
 // underlying function
-export function asObject<T = object>(value: unknown, defaultValue?: T): Optional<T> {
+export function asObject<T extends object = object>(value: unknown, defaultValue?: T): Optional<T> {
   return isObject<T>(value) ? value : defaultValue;
 }
 
@@ -97,16 +97,16 @@ export function asObject<T = object>(value: unknown, defaultValue?: T): Optional
  *
  * @param value The value to test.
  */
-export function asPlainObject<T = object>(value: unknown): Optional<T>;
+export function asPlainObject<T extends object = object>(value: unknown): Optional<T>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asPlainObject<T = object>(value: unknown, defaultValue: T): T;
+export function asPlainObject<T extends object = object>(value: unknown, defaultValue: T): T;
 // underlying function
-export function asPlainObject<T = object>(value: unknown, defaultValue?: T): Optional<T> {
+export function asPlainObject<T extends object = object>(value: unknown, defaultValue?: T): Optional<T> {
   return isPlainObject<T>(value) ? value : defaultValue;
 }
 
@@ -115,16 +115,16 @@ export function asPlainObject<T = object>(value: unknown, defaultValue?: T): Opt
  *
  * @param value The value to test.
  */
-export function asDictionary<T = object>(value: unknown): Optional<Dictionary<T>>;
+export function asDictionary<T = unknown>(value: unknown): Optional<Dictionary<T>>;
 /**
  * Narrows an `unknown` value to an `object` if it is type-compatible, or returns the provided default otherwise.
  *
  * @param value The value to test.
  * @param defaultValue The default to return if `value` was undefined or of the incorrect type.
  */
-export function asDictionary<T = object>(value: unknown, defaultValue: Dictionary<T>): Dictionary<T>;
+export function asDictionary<T = unknown>(value: unknown, defaultValue: Dictionary<T>): Dictionary<T>;
 // underlying function
-export function asDictionary<T = object>(value: unknown, defaultValue?: Dictionary<T>): Optional<Dictionary<T>> {
+export function asDictionary<T = unknown>(value: unknown, defaultValue?: Dictionary<T>): Optional<Dictionary<T>> {
   return isDictionary<T>(value) ? value : defaultValue;
 }
 

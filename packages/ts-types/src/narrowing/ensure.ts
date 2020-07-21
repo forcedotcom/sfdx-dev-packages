@@ -84,8 +84,8 @@ export function ensureBoolean(value: unknown, message?: string): boolean {
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensureObject<T = object>(value: unknown, message?: string): T {
-  return ensure(asObject(value), message || 'Value is not an object');
+export function ensureObject<T extends object = object>(value: unknown, message?: string): T {
+  return ensure(asObject<T>(value), message || 'Value is not an object');
 }
 
 /**
@@ -96,7 +96,7 @@ export function ensureObject<T = object>(value: unknown, message?: string): T {
  * @param message The error message to use if `value` is not type-compatible.
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
-export function ensurePlainObject<T = object>(value: unknown, message?: string): T {
+export function ensurePlainObject<T extends object = object>(value: unknown, message?: string): T {
   return ensure(asPlainObject<T>(value), message || 'Value is not a plain object');
 }
 
@@ -109,7 +109,7 @@ export function ensurePlainObject<T = object>(value: unknown, message?: string):
  * @throws {@link UnexpectedValueTypeError} If the value was undefined.
  */
 export function ensureDictionary<T = unknown>(value: unknown, message?: string): Dictionary<T> {
-  return ensure(asDictionary(value), message || 'Value is not a dictionary object');
+  return ensure(asDictionary<T>(value), message || 'Value is not a dictionary object');
 }
 
 /**

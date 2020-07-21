@@ -5,7 +5,18 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Many, Optional, View } from '../types';
+import {
+  AnyArray,
+  AnyConstructor,
+  AnyFunction,
+  AnyJson,
+  JsonArray,
+  JsonMap,
+  Many,
+  Optional,
+  View,
+  Dictionary,
+} from '../types';
 import {
   isAnyJson,
   isArray,
@@ -17,6 +28,7 @@ import {
   isObject,
   isPlainObject,
   isString,
+  isDictionary,
 } from './is';
 
 /**
@@ -139,11 +151,11 @@ export function hasBoolean<T extends unknown, K extends string>(
  * @param value The value to test.
  * @param keys An `object` key to check for existence.
  */
-export function hasObject<T extends unknown, K extends string>(
+export function hasObject<V extends object = object, T extends unknown = unknown, K extends string = string>(
   value: T,
   key: K
-): value is T & object & View<K, object> {
-  return has(value, key) && isObject(value[key]);
+): value is T & object & View<K, V> {
+  return has(value, key) && isObject<V>(value[key]);
 }
 
 /**
@@ -167,11 +179,39 @@ export function hasObject<T extends unknown, K extends string>(
  * @param value The value to test.
  * @param keys A "plain" `object` key to check for existence.
  */
-export function hasPlainObject<T extends unknown, K extends string>(
+export function hasPlainObject<V extends object = object, T extends unknown = unknown, K extends string = string>(
   value: T,
   key: K
-): value is T & object & View<K, object> {
-  return has(value, key) && isPlainObject(value[key]);
+): value is T & object & View<K, V> {
+  return has(value, key) && isPlainObject<V>(value[key]);
+}
+
+/**
+ * Tests whether a value of type `T` contains a property `key` whose type tests positively when tested with
+ * {@link isDictionary}. If so, the type of the tested value is narrowed to reflect the existence of that key for
+ * convenient access in the same scope. Returns `false` if the property key does not exist on the object or the value
+ * stored by that key is not of type `object`.
+ *
+ * ```
+ * // type of obj -> unknown
+ * if (hasNumber(obj, 'status')) {
+ *   // type of obj -> { status: number }
+ *   if (hasDictionary(obj, 'data')) {
+ *     // type of obj -> { status: number } & { data: Dictionary }
+ *   } else if (hasString('error')) {
+ *     // type of obj -> { status: number } & { error: string }
+ *   }
+ * }
+ * ```
+ *
+ * @param value The value to test.
+ * @param keys A "dictionary" `object` key to check for existence.
+ */
+export function hasDictionary<V = unknown, T extends unknown = unknown, K extends string = string>(
+  value: T,
+  key: K
+): value is T & object & View<K, Dictionary<V>> {
+  return has(value, key) && isDictionary<V>(value[key]);
 }
 
 /**

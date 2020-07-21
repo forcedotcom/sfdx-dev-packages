@@ -5,7 +5,17 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { AnyArray, AnyConstructor, AnyFunction, AnyJson, JsonArray, JsonMap, Nullable, Optional } from '../types';
+import {
+  AnyArray,
+  AnyConstructor,
+  AnyFunction,
+  AnyJson,
+  JsonArray,
+  JsonMap,
+  Nullable,
+  Optional,
+  Dictionary,
+} from '../types';
 import {
   asArray,
   asBoolean,
@@ -17,6 +27,7 @@ import {
   asObject,
   asPlainObject,
   asString,
+  asDictionary,
 } from './as';
 import { coerceAnyJson } from './coerce';
 import { has } from './has';
@@ -170,7 +181,7 @@ export function getBoolean(from: unknown, path: string, defaultValue?: boolean):
  * @param from Any value to query.
  * @param path The query path.
  */
-export function getObject(from: unknown, path: string): Nullable<object>;
+export function getObject<T extends object = object>(from: unknown, path: string): Nullable<T>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
  * `undefined` if a value was not found or was not type-compatible.
@@ -185,10 +196,10 @@ export function getObject(from: unknown, path: string): Nullable<object>;
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getObject(from: unknown, path: string, defaultValue: object): object;
+export function getObject<T extends object = object>(from: unknown, path: string, defaultValue: T): T;
 // underlying function
-export function getObject(from: unknown, path: string, defaultValue?: object): Nullable<object> {
-  return valueOrDefault(asObject(get(from, path)), defaultValue);
+export function getObject<T extends object = object>(from: unknown, path: string, defaultValue?: T): Nullable<T> {
+  return valueOrDefault(asObject<T>(get(from, path)), defaultValue);
 }
 
 /**
@@ -205,7 +216,7 @@ export function getObject(from: unknown, path: string, defaultValue?: object): N
  * @param from Any value to query.
  * @param path The query path.
  */
-export function getPlainObject(from: unknown, path: string): Nullable<object>;
+export function getPlainObject<T extends object = object>(from: unknown, path: string): Nullable<T>;
 /**
  * Given a deep-search query path, returns an object property or array value of an object or array as an `object`, or
  * `undefined` if a value was not found or was not type-compatible. This differs from {@link getObject} by way of
@@ -221,10 +232,48 @@ export function getPlainObject(from: unknown, path: string): Nullable<object>;
  * @param path The query path.
  * @param defaultValue The default to return if the query result was not defined.
  */
-export function getPlainObject(from: unknown, path: string, defaultValue: object): object;
+export function getPlainObject<T extends object = object>(from: unknown, path: string, defaultValue: T): T;
 // underlying function
-export function getPlainObject(from: unknown, path: string, defaultValue?: object): Nullable<object> {
-  return valueOrDefault(asPlainObject(get(from, path)), defaultValue);
+export function getPlainObject<T extends object = object>(from: unknown, path: string, defaultValue?: T): Nullable<T> {
+  return valueOrDefault(asPlainObject<T>(get(from, path)), defaultValue);
+}
+
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as a `Dictionary<T>`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = getDictionary<string>(obj, 'foo.bar[0]');
+ * // type of value -> Dictionary<string>; value -> { name: 'baz' }
+ * ```
+ *
+ * @param from Any value to query.
+ * @param path The query path.
+ */
+export function getDictionary<T = unknown>(from: unknown, path: string): Nullable<Dictionary<T>>;
+/**
+ * Given a deep-search query path, returns an object property or array value of an object or array as an `Dictionary<T>`, or
+ * `undefined` if a value was not found or was not type-compatible.
+ *
+ * ```
+ * const obj = { foo: { bar: [{ name: 'baz' }] } };
+ * const value = getDictionary<string>(obj, 'foo.bar[1]', { name: 'buzz' });
+ * // type of value -> Dictionary<string>; value -> { name: 'buzz' }
+ * ```
+ *
+ * @param from Any value to query.
+ * @param path The query path.
+ * @param defaultValue The default to return if the query result was not defined.
+ */
+export function getDictionary<T = unknown>(from: unknown, path: string, defaultValue: Dictionary<T>): Dictionary<T>;
+// underlying function
+export function getDictionary<T = unknown>(
+  from: unknown,
+  path: string,
+  defaultValue?: Dictionary<T>
+): Nullable<Dictionary<T>> {
+  return valueOrDefault(asDictionary<T>(get(from, path)), defaultValue);
 }
 
 /**
