@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-salesforce-typescript",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The eslint config for Salesforce typescript projects",
   "keywords": [
     "Salesforce",
@@ -21,13 +21,12 @@
   "bugs": {
     "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
   },
-  "dependencies": {},
   "devDependencies": {
-    "eslint-config-salesforce-license": "^0.0.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "@typescript-eslint/parser": "^2.30.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-config-salesforce-license": "^0.1.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsdoc": "^27.0.3",
     "eslint-plugin-prettier": "^3.1.3"

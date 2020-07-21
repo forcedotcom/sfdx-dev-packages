@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-salesforce-license",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "The eslint config to for Salesforce license",
   "keywords": [
     "Salesforce",
@@ -20,7 +20,6 @@
   "bugs": {
     "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
   },
-  "dependencies": {},
   "devDependencies": {
     "eslint-plugin-header": "^3.0.0"
   },

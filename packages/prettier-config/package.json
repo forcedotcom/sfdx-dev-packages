@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/prettier-config",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The prettier config for Salesforce projects",
   "keywords": [
     "Salesforce",
@@ -20,8 +20,6 @@
   "bugs": {
     "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
   },
-  "dependencies": {},
-  "devDependencies": {},
   "publishConfig": {
     "access": "public"
   }

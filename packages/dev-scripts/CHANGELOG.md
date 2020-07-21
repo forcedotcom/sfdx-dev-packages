@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.5.0...@salesforce/dev-scripts@0.6.0) (2020-07-21)
+
+
+### Features
+
+* **@salesforce/dev-scripts:** bump version to 0.5.0 ([0ab4c6f](https://github.com/forcedotcom/sfdx-dev-packages/commit/0ab4c6f64703e588a63e72814f0850aa785778cb))
+* add eslint and use it in all packages ([0165cc8](https://github.com/forcedotcom/sfdx-dev-packages/commit/0165cc8853079c7f987dddfb60ced3efb00deea0))
+* add getNumber on env ([0c94a64](https://github.com/forcedotcom/sfdx-dev-packages/commit/0c94a64f7ac9af40198918cceda6e96facbc77ca))
+* add javascipt eslint rules that typescript extends ([135ac73](https://github.com/forcedotcom/sfdx-dev-packages/commit/135ac73b8c513d8950ac69373349361d9f600a8c))
+* add salesforce license linting ([3213135](https://github.com/forcedotcom/sfdx-dev-packages/commit/3213135f34956335ef2c123ec680c2de2bc7f10f))
+
+
+### BREAKING CHANGES
+
+* **@salesforce/dev-scripts:** Renamed all bin files. Renamed the config file from sfdx-dev-config.json to
+sfdevrc.json. Uses eslint instead of tslint.
+
+
+
+
+
 # [0.5.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.4.2...@salesforce/dev-scripts@0.5.0) (2020-07-02)
 
 
