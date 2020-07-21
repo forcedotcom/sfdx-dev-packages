@@ -17,7 +17,7 @@ import {
   isNumber,
   isObject,
   isPlainObject,
-  isString
+  isString,
 } from './is';
 
 /**

@@ -4,7 +4,7 @@
 
 A collection of commonly needed scripts and hooks used by Salesforce typescript projects. This helps to enforce consistency across and reduces the amount of time it takes to setup new projects. This also reduces the amount of needed configuration required for each project by using common configuration from [@salesforce/dev-config](https://www.npmjs.com/package/@salesforce/dev-config) by default.
 
-When dev-packages is added as a dev dependency, it will automatically run on post-install to enforce the package.json has the right scripts, hooks, and dependencies. Use the `.sfdx-dev.json` to configure what is generated and controlled.
+When dev-packages is added as a dev dependency, it will automatically run on post-install to enforce the package.json has the right scripts, hooks, and dependencies. Use the `.sfdevrc.json` to configure what is generated and controlled.
 
 The common scripts that are added to each project include:
 
@@ -29,4 +29,10 @@ The common hooks that are added to each project include:
 
 ## Configuration
 
-To configure what this generates and controls, create a `.sfdx-dev.json`. Look at the [schema](https://github.com/forcedotcom/sfdx-dev-packages/blob/master/packages/dev-scripts/sfdx-dev.schema.json) to see what options are available.
+To configure what this generates and controls, create a `.sfdevrc` file. Look at the [schema](./sfdevrc.schema.json) to see what options are available.
+
+## Config File Notes
+
+### tsconfig
+
+The `include` section has to live in the repository's tsconfig file until there is a way to specify a base. We plan to remove this section when https://github.com/Microsoft/TypeScript/issues/25430 is fixed

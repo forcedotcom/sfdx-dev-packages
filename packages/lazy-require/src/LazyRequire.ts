@@ -1,18 +1,25 @@
+/*
+ * Copyright (c) 2020, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
 import fs = require('fs');
 
 import LazyLoader from './LazyLoader';
 import TypeCache from './TypeCache';
 
 export default class LazyRequire {
-  public static create(typeCacheFile: string): LazyRequire {
-    const typeCache = new TypeCache(fs, typeCacheFile);
-    return new LazyRequire(typeCache);
-  }
-
   private lazyLoader: LazyLoader;
 
   public constructor(private typeCache: TypeCache, exclusions?: string[]) {
     this.lazyLoader = new LazyLoader(this.typeCache, exclusions);
+  }
+
+  public static create(typeCacheFile: string): LazyRequire {
+    const typeCache = new TypeCache(fs, typeCacheFile);
+    return new LazyRequire(typeCache);
   }
 
   /**

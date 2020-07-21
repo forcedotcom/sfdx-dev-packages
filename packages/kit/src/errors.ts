@@ -18,9 +18,9 @@ export class NamedError extends Error {
   public readonly name: string;
   public readonly cause?: NamedErrorLike;
 
-  constructor(name: string, cause?: NamedErrorLike);
-  constructor(name: string, message?: string, cause?: NamedErrorLike);
-  constructor(name: string, messageOrCause?: string | NamedErrorLike, cause?: NamedErrorLike) {
+  public constructor(name: string, cause?: NamedErrorLike);
+  public constructor(name: string, message?: string, cause?: NamedErrorLike);
+  public constructor(name: string, messageOrCause?: string | NamedErrorLike, cause?: NamedErrorLike) {
     if (typeof messageOrCause === 'string') {
       super(messageOrCause);
       this.cause = cause;
@@ -33,14 +33,24 @@ export class NamedError extends Error {
 
   public get fullStack(): string | undefined {
     let stack = this.stack;
-    if (this.cause && (this.cause.fullStack || this.cause.stack)) {
-      stack = `${stack ? stack + '\n' : ''}Caused by: ${this.cause.fullStack || this.cause.stack}`;
+    const causedStack = this.cause?.fullStack || this.cause?.stack;
+    if (causedStack) {
+      stack = `${stack ? stack + '\n' : ''}Caused by: ${causedStack}`;
     }
     return stack;
   }
 }
 
 export class JsonParseError extends NamedError {
+  public constructor(
+    cause: Error,
+    public readonly path?: string,
+    public readonly line?: number,
+    public readonly errorPortion?: string
+  ) {
+    super('JsonParseError', JsonParseError.format(cause, path, line, errorPortion), cause);
+  }
+
   /**
    * Creates a `JsonParseError` from a `SyntaxError` thrown during JSON parsing.
    *
@@ -51,7 +61,7 @@ export class JsonParseError extends NamedError {
   public static create(error: SyntaxError, data: string, jsonPath?: string): JsonParseError {
     // Get the position of the error from the error message. This is the error index
     // within the file contents as 1 long string.
-    const positionMatch = error.message.match(/position (\d+)/);
+    const positionMatch = /position (\d+)/.exec(error.message);
     if (!positionMatch) {
       return new JsonParseError(error, jsonPath);
     }
@@ -70,35 +80,26 @@ export class JsonParseError extends NamedError {
     return new JsonParseError(error, jsonPath, lineNumber, errorPortion);
   }
 
-  private static format(cause: Error, path?: string, line?: number, errorPortion?: string) {
+  private static format(cause: Error, path?: string, line?: number, errorPortion?: string): string {
     if (line == null) return cause.message || 'Unknown cause';
-    return `Parse error in file ${path} on line ${line}\n${errorPortion}`;
-  }
-
-  constructor(
-    cause: Error,
-    public readonly path?: string,
-    public readonly line?: number,
-    public readonly errorPortion?: string
-  ) {
-    super('JsonParseError', JsonParseError.format(cause, path, line, errorPortion), cause);
+    return `Parse error in file ${path || 'unknown'} on line ${line}\n${errorPortion || cause.message}`;
   }
 }
 
 export class JsonStringifyError extends NamedError {
-  constructor(cause: Error) {
+  public constructor(cause: Error) {
     super('JsonStringifyError', cause);
   }
 }
 
 export class JsonDataFormatError extends NamedError {
-  constructor(message: string) {
+  public constructor(message: string) {
     super('JsonDataFormatError', message);
   }
 }
 
 export class InvalidDefaultEnvValueError extends NamedError {
-  constructor(message: string) {
+  public constructor(message: string) {
     super('InvalidDefaultEnvValueError', message);
   }
 }

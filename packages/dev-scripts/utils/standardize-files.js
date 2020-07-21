@@ -1,118 +1,151 @@
 /*
- * Copyright (c) 2018, salesforce.com, inc.
+ * Copyright (c) 2020, salesforce.com, inc.
  * All rights reserved.
- * SPDX-License-Identifier: BSD-3-Clause
- * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
 const { join } = require('path');
-const { writeFileSync } = require('fs');
+const { readFileSync, unlinkSync, copyFileSync, statSync } = require('fs');
 const log = require('./log');
 const exists = require('./exists');
-const SfdxDevConfig = require('./sfdx-dev-config');
+const { resolveConfig } = require('./sf-config');
 const PackageJson = require('./package-json');
 const { isMultiPackageProject } = require('./project-type');
 
-const addFile = (filePath, strict, config) => {
-  const fileExists = exists(filePath);
+const FILES_PATH = join(__dirname, '..', 'files');
 
-  // If it is strict, the user shouldn't be overriding anything,
-  // so write the file again.
-  if (strict || (!strict && !fileExists)) {
-    let contents = JSON.stringify(config, null, 2) + '\n';
-    if (strict) {
-      contents = `// Generated - Do not modify. Controlled by @salesforce/dev-scripts\n${contents}`;
+const FILE_NAME_LICENSE = 'LICENSE.txt';
+const FILE_NAME_GITIGNORE = 'gitignore';
+
+function isDifferent(sourcePath, targetPath) {
+  try {
+    if (statSync(sourcePath).size !== statSync(targetPath).size) {
+      return true;
     }
-    writeFileSync(filePath, contents);
-    return filePath;
+    return readFileSync(sourcePath, 'utf8') !== readFileSync(targetPath, 'utf8');
+  } catch (error) {
+    /* do nothing */
   }
-};
+  return true;
+}
 
+function copyFile(sourcePath, targetPath, override = false) {
+  const fileExists = exists(targetPath);
+  const shouldWriteFile = override || !fileExists;
+
+  if (shouldWriteFile && isDifferent(sourcePath, targetPath)) {
+    copyFileSync(sourcePath, targetPath);
+    return targetPath;
+  }
+}
+
+function writeLicenseFile(targetDir) {
+  const licenseSourcePath = join(FILES_PATH, FILE_NAME_LICENSE);
+  const licenseTargetPath = join(targetDir, FILE_NAME_LICENSE);
+  // Always keep license file up-to-date
+  return copyFile(licenseSourcePath, licenseTargetPath, true);
+}
+
+function writeGitignore(targetDir) {
+  const gitignoreSourcePath = join(FILES_PATH, FILE_NAME_GITIGNORE);
+  const gitignoreTargetPath = join(targetDir, `.${FILE_NAME_GITIGNORE}`);
+  // Try to copy the default.
+  const copied = copyFile(gitignoreSourcePath, gitignoreTargetPath);
+
+  if (!copied) {
+    if (!readFileSync(gitignoreTargetPath, 'utf-8').includes('# -- CLEAN')) {
+      log(`The .gitignore doesn't contain any clean entries. See ${gitignoreTargetPath} for examples.`);
+    }
+  }
+  return copied;
+}
+
+// eslint-disable-next-line complexity
 module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
-  const config = new SfdxDevConfig(packageRoot);
+  const config = resolveConfig(packageRoot, inLernaProject);
+  const testPath = join(packageRoot, 'test');
+  const scripts = config.scripts;
+
+  let added = [];
+  let removed = [];
+
+  // No need to write these file in lerna package directories.
+  if (isMultiPackageProject(packageRoot) || !inLernaProject) {
+    added.push(writeLicenseFile(packageRoot));
+    added.push(writeGitignore(packageRoot));
+  }
+
+  // We want prettier in the root since that is when the commit format hook runs
+  if (isMultiPackageProject(packageRoot) || scripts.format) {
+    const prettierSourcePath = join(FILES_PATH, 'prettierrc.json');
+    const prettierTargetPath = join(packageRoot, '.prettierrc.json');
+    // prettier config files can't have the header, so it doesn't use a strict mode, meaning, it won't be overridden
+    added.push(copyFile(prettierSourcePath, prettierTargetPath, false));
+  }
 
   if (isMultiPackageProject(packageRoot)) {
-    log('skipping writing files for learn project', 1);
     return;
   }
 
-  log(`standardizing config files for ${new PackageJson(packageRoot).name}`, 1);
+  // nyc file
+  if (scripts.test) {
+    const nycSourcePath = join(FILES_PATH, 'nycrc');
+    const nycTargetPath = join(packageRoot, '.nycrc');
+    // Allow repos to override their coverage so don't override file
+    added.push(copyFile(nycSourcePath, nycTargetPath, false));
+  }
 
-  const added = [];
-  const removed = [];
-  const scriptList = config.list('scripts');
+  // eslint files
+  if (scripts.lint) {
+    const lintConfig = config.lint || {};
+    const strict = config.strict || lintConfig.strict;
 
-  if (scriptList.length > 0) {
-    const nycPath = join(packageRoot, '.nycrc');
-    // nyc file
-    if (scriptList.includes('test') && !exists(nycPath)) {
-      const nyc = {
-        nyc: {
-          extends: '@salesforce/dev-config/nyc'
-        }
-      };
-      const nycJson = JSON.stringify(nyc, null, 2) + '\n';
-      writeFileSync(nycPath, nycJson);
-      added.push(nycPath);
+    const eslintSourcePath = join(FILES_PATH, strict ? 'eslintrc-strict.js' : 'eslintrc.js');
+    const eslintTargetPath = join(packageRoot, '.eslintrc.js');
+    added.push(copyFile(eslintSourcePath, eslintTargetPath, strict));
+
+    if (exists(testPath)) {
+      const eslintTestSourcePath = join(FILES_PATH, strict ? 'eslintrc-test-strict.js' : 'eslintrc-test.js');
+      const eslintTestTargetPath = join(testPath, '.eslintrc.js');
+      added.push(copyFile(eslintTestSourcePath, eslintTestTargetPath, strict));
     }
 
-    // tslint files
-    if (scriptList.includes('lint')) {
-      const lintConfig = config.get('lint') || {};
-      const strict = config.get('strict') || lintConfig.strict;
-
-      const postfix = strict ? '-strict' : '';
-      const addLintFile = (baseDir, baseFile) => {
-        const tslintPath = join(baseDir, 'tslint.json');
-        const tslint = {
-          extends: `@salesforce/dev-config/${baseFile}${postfix}`
-        };
-        const file = addFile(tslintPath, strict, tslint);
-        if (file) {
-          added.push(tslintPath);
-        }
-      };
-      addLintFile(packageRoot, 'tslint');
-      if (exists(join(packageRoot, 'test'))) {
-        addLintFile(join(packageRoot, 'test'), 'tslint-test');
-      }
+    // We don't use tslint anymore.
+    const tslintPath = join(packageRoot, 'tslint.json');
+    if (exists(tslintPath)) {
+      unlinkSync(tslintPath);
+      removed.push(tslintPath);
     }
 
-    // tsconfig files
-    if (scriptList.includes('compile')) {
-      const compileConfig = config.get('compile') || {};
-      const strict = config.get('strict') || compileConfig.strict;
-
-      const prefix = inLernaProject ? '../../' : './';
-      const postfix = strict ? '-strict' : '';
-
-      const addConfigFile = (baseDir, config) => {
-        const tsconfigPath = join(baseDir, 'tsconfig.json');
-        const file = addFile(tsconfigPath, strict, config);
-        if (file) {
-          added.push(tsconfigPath);
-        }
-      };
-      // FIXME: Temporary fix until github.com/Microsoft/TypeScript/issues/18865 is fixed.
-      // TODO: Change to @salesforce/devconfig/tsconfig-strict when above is resolved.
-      addConfigFile(packageRoot, {
-        extends: `${prefix}node_modules/@salesforce/dev-config/tsconfig${postfix}`,
-        // This has to live in this file until there is a way to specify a base
-        // TODO Update when https://github.com/Microsoft/TypeScript/issues/25430 is fixed
-        compilerOptions: {
-          outDir: 'lib'
-        },
-        include: ['./src/**/*.ts']
-      });
-      if (exists(join(packageRoot, 'test'))) {
-        addConfigFile(join(packageRoot, 'test'), {
-          extends: `${prefix}../node_modules/@salesforce/dev-config/tsconfig-test${postfix}`,
-          // This has to live in this file until there is a way to specify a base
-          // TODO Update when https://github.com/Microsoft/TypeScript/issues/25430 is fixed
-          include: ['./**/*.ts']
-        });
-      }
+    const tslintTestPath = join(testPath, 'tslint.json');
+    if (exists(tslintTestPath)) {
+      unlinkSync(tslintTestPath);
+      removed.push(tslintTestPath);
     }
+  }
+
+  // tsconfig files
+  if (scripts.compile) {
+    const compileConfig = config.compile || {};
+    const strict = config.strict || compileConfig.strict;
+
+    const tsconfigSourcePath = join(FILES_PATH, strict ? 'tsconfig-strict.json' : 'tsconfig.json');
+    const tsconfigTargetPath = join(packageRoot, 'tsconfig.json');
+    added.push(copyFile(tsconfigSourcePath, tsconfigTargetPath, strict));
+
+    if (exists(testPath)) {
+      const tsconfigTestSourcePath = join(FILES_PATH, strict ? 'tsconfig-test-strict.json' : 'tsconfig-test.json');
+      const tsconfigTestTargetPath = join(testPath, 'tsconfig.json');
+      added.push(copyFile(tsconfigTestSourcePath, tsconfigTestTargetPath, strict));
+    }
+  }
+
+  added = added.filter((a) => !!a);
+  removed = removed.filter((a) => !!a);
+
+  if (added.length > 0 || removed.length > 0) {
+    log(`standardizing config files for ${new PackageJson(packageRoot).name}`);
   }
   if (added.length > 0) {
     log(`adding config files ${added.join(', ')}`, 2);

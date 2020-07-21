@@ -1,27 +1,30 @@
 {
   "name": "@salesforce/dev-scripts",
   "version": "0.5.0",
-  "description": "A set of standard package.json scripts for Salesforce projects.",
+  "description": "Standardize package.json scripts and config files for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "bin": {
-    "sfdx-build": "bin/sfdx-build.js",
-    "sfdx-ci-docs": "bin/sfdx-ci-docs.js",
-    "sfdx-clean": "bin/sfdx-clean.js",
-    "sfdx-compile": "bin/sfdx-compile.js",
-    "sfdx-docs": "bin/sfdx-docs.js",
-    "sfdx-format": "bin/sfdx-format.js",
-    "sfdx-husky-commit-msg": "bin/sfdx-husky-commit-msg.js",
-    "sfdx-husky-pre-commit": "bin/sfdx-husky-pre-commit.js",
-    "sfdx-husky-pre-push": "bin/sfdx-husky-pre-push.js",
-    "sfdx-install": "bin/sfdx-install.js",
-    "sfdx-lerna-install": "bin/sfdx-lerna-install.js",
-    "sfdx-lint": "bin/sfdx-lint.js",
-    "sfdx-test": "bin/sfdx-test.js"
+    "sf-build": "bin/sf-build.js",
+    "sf-ci-docs": "bin/sf-ci-docs.js",
+    "sf-clean": "bin/sf-clean.js",
+    "sf-compile": "bin/sf-compile.js",
+    "sf-compile-test": "bin/sf-compile-test.js",
+    "sf-docs": "bin/sf-docs.js",
+    "sf-format": "bin/sf-format.js",
+    "sf-husky-commit-msg": "bin/sf-husky-commit-msg.js",
+    "sf-husky-pre-commit": "bin/sf-husky-pre-commit.js",
+    "sf-husky-pre-push": "bin/sf-husky-pre-push.js",
+    "sf-install": "bin/sf-install.js",
+    "sf-lerna-install": "bin/sf-lerna-install.js",
+    "sf-lint": "bin/sf-lint.js",
+    "sf-test": "bin/sf-test.js"
   },
   "scripts": {
-    "clean": "bin/sfdx-clean.js",
-    "clean-all": "bin/sfdx-clean.js all",
-    "test": "bin/sfdx-test.js"
+    "format": "prettier --write \"**/*.+(js|json)\"",
+    "lint": "eslint \"**/*.js\"",
+    "clean": "bin/sf-clean.js",
+    "clean-all": "bin/sf-clean.js all",
+    "test": "nyc mocha test/**/*.test.js"
   },
   "keywords": [
     "sfdx"
@@ -30,32 +33,49 @@
   "license": "BSD-3-Clause",
   "files": [
     "bin",
-    "utils"
+    "utils",
+    "files",
+    "sfdevrc.schema.json"
   ],
   "dependencies": {
-    "@commitlint/cli": "^8.1.0",
-    "@commitlint/config-conventional": "^7.6.0",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
+    "chalk": "^4.0.0",
+    "cosmiconfig": "^6.0.0",
+    "shelljs": "~0.8.4",
+    "source-map-support": "~0.5.19",
+    "typedoc": "~0.17.7",
+    "typedoc-plugin-external-module-name": "~4.0.0",
+    "xunit-file": "^1.0.0",
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "typescript": "^3.9.3",
+    "sinon": "^9.0.2",
+    "mocha": "^7.2.0",
+    "nyc": "^15.1.0",
     "@salesforce/dev-config": "^1.6.0",
-    "@types/chai": "^4.1.7",
-    "@types/mocha": "^5.2.7",
-    "@types/node": "^10.14.12",
-    "@types/sinon": "^4.3.3",
+    "@types/chai": "^4.2.11",
+    "@types/mocha": "^7.0.2",
+    "@types/node": "^12.12.6",
+    "@types/sinon": "^9.0.4",
     "chai": "^4.2.0",
-    "chalk": "2.4.2",
-    "mocha": "^5.2.0",
-    "nyc": "^13.3.0",
-    "prettier": "^1.19.1",
-    "pretty-quick": "^1.11.1",
-    "shelljs": "~0.8.3",
-    "sinon": "^5.1.1",
-    "source-map-support": "~0.5.12",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.20.1",
-    "typedoc": "~0.15.0",
-    "typedoc-plugin-external-module-name": "~1.1.3",
-    "xunit-file": "^1.0.0"
+    "ts-node": "^8.10.2"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@salesforce/prettier-config": "^0.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-salesforce": "^0.0.0",
+    "eslint-config-salesforce-license": "^0.0.0",
+    "eslint-config-salesforce-typescript": "^0.0.0",
+    "eslint-plugin-header": "^3.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsdoc": "^27.0.3",
+    "eslint-plugin-prefer-arrow": "^1.2.1",
+    "eslint-plugin-prettier": "^3.1.3"
   }
 }

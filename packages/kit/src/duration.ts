@@ -36,6 +36,14 @@ export class Duration {
    */
   public static readonly DAYS_IN_WEEK: number = 7;
 
+  public readonly quantity: number;
+  public readonly unit: Duration.Unit;
+
+  public constructor(quantity: number, unit: Duration.Unit = Duration.Unit.MINUTES) {
+    this.quantity = quantity;
+    this.unit = unit;
+  }
+
   /**
    * Returns a new `Duration` instance created from the specified number of milliseconds.
    *
@@ -90,18 +98,10 @@ export class Duration {
     return new Duration(quantity, Duration.Unit.WEEKS);
   }
 
-  public readonly quantity: number;
-  public readonly unit: Duration.Unit;
-
-  constructor(quantity: number, unit: Duration.Unit = Duration.Unit.MINUTES) {
-    this.quantity = quantity;
-    this.unit = unit;
-  }
-
   /**
    * Returns the current number of milliseconds represented by this `Duration` instance.
    */
-  get milliseconds(): number {
+  public get milliseconds(): number {
     switch (this.unit) {
       case Duration.Unit.MILLISECONDS:
         return this.quantity;
@@ -132,9 +132,10 @@ export class Duration {
   }
 
   /**
-   * Returns the current number of seconds represented by this `Duration` instance, rounded to the nearest integer value.
+   * Returns the current number of seconds represented by this `Duration` instance, rounded to the nearest integer
+   * value.
    */
-  get seconds(): number {
+  public get seconds(): number {
     switch (this.unit) {
       case Duration.Unit.MILLISECONDS:
         return Math.round(this.quantity / Duration.MILLIS_IN_SECONDS);
@@ -158,9 +159,10 @@ export class Duration {
   }
 
   /**
-   * Returns the current number of minutes represented by this `Duration` instance, rounded to the nearest integer value.
+   * Returns the current number of minutes represented by this `Duration` instance, rounded to the nearest integer
+   * value.
    */
-  get minutes(): number {
+  public get minutes(): number {
     switch (this.unit) {
       case Duration.Unit.MILLISECONDS:
         return Math.round(this.quantity / Duration.MILLIS_IN_SECONDS / Duration.SECONDS_IN_MINUTE);
@@ -180,7 +182,7 @@ export class Duration {
   /**
    * Returns the current number of hours represented by this `Duration` instance.
    */
-  get hours(): number {
+  public get hours(): number {
     switch (this.unit) {
       case Duration.Unit.MILLISECONDS:
         return Math.round(
@@ -202,7 +204,7 @@ export class Duration {
   /**
    * Returns the current number of days represented by this `Duration` instance.
    */
-  get days(): number {
+  public get days(): number {
     switch (this.unit) {
       case Duration.Unit.MILLISECONDS:
         return Math.round(
@@ -230,7 +232,7 @@ export class Duration {
   /**
    * Returns the current number of weeks represented by this `Duration` instance.
    */
-  get weeks(): number {
+  public get weeks(): number {
     switch (this.unit) {
       case Duration.Unit.MILLISECONDS:
         return Math.round(
@@ -263,7 +265,7 @@ export class Duration {
   /**
    * The string representation of this `Duration`. e.g. "645 seconds"
    */
-  public toString() {
+  public toString(): string {
     return this.pluralize();
   }
 
@@ -284,7 +286,7 @@ export namespace Duration {
     SECONDS,
     HOURS,
     DAYS,
-    WEEKS
+    WEEKS,
   }
 }
 
@@ -343,13 +345,13 @@ export function sleep(
   const duration = durationOrQuantity instanceof Duration ? durationOrQuantity : new Duration(durationOrQuantity, unit);
   let handle: Optional<NodeJS.Timer>;
   let doResolve: () => void;
-  const wake = () => {
+  const wake = (): undefined => {
     if (!handle) return;
     clearTimeout(handle);
     handle = undefined;
     doResolve();
   };
-  const promise = new Promise<void>(resolve => {
+  const promise = new Promise<void>((resolve) => {
     doResolve = resolve;
     handle = setTimeout(wake, duration.milliseconds);
   });

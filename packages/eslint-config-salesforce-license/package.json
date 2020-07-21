@@ -1,0 +1,30 @@
+{
+  "name": "eslint-config-salesforce-license",
+  "version": "0.0.0",
+  "description": "The eslint config to for Salesforce license",
+  "keywords": [
+    "Salesforce",
+    "eslint"
+  ],
+  "author": "Thomas <t.dvornik@salesforce.com>",
+  "homepage": "https://github.com/forcedotcom/sfdx-dev-packages#readme",
+  "license": "BSD-3-Clause",
+  "main": ".eslintrc.js",
+  "files": [
+    ".eslintrc.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forcedotcom/sfdx-dev-packages.git"
+  },
+  "bugs": {
+    "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "eslint-plugin-header": "^3.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

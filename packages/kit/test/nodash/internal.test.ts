@@ -10,63 +10,63 @@ import * as _ from '../../src/nodash';
 
 describe('nodash internal', () => {
   describe('isEmpty', () => {
-    it('should return true given undefined', async () => {
+    it('should return true given undefined', () => {
       expect(_.isEmpty(undefined)).to.be.true;
     });
 
-    it('should return true given null', async () => {
+    it('should return true given null', () => {
       expect(_.isEmpty(null)).to.be.true;
     });
 
-    it('should return false given a number', async () => {
+    it('should return false given a number', () => {
       expect(_.isEmpty(0)).to.be.false;
     });
 
-    it('should return false given a boolean', async () => {
+    it('should return false given a boolean', () => {
       expect(_.isEmpty(false)).to.be.false;
     });
 
-    it('should return true given an empty array', async () => {
+    it('should return true given an empty array', () => {
       expect(_.isEmpty([])).to.be.true;
     });
 
-    it('should return false given an non-empty array', async () => {
+    it('should return false given an non-empty array', () => {
       expect(_.isEmpty([0])).to.be.false;
     });
 
-    it('should return true given an empty object', async () => {
+    it('should return true given an empty object', () => {
       expect(_.isEmpty({})).to.be.true;
     });
 
-    it('should return false given an non-empty object', async () => {
+    it('should return false given an non-empty object', () => {
       expect(_.isEmpty({ a: 0 })).to.be.false;
     });
 
-    it('should return true given an empty Map', async () => {
+    it('should return true given an empty Map', () => {
       expect(_.isEmpty(new Map())).to.be.true;
     });
 
-    it('should return false given an non-empty Map', async () => {
+    it('should return false given an non-empty Map', () => {
       expect(_.isEmpty(new Map([['a', 1]]))).to.be.false;
     });
   });
 
   describe('lowerFirst', () => {
-    it('should return undefined if passed undefined', async () => {
+    it('should return undefined if passed undefined', () => {
       expect(_.lowerFirst()).to.be.undefined;
     });
 
-    it('should return the empty string if passed the empty string', async () => {
+    it('should return the empty string if passed the empty string', () => {
       expect(_.lowerFirst('')).to.equal('');
     });
 
-    it('should return a string with a lower first letter if passed a string with length 1 or more', async () => {
+    it('should return a string with a lower first letter if passed a string with length 1 or more', () => {
       expect(_.lowerFirst('ABC')).to.equal('aBC');
     });
   });
 
   describe('snakeCase', () => {
-    it('should snake case a variety of strings', async () => {
+    it('should snake case a variety of strings', () => {
       let result = _.snakeCase('Foo Bar');
       expect(result).to.equal('foo_bar');
 
@@ -79,15 +79,15 @@ describe('nodash internal', () => {
   });
 
   describe('upperFirst', () => {
-    it('should return undefined if passed undefined', async () => {
+    it('should return undefined if passed undefined', () => {
       expect(_.upperFirst()).to.be.undefined;
     });
 
-    it('should return the empty string if passed the empty string', async () => {
+    it('should return the empty string if passed the empty string', () => {
       expect(_.upperFirst('')).to.equal('');
     });
 
-    it('should return a string with an upper first letter if passed a string with length 1 or more', async () => {
+    it('should return a string with an upper first letter if passed a string with length 1 or more', () => {
       expect(_.upperFirst('abc')).to.equal('Abc');
     });
   });

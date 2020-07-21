@@ -5,8 +5,9 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { definiteEntriesOf, Dictionary, isKeyOf, KeyValue, Nullable, Optional } from '@salesforce/ts-types';
+import { definiteEntriesOf, Dictionary, isKeyOf, KeyValue, Nullable, Optional, isNumber } from '@salesforce/ts-types';
 import { InvalidDefaultEnvValueError } from './errors';
+import { toNumber } from './nodash';
 
 /**
  * An injectable abstraction on top of `process.env` with various convenience functions
@@ -56,7 +57,8 @@ export class Env {
   public getStringIn(key: string, values: string[], def?: string): Optional<string> {
     const re = new RegExp(values.join('|'), 'i');
     if (def && !re.test(def.toString())) {
-      throw new InvalidDefaultEnvValueError(`${def} is not a member of ${values}`);
+      const valueAsString = values.join(', ');
+      throw new InvalidDefaultEnvValueError(`${def} is not a member of ${valueAsString}`);
     }
     const value = this.getString(key);
     if (!value) return def;
@@ -71,7 +73,7 @@ export class Env {
    * @param key The name of the envar.
    * @param obj The object providing the keys to test with.
    * @param transform A transform function applied to both the default and value before testing that
-   *  either is a key of `T`.
+   * either is a key of `T`.
    *
    * ```
    * enum Mode { TEST = 'test', DEMO = 'demo' }
@@ -87,7 +89,7 @@ export class Env {
    * // typeof enumValue -> Mode
    * ```
    */
-  public getKeyOf<T extends object>(
+  public getKeyOf<T extends Record<string, unknown>>(
     key: string,
     obj: T,
     transform?: (k: string) => string
@@ -102,7 +104,7 @@ export class Env {
    * @param obj The object providing the keys to test with.
    * @param def A default value.
    * @param transform A transform function applied to both the default and value before testing that
-   *  either is a key of `T`.
+   * either is a key of `T`.
    * @param {@link InvalidDefaultEnvValueError} If the provided default value is not a member of the expected set.
    *
    * ```
@@ -119,14 +121,14 @@ export class Env {
    * // typeof enumValue -> Mode
    * ```
    */
-  public getKeyOf<T extends object>(
+  public getKeyOf<T extends Record<string, unknown>>(
     key: string,
     obj: T,
     def: string,
     transform?: (k: string) => string
   ): Extract<keyof T, string>;
   // underlying method
-  public getKeyOf<T extends object>(
+  public getKeyOf<T extends Record<string, unknown>>(
     key: string,
     obj: T,
     defOrTransform?: string | ((k: string) => string),
@@ -221,6 +223,35 @@ export class Env {
       return;
     }
     this.setString(key, value.toString());
+  }
+
+  /**
+   * Gets a `number` value for a given key. Returns the default value if no value was found.
+   *
+   * @param key The name of the envar.
+   * @param def A default number, which itself defaults to `undefined` if not otherwise supplied.
+   */
+  public getNumber(key: string, def?: number): Optional<number> {
+    const value = this.getString(key);
+    if (value) {
+      const num = toNumber(value);
+      return isNaN(num) && isNumber(def) ? def : num;
+    }
+    return isNumber(def) ? def : undefined;
+  }
+
+  /**
+   * Sets a `number` value for a given key, or removes the current value when no value is given.
+   *
+   * @param key The name of the envar.
+   * @param value The value to set.
+   */
+  public setNumber(key: string, value: Nullable<number>): void {
+    if (value == null) {
+      this.unset(key);
+      return;
+    }
+    this.setString(key, isNumber(value) ? String(value) : value);
   }
 
   /**

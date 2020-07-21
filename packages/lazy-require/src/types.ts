@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2020, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
 import fs = require('fs');
 
 export type FileSystem = Pick<typeof fs, 'readFileSync' | 'writeFileSync' | 'unlinkSync'>;
@@ -5,15 +12,16 @@ export type FileSystem = Pick<typeof fs, 'readFileSync' | 'writeFileSync' | 'unl
 export type ResolveFilenameFunction = (request: string, parent: ProxiableModule, isMain: boolean) => string;
 
 export type KeyedObject = {
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-  // tslint:disable-next-line:no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: number]: any;
   // TODO: un-comment this once tsc supports symbol-keyed index signatures
   // [key: symbol]: any;
 };
 export type ObjectModule = object;
-export type FunctionModule = (...args: any[]) => any; // tslint:disable-line:no-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type FunctionModule = (...args: any[]) => any;
 export type ProxiableModule = (ObjectModule | FunctionModule) & KeyedObject;
 
 export type LoadModuleFunction = (request: string, parent: ProxiableModule, isMain: boolean) => ProxiableModule;

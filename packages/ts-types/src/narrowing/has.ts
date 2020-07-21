@@ -16,7 +16,7 @@ import {
   isNumber,
   isObject,
   isPlainObject,
-  isString
+  isString,
 } from './is';
 
 /**
@@ -41,7 +41,7 @@ import {
  * @param keys One or more `string` keys to check for existence.
  */
 export function has<T extends unknown, K extends string>(value: T, keys: Many<K>): value is T & object & View<K> {
-  return isObject(value) && (isArray(keys) ? keys.every(k => k in value) : keys in value);
+  return isObject(value) && (isArray(keys) ? keys.every((k) => k in value) : keys in value);
 }
 
 /**
