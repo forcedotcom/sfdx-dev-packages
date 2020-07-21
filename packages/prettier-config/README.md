@@ -1,4 +1,4 @@
-# `eslint-config-salesforce-typescript`
+# `@salesforce/prettier-config`
 
 Salesforce prettier configuration for all projects.
 
@@ -7,23 +7,15 @@ Salesforce prettier configuration for all projects.
 First install this package.
 
 ```bash
-yarn add eslint-config-salesforce
+yarn add @salesforce/prettier-config
 ```
 
-Then extend this configuration in your own eslint file.
+Then extend this configuration in your own prettier file.
 
-Here is an example using a `.eslintrc.js` file.
+Here is an example using a `.prettierrs.json` file.
 
 ```javascript
-module.exports = {
-  extends: ['eslint-config-salesforce'],
-};
+'@salesforce/prettier-config';
 ```
 
-Because eslint requires all eslint packages locally, you must also install the following packages.
-
-```bash
-yarn add eslint eslint-plugin-import eslint-plugin-prettier eslint-plugin-jsdoc
-```
-
-For Salesforce owned repositories, also extend [eslint-config-salesforce-license](../eslint-config-salesforce-license);
+**Note:** You can use [@salesforce/dev-scripts](https://www.npmjs.com/package/@salesforce/dev-scripts) to set this up along with all other configuration files related to a Salesforce typescript project.
