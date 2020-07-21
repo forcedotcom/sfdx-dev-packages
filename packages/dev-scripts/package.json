@@ -38,8 +38,8 @@
     "sfdevrc.schema.json"
   ],
   "dependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
     "chalk": "^4.0.0",
     "cosmiconfig": "^6.0.0",
     "shelljs": "~0.8.4",
