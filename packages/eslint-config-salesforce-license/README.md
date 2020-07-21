@@ -26,4 +26,4 @@ Because eslint requires all eslint packages locally, you must also install the f
 yarn add eslint eslint-plugin-header
 ```
 
-**Note:** You can use [@salesforce/dev-scripts](https://www.npmjs.com/package/@salesforce/dev-scripts) to set this up along with all other configuration files related to a Salesforce typescript project.
+**Note:** You can use [@salesforce/dev-scripts](../dev-scripts) to set this up along with all other configuration files related to a Salesforce typescript project.

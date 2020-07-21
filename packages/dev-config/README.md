@@ -7,6 +7,10 @@ A collection of commonly needed configuration files and dependencies for:
 - tsconfig
 - nyc
 - typedoc
-- prettier
 
-For eslint config, look at [eslint-config-salesforce-typescript](../eslint-config-salesforce-typescript);
+Some tools require their config files be in a separate package.
+
+- [eslint-config-salesforce](../eslint-config-salesforce)
+- [eslint-config-salesforce-typescript](../eslint-config-salesforce-typescript)
+- [eslint-config-salesforce-license](../eslint-config-salesforce-license)
+- [@salesforce/prettier-config](../prettier-config)
