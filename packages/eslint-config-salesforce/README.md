@@ -27,3 +27,5 @@ yarn add eslint eslint-plugin-import eslint-plugin-prettier eslint-plugin-jsdoc
 ```
 
 For Salesforce owned repositories, also extend [eslint-config-salesforce-license](../eslint-config-salesforce-license);
+
+**Note:** For typescript packages, use [eslint-config-salesforce-typescript](../eslint-config-salesforce-typescript).
