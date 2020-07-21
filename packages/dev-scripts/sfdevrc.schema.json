@@ -1,0 +1,124 @@
+{
+  "title": "JSON schema for .sfdevrc.json config for @salesforce/dev-scripts",
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "strict": {
+      "description": "Use eslint and tsconfig strict. Will overwrite files to prevent extending configs.",
+      "type": "boolean",
+      "default": false
+    },
+    "scripts": {
+      "description": "The scripts to add to the package.json",
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "properties": {
+        "clean": {
+          "description": "script used to clean a project",
+          "type": "string"
+        },
+        "clean-all": {
+          "description": "script used to clean a project including cached files like node_modules",
+          "type": "string"
+        },
+        "lint": {
+          "description": "script used to lint a project",
+          "type": "string"
+        },
+        "compile": {
+          "description": "script used to compile a project",
+          "type": "string"
+        },
+        "build": {
+          "description": "script used to clean and compile a project",
+          "type": "string"
+        },
+        "test": {
+          "description": "script used to test a project",
+          "type": "string"
+        },
+        "format": {
+          "description": "script used to format a project",
+          "type": "string"
+        },
+        "docs": {
+          "description": "script used to generate documentation a project",
+          "type": "string"
+        }
+      }
+    },
+    "only-scripts": {
+      "description": "choose which package.json scripts to include from the default list",
+      "type": "array"
+    },
+    "exclude-scripts": {
+      "description": "choose which package.json scripts to exclude from the default list",
+      "type": "array"
+    },
+    "husky": {
+      "description": "The list of husky hooks to generate.",
+      "additionalProperties": { "type": "string" },
+      "type": "object",
+      "properties": {
+        "commit-msg": {
+          "description": "script to validate git commit message",
+          "type": "string"
+        },
+        "pre-commit": {
+          "description": "script to run before git commit",
+          "type": "string"
+        },
+        "pre-push": {
+          "description": "script to run before git push",
+          "type": "string"
+        }
+      }
+    },
+    "only-husky": {
+      "description": "choose which husky scripts to include from the default list",
+      "type": "array"
+    },
+    "exclude-husky": {
+      "description": "choose which husky scripts to exclude from the default list",
+      "type": "array"
+    },
+    "lint": {
+      "description": "Options for the lint script.",
+      "type": "object",
+      "properties": {
+        "strict": {
+          "description": "Use the exact version of tslint-strict.json config in @salesforce/dev-confg. Will overwrite files to prevent extending configs.",
+          "type": "boolean"
+        }
+      }
+    },
+    "compile": {
+      "description": "Options for the compile script.",
+      "type": "object",
+      "properties": {
+        "strict": {
+          "description": "Use the exact version of tsconfig-strict.json config in @salesforce/dev-confg. Will overwrite files to prevent extending configs.",
+          "type": "boolean"
+        }
+      }
+    },
+    "test": {
+      "description": "Options for the test script.",
+      "type": "object",
+      "properties": {
+        "mochaOpts": {
+          "description": "Rely on mocha.opts for all configuration (will not send any additional options to mocha).",
+          "type": "boolean",
+          "default": false
+        },
+        "testsPath": {
+          "description": "The expression path for all tests",
+          "type": "string",
+          "default": "**/*.test.ts"
+        }
+      }
+    }
+  }
+}

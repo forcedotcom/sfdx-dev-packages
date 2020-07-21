@@ -59,7 +59,13 @@ describe('to type', () => {
     });
 
     it('should omit non-JSON values when passed an object with non-JSON values', () => {
-      const value = { a: 'b', c: 'd', e: () => {} };
+      const value = {
+        a: 'b',
+        c: 'd',
+        e: (): void => {
+          /* do nothing */
+        },
+      };
       expect(toJsonMap(value)).to.deep.equal({ a: 'b', c: 'd' });
     });
 
@@ -89,7 +95,14 @@ describe('to type', () => {
     });
 
     it('should omit non-JSON values when passed an array with non-JSON values', () => {
-      const value = ['a', null, 'b', () => {}];
+      const value = [
+        'a',
+        null,
+        'b',
+        (): void => {
+          /* do nothing */
+        },
+      ];
       expect(toJsonArray(value)).to.deep.equal(['a', null, 'b', null]);
     });
 

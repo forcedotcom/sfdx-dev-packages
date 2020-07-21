@@ -22,7 +22,7 @@ import {
   hasPlainObject,
   hasString,
   isFunction,
-  isString
+  isString,
 } from '../narrowing';
 import { AnyArray, AnyConstructor, AnyFunction, Dictionary, Many, Nullable, Optional, View } from '../types';
 
@@ -56,14 +56,13 @@ export function is<T extends object>(obj: Nullable<object>, shape: ObjectShape):
     definiteEntriesOf(shape)
       .map(([k, v]) => ({
         key: k,
-        ...(isVerifiable(v) ? { type: v, optional: false } : v)
+        ...(isVerifiable(v) ? { type: v, optional: false } : v),
       }))
-      .every(({ key, type, optional }) => {
-        return (
+      .every(
+        ({ key, type, optional }) =>
           (optional && !(key in obj)) ||
           (isString(type) ? typeof get(obj, key) === type : get(obj, key) instanceof type)
-        );
-      })
+      )
   );
 }
 

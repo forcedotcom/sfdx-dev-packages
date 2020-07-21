@@ -5,10 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-// tslint:disable:no-unused-expression
+/* eslint-disable no-underscore-dangle */
 
-import { expect } from 'chai';
 import * as fs from 'fs';
+import { expect } from 'chai';
 import * as sinon from 'sinon';
 import { start } from '../src';
 
@@ -21,11 +21,9 @@ describe('start', () => {
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     error = sandbox.stub(console, 'error');
-    load = sandbox.stub().callsFake(() => {
-      // simply read any file synchronously to make this mock take nontrivial time to execute
-      // in node v10 we could use Atomics.wait, but test still run on node v8
-      return fs.readFileSync(`${__dirname}/../package.json`);
-    });
+    // simply read any file synchronously to make this mock take nontrivial time to execute
+    // in node v10 we could use Atomics.wait, but test still run on node v8
+    load = sandbox.stub().callsFake(() => fs.readFileSync(`${__dirname}/../package.json`));
     mock = { _load: load };
   });
 

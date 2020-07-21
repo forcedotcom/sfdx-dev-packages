@@ -1,27 +1,30 @@
 {
-  "name": "root",
+  "name": "sfdx-dev-packages",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
-    "ci-docs": "yarn sfdx-ci-docs",
+    "ci-docs": "yarn sf-ci-docs",
     "ci-test": "nyc mocha 'packages/**/*.test.js'",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
     "compile": "lerna run compile",
     "docs": "lerna run docs",
     "format": "lerna run format",
-    "install": "yarn sfdx-lerna-install",
+    "install": "./packages/dev-scripts/bin/sf-lerna-install.js",
     "lint": "lerna run lint",
     "lint-fix": "lerna run lint -- --fix",
-    "postclean-all": "yarn sfdx-clean all",
+    "postclean-all": "yarn sf-clean all",
+    "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
     "test": "lerna run test"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^2.1.0",
-    "husky": "^1.3.1",
-    "lerna": "^3.15.0"
+    "cz-conventional-changelog": "^3.2.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
   },
   "config": {
     "commitizen": {
@@ -33,13 +36,14 @@
   ],
   "husky": {
     "hooks": {
-      "commit-msg": "yarn sfdx-husky-commit-msg",
-      "pre-commit": "yarn sfdx-husky-pre-commit",
-      "pre-push": "yarn sfdx-husky-pre-push"
+      "commit-msg": "sf-husky-commit-msg",
+      "pre-commit": "sf-husky-pre-commit",
+      "pre-push": "sf-husky-pre-push"
     }
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/forcedotcom/sfdx-dev-packages.git"
-  }
+  },
+  "license": "BSD-3-Clause"
 }

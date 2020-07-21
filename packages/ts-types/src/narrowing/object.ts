@@ -104,21 +104,10 @@ export function valuesOf<T extends object, K extends KeyOf<T>>(obj: Nullable<T>)
 }
 
 /**
- * Returns an array of all `string` keys in an object of type `T` whose values are neither `null` nor `undefined`.
- * This can be convenient for enumerating the keys of definitely assigned properties in an object or `Dictionary`.
- *
- * See also caveats outlined in {@link keysOf}.
- *
- * @param obj The object of interest.
- */
-export function definiteKeysOf<T extends object>(obj: Nullable<T>): Array<KeyOf<T>> {
-  return definiteEntriesOf(obj).map(entry => entry[0]);
-}
-
-/**
  * Returns an array of all entry tuples of type `[K, NonNullable<T[K]>]` in an object `T` whose values are neither
- * `null` nor `undefined`. This can be convenient for enumerating the entries of unknown objects with optional properties
- * (including `Dictionary`s) without worrying about performing checks against possibly `undefined` or `null` values.
+ * `null` nor `undefined`. This can be convenient for enumerating the entries of unknown objects with optional
+ * properties (including `Dictionary`s) without worrying about performing checks against possibly `undefined` or
+ * `null` values.
  *
  * See also caveats outlined in {@link entriesOf}.
  *
@@ -131,6 +120,18 @@ export function definiteEntriesOf<T extends object, K extends KeyOf<T>, V extend
 }
 
 /**
+ * Returns an array of all `string` keys in an object of type `T` whose values are neither `null` nor `undefined`.
+ * This can be convenient for enumerating the keys of definitely assigned properties in an object or `Dictionary`.
+ *
+ * See also caveats outlined in {@link keysOf}.
+ *
+ * @param obj The object of interest.
+ */
+export function definiteKeysOf<T extends object>(obj: Nullable<T>): Array<KeyOf<T>> {
+  return definiteEntriesOf(obj).map((entry) => entry[0]);
+}
+
+/**
  * Returns an array of all values of type `T` in an object `T` for values that are neither `null` nor `undefined`.
  * This can be convenient for enumerating the values of unknown objects with optional properties (including
  * `Dictionary`s) without worrying about performing checks against possibly `undefined` or `null` values.
@@ -138,5 +139,5 @@ export function definiteEntriesOf<T extends object, K extends KeyOf<T>, V extend
  * @param obj The object of interest.
  */
 export function definiteValuesOf<T extends object>(obj: Nullable<T>): Array<NonNullable<T[KeyOf<T>]>> {
-  return definiteEntriesOf(obj).map(entry => entry[1]);
+  return definiteEntriesOf(obj).map((entry) => entry[1]);
 }

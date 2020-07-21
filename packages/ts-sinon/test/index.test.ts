@@ -5,8 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { expect } from 'chai';
 import * as fs from 'fs';
+import { expect } from 'chai';
 import { createSandbox, SinonSandbox } from 'sinon';
 import { fromStub, spyMethod, stubCallable, stubInterface, stubMethod, stubObject } from '../src/index';
 
@@ -26,9 +26,7 @@ describe('stubs', () => {
 
     const stub = stubInterface<FileSystem>(sandbox, {
       // readFileSync included to test explicit stub impl
-      readFileSync: (filename: string) => {
-        return Buffer.from(`data from ${filename}`);
-      }
+      readFileSync: (filename: string) => Buffer.from(`data from ${filename}`),
       // writeFileSync omitted to test implicit stubbing via proxy
     });
 
@@ -44,8 +42,8 @@ describe('stubs', () => {
 
   it('should stub a class instance with private fields', async () => {
     type Callable = {
-      (): string;
       property?: string;
+      (): string;
     };
     class Target {
       public property: {
@@ -55,9 +53,9 @@ describe('stubs', () => {
       public overrideCallable: Callable;
       public constructor(value: boolean) {
         this.property = { value };
-        this.normalCallable = () => 'normal';
+        this.normalCallable = (): string => 'normal';
         this.normalCallable.property = 'default';
-        this.overrideCallable = () => 'override';
+        this.overrideCallable = (): string => 'override';
         this.overrideCallable.property = 'default';
       }
       public normalMethod(): string {
@@ -78,13 +76,14 @@ describe('stubs', () => {
       overrideCallable: stubCallable(
         sandbox,
         {
-          property: 'overridden'
+          property: 'overridden',
         },
         () => 'overridden'
       ),
       overrideMethod() {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         return `overridden:${this.property.value}`;
-      }
+      },
     });
 
     expect(stub.normalMethod()).to.equal('normal:true');
@@ -113,32 +112,32 @@ describe('stubs', () => {
     expect(await Promise.resolve(stub)).to.equal(stub);
   });
 
-  it('should stub when target has a then method', async () => {
+  it('should stub when target has a then method', () => {
     const stub = stubObject<{ then: () => string }>(sandbox, {
-      then: () => 'test'
+      then: () => 'test',
     });
     expect(stub.then()).to.equal('test');
   });
 
-  it('should stub when members have a then method', async () => {
+  it('should stub when members have a then method', () => {
     const stub = stubInterface<{ then: () => string }>(sandbox, {
-      then: () => 'test'
+      then: () => 'test',
     });
     expect(stub.then()).to.equal('test');
   });
 
   it('should stub a callable', () => {
     interface Callable {
-      (): string;
       foo: () => string;
       bar: boolean;
+      (): string;
     }
 
     const stub = stubCallable<Callable>(
       sandbox,
       {
         foo: () => 'ret2',
-        bar: true
+        bar: true,
       },
       () => 'ret1'
     );
@@ -161,7 +160,7 @@ describe('stubs', () => {
   });
 
   it('should stub an object with no members', () => {
-    const obj = { foo: () => 'foo' };
+    const obj = { foo: (): string => 'foo' };
     const stub = stubObject<typeof obj>(sandbox, obj);
     stub.foo();
     expect(stub.foo.calledOnce).to.be.true;

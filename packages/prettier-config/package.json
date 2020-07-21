@@ -1,0 +1,28 @@
+{
+  "name": "@salesforce/prettier-config",
+  "version": "0.0.0",
+  "description": "The prettier config for Salesforce projects",
+  "keywords": [
+    "Salesforce",
+    "prettier"
+  ],
+  "author": "Thomas <t.dvornik@salesforce.com>",
+  "homepage": "https://github.com/forcedotcom/sfdx-dev-packages#readme",
+  "license": "BSD-3-Clause",
+  "main": "prettier-config.js",
+  "files": [
+    "prettier-config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forcedotcom/sfdx-dev-packages.git"
+  },
+  "bugs": {
+    "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  }
+}

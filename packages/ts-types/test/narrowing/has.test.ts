@@ -19,11 +19,11 @@ import {
   hasNumber,
   hasObject,
   hasPlainObject,
-  hasString
+  hasString,
 } from '../../src/narrowing/has';
 
 class TestClass {
-  constructor(public name = 'test') {}
+  public constructor(public name = 'test') {}
 }
 
 describe('has type', () => {
@@ -39,7 +39,7 @@ describe('has type', () => {
       m: {},
       i: new TestClass(),
       a: [],
-      f: () => {}
+      f: () => {},
     };
   });
 

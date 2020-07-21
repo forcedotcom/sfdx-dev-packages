@@ -18,7 +18,7 @@ import {
   asNumber,
   asObject,
   asPlainObject,
-  asString
+  asString,
 } from './as';
 import { toAnyJson } from './to';
 
@@ -101,8 +101,8 @@ export function ensurePlainObject<T = object>(value: unknown, message?: string):
 }
 
 /**
- * Narrows an `unknown` value to a `Dictionary<T>` if it is type-compatible and tests positively with {@link isDictionary},
- * or raises an error otherwise.
+ * Narrows an `unknown` value to a `Dictionary<T>` if it is type-compatible and tests positively
+ * with {@link isDictionary}, or raises an error otherwise.
  *
  * @param value The value to test.
  * @param message The error message to use if `value` is not type-compatible.

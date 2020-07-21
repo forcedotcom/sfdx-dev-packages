@@ -13,7 +13,7 @@ import {
   isNumber,
   isString,
   JsonMap,
-  Optional
+  Optional,
 } from '@salesforce/ts-types';
 import { JsonDataFormatError, JsonParseError, JsonStringifyError } from './errors';
 
@@ -29,7 +29,7 @@ export function parseJson(data: string, jsonPath?: string, throwOnEmpty = true):
   data = data.trim();
   if (!throwOnEmpty && data.length === 0) data = '{}';
   try {
-    return JSON.parse(data);
+    return JSON.parse(data) as AnyJson;
   } catch (error) {
     throw JsonParseError.create(error, data, jsonPath);
   }
@@ -84,11 +84,12 @@ export function parseJsonMap<T extends JsonMap = JsonMap>(data: string, jsonPath
  *
  * @param obj A JSON-compatible object or array to clone.
  * @throws {@link JsonStringifyError} If the object contains circular references or causes
- *  other JSON stringification errors.
+ * other JSON stringification errors.
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function cloneJson<T extends object>(obj: T): T {
   try {
-    return JSON.parse(JSON.stringify(obj));
+    return JSON.parse(JSON.stringify(obj)) as T;
   } catch (err) {
     throw new JsonStringifyError(err);
   }
@@ -104,7 +105,7 @@ export function cloneJson<T extends object>(obj: T): T {
  */
 export function getJsonValuesByName<T extends AnyJson = AnyJson>(json: JsonMap, name: string): T[] {
   let matches: T[] = [];
-  if (json.hasOwnProperty(name)) {
+  if (Object.prototype.hasOwnProperty.call(json, name)) {
     matches.push(json[name] as T); // Asserting T here assumes the caller knows what they are asking for
   }
   const maybeRecurse = (element: Optional<AnyJson>): void => {
@@ -112,7 +113,7 @@ export function getJsonValuesByName<T extends AnyJson = AnyJson>(json: JsonMap, 
       matches = matches.concat(getJsonValuesByName(element, name));
     }
   };
-  Object.values(json).forEach(value => (isJsonArray(value) ? value.forEach(maybeRecurse) : maybeRecurse(value)));
+  Object.values(json).forEach((value) => (isJsonArray(value) ? value.forEach(maybeRecurse) : maybeRecurse(value)));
   return matches;
 }
 

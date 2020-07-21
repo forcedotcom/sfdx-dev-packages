@@ -5,6 +5,9 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable @typescript-eslint/no-empty-function */
+
 import { expect } from 'chai';
 import {
   isAnyJson,
@@ -21,16 +24,16 @@ import {
   isNumber,
   isObject,
   isPlainObject,
-  isString
+  isString,
 } from '../../src/narrowing/is';
 import { JsonArray } from '../../src/types';
 
 class TestClass {
-  constructor(public name = 'Test') {}
+  public constructor(public name = 'Test') {}
 }
 
 class TestSubclass extends TestClass {
-  constructor(name = 'SubTest') {
+  public constructor(name = 'SubTest') {
     super(name);
   }
 }
@@ -107,17 +110,17 @@ describe('is type', () => {
     });
 
     it('should accept new String()', () => {
-      // tslint:disable-next-line:no-construct
+      // eslint-disable-next-line no-new-wrappers
       expect(isObject(new String('foo'))).to.be.true;
     });
 
     it('should accept new Number()', () => {
-      // tslint:disable-next-line:no-construct
+      // eslint-disable-next-line no-new-wrappers
       expect(isObject(new Number(0))).to.be.true;
     });
 
     it('should accept new String()', () => {
-      // tslint:disable-next-line:no-construct
+      // eslint-disable-next-line no-new-wrappers
       expect(isObject(new Boolean(true))).to.be.true;
     });
 
@@ -414,7 +417,8 @@ describe('is type', () => {
     });
 
     it('should accept function expressions', () => {
-      expect(isFunction(function() {})).to.be.true; // tslint:disable-line:only-arrow-functions
+      // eslint-disable-next-line prefer-arrow-callback
+      expect(isFunction(function () {})).to.be.true;
     });
 
     it('should accept arrow functions', () => {

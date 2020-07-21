@@ -5,11 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { Dictionary } from '@salesforce/ts-types';
-
 // Support types specific to lodash constructs -- not intended for general reuse.
 export type NotVoid = {} | null | undefined;
 export type ValueIterateeCustom<T, R> = ((value: T) => R) | IterateeShorthand<T>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type IterateeShorthand<T> = PropertyKey | [PropertyKey, any] | PartialDeep<T>;
 export type PartialDeep<T> = { [P in keyof T]?: PartialDeep<T[P]> };
 export type ObjectIterator<T, R> = (value: NonNullable<T[keyof T]>, key: string, collection: T) => R;

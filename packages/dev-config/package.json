@@ -22,16 +22,11 @@
     "/nyc.json",
     "/typedoc.js"
   ],
-  "dependencies": {
-    "tslint": "^5.18.0",
-    "tslint-microsoft-contrib": "^5.2.1",
-    "typescript": "~3.7.4"
-  },
   "scripts": {
     "clean-all": "shx rm -rf node_modules"
   },
   "devDependencies": {
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.1.2",
     "shx": "^0.3.2"
   }
 }

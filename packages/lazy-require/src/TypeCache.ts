@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2020, salesforce.com, inc.
+ * All rights reserved.
+ * Licensed under the BSD 3-Clause license.
+ * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+ */
+
 import { debug, trace } from './debug';
 import { FileSystem, ProxiableModule } from './types';
 
@@ -87,7 +94,10 @@ export default class TypeCache {
     switch (moduleType) {
       // MUST return a function expression, not an arrow function
       case 'function':
-        return function() {}; // tslint:disable-line:only-arrow-functions
+        // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+        return function () {
+          /* Do nothing */
+        };
       case 'object':
         return {};
       default:
@@ -95,7 +105,7 @@ export default class TypeCache {
     }
   }
 
-  public setType(filename: string, moduleType: string) {
+  public setType(filename: string, moduleType: string): boolean {
     if (this.values[filename] === moduleType) {
       return false;
     } else if (this.values[filename]) {
@@ -106,7 +116,7 @@ export default class TypeCache {
     return true;
   }
 
-  public clearType(filename: string) {
+  public clearType(filename: string): boolean {
     if (this.values[filename]) {
       delete this.values[filename];
       this.changed = true;

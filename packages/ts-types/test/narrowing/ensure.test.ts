@@ -20,11 +20,11 @@ import {
   ensureNumber,
   ensureObject,
   ensurePlainObject,
-  ensureString
+  ensureString,
 } from '../../src/narrowing/ensure';
 
 class TestClass {
-  constructor(public name = 'test') {}
+  public constructor(public name = 'test') {}
 }
 
 describe('ensure type', () => {

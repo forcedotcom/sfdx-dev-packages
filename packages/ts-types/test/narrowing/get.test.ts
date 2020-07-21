@@ -18,11 +18,11 @@ import {
   getNumber,
   getObject,
   getPlainObject,
-  getString
+  getString,
 } from '../../src/narrowing/get';
 
 class TestClass {
-  constructor(public name = 'test') {}
+  public constructor(public name = 'test') {}
 }
 
 describe('get type', () => {
@@ -32,8 +32,8 @@ describe('get type', () => {
       n: 1,
       b: true,
       m: { a: 'b', c: 'd', e: [1] },
-      a: ['a', 'b']
-    }
+      a: ['a', 'b'],
+    },
   };
 
   const jsonArray = [jsonMap];
@@ -41,8 +41,8 @@ describe('get type', () => {
   const obj = {
     inner: Object.assign(jsonMap.inner, {
       c: new TestClass(),
-      f: () => {}
-    })
+      f: () => {},
+    }),
   };
 
   describe('get', () => {
@@ -77,7 +77,7 @@ describe('get type', () => {
 
     it('should support string keys in brackets, with or without any style of quotes', () => {
       const value = jsonArray[0].inner.m.e[0];
-      const path = `[0]["inner"][m]['e'][0]`;
+      const path = '[0]["inner"][m][\'e\'][0]';
       expect(get(jsonArray, path)).to.equal(value);
     });
   });
