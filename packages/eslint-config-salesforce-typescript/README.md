@@ -26,8 +26,8 @@ Because eslint requires all eslint packages locally, you must also install the f
 yarn add eslint eslint-plugin-import eslint-plugin-prettier eslint-plugin-jsdoc @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-For Salesforce owned repositories, also extend [eslint-config-salesforce-license](../eslint-config-salesforce-license);
+For Salesforce owned repositories, also extend [eslint-config-salesforce-license](https://www.npmjs.com/package/eslint-config-salesforce-license);
 
-**Note:** You can use [@salesforce/dev-scripts](../dev-scripts) to set this up along with all other configuration files related to a Salesforce typescript project.
+**Note:** You can use [@salesforce/dev-scripts](https://www.npmjs.com/package/@salesforce/dev-scripts) to set this up along with all other configuration files related to a Salesforce typescript project.
 
-For other configuration files, see [@salesforce/dev-config](../dev-config)
+For other configuration files, see [@salesforce/dev-config](https://www.npmjs.com/package/@salesforce/dev-config)
