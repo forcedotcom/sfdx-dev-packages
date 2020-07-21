@@ -10,7 +10,7 @@ A collection of commonly needed configuration files and dependencies for:
 
 Some tools require their config files be in a separate package.
 
-- [eslint-config-salesforce](../eslint-config-salesforce)
-- [eslint-config-salesforce-typescript](../eslint-config-salesforce-typescript)
-- [eslint-config-salesforce-license](../eslint-config-salesforce-license)
-- [@salesforce/prettier-config](../prettier-config)
+- [eslint-config-salesforce](https://www.npmjs.com/package/eslint-config-salesforce)
+- [eslint-config-salesforce-typescript](https://www.npmjs.com/package/eslint-config-salesforce-typescript)
+- [eslint-config-salesforce-license](https://www.npmjs.com/package/eslint-config-salesforce-license)
+- [@salesforce/prettier-config](https://www.npmjs.com/package/@salesforce/prettier-config)
