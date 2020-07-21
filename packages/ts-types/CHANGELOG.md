@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.4.0...@salesforce/ts-types@1.4.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* correct some dictionary typings, more complete object fns and typings ([aef5822](https://github.com/forcedotcom/sfdx-dev-packages/commit/aef5822ea24b15a4a2f40612ef5e7f6a71a9397a))
+* export assert lib from ts-types ([d72ef50](https://github.com/forcedotcom/sfdx-dev-packages/commit/d72ef50b32ad2055b1175dd61499a649f4d18ac2))
+
+
+
+
+
 # [1.4.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.3.0...@salesforce/ts-types@1.4.0) (2020-07-21)
 
 
