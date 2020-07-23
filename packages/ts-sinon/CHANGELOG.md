@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.2.1...@salesforce/ts-sinon@1.2.2) (2020-07-23)
+
+
+### Bug Fixes
+
+* missing ts-sinon merge and fixed eslint rules ([4d4325b](https://github.com/forcedotcom/sfdx-dev-packages/commit/4d4325b306e579e3ae9f3492b58a66f8eb8a4e56))
+
+
+
+
+
 ## [1.2.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.2.0...@salesforce/ts-sinon@1.2.1) (2020-07-21)
 
 **Note:** Version bump only for package @salesforce/ts-sinon
