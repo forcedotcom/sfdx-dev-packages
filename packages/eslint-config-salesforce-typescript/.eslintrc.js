@@ -69,7 +69,6 @@ module.exports = {
     ],
     '@typescript-eslint/prefer-for-of': 'error',
     '@typescript-eslint/prefer-function-type': 'error',
-    '@typescript-eslint/member-ordering': 'error',
     '@typescript-eslint/consistent-type-assertions': 'error',
     '@typescript-eslint/type-annotation-spacing': 'error',
     '@typescript-eslint/unified-signatures': 'error',

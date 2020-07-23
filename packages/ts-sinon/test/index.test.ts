@@ -112,6 +112,14 @@ describe('stubs', () => {
     expect(await Promise.resolve(stub)).to.equal(stub);
   });
 
+  it('should resolve a stub from an interface', async () => {
+    // stubInterface will stub missing properties and return a stub for those missing
+    // properties, which includes a .then method. This could cause a promise chain to
+    // hang if not handled in ts-sinon.
+    const stub = stubInterface(sandbox);
+    expect(await Promise.resolve(stub)).to.equal(stub);
+  });
+
   it('should stub when target has a then method', () => {
     const stub = stubObject<{ then: () => string }>(sandbox, {
       then: () => 'test',
