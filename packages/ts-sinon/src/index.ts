@@ -14,7 +14,9 @@ import { AnyFunction, Dictionary, isFunction } from '@salesforce/ts-types';
 // Internal implementation for the generated proxy getters.
 const makeProxyGet = (sandbox: SinonSandbox, members: OpenDictionary, stubMissing: boolean): any => {
   const cache: OpenDictionary = {};
-  return (target: OpenDictionary, name: string): OpenDictionary => {
+
+  // The cache can contain any value from the target or members.
+  return (target: OpenDictionary, name: string): any => {
     const stubMemberFn = (fn: OpenFunction): Stub<object & AnyFunction<any>> => {
       if (Object.keys(fn).length > 0) {
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -22,6 +24,10 @@ const makeProxyGet = (sandbox: SinonSandbox, members: OpenDictionary, stubMissin
       }
       return sandbox.stub().callsFake(fn);
     };
+    // We are not a promise.
+    if (target[name] == null && members[name] == null && name === 'then') {
+      return undefined;
+    }
     if (cache[name] != null) {
       return cache[name];
     }

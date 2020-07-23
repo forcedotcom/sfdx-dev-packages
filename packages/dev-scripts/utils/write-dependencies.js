@@ -64,7 +64,7 @@ module.exports = (projectPath, inLernaProject) => {
   }
 
   // We don't need to install these for root lerna packages. They will be installed for the packages.
-  if (!inLernaProject) {
+  if (isMultiPackageProject(projectPath) && !inLernaProject) {
     return;
   }
 

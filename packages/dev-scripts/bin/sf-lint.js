@@ -9,4 +9,4 @@
 const shell = require('../utils/shelljs');
 
 // Simple one line command. If it needs to be customized, override script in sfdevrc file.
-shell.exec(`eslint "src/**/*.ts" "test/**/*.ts"`);
+shell.exec(`eslint "src/**/*.ts" "test/**/*.ts"`, { passthrough: true });
