@@ -12,7 +12,7 @@ yarn add @salesforce/prettier-config
 
 Then extend this configuration in your own prettier file.
 
-Here is an example using a `.prettierrs.json` file.
+Here is an example using a `.prettierrc.json` file.
 
 ```javascript
 '@salesforce/prettier-config';
