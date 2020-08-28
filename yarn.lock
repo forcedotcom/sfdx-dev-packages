@@ -209,6 +209,14 @@
   dependencies:
     conventional-changelog-conventionalcommits "4.3.0"
 
+"@commitlint/ensure@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/ensure/-/ensure-10.0.0.tgz#b27b8e82818431e9fa0280dfdc42931a7891e176"
+  integrity sha512-OBlv6Hw91u4Gqz4ocKO7IyIvQ6ZmKbJaLFf8MD0EOH3Prn0aatiiqUB0+paBELKt3yWdwQNYI8ZkzZWtj4EcYw==
+  dependencies:
+    "@commitlint/types" "^10.0.0"
+    lodash "^4.17.19"
+
 "@commitlint/ensure@^9.1.1":
   version "9.1.1"
   resolved "https://registry.npmjs.org/@commitlint/ensure/-/ensure-9.1.1.tgz#0143f2c34a27fcd7fb91b7a5029de84a0f416b93"
@@ -229,6 +237,14 @@
   dependencies:
     chalk "^4.0.0"
 
+"@commitlint/is-ignored@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/is-ignored/-/is-ignored-10.0.0.tgz#2fc650dac30aad961f3b16510aa385689304a0ae"
+  integrity sha512-OLjUs/0HaQGh5iSqv/jF/TXqQ8sJ5VShujTmADSvnGTyruZu+d1Hfgw9QM1FMjzcx2NpMDsX/EFBU0ZMx9hmEg==
+  dependencies:
+    "@commitlint/types" "^10.0.0"
+    semver "7.3.2"
+
 "@commitlint/is-ignored@^9.1.1":
   version "9.1.1"
   resolved "https://registry.npmjs.org/@commitlint/is-ignored/-/is-ignored-9.1.1.tgz#1f2683897dab03ec00d363486b4b439791a86927"
@@ -236,6 +252,16 @@
   dependencies:
     "@commitlint/types" "^9.1.1"
     semver "7.3.2"
+
+"@commitlint/lint@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/lint/-/lint-10.0.0.tgz#e235d502e09f0c76ede46a3f9bfb02c4acef7911"
+  integrity sha512-KcDzOMQYVLziWIXNedTDnf5LS9NMYKzcdzjuCH8jTZLx/oX3kuOVB0jYZHVaKPwjj0miZSOhONqIMJDlLZpn+g==
+  dependencies:
+    "@commitlint/is-ignored" "^10.0.0"
+    "@commitlint/parse" "^10.0.0"
+    "@commitlint/rules" "^10.0.0"
+    "@commitlint/types" "^10.0.0"
 
 "@commitlint/lint@^9.1.1":
   version "9.1.1"
@@ -260,10 +286,23 @@
     lodash "^4.17.15"
     resolve-from "^5.0.0"
 
+"@commitlint/message@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/message/-/message-10.0.0.tgz#a41e36bde4993516935176ccc35525ecdaf377ff"
+  integrity sha512-2ZDgHc6v3t1C/zkAkRwPDIRVD/jbrQAu+Iqe7VH1/Y//cJhwte6OuSGfs2Qze/6gh+/RbvUIBskR8OUIY6VTrA==
+
 "@commitlint/message@^9.1.1":
   version "9.1.1"
   resolved "https://registry.npmjs.org/@commitlint/message/-/message-9.1.1.tgz#7621e8f194d676d7d747bfdda49c00ca4d1572df"
   integrity sha512-52Li4BNSY55I0fAq1s8cnxIK9Jneozdh4oonLlDzqWvgFq8znsHb9LWmi46K0bsCQT3CRUnMU+GPnikghIMRKQ==
+
+"@commitlint/parse@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/parse/-/parse-10.0.0.tgz#a2dad8b111444267defd5d35c12ed7a3262017d4"
+  integrity sha512-xIBD0w85FVhrlX4pI/m4xF9MvTQNMbvilPSr42yIds2xn7GJcJidN4Z8O6qCqcjwl6f3ruQ8G8Pdi3PggVjZrw==
+  dependencies:
+    conventional-changelog-angular "^5.0.0"
+    conventional-commits-parser "^3.0.0"
 
 "@commitlint/parse@^9.1.1":
   version "9.1.1"
@@ -292,6 +331,16 @@
     resolve-from "^5.0.0"
     resolve-global "^1.0.0"
 
+"@commitlint/rules@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/rules/-/rules-10.0.0.tgz#d6fe2a788417f8636f95f0581ed1257952c91f8e"
+  integrity sha512-myHG8pgUHIOtceJsALRRXvYBuLbTwWl7/6soDrIJudDhKsyhV3yFtAbRX40pujg25IlAUra6nuy8JDU86bVxog==
+  dependencies:
+    "@commitlint/ensure" "^10.0.0"
+    "@commitlint/message" "^10.0.0"
+    "@commitlint/to-lines" "^10.0.0"
+    "@commitlint/types" "^10.0.0"
+
 "@commitlint/rules@^9.1.1":
   version "9.1.1"
   resolved "https://registry.npmjs.org/@commitlint/rules/-/rules-9.1.1.tgz#21165c9dc8621a52fa57eec9a66e01c83ec58f90"
@@ -301,6 +350,11 @@
     "@commitlint/message" "^9.1.1"
     "@commitlint/to-lines" "^9.1.1"
     "@commitlint/types" "^9.1.1"
+
+"@commitlint/to-lines@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/to-lines/-/to-lines-10.0.0.tgz#e0dfddf8e6a2e6b7249ce9a4f4890b21c0006e4c"
+  integrity sha512-qUHuYiLgE7ioBRgHUR2EOwXuEhb2TnAktEc9NBZcQNzfqu5nbOaf2iOBx5mlDK0heTJyTjLboAmzojXxuqJNcA==
 
 "@commitlint/to-lines@^9.1.1":
   version "9.1.1"
@@ -313,6 +367,11 @@
   integrity sha512-pIgAbGqHbOunTGiUzBPhIKfXrTWdCrVwsimECXy/If5XaZ3GHhxiiA7BxsWFlAN1UZ6PgVMPgymKU0kx2D5A/w==
   dependencies:
     find-up "^4.0.0"
+
+"@commitlint/types@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.npmjs.org/@commitlint/types/-/types-10.0.0.tgz#4c05f59562e66209a6f063ea60b931063bc17c09"
+  integrity sha512-b7uumSfDI1guYnNc11BpkTZjiY7gC1DPedeUa0r+csd/1DiFyRo4oNOaxXHve0cC4NzaHaOHa0aPktWMTYJlVQ==
 
 "@commitlint/types@^9.1.1":
   version "9.1.1"

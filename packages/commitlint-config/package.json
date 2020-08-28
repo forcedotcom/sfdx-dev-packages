@@ -1,0 +1,32 @@
+{
+  "name": "commitlint-config-salesforce",
+  "version": "0.0.1",
+  "description": "The commitlint config for Salesforce projects",
+  "keywords": [
+    "Salesforce",
+    "commitlint"
+  ],
+  "author": "Mike Donnalley<mdonnalley@salesforce.com>",
+  "homepage": "https://github.com/forcedotcom/sfdx-dev-packages#readme",
+  "license": "BSD-3-Clause",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forcedotcom/sfdx-dev-packages.git"
+  },
+  "bugs": {
+    "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
+  },
+  "dependencies": {
+    "@commitlint/config-conventional": "^9.1.1"
+  },
+  "devDependencies": {
+    "@commitlint/lint": "^10.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
