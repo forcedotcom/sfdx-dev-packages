@@ -55,7 +55,7 @@ function writeGitignore(targetDir) {
 
   if (!copied) {
     if (!readFileSync(gitignoreTargetPath, 'utf-8').includes('# -- CLEAN')) {
-      log(`The .gitignore doesn't contain any clean entries. See ${gitignoreTargetPath} for examples.`);
+      log(`The .gitignore doesn't contain any clean entries. See ${gitignoreSourcePath} for examples.`);
     }
   }
   return copied;

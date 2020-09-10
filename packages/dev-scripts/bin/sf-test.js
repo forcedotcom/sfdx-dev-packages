@@ -20,6 +20,10 @@ let command = `${nyc} mocha`;
 
 if (!testConfig.mochaOpts) {
   command += ' --require ts-node/register --require source-map-support/register';
+} else {
+  testConfig.mochaOpts.forEach(opt => {
+    command += ` ${opt}`;
+  })
 }
 
 const includes = testConfig.testsPath || '**/*.test.ts';
