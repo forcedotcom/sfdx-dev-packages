@@ -17,6 +17,7 @@ const FILES_PATH = join(__dirname, '..', 'files');
 
 const FILE_NAME_LICENSE = 'LICENSE.txt';
 const FILE_NAME_GITIGNORE = 'gitignore';
+const FILE_NAME_MOCHARC = 'mocharc.json';
 
 function isDifferent(sourcePath, targetPath) {
   try {
@@ -61,6 +62,13 @@ function writeGitignore(targetDir) {
   return copied;
 }
 
+function writeMocharcJson(targetDir) {
+  const mocharcSourcePath = join(FILES_PATH, FILE_NAME_MOCHARC);
+  const gitignoreTargetPath = join(targetDir, `.${FILE_NAME_MOCHARC}`);
+  // Try to copy the default.
+  return copyFile(mocharcSourcePath, gitignoreTargetPath);
+}
+
 // eslint-disable-next-line complexity
 module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   const config = resolveConfig(packageRoot, inLernaProject);
@@ -74,6 +82,7 @@ module.exports = (packageRoot = require('./package-path'), inLernaProject) => {
   if (isMultiPackageProject(packageRoot) || !inLernaProject) {
     added.push(writeLicenseFile(packageRoot));
     added.push(writeGitignore(packageRoot));
+    added.push(writeMocharcJson(packageRoot));
   }
 
   // We want prettier in the root since that is when the commit format hook runs
