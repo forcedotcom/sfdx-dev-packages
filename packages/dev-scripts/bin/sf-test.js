@@ -15,15 +15,9 @@ const nyc = require.resolve('nyc/bin/nyc');
 
 const config = resolveConfig(packageRoot);
 const testConfig = config.test || {};
-
-let command = `${nyc} mocha`;
-
-if (!testConfig.mochaOpts) {
-  command += ' --require ts-node/register --require source-map-support/register';
-}
-
 const includes = testConfig.testsPath || '**/*.test.ts';
-command += ` --recursive "${includes}"`;
+
+let command = `${nyc} mocha "${includes}"`;
 
 try {
   shell.exec(command, {
