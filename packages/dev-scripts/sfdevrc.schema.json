@@ -108,11 +108,6 @@
       "description": "Options for the test script.",
       "type": "object",
       "properties": {
-        "mochaOpts": {
-          "description": "Rely on mocha.opts for all configuration (will not send any additional options to mocha).",
-          "type": "boolean",
-          "default": false
-        },
         "testsPath": {
           "description": "The expression path for all tests",
           "type": "string",
