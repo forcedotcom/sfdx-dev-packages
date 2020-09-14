@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.6.1...@salesforce/dev-scripts@0.6.2) (2020-09-14)
+
+
+### Bug Fixes
+
+* remove mochaOpts in sfdevrc and update .gitignore location ([#100](https://github.com/forcedotcom/sfdx-dev-packages/issues/100)) ([f58733e](https://github.com/forcedotcom/sfdx-dev-packages/commit/f58733ed292ff97818e5da9d78df4bc7a7022fde))
+
+
+
+
+
 ## [0.6.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.6.0...@salesforce/dev-scripts@0.6.1) (2020-07-23)
 
 
