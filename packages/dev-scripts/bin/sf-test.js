@@ -17,7 +17,7 @@ const config = resolveConfig(packageRoot);
 const testConfig = config.test || {};
 const includes = testConfig.testsPath || '**/*.test.ts';
 
-let command = `${nyc} mocha "${includes}"`;
+const command = `${nyc} mocha "${includes}"`;
 
 try {
   shell.exec(command, {
