@@ -39,7 +39,7 @@
   ],
   "dependencies": {
     "@commitlint/cli": "^9.1.1",
-    "@commitlint/config-conventional": "^9.1.1",
+    "@commitlint/config-conventional": "^10.0.0",
     "@salesforce/dev-config": "^2.0.0",
     "@salesforce/prettier-config": "^0.0.1",
     "@types/chai": "^4.2.11",
