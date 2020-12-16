@@ -141,7 +141,8 @@ workflows:
             branches: { only: master }
           requires:
             - release
-      -run: yarn test
+      - name: Generate nyc_folder for uploading
+        run: yarn test
       - release-management/test-package:
           requires:
             - node-latest
