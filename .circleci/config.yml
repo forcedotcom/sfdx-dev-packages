@@ -109,7 +109,6 @@ jobs:
   upload-coverage:
     <<: *defaults
     steps:
-      - run: yarn test
       - release-management/test-package:
         name: node-latest-codecov
         node_version: latest
