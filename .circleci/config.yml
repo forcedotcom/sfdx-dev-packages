@@ -141,11 +141,7 @@ workflows:
             branches: { only: master }
           requires:
             - release
-      - name: Generate nyc_folder for uploading
-        run: yarn test
       - release-management/test-package:
-          requires:
-            - node-latest
           name: node-latest-codecov
           node_version: latest
           upload-coverage: true
