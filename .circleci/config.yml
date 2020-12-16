@@ -31,13 +31,13 @@ _refs:
     command: yarn build
   test: &test
     name: Testing
-    release-management/test-package:
-      node_version: latest
-      upload-coverage: true
+    command: yarn test
   coverage: &coverage
     name: Submitting code coverage to codecov
-    command: |
-      # yarn codecov
+    - release-management/test-package:
+      name: node-latest-codecov
+      node_version: latest
+      upload-coverage: true
   gh-config: &gh-config
     name: Configuring GitHub
     command: |
