@@ -32,6 +32,10 @@ _refs:
   test: &test
     name: Testing
     command: yarn test
+  coverage: &coverage
+    name: Submitting code coverage to codecov
+    command: |
+      # yarn codecov
   gh-config: &gh-config
     name: Configuring GitHub
     command: |
@@ -58,10 +62,7 @@ jobs:
       - run: *bootstrap
       - run: *build
       - run: *test
-      - release-management/test-package:
-        name: Submitting code coverage to codecov
-        node_version: latest
-        upload-coverage: true
+      - run: *coverage
       - save_cache: *save-cache
   node-12:
     <<: *node-test
@@ -140,3 +141,10 @@ workflows:
             branches: { only: master }
           requires:
             - release
+      -run: yarn test
+      - release-management/test-package:
+          requires:
+            - node-latest
+          name: node-latest-codecov
+          node_version: latest
+          upload-coverage: true
