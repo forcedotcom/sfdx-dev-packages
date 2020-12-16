@@ -31,7 +31,9 @@ _refs:
     command: yarn build
   test: &test
     name: Testing
-    command: yarn test
+    release-management/test-package:
+      node_version: latest
+      upload-coverage: true
   coverage: &coverage
     name: Submitting code coverage to codecov
     command: |
@@ -141,9 +143,3 @@ workflows:
             branches: { only: master }
           requires:
             - release
-      - release-management/test-package:
-          requires:
-            - node-latest
-          name: node-latest-codecov
-          node_version: latest
-          upload-coverage: true
