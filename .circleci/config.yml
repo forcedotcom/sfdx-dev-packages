@@ -106,6 +106,14 @@ jobs:
             git merge origin/master
             git push origin develop
       - save_cache: *save-cache
+  upload-coverage:
+    <<: *defaults
+    steps:
+      - run: yarn test
+      - release-management/test-package:
+        name: node-latest-codecov
+        node_version: latest
+        upload-coverage: true
   ci-docs:
     <<: *defaults
     steps:
@@ -141,11 +149,4 @@ workflows:
             branches: { only: master }
           requires:
             - release
-      - upload-coverage:
-        name: upload-codecov
-        steps:
-          - run: yarn test
-          - release-management/test-package:
-            name: node-latest-codecov
-            node_version: latest
-            upload-coverage: true
+      - upload-coverage
