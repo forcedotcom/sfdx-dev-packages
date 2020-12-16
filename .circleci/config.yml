@@ -141,8 +141,11 @@ workflows:
             branches: { only: master }
           requires:
             - release
-      - release-management/test-package:
-          run: yarn test
-          name: node-latest-codecov
-          node_version: latest
-          upload-coverage: true
+      - upload-coverage:
+        name: upload-codecov
+        steps:
+          - run: yarn test
+          - release-management/test-package:
+            name: node-latest-codecov
+            node_version: latest
+            upload-coverage: true
