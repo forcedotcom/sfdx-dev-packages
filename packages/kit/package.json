@@ -24,7 +24,7 @@
     "postcompile": "shx cp -r src/nodash/support.d.ts lib/nodash",
     "prepack": "sf-build",
     "pretest": "sf-compile-test",
-    "test": "sf-test"
+    "test": "mocha --require ts-node/register 'test/**/*.ts'"
   },
   "dependencies": {
     "@salesforce/ts-types": "^1.4.3",
