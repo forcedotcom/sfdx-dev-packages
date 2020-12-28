@@ -16,7 +16,7 @@
     "postclean-all": "yarn sf-clean all",
     "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
-    "test": "nyc lerna run test",
+    "test": "./node_modules/.bin/nyc lerna run test",
     "codecov": "codecov --disable=gcov"
   },
   "devDependencies": {
