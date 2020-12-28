@@ -21,7 +21,7 @@
     "lint": "sf-lint",
     "prepack": "sf-build",
     "pretest": "sf-compile-test",
-    "test": "mocha --require ts-node/register 'test/**/*.ts'"
+    "test": "sf-test --require ts-node/register"
   },
   "dependencies": {
     "tslib": "^1.10.0"
