@@ -22,6 +22,7 @@ const command = `${nyc} mocha "${includes}"`;
 try {
   shell.exec(command, {
     cwd: packageRoot,
+    passthrough: true,
   });
 } catch (err) {
   process.exitCode = 1;
