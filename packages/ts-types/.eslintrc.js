@@ -3,5 +3,6 @@ module.exports = {
   rules: {
     // Define convenient alias types
     '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/ban-types': 'off'
   },
 };

@@ -280,6 +280,7 @@ export namespace Duration {
   /**
    * Units of duration.
    */
+  // eslint-disable-next-line no-shadow
   export enum Unit {
     MINUTES,
     MILLISECONDS,

@@ -1,4 +1,3 @@
 {
-  "$schema": "../dev-scripts/sfdevrc.schema.json",
-  "strict": true
+  "$schema": "../dev-scripts/sfdevrc.schema.json"
 }
