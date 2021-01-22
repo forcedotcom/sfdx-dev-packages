@@ -151,7 +151,6 @@ workflows:
           upload-coverage: true
       - release-management/test-package:
           name: node-12
-      - release-management/test-package-windows:
-          filters:
-            branches:
-              ignore: master
+      - release-management/test-package:
+          os: 'windows'
+          name: windows-test
