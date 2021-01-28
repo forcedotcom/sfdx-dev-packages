@@ -7,10 +7,6 @@
 
 // A simple utility for gathering module loading statistics for diagnostic purposes.
 
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // -------------------------------------------------------------------------------
 // No requires or imports so we can instrument as much module loading as possible.
 // -------------------------------------------------------------------------------

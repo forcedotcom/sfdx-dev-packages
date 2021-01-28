@@ -39,7 +39,7 @@ export function toAnyJson<T>(value: Nullable<T>, defaultValue: AnyJson): AnyJson
 // underlying function
 export function toAnyJson<T>(value: Nullable<T>, defaultValue?: AnyJson): Optional<AnyJson> {
   try {
-    return value !== undefined ? JSON.parse(JSON.stringify(value)) : defaultValue;
+    return (value !== undefined ? JSON.parse(JSON.stringify(value)) : defaultValue) as Optional<AnyJson>;
   } catch (err) {
     throw new JsonCloneError(err);
   }

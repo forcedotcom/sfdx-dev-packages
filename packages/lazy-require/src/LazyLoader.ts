@@ -7,7 +7,7 @@
 
 // This file does a lot of trickery with low level javascript and proxies. So turn off some eslint features.
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable no-underscore-dangle */
 
 /**

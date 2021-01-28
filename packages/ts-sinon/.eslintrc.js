@@ -10,4 +10,11 @@
 
 module.exports = {
   extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license'],
+  rules: {
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/ban-types': 'off'
+  }
 };

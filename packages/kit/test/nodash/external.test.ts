@@ -65,7 +65,7 @@ describe('nodash', () => {
   describe('mapKeys', () => {
     it('should map the keys of an object', () => {
       const obj = { a: 1, b: 2 };
-      const result = _.mapKeys(obj, (value, key) => key + value);
+      const result = _.mapKeys(obj, (value, key) => `${key}${value}`);
       expect(result).to.deep.equal({ a1: 1, b2: 2 });
     });
   });

@@ -104,7 +104,7 @@ export function view<T, K extends string>(value: Nullable<T>, keys: Many<K>): Op
 function viewOptional<T, K extends string, R extends T>(
   value: Nullable<T>,
   key: K,
-  hasType: (value: Nullable<T>, key: K) => value is R
+  hasType: (v: Nullable<T>, k: K) => v is R
 ): Optional<T & ViewOptional<K, R>> {
   return hasType(value, key) ? value : hasNull(value, key) ? value : undefined;
 }
