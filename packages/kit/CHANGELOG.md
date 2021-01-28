@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.3.4...@salesforce/kit@1.4.0) (2021-01-28)
+
+
+### Features
+
+* update typescript version ([#109](https://github.com/forcedotcom/sfdx-dev-packages/issues/109)) ([399a0b0](https://github.com/forcedotcom/sfdx-dev-packages/commit/399a0b03aa831f25511bb3391702c10dc5c4a488))
+
+
+
+
+
 ## [1.3.4](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.3.3...@salesforce/kit@1.3.4) (2021-01-22)
 
 **Note:** Version bump only for package @salesforce/kit

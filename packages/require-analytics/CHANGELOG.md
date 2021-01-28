@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/require-analytics@0.8.3...@salesforce/require-analytics@0.9.0) (2021-01-28)
+
+
+### Features
+
+* update typescript version ([#109](https://github.com/forcedotcom/sfdx-dev-packages/issues/109)) ([399a0b0](https://github.com/forcedotcom/sfdx-dev-packages/commit/399a0b03aa831f25511bb3391702c10dc5c4a488))
+
+
+
+
+
 ## [0.8.3](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/require-analytics@0.8.2...@salesforce/require-analytics@0.8.3) (2021-01-22)
 
 **Note:** Version bump only for package @salesforce/require-analytics
