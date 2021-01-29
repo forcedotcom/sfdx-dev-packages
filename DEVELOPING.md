@@ -2,9 +2,10 @@
 
 ## Pre-requisites
 
-1. We are using Node 8 (or later). If you need to work with multiple versions of Node, you
+1. We use the active NodeJS LTS. If you need to work with multiple versions of Node, you
    might consider using [nvm](https://github.com/creationix/nvm).
 1. This repository uses [yarn](https://yarnpkg.com/) to manage node dependencies. Please install yarn globally using `npm install --global yarn`.
+1. Tests are executed on the latest NodeJS as well as all active and maintained NodeJS LTS versions.
 
 ## Structure
 
@@ -18,15 +19,14 @@ You would only do this once after you cloned the repository.
 
 1. Clone this repository from git.
 1. `cd` into `sfdx-dev-packages`.
-1. We develop on the `develop` branch and release from the `master` branch. At
-   this point, it should be set to develop by default. If not, run
-   `git checkout -t origin/develop`.
+1. We develop using feature brances off `main` and release from the `main` branch. At
+   this point, it should be set to `main` by default. If not, run `git checkout -t origin/main`.
 1. `yarn` to bring in all the top-level dependencies and bootstrap.
 1. Open the project in your editor of choice.
 
-When you are ready to commit
+## When you are ready to commit
 
-1. We enforces commit message format. We recommend using [commitizen](https://github.com/commitizen/cz-cli) by installing it with `yarn add --global commitizen` then commit using `git cz` which will prompt you questions to format the commit message.
+1. We enforce commit message format. We recommend using [commitizen](https://github.com/commitizen/cz-cli) by installing it with `yarn global add commitizen` then commit using `git cz` which will prompt you questions to format the commit message.
 1. Before commit and push, husky will run several hooks to ensure the message and that everything lints and compiles properly.
 
 ## List of Useful commands
@@ -37,7 +37,7 @@ packages directory._
 
 ### `yarn bootstrap`
 
-This bootstraps the packages by issuing an `yarn install` on each package and
+This bootstraps the packages by issuing a `yarn install` on each package and
 also symlinking any package that are part of the packages folder.
 
 You would want do this as the first step after you have made changes in the
