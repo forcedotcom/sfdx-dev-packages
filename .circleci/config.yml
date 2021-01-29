@@ -131,6 +131,7 @@ workflows:
           requires:
             - node-latest
             - node-12
+            - windows-test
       - merge:
           filters:
             branches: { only: master }
