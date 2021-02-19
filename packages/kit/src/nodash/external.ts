@@ -18,7 +18,7 @@
 //   published in the lodash documentation for that fn.
 
 import { AnyFunction, Dictionary, Many, Nullable, Optional } from '@salesforce/ts-types';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+/* eslint-disable-next-line @typescript-eslint/ban-ts-ignore */
 // @ts-ignore ignore the demand for typings for the locally built lodash
 import * as _ from '../../vendor/lodash';
 import { ListIteratee, NumericDictionary, ObjectIteratee, Omit, ValueIteratee, ValueIterateeCustom } from './support';

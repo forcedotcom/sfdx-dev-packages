@@ -13,7 +13,7 @@ const PACKAGE_DEFAULTS = {
   scripts: {
     build: 'sf-build',
     clean: 'sf-clean',
-    'clean-all': '-clean all',
+    'clean:all': 'sf-clean all',
     compile: 'sf-compile',
     docs: 'sf-docs',
     format: 'sf-format',
@@ -35,7 +35,7 @@ const LERNA_DEFAULTS = {
   scripts: {
     build: 'lerna build',
     clean: 'lerna clean',
-    'clean-all': 'lerna sf-clean-all',
+    'clean:all': 'lerna sf-clean all',
     compile: 'lerna compile',
     docs: 'lerna docs',
     format: 'lerna format',
@@ -54,7 +54,7 @@ const LERNA_PACKAGE_DEFAULTS = {
   scripts: {
     build: 'sf-build',
     clean: 'sf-clean',
-    'clean-all': 'sf-clean all',
+    'clean:all': 'sf-clean all',
     compile: 'sf-compile',
     docs: 'sf-docs',
     format: 'sf-format',
