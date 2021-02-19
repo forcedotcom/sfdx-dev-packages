@@ -7,7 +7,6 @@
     "ci-docs": "yarn sf-ci-docs",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
-    "clean:all": "lerna run clean:all",
     "codecov": "codecov --disable=gcov",
     "compile": "lerna run compile",
     "docs": "lerna run docs",
