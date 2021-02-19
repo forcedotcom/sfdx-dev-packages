@@ -17,7 +17,7 @@ const config = resolveConfig(packageRoot);
 const testConfig = config.test || {};
 const includes = testConfig.testsPath || '**/*.nut.ts';
 
-const command = `${nyc} mocha "${includes} --slow 4500 --timeout 600000 --parallel"`;
+const command = `${nyc} mocha "${includes}" --slow 4500 --timeout 600000 --parallel`;
 
 try {
   shell.exec(command, {
