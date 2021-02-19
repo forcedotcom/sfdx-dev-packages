@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.7.1...@salesforce/dev-scripts@0.8.0) (2021-02-19)
+
+
+### Bug Fixes
+
+* quote only the includes ([38cb96d](https://github.com/forcedotcom/sfdx-dev-packages/commit/38cb96d4dfe55a16f2eb3db3fa702a19caf29b8c))
+* remove clean:all in favor of clean-all ([c0f5a20](https://github.com/forcedotcom/sfdx-dev-packages/commit/c0f5a20ca4942feded85e21e0feda672ba0109d2))
+* remove nuts from dev scripts ([824b687](https://github.com/forcedotcom/sfdx-dev-packages/commit/824b68711465b37ac3099913b7b315c5241d3bee))
+
+
+### Features
+
+* adds a script for running NUTs ([4da640d](https://github.com/forcedotcom/sfdx-dev-packages/commit/4da640d52af526168952f50f2fb5774759c5b099))
+
+
+
+
+
 ## [0.7.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.7.0...@salesforce/dev-scripts@0.7.1) (2021-02-19)
 
 

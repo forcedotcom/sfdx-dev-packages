@@ -7,6 +7,7 @@
     "ci-docs": "yarn sf-ci-docs",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
+    "codecov": "codecov --disable=gcov",
     "compile": "lerna run compile",
     "docs": "lerna run docs",
     "format": "lerna run format",
@@ -16,8 +17,7 @@
     "postclean-all": "yarn sf-clean all",
     "postinstall": "yarn bootstrap",
     "prepack": "lerna run prepack",
-    "test": "lerna run test",
-    "codecov": "codecov --disable=gcov"
+    "test": "lerna run test"
   },
   "devDependencies": {
     "codecov": "^3.7.1",

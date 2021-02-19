@@ -13,14 +13,13 @@ const PACKAGE_DEFAULTS = {
   scripts: {
     build: 'sf-build',
     clean: 'sf-clean',
-    'clean:all': 'sf-clean all',
+    'clean-all': 'sf-clean all',
     compile: 'sf-compile',
     docs: 'sf-docs',
     format: 'sf-format',
     // Cleaner errors than ts-node through tests
     pretest: 'sf-compile-test',
     test: 'sf-test',
-    'test:nuts': 'sf-nuts',
     lint: 'sf-lint',
     prepack: 'sf-build',
   },
@@ -35,12 +34,11 @@ const LERNA_DEFAULTS = {
   scripts: {
     build: 'lerna build',
     clean: 'lerna clean',
-    'clean:all': 'lerna sf-clean all',
+    'clean-all': 'lerna sf-clean all',
     compile: 'lerna compile',
     docs: 'lerna docs',
     format: 'lerna format',
     test: 'lerna test',
-    'test:nuts': 'lerna test:nuts',
     lint: 'lerna lint',
   },
   husky: {
@@ -54,14 +52,13 @@ const LERNA_PACKAGE_DEFAULTS = {
   scripts: {
     build: 'sf-build',
     clean: 'sf-clean',
-    'clean:all': 'sf-clean all',
+    'clean-all': 'sf-clean all',
     compile: 'sf-compile',
     docs: 'sf-docs',
     format: 'sf-format',
     // Cleaner errors than ts-node through tests
     pretest: 'sf-compile-test',
     test: 'sf-test',
-    'test:nuts': 'sf-nuts',
     lint: 'sf-lint',
     prepack: 'sf-build',
   },
