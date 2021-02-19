@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.7.0...@salesforce/dev-scripts@0.7.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* testing and linting on windows ([a906fb8](https://github.com/forcedotcom/sfdx-dev-packages/commit/a906fb8da95e194a32ed768f84d6e9c7cbb6e9c6))
+
+
+
+
+
 # [0.7.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.6.3...@salesforce/dev-scripts@0.7.0) (2021-01-28)
 
 
