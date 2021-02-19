@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/ts-types",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Types and related utilities for TypeScript",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -28,8 +28,8 @@
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.1.0",
-    "@salesforce/dev-scripts": "^0.7.0",
-    "@salesforce/prettier-config": "^0.0.1",
+    "@salesforce/dev-scripts": "^0.7.1",
+    "@salesforce/prettier-config": "^0.0.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
     "chai": "^4.2.0",
