@@ -20,7 +20,6 @@ const PACKAGE_DEFAULTS = {
     // Cleaner errors than ts-node through tests
     pretest: 'sf-compile-test',
     test: 'sf-test',
-    'test:nuts': 'sf-nuts',
     lint: 'sf-lint',
     prepack: 'sf-build',
   },
@@ -40,7 +39,6 @@ const LERNA_DEFAULTS = {
     docs: 'lerna docs',
     format: 'lerna format',
     test: 'lerna test',
-    'test:nuts': 'lerna test:nuts',
     lint: 'lerna lint',
   },
   husky: {
@@ -61,7 +59,6 @@ const LERNA_PACKAGE_DEFAULTS = {
     // Cleaner errors than ts-node through tests
     pretest: 'sf-compile-test',
     test: 'sf-test',
-    'test:nuts': 'sf-nuts',
     lint: 'sf-lint',
     prepack: 'sf-build',
   },

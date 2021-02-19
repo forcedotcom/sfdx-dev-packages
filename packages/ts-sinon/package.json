@@ -45,6 +45,7 @@
     "build": "sf-build",
     "clean": "sf-clean",
     "clean-all": "sf-clean all",
+    "clean:all": "sf-clean all",
     "compile": "sf-compile",
     "docs": "sf-docs",
     "format": "sf-format",
