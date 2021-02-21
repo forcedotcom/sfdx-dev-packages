@@ -21,7 +21,7 @@ const PACKAGE_DEFAULTS = {
     pretest: 'sf-compile-test',
     test: 'sf-test',
     lint: 'sf-lint',
-    prepack: 'sf-build',
+    prepack: 'sf-prepack',
   },
   husky: {
     'commit-msg': 'sf-husky-commit-msg',
