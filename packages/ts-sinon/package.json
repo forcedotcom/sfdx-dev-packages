@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/ts-sinon",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "TypeScript helpers for Sinon",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -12,13 +12,13 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "@salesforce/ts-types": "^1.5.3",
+    "@salesforce/ts-types": "^1.5.4",
     "sinon": "5.1.1",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.1.0",
-    "@salesforce/dev-scripts": "^0.8.1",
+    "@salesforce/dev-scripts": "^0.9.0",
     "@salesforce/prettier-config": "^0.0.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",

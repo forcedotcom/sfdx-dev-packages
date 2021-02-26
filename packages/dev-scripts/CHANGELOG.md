@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.8.1...@salesforce/dev-scripts@0.9.0) (2021-02-26)
+
+
+### Features
+
+* add sf-prepack ([577f0f9](https://github.com/forcedotcom/sfdx-dev-packages/commit/577f0f9700ad2c57d5d7d419c9c384d578bea029))
+
+
+
+
+
 ## [0.8.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.8.0...@salesforce/dev-scripts@0.8.1) (2021-02-19)
 
 **Note:** Version bump only for package @salesforce/dev-scripts
