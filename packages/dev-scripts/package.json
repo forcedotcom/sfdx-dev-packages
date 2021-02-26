@@ -17,6 +17,7 @@
     "sf-install": "bin/sf-install.js",
     "sf-lerna-install": "bin/sf-lerna-install.js",
     "sf-lint": "bin/sf-lint.js",
+    "sf-prepack": "bin/sf-prepack.js",
     "sf-test": "bin/sf-test.js"
   },
   "scripts": {
