@@ -73,6 +73,8 @@ module.exports = {
     '@typescript-eslint/consistent-type-assertions': 'error',
     '@typescript-eslint/type-annotation-spacing': 'error',
     '@typescript-eslint/unified-signatures': 'error',
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
   },
   ignorePatterns: ['*.js'],
 };
