@@ -43,17 +43,11 @@ export function lowerFirst(value?: string): Optional<string> {
  *
  * @param text Text to transform.
  */
-export function camelCaseToTitleCase(str: string): string;
-export function camelCaseToTitleCase(str?: string): Optional<string>;
-// underlying function
-export function camelCaseToTitleCase(text?: string): Optional<string> {
-  return (
-    text &&
-    text
-      .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
-      .replace(/([A-Z][a-z]+)/g, ' $1')
-      .trim()
-  );
+export function camelCaseToTitleCase(text: string): string {
+  return text
+    .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
+    .replace(/([A-Z][a-z]+)/g, ' $1')
+    .trim();
 }
 
 /**
