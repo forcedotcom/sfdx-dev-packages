@@ -39,6 +39,24 @@ export function lowerFirst(value?: string): Optional<string> {
 }
 
 /**
+ * Formats a camel case style `string` into a title case.
+ *
+ * @param text Text to transform.
+ */
+ export function camelCaseToTitleCase(str: string): string;
+ export function camelCaseToTitleCase(str?: string): Optional<string>;
+ // underlying function
+ export function camelCaseToTitleCase(text?: string): Optional<string> {
+  return (
+    text &&
+    text
+    .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
+    .replace(/([A-Z][a-z]+)/g, ' $1')
+    .trim()
+  );
+}
+
+/**
  * Converts string to snake case.
  *
  * @param str The string to convert.
