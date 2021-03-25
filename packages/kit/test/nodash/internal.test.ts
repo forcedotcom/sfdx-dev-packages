@@ -94,9 +94,14 @@ describe('nodash internal', () => {
 
   describe('format', () => {
     it('returns a title case string given a camel case one', () => {
-      const inp = 'MyNewString';
-      const out = 'My New String';
-      expect(_.camelCaseToTitleCase(inp)).to.equal(out);
+      let result = _.camelCaseToTitleCase('FooBar');
+      expect(result).to.equal('Foo Bar');
+
+      result = _.camelCaseToTitleCase('fooBar');
+      expect(result).to.equal('Foo Bar');
+
+      result = _.camelCaseToTitleCase('Foo Bar');
+      expect(result).not.to.equal('Foo Bar');
     });
   });
 });
