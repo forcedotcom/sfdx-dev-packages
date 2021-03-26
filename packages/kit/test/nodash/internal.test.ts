@@ -101,7 +101,7 @@ describe('nodash internal', () => {
       expect(result).to.equal('Foo Bar');
 
       result = _.camelCaseToTitleCase('Foo Bar');
-      expect(result).not.to.equal('Foo Bar');
+      expect(result).to.equal('Foo Bar');
     });
   });
 });
