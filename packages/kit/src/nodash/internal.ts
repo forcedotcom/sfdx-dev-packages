@@ -47,7 +47,7 @@ export function camelCaseToTitleCase(text: string): string {
   return text
     .replace(/(^\w|\s\w)/g, (m) => m.toUpperCase())
     .replace(/([A-Z][a-z]+)/g, ' $1')
-    .replace(/  +/g, ' ')
+    .replace(/\s{2,}/g, ' ')
     .trim();
 }
 
