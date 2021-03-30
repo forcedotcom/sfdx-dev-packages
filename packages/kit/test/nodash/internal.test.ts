@@ -91,4 +91,17 @@ describe('nodash internal', () => {
       expect(_.upperFirst('abc')).to.equal('Abc');
     });
   });
+
+  describe('format', () => {
+    it('returns a title case string given a camel case one', () => {
+      let result = _.camelCaseToTitleCase('FooBar');
+      expect(result).to.equal('Foo Bar');
+
+      result = _.camelCaseToTitleCase('fooBar');
+      expect(result).to.equal('Foo Bar');
+
+      result = _.camelCaseToTitleCase('Foo Bar');
+      expect(result).to.equal('Foo Bar');
+    });
+  });
 });
