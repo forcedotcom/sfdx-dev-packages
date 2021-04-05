@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/kit",
-  "version": "1.4.5",
+  "version": "1.5.0",
   "description": "Commonly needed utilities for TypeScript and JavaScript",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
