@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce-typescript@0.2.0...eslint-config-salesforce-typescript@0.2.1) (2021-04-19)
+
+
+### Bug Fixes
+
+* **eslint-typescript:** use typescript-specific no-shadow rule ([2733eab](https://github.com/forcedotcom/sfdx-dev-packages/commit/2733eab865b314a824131c1b1300c7cf04626e35)), closes [#118](https://github.com/forcedotcom/sfdx-dev-packages/issues/118)
+
+
+
+
+
 # [0.2.0](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce-typescript@0.1.0...eslint-config-salesforce-typescript@0.2.0) (2021-01-28)
 
 
