@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.8](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.5.7...@salesforce/ts-types@1.5.8) (2021-04-29)
+
+**Note:** Version bump only for package @salesforce/ts-types
+
+
+
+
+
 ## [1.5.7](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.5.6...@salesforce/ts-types@1.5.7) (2021-04-29)
 
 **Note:** Version bump only for package @salesforce/ts-types

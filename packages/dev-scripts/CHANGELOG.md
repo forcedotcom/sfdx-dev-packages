@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.5](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.3...@salesforce/dev-scripts@0.9.5) (2021-04-29)
+
+
+### Bug Fixes
+
+* force publish ([276efe1](https://github.com/forcedotcom/sfdx-dev-packages/commit/276efe1c31041917285d38cb472ef2b767f1af83))
+
+
+
+
+
 ## [0.9.3](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.2...@salesforce/dev-scripts@0.9.3) (2021-04-29)
 
 
