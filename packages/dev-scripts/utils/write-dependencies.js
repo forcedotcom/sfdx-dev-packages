@@ -19,6 +19,20 @@ module.exports = (projectPath, inLernaProject) => {
   const added = [];
   const removed = [];
 
+  const getVersionNum = (ver) => {
+    return (ver.startsWith('^') || ver.startsWith('~')) ? ver.slice(1) : ver;
+  }
+  const meetsMinimumVersion = (pjsonDepVersion, devScriptsDepVersion) => {
+    // First remove any carets and tildas
+    const pVersion = getVersionNum(pjsonDepVersion);
+    const dsVersion = getVersionNum(devScriptsDepVersion);
+    // Compare the version in package.json with the dev scripts version.
+    // result === -1 means the version in package.json < dev scripts version
+    // result === 0 means they match
+    // result === 1 means the version in package.json > dev scripts version
+    return pVersion.localeCompare(dsVersion, 'en-u-kn-true') > -1;
+  }
+
   const devScriptsPjson = require(join(__dirname, '..', 'package.json'));
   const add = (name, version) => {
     version = version || devScriptsPjson.dependencies[name] || devScriptsPjson.devDependencies[name];
@@ -28,7 +42,8 @@ module.exports = (projectPath, inLernaProject) => {
         `Version empty for ${name}. Make sure it is in the devDependencies in dev-scripts since it is being added to the actual projects devDependencies.`
       );
     }
-    if (!dependencies[name] || dependencies[name] !== version) {
+    // If the dependency min version has been met, ignore it.
+    if (!dependencies[name] || !meetsMinimumVersion(dependencies[name], version)) {
       dependencies[name] = version;
       added.push(name);
     }
