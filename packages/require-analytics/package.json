@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/require-analytics",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "Simple CommonJS require analytics",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.1.0",
-    "@salesforce/dev-scripts": "^0.9.5",
+    "@salesforce/dev-scripts": "^0.9.7",
     "@salesforce/prettier-config": "^0.0.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
