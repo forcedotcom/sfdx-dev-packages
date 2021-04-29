@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.3](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.2...@salesforce/dev-scripts@0.9.3) (2021-04-29)
+
+
+### Bug Fixes
+
+* add minimum version check to dev-scripts ([#122](https://github.com/forcedotcom/sfdx-dev-packages/issues/122)) ([5d1470a](https://github.com/forcedotcom/sfdx-dev-packages/commit/5d1470a22da2f050ef4ace1ba819b85e2f600f9b))
+
+
+
+
+
 ## [0.9.2](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.1...@salesforce/dev-scripts@0.9.2) (2021-04-19)
 
 **Note:** Version bump only for package @salesforce/dev-scripts
