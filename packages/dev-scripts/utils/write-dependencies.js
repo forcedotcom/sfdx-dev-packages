@@ -19,9 +19,7 @@ module.exports = (projectPath, inLernaProject) => {
   const added = [];
   const removed = [];
 
-  const getVersionNum = (ver) => {
-    return (ver.startsWith('^') || ver.startsWith('~')) ? ver.slice(1) : ver;
-  }
+  const getVersionNum = (ver) => (ver.startsWith('^') || ver.startsWith('~') ? ver.slice(1) : ver);
   const meetsMinimumVersion = (pjsonDepVersion, devScriptsDepVersion) => {
     // First remove any carets and tildas
     const pVersion = getVersionNum(pjsonDepVersion);
@@ -31,7 +29,7 @@ module.exports = (projectPath, inLernaProject) => {
     // result === 0 means they match
     // result === 1 means the version in package.json > dev scripts version
     return pVersion.localeCompare(dsVersion, 'en-u-kn-true') > -1;
-  }
+  };
 
   const devScriptsPjson = require(join(__dirname, '..', 'package.json'));
   const add = (name, version) => {
