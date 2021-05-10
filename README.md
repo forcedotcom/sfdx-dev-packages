@@ -86,4 +86,4 @@ Currently, we have the following packages:
 - [![NPM](https://img.shields.io/npm/v/@salesforce/require-analytics.svg)](https://www.npmjs.com/package/@salesforce/require-analytics)
 - Learn more in its [README](./packages/require-analytics/README.md).
 - See the code at [packages/require-analytics](./packages/require-analytics).
-- Read the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/require-analytics).
+- Read the [API docs](https://forcedotcom.github.io/sfdx-dev-packages/require-analytics). 
