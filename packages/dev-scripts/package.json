@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/dev-scripts",
-  "version": "0.9.9",
+  "version": "0.9.10",
   "description": "Standardize package.json scripts and config files for Salesforce projects.",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
   "bin": {
@@ -53,9 +53,9 @@
     "cosmiconfig": "^6.0.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-config-salesforce": "^0.1.2",
-    "eslint-config-salesforce-license": "^0.1.2",
-    "eslint-config-salesforce-typescript": "^0.2.3",
+    "eslint-config-salesforce": "^0.1.4",
+    "eslint-config-salesforce-license": "^0.1.4",
+    "eslint-config-salesforce-typescript": "^0.2.5",
     "eslint-plugin-header": "^3.0.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsdoc": "^27.0.3",

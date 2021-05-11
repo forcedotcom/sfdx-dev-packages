@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce-typescript@0.2.3...eslint-config-salesforce-typescript@0.2.5) (2021-05-11)
+
+**Note:** Version bump only for package eslint-config-salesforce-typescript
+
+
+
+
+
 ## [0.2.3](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce-typescript@0.2.1...eslint-config-salesforce-typescript@0.2.3) (2021-05-11)
 
 **Note:** Version bump only for package eslint-config-salesforce-typescript
