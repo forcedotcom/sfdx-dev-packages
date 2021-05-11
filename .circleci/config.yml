@@ -22,11 +22,10 @@ workflows:
                 - maintenance
       - release-management/release-lerna-packages:
           github-release: true
-          dryrun: true
           requires:
             - release-management/test-package
-          # filters:
-          #   branches:
-          #     only: main
+          filters:
+            branches:
+              only: main
           post-job-steps:
             - run: yarn ci-docs
