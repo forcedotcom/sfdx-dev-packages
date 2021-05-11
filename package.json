@@ -7,7 +7,6 @@
     "ci-docs": "yarn sf-ci-docs",
     "clean": "lerna run clean",
     "clean-all": "lerna run clean-all",
-    "codecov": "codecov --disable=gcov",
     "compile": "lerna run compile",
     "docs": "lerna run docs",
     "format": "lerna run format",
@@ -20,7 +19,6 @@
     "test": "lerna run test"
   },
   "devDependencies": {
-    "codecov": "^3.7.1",
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
     "lerna": "^3.22.1",
