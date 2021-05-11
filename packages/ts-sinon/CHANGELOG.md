@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.10](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.9...@salesforce/ts-sinon@1.3.10) (2021-05-11)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
 ## [1.3.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.8...@salesforce/ts-sinon@1.3.9) (2021-04-29)
 
 **Note:** Version bump only for package @salesforce/ts-sinon
