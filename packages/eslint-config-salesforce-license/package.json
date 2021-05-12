@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-salesforce-license",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "The eslint config to for Salesforce license",
   "keywords": [
     "Salesforce",

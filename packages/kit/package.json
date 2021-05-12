@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/kit",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "description": "Commonly needed utilities for TypeScript and JavaScript",
   "main": "lib/index.js",
   "repository": "https://github.com/forcedotcom/sfdx-dev-packages",
@@ -27,21 +27,21 @@
     "test": "sf-test"
   },
   "dependencies": {
-    "@salesforce/ts-types": "^1.5.11",
+    "@salesforce/ts-types": "^1.5.12",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.1.2",
-    "@salesforce/dev-scripts": "^0.9.10",
+    "@salesforce/dev-scripts": "^0.9.11",
     "@salesforce/prettier-config": "^0.0.2",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
     "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-config-salesforce": "^0.1.4",
-    "eslint-config-salesforce-license": "^0.1.4",
-    "eslint-config-salesforce-typescript": "^0.2.5",
+    "eslint-config-salesforce": "^0.1.6",
+    "eslint-config-salesforce-license": "^0.1.6",
+    "eslint-config-salesforce-typescript": "^0.2.7",
     "eslint-plugin-header": "^3.0.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsdoc": "^27.0.3",
