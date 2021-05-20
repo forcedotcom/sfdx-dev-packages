@@ -59,7 +59,10 @@ import { valueOrDefault } from './internal';
 export function get(from: unknown, path: string, defaultValue?: unknown): unknown {
   return valueOrDefault(
     path
-      .split(/[.[\]'"]/)
+      // keep values in quotes together
+      .split(/['"]/)
+      // values in quotes will always be odd indexes, split the non-quotes values as normal
+      .reduce((r: string[], p: string, index: number) => index % 2 == 1 ? [...r, p] : [...r, ...p.split(/[.[\]]/)], [])
       .filter((p) => !!p)
       .reduce((r: unknown, p: string) => (has(r, p) ? r[p] : undefined), from),
     defaultValue
