@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.13](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.5.12...@salesforce/ts-types@1.5.13) (2021-05-20)
+
+
+### Bug Fixes
+
+* allow periods in key names @W-9225317@ ([#129](https://github.com/forcedotcom/sfdx-dev-packages/issues/129)) ([e5817a0](https://github.com/forcedotcom/sfdx-dev-packages/commit/e5817a0624b15e6b353c610e92205426af773884))
+
+
+
+
+
 ## [1.5.12](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-types@1.5.11...@salesforce/ts-types@1.5.12) (2021-05-12)
 
 **Note:** Version bump only for package @salesforce/ts-types

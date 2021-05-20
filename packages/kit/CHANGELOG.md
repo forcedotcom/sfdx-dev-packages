@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.8](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.7...@salesforce/kit@1.5.8) (2021-05-20)
+
+
+### Bug Fixes
+
+* allow periods in key names @W-9225317@ ([#129](https://github.com/forcedotcom/sfdx-dev-packages/issues/129)) ([e5817a0](https://github.com/forcedotcom/sfdx-dev-packages/commit/e5817a0624b15e6b353c610e92205426af773884))
+
+
+
+
+
 ## [1.5.7](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.6...@salesforce/kit@1.5.7) (2021-05-12)
 
 **Note:** Version bump only for package @salesforce/kit
