@@ -34,6 +34,7 @@ describe('get type', () => {
       b: true,
       m: { a: 'b', c: 'd', e: [1] },
       a: ['a', 'b'],
+      ['m.a']: { c: 'd', e: [1] },
     },
   };
 
@@ -67,6 +68,24 @@ describe('get type', () => {
     it('should return a value from an object when passed a valid object path', () => {
       const value = jsonMap.inner.s;
       const path = 'inner.s';
+      expect(get(jsonMap, path)).to.equal(value);
+    });
+
+    it('should return a value from an object when passed a valid object path containing a period', () => {
+      const value = jsonMap.inner['m.a'];
+      const path = 'inner["m.a"]';
+      expect(get(jsonMap, path)).to.equal(value);
+    });
+
+    it('should return a value from an object when passed a valid object path containing a period and array', () => {
+      const value = jsonMap.inner['m.a'].e[0];
+      const path = 'inner["m.a"].e[0]';
+      expect(get(jsonMap, path)).to.equal(value);
+    });
+
+    it('should return a value from an object when passed a valid object path containing a period and key in brackets', () => {
+      const value = jsonMap.inner['m.a'].e[0];
+      const path = 'inner["m.a"]["e"][0]';
       expect(get(jsonMap, path)).to.equal(value);
     });
 
