@@ -24,7 +24,7 @@
     "test": "sf-test"
   },
   "dependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^2.2.0"
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.1.2",
