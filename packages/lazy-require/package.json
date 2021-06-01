@@ -12,7 +12,7 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "debug": "^3.2.6",
+    "debug": "^4.3.1",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
