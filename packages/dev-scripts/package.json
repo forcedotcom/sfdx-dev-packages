@@ -47,7 +47,7 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "^12.12.6",
-    "@types/sinon": "^9.0.4",
+    "@types/sinon": "^10.0.1",
     "chai": "^4.2.0",
     "chalk": "^4.0.0",
     "cosmiconfig": "^6.0.0",
