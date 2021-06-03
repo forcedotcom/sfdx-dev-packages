@@ -12,7 +12,7 @@
     "lib/**/*.d.ts"
   ],
   "dependencies": {
-    "@salesforce/ts-types": "^1.5.14",
+    "@salesforce/ts-types": "^1.5.13",
     "sinon": "^5.1.1",
     "tslib": "^2.2.0"
   },
