@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.8...@salesforce/kit@1.5.9) (2021-06-03)
+
+**Note:** Version bump only for package @salesforce/kit
+
+
+
+
+
 ## [1.5.8](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.7...@salesforce/kit@1.5.8) (2021-05-20)
 
 
