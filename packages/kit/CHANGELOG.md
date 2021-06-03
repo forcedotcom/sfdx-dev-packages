@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.10](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.9...@salesforce/kit@1.5.10) (2021-06-03)
+
+
+### Bug Fixes
+
+* use existing published version of ts-types ([f1ae94a](https://github.com/forcedotcom/sfdx-dev-packages/commit/f1ae94a3e59794c7df7530547542da8d5ef40bef))
+
+
+
+
+
 ## [1.5.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.8...@salesforce/kit@1.5.9) (2021-06-03)
 
 **Note:** Version bump only for package @salesforce/kit
