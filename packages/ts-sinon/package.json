@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@salesforce/ts-types": "^1.5.13",
-    "sinon": "10.0.0",
+    "sinon": "^5.1.1",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
