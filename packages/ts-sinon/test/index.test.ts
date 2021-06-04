@@ -42,8 +42,8 @@ describe('stubs', () => {
 
   it('should stub a class instance with private fields', async () => {
     type Callable = {
-      property?: string;
       (): string;
+      property?: string;
     };
     class Target {
       public property: {
@@ -136,9 +136,9 @@ describe('stubs', () => {
 
   it('should stub a callable', () => {
     interface Callable {
+      (): string;
       foo: () => string;
       bar: boolean;
-      (): string;
     }
 
     const stub = stubCallable<Callable>(
