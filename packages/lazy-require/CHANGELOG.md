@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.16](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.15...@salesforce/lazy-require@0.4.16) (2021-06-04)
+
+**Note:** Version bump only for package @salesforce/lazy-require
+
+
+
+
+
+## [0.4.15](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.14...@salesforce/lazy-require@0.4.15) (2021-06-03)
+
+**Note:** Version bump only for package @salesforce/lazy-require
+
+
+
+
+
+## [0.4.14](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.13...@salesforce/lazy-require@0.4.14) (2021-06-03)
+
+**Note:** Version bump only for package @salesforce/lazy-require
+
+
+
+
+
+## [0.4.13](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.12...@salesforce/lazy-require@0.4.13) (2021-05-20)
+
+**Note:** Version bump only for package @salesforce/lazy-require
+
+
+
+
+
+## [0.4.12](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.11...@salesforce/lazy-require@0.4.12) (2021-05-12)
+
+**Note:** Version bump only for package @salesforce/lazy-require
+
+
+
+
+
+## [0.4.11](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.10...@salesforce/lazy-require@0.4.11) (2021-05-11)
+
+**Note:** Version bump only for package @salesforce/lazy-require
+
+
+
+
+
 ## [0.4.10](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/lazy-require@0.4.9...@salesforce/lazy-require@0.4.10) (2021-05-11)
 
 **Note:** Version bump only for package @salesforce/lazy-require

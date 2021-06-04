@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce@0.1.6...eslint-config-salesforce@0.1.7) (2021-06-03)
+
+**Note:** Version bump only for package eslint-config-salesforce
+
+
+
+
+
+## [0.1.6](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce@0.1.4...eslint-config-salesforce@0.1.6) (2021-05-12)
+
+**Note:** Version bump only for package eslint-config-salesforce
+
+
+
+
+
+## [0.1.4](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce@0.1.2...eslint-config-salesforce@0.1.4) (2021-05-11)
+
+**Note:** Version bump only for package eslint-config-salesforce
+
+
+
+
+
 ## [0.1.2](https://github.com/forcedotcom/sfdx-dev-packages/compare/eslint-config-salesforce@0.1.0...eslint-config-salesforce@0.1.2) (2021-05-11)
 
 **Note:** Version bump only for package eslint-config-salesforce

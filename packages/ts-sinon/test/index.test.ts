@@ -42,8 +42,8 @@ describe('stubs', () => {
 
   it('should stub a class instance with private fields', async () => {
     type Callable = {
-      property?: string;
       (): string;
+      property?: string;
     };
     class Target {
       public property: {
@@ -76,9 +76,9 @@ describe('stubs', () => {
       overrideCallable: stubCallable(
         sandbox,
         {
-          property: 'overridden',
+          property: 'overrideCallable',
         },
-        () => 'overridden'
+        () => 'overrideCallable'
       ),
       overrideMethod() {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -95,9 +95,9 @@ describe('stubs', () => {
     expect(stub.normalCallable()).to.equal('normal');
     expect(stub.normalCallable.calledOnce).to.be.true;
     expect(stub.normalCallable.property).to.equal('default');
-    expect(stub.overrideCallable()).to.equal('overridden');
+    expect(stub.overrideCallable()).to.equal('overrideCallable');
     expect(stub.overrideCallable.calledOnce).to.be.true;
-    expect(stub.overrideCallable.property).to.equal('overridden');
+    expect(stub.overrideCallable.property).to.equal('overrideCallable');
 
     // Stub can be coerced back to a usable object of the original type
     function useTarget(target: Target): Target {
@@ -136,9 +136,9 @@ describe('stubs', () => {
 
   it('should stub a callable', () => {
     interface Callable {
+      (): string;
       foo: () => string;
       bar: boolean;
-      (): string;
     }
 
     const stub = stubCallable<Callable>(

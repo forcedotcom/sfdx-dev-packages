@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-salesforce",
-  "version": "0.1.2",
+  "version": "0.1.7",
   "description": "The eslint config for Salesforce projects",
   "keywords": [
     "Salesforce",
@@ -21,10 +21,10 @@
     "url": "https://github.com/forcedotcom/sfdx-dev-packages/issues"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
+    "eslint": "^7.27.0",
     "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsdoc": "^27.0.3",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-jsdoc": "^35.1.2",
     "eslint-plugin-prettier": "^3.1.3"
   },
   "publishConfig": {

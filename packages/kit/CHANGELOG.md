@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.11](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.10...@salesforce/kit@1.5.11) (2021-06-04)
+
+**Note:** Version bump only for package @salesforce/kit
+
+
+
+
+
+## [1.5.10](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.9...@salesforce/kit@1.5.10) (2021-06-03)
+
+
+### Bug Fixes
+
+* use existing published version of ts-types ([f1ae94a](https://github.com/forcedotcom/sfdx-dev-packages/commit/f1ae94a3e59794c7df7530547542da8d5ef40bef))
+
+
+
+
+
+## [1.5.9](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.8...@salesforce/kit@1.5.9) (2021-06-03)
+
+**Note:** Version bump only for package @salesforce/kit
+
+
+
+
+
+## [1.5.8](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.7...@salesforce/kit@1.5.8) (2021-05-20)
+
+
+### Bug Fixes
+
+* allow periods in key names @W-9225317@ ([#129](https://github.com/forcedotcom/sfdx-dev-packages/issues/129)) ([e5817a0](https://github.com/forcedotcom/sfdx-dev-packages/commit/e5817a0624b15e6b353c610e92205426af773884))
+
+
+
+
+
+## [1.5.7](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.6...@salesforce/kit@1.5.7) (2021-05-12)
+
+**Note:** Version bump only for package @salesforce/kit
+
+
+
+
+
+## [1.5.6](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.5...@salesforce/kit@1.5.6) (2021-05-11)
+
+**Note:** Version bump only for package @salesforce/kit
+
+
+
+
+
 ## [1.5.5](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.4...@salesforce/kit@1.5.5) (2021-05-11)
 
 **Note:** Version bump only for package @salesforce/kit

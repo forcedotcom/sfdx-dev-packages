@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.16](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.15...@salesforce/ts-sinon@1.3.16) (2021-06-04)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
+## [1.3.15](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.14...@salesforce/ts-sinon@1.3.15) (2021-06-03)
+
+
+### Bug Fixes
+
+* use existing published version of ts-types ([f1ae94a](https://github.com/forcedotcom/sfdx-dev-packages/commit/f1ae94a3e59794c7df7530547542da8d5ef40bef))
+
+
+
+
+
+## [1.3.14](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.13...@salesforce/ts-sinon@1.3.14) (2021-06-03)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
+## [1.3.13](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.12...@salesforce/ts-sinon@1.3.13) (2021-05-20)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
+## [1.3.12](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.11...@salesforce/ts-sinon@1.3.12) (2021-05-12)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
+## [1.3.11](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.10...@salesforce/ts-sinon@1.3.11) (2021-05-11)
+
+**Note:** Version bump only for package @salesforce/ts-sinon
+
+
+
+
+
 ## [1.3.10](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.9...@salesforce/ts-sinon@1.3.10) (2021-05-11)
 
 **Note:** Version bump only for package @salesforce/ts-sinon
