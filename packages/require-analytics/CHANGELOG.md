@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.16](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/require-analytics@0.9.15...@salesforce/require-analytics@0.9.16) (2021-06-07)
+
+
+### Bug Fixes
+
+* pin typedoc at v0.18.0 due to breaking changes ([#164](https://github.com/forcedotcom/sfdx-dev-packages/issues/164)) ([dd7f90c](https://github.com/forcedotcom/sfdx-dev-packages/commit/dd7f90cb7b5c9a2508ac0f10ba4b6ec54d262165))
+
+
+
+
+
 ## [0.9.15](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/require-analytics@0.9.14...@salesforce/require-analytics@0.9.15) (2021-06-07)
 
 **Note:** Version bump only for package @salesforce/require-analytics
