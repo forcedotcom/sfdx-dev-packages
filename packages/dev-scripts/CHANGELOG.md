@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.15](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.14...@salesforce/dev-scripts@0.9.15) (2021-06-07)
+
+
+### Bug Fixes
+
+* pin typedoc at v0.18.0 due to breaking changes ([#164](https://github.com/forcedotcom/sfdx-dev-packages/issues/164)) ([dd7f90c](https://github.com/forcedotcom/sfdx-dev-packages/commit/dd7f90cb7b5c9a2508ac0f10ba4b6ec54d262165))
+
+
+
+
+
+## [0.9.14](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.13...@salesforce/dev-scripts@0.9.14) (2021-06-07)
+
+
+### Bug Fixes
+
+* fix incorrect version ([#163](https://github.com/forcedotcom/sfdx-dev-packages/issues/163)) ([fcd260c](https://github.com/forcedotcom/sfdx-dev-packages/commit/fcd260cd6707f229c68272270c2b6655e685d738))
+
+
+
+
+
 ## [0.9.13](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.12...@salesforce/dev-scripts@0.9.13) (2021-06-04)
 
 **Note:** Version bump only for package @salesforce/dev-scripts
