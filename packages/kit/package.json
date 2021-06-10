@@ -27,7 +27,7 @@
     "test": "sf-test"
   },
   "dependencies": {
-    "@salesforce/ts-types": "^1.5.17",
+    "@salesforce/ts-types": "^1.5.13",
     "tslib": "^2.2.0"
   },
   "devDependencies": {
