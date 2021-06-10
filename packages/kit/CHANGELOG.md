@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.14](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.13...@salesforce/kit@1.5.14) (2021-06-10)
+
+
+### Bug Fixes
+
+* rollback ts-types dependency for kit ([925bb58](https://github.com/forcedotcom/sfdx-dev-packages/commit/925bb58727436fd13ddb9898d20110da7b29f0bb))
+
+
+
+
+
 ## [1.5.13](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/kit@1.5.12...@salesforce/kit@1.5.13) (2021-06-07)
 
 
