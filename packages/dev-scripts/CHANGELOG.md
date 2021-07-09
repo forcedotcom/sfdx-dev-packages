@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.17](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.16...@salesforce/dev-scripts@0.9.17) (2021-07-08)
+
+
+### Bug Fixes
+
+* oclif manifest ([88bbeff](https://github.com/forcedotcom/sfdx-dev-packages/commit/88bbeff01e6edd9c4c29ed14f8de252fa8f1e10c))
+
+
+
+
+
 ## [0.9.16](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.15...@salesforce/dev-scripts@0.9.16) (2021-07-08)
 
 

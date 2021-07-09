@@ -15,7 +15,7 @@ shell.exec('yarn build');
 
 if (isPlugin(packageRoot)) {
   if (shell.which('oclif')) {
-    shell.exec('oclif manifest');
+    shell.exec('oclif manifest .');
   } else if (shell.which('oclif-dev')) {
     shell.exec('oclif-dev manifest');
   } else {
