@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.18](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.17...@salesforce/dev-scripts@0.9.18) (2021-07-09)
+
+**Note:** Version bump only for package @salesforce/dev-scripts
+
+
+
+
+
 ## [0.9.17](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/dev-scripts@0.9.16...@salesforce/dev-scripts@0.9.17) (2021-07-08)
 
 

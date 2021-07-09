@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.21](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.20...@salesforce/ts-sinon@1.3.21) (2021-07-09)
+
+
+### Bug Fixes
+
+* sinon types match sinon ([acb2a07](https://github.com/forcedotcom/sfdx-dev-packages/commit/acb2a07f7b7ed40944254126428e170e2e587cd7))
+
+
+
+
+
 ## [1.3.20](https://github.com/forcedotcom/sfdx-dev-packages/compare/@salesforce/ts-sinon@1.3.19...@salesforce/ts-sinon@1.3.20) (2021-07-08)
 
 **Note:** Version bump only for package @salesforce/ts-sinon
