@@ -215,10 +215,10 @@
     resolve-global "1.0.0"
     yargs "^16.2.0"
 
-"@commitlint/config-conventional@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-10.0.0.tgz#2f5546394c2e580adc23770e2f1ccfcf4887eddc"
-  integrity sha512-M9l7hh2a1GB9nQ/Gm+aDLGPmzGdpgxqJoSmrbTxDlapJDyaL7FPe5aQf66F50Eq3j0bmaRaJihFCA6mIUBQAag==
+"@commitlint/config-conventional@^13.2.0":
+  version "13.2.0"
+  resolved "https://registry.npmjs.org/@commitlint/config-conventional/-/config-conventional-13.2.0.tgz#2ad24fecc56ae9619dbe0934b98a98b18ace0bec"
+  integrity sha512-7u7DdOiF+3qSdDlbQGfpvCH8DCQdLFvnI2+VucYmmV7E92iD6t9PBj+UjIoSQCaMAzYp27Vkall78AkcXBh6Xw==
   dependencies:
     conventional-changelog-conventionalcommits "^4.3.1"
 
